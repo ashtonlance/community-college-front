@@ -49,6 +49,11 @@
     "RootQueryToGfEntryConnection",
     "RootQueryToGfFormConnection",
     "RootQueryToGfSubmittedEntryConnection",
+    "GraphqlDocumentToGraphqlDocumentGroupConnection",
+    "GraphqlDocumentGroupToContentNodeConnection",
+    "GraphqlDocumentGroupToGraphqlDocumentConnection",
+    "GraphqlDocumentToTermNodeConnection",
+    "RootQueryToGraphqlDocumentGroupConnection",
     "RootQueryToGraphqlDocumentConnection",
     "RootQueryToMediaItemConnection",
     "MenuToMenuItemConnection",
@@ -130,7 +135,13 @@
     "RootQueryToGfEntryConnectionEdge",
     "RootQueryToGfFormConnectionEdge",
     "RootQueryToGfSubmittedEntryConnectionEdge",
+    "GraphqlDocumentGroupToContentNodeConnectionEdge",
+    "GraphqlDocumentGroupToGraphqlDocumentConnectionEdge",
+    "GraphqlDocumentGroupToTaxonomyConnectionEdge",
+    "GraphqlDocumentToGraphqlDocumentGroupConnectionEdge",
     "GraphqlDocumentToPreviewConnectionEdge",
+    "GraphqlDocumentToTermNodeConnectionEdge",
+    "RootQueryToGraphqlDocumentGroupConnectionEdge",
     "RootQueryToGraphqlDocumentConnectionEdge",
     "RootQueryToMediaItemConnectionEdge",
     "MenuItemToMenuItemConnectionEdge",
@@ -172,6 +183,7 @@
     "GfForm",
     "GfSubmittedEntry",
     "GraphqlDocument",
+    "GraphqlDocumentGroup",
     "Menu",
     "MenuItem",
     "Plugin",
@@ -224,6 +236,11 @@
     "RootQueryToGfEntryConnectionPageInfo",
     "RootQueryToGfFormConnectionPageInfo",
     "RootQueryToGfSubmittedEntryConnectionPageInfo",
+    "GraphqlDocumentGroupToContentNodeConnectionPageInfo",
+    "GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo",
+    "GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo",
+    "GraphqlDocumentToTermNodeConnectionPageInfo",
+    "RootQueryToGraphqlDocumentGroupConnectionPageInfo",
     "RootQueryToGraphqlDocumentConnectionPageInfo",
     "RootQueryToMediaItemConnectionPageInfo",
     "MenuItemToMenuItemConnectionPageInfo",
@@ -251,7 +268,7 @@
     "CategoryToParentCategoryConnectionEdge",
     "RootQueryToCategoryConnectionEdge"
   ],
-  "TermNode": ["Category", "PostFormat", "Tag"],
+  "TermNode": ["Category", "PostFormat", "Tag", "GraphqlDocumentGroup"],
   "UniformResourceIdentifiable": [
     "Category",
     "ContentType",
@@ -261,7 +278,8 @@
     "Post",
     "PostFormat",
     "Tag",
-    "GraphqlDocument"
+    "GraphqlDocument",
+    "GraphqlDocumentGroup"
   ],
   "EnqueuedScriptConnection": [
     "TermNodeToEnqueuedScriptConnection",
@@ -328,6 +346,11 @@
     "RootQueryToGfEntryConnectionPageInfo",
     "RootQueryToGfFormConnectionPageInfo",
     "RootQueryToGfSubmittedEntryConnectionPageInfo",
+    "GraphqlDocumentGroupToContentNodeConnectionPageInfo",
+    "GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo",
+    "GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo",
+    "GraphqlDocumentToTermNodeConnectionPageInfo",
+    "RootQueryToGraphqlDocumentGroupConnectionPageInfo",
     "RootQueryToGraphqlDocumentConnectionPageInfo",
     "RootQueryToMediaItemConnectionPageInfo",
     "MenuItemToMenuItemConnectionPageInfo",
@@ -378,6 +401,7 @@
     "GfForm",
     "GfSubmittedEntry",
     "GraphqlDocument",
+    "GraphqlDocumentGroup",
     "Menu",
     "MenuItem",
     "CommentAuthor"
@@ -400,6 +424,7 @@
     "TagToContentNodeConnection",
     "UserToRevisionsConnection",
     "RootQueryToContentNodeConnection",
+    "GraphqlDocumentGroupToContentNodeConnection",
     "RootQueryToRevisionsConnection"
   ],
   "ContentNodeConnectionEdge": [
@@ -414,6 +439,7 @@
     "UserToRevisionsConnectionEdge",
     "CategoryToContentNodeConnectionEdge",
     "RootQueryToContentNodeConnectionEdge",
+    "GraphqlDocumentGroupToContentNodeConnectionEdge",
     "RootQueryToRevisionsConnectionEdge"
   ],
   "ContentNode": ["MediaItem", "Page", "Post", "GraphqlDocument"],
@@ -435,6 +461,7 @@
     "CategoryToParentCategoryConnectionEdge",
     "CategoryToTaxonomyConnectionEdge",
     "FormConfirmationToPageConnectionEdge",
+    "GraphqlDocumentGroupToTaxonomyConnectionEdge",
     "GraphqlDocumentToPreviewConnectionEdge",
     "MenuItemToMenuItemLinkableConnectionEdge",
     "MenuItemToMenuConnectionEdge",
@@ -454,6 +481,7 @@
     "PostFormatToTaxonomyConnectionEdge",
     "TagToTaxonomyConnectionEdge",
     "CategoryToTaxonomyConnectionEdge",
+    "GraphqlDocumentGroupToTaxonomyConnectionEdge",
     "RootQueryToTaxonomyConnectionEdge"
   ],
   "ContentTypeConnection": [
@@ -477,6 +505,7 @@
     "UserToRevisionsConnectionPageInfo",
     "CategoryToContentNodeConnectionPageInfo",
     "RootQueryToContentNodeConnectionPageInfo",
+    "GraphqlDocumentGroupToContentNodeConnectionPageInfo",
     "RootQueryToRevisionsConnectionPageInfo"
   ],
   "UserConnectionEdge": [
@@ -524,10 +553,8 @@
   "NodeWithTemplate": ["MediaItem", "Page", "Post", "GraphqlDocument"],
   "ContentTemplate": [
     "DefaultTemplate",
-    "Template_SinglePostNoSeparators",
     "Template_Blank",
-    "Template_PageLargeHeader",
-    "Template_PageNoSeparators"
+    "Template_BlogAlternative"
   ],
   "NodeWithTitle": ["MediaItem", "Page", "Post", "GraphqlDocument"],
   "NodeWithAuthor": ["MediaItem", "Page", "Post"],
@@ -555,18 +582,6 @@
   "NodeWithFeaturedImage": ["Page", "Post"],
   "NodeWithRevisions": ["Page", "Post"],
   "NodeWithPageAttributes": ["Page"],
-  "AcfFieldGroup": [
-    "Page_Heropageblock",
-    "Page_Heropageblock_CtaButton",
-    "Post_Webinar",
-    "MenuItem_Navigationmenu",
-    "MenuItem_Navigationmenu_items",
-    "MenuItem_Navigationmenu_items_resourcesLinks",
-    "MenuItem_Utilitynavigation",
-    "Menu_Prefooter",
-    "Menu_Prefooter_certifications",
-    "Menu_Utilitynavigation"
-  ],
   "PageConnectionPageInfo": [
     "PageToRevisionConnectionPageInfo",
     "UserToPageConnectionPageInfo",
@@ -622,14 +637,17 @@
   ],
   "TermNodeConnection": [
     "PostToTermNodeConnection",
+    "GraphqlDocumentToTermNodeConnection",
     "RootQueryToTermNodeConnection"
   ],
   "TermNodeConnectionEdge": [
     "PostToTermNodeConnectionEdge",
+    "GraphqlDocumentToTermNodeConnectionEdge",
     "RootQueryToTermNodeConnectionEdge"
   ],
   "TermNodeConnectionPageInfo": [
     "PostToTermNodeConnectionPageInfo",
+    "GraphqlDocumentToTermNodeConnectionPageInfo",
     "RootQueryToTermNodeConnectionPageInfo"
   ],
   "UserRoleConnection": [
@@ -749,13 +767,30 @@
   "GfSubmittedEntryConnectionPageInfo": [
     "RootQueryToGfSubmittedEntryConnectionPageInfo"
   ],
+  "GraphqlDocumentGroupConnection": [
+    "GraphqlDocumentToGraphqlDocumentGroupConnection",
+    "RootQueryToGraphqlDocumentGroupConnection"
+  ],
+  "GraphqlDocumentGroupConnectionEdge": [
+    "GraphqlDocumentToGraphqlDocumentGroupConnectionEdge",
+    "RootQueryToGraphqlDocumentGroupConnectionEdge"
+  ],
+  "GraphqlDocumentConnection": [
+    "GraphqlDocumentGroupToGraphqlDocumentConnection",
+    "RootQueryToGraphqlDocumentConnection"
+  ],
   "GraphqlDocumentConnectionEdge": [
+    "GraphqlDocumentGroupToGraphqlDocumentConnectionEdge",
     "GraphqlDocumentToPreviewConnectionEdge",
     "RootQueryToGraphqlDocumentConnectionEdge"
   ],
-  "GraphqlDocumentConnection": ["RootQueryToGraphqlDocumentConnection"],
   "GraphqlDocumentConnectionPageInfo": [
+    "GraphqlDocumentGroupToGraphqlDocumentConnectionPageInfo",
     "RootQueryToGraphqlDocumentConnectionPageInfo"
+  ],
+  "GraphqlDocumentGroupConnectionPageInfo": [
+    "GraphqlDocumentToGraphqlDocumentGroupConnectionPageInfo",
+    "RootQueryToGraphqlDocumentGroupConnectionPageInfo"
   ],
   "MenuItemConnection": [
     "MenuToMenuItemConnection",

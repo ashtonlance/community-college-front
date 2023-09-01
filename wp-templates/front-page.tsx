@@ -13,7 +13,7 @@ export default function FrontPage(props: FrontPageProps) {
   const menuItems = props.data?.menu?.menuItems || [];
   const homePageData = props.data?.nodeByUri as Page;
   const preFooterContent = props.data?.menus.nodes[0];
-  const blocks = homePageData && [...homePageData.blocks];
+  const blocks = homePageData && [...homePageData?.blocks];
   return (
     <Layout
       menuItems={menuItems}

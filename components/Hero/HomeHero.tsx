@@ -30,13 +30,15 @@ export const HomeHero = ({
       }}
       suppressHydrationWarning
     >
-      <Image
-        src={bgImg}
-        alt=""
-        fill
-        className={`object-cover object-${bgPosition} z-0`}
-        priority
-      />
+      {bgImg && (
+        <Image
+          src={bgImg}
+          alt=""
+          fill
+          className={`object-cover object-${bgPosition} z-0`}
+          priority
+        />
+      )}
       <div
         className="top-0 left-0 right-0 bottom-0 w-full absolute"
         style={{

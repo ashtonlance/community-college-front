@@ -2,7 +2,7 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: `https://nextword.wpengine.com/graphql`,
+  schema: `https://ncccs-api.ddev.site/graphql`,
   generates: {
     "./generated/": {
       preset: "client",

@@ -1,4 +1,4 @@
 schema:
-  - https://nextword.php.ddev.site/graphql:
+  - https://ncccs-api.ddev.site/graphql:
       headers:
         x-hasura-admin-secret: nhost-admin-secret
