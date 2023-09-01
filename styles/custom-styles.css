@@ -1,0 +1,158 @@
+.inactive-arrow {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.tag-page .tag-wrapper .inactive-taxonomy-item p,
+.category-page .category-wrapper .inactive-taxonomy-item p,
+.resource-single-template p {
+  color: #888;
+}
+
+.resource-single-template strong {
+  color: #555;
+}
+
+.tag-page .tag-wrapper .active-taxonomy-item p,
+.category-page .category-wrapper .active-taxonomy-item p {
+  color: black;
+}
+
+#category-uncategorized,
+#category-featured {
+  display: none;
+}
+
+.hide-border {
+  border: none;
+}
+
+.topbar-transparent {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 21.35%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.download-resource-form {
+  flex-direction: row;
+  margin: 0;
+}
+
+.arrow-submit {
+  stroke-width: 1.5;
+  stroke: white;
+}
+.sidebar-module .arrow-submit {
+  stroke: #888888;
+}
+table td {
+  padding: 10px 20px;
+  border: 1.5px solid #ccc;
+}
+.gallery-images img {
+  width: 100%;
+  object-fit: cover;
+  height: 400px;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+.module-spacing-bottom-none {
+  padding-bottom: 0;
+}
+.module-spacing-bottom-medium {
+  padding-bottom: 40px;
+}
+.module-spacing-bottom-large {
+  padding-bottom: 80px;
+}
+.module-spacing-top-none {
+  padding-top: 0;
+}
+.module-spacing-top-medium {
+  padding-top: 40px;
+}
+.module-spacing-top-large {
+  padding-top: 80px;
+}
+.module-color-white {
+  background-color: #fff;
+}
+.module-color-light {
+  background-color: #f8f8f8;
+}
+.module-color-dark {
+  background-color: #ccc;
+}
+.module-color-dark a {
+  background-color: #555;
+  color: white;
+}
+
+.module-spacing-bottom-none + .module-spacing-top-none {
+  padding-top: 20px;
+}
+
+.wp-block-video video {
+  margin: 40px auto 0 auto;
+  max-width: 1030px;
+}
+
+.submit-button-as-arrow {
+  position: relative;
+}
+
+.event-registration-form {
+  flex-direction: row;
+}
+
+.event-registration-form .gfield-FILEUPLOAD {
+  border: none;
+}
+
+.event-registration-form .gfield-FILEUPLOAD input {
+  padding: 0;
+}
+
+.event-registration-form .gfield-SELECT {
+  width: 100%;
+}
+
+.wp-block-quote p {
+  margin-bottom: 20px;
+}
+
+.secondary-nav:hover a,
+.secondary-nav:hover div {
+  color: black;
+}
+
+.search-white,
+.hamburguer-white {
+  stroke: white;
+}
+
+.search-wrapper-icon:hover .search-white,
+.search-black,
+.hamburguer-wrapper:hover .hamburguer-white {
+  stroke: black;
+}
+
+.event-single-page .modal {
+  top: 60px;
+}
+
+.landing-hero-text {
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.25));
+}
+
+.hide-label label {
+  display: none;
+}
+
+.hide-the-input-field > input {
+  display: none;
+}

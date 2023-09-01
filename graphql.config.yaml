@@ -1,0 +1,4 @@
+schema:
+  - https://nextword.php.ddev.site/graphql:
+      headers:
+        x-hasura-admin-secret: nhost-admin-secret
