@@ -16,7 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest",
-    "chromatic": "npx chromatic --project-token=chpt_ec41a7e2e8d8357",
+    "chromatic": "npx chromatic --project-token=chpt_6f7a3ec9598be62",
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
@@ -27,8 +27,10 @@
     "@faustwp/core": "^1.1.1",
     "@formspree/react": "^2.4.1",
     "@next/bundle-analyzer": "^13.4.12",
+    "@simplefocus/prettier-config": "^1.0.3",
     "@storybook/addon-console": "^2.0.0",
     "@storybook/addons": "^7.0.23",
+    "@tailwindcss/typography": "^0.5.9",
     "apollo-upload-client": "^17.0.0",
     "crypto-hash": "^2.0.1",
     "date-fns": "^2.29.3",

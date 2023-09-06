@@ -10,8 +10,8 @@ type SearchProps = {
 };
 
 export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
-  let [searchedTerm, setSearchedTerm] = useState("");
-  let [searchBarActive, setSearchBarActive] = useState(false);
+  const [searchedTerm, setSearchedTerm] = useState("");
+  const [searchBarActive, setSearchBarActive] = useState(false);
 
   const handleChange = (event) => {
     setSearchedTerm(event.target.value);
@@ -23,7 +23,11 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   };
 
   return (
-    <>
+    <div
+      className="flex gap-[10px] items-center hover:cursor-pointer"
+      onClick={toggleSearchBar}
+    >
+      {"Search"}
       {searchBarActive ? (
         <Image
           alt=""
@@ -34,61 +38,57 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
           onClick={toggleSearchBar}
         />
       ) : transparentMode ? (
-        <div onClick={toggleSearchBar}>
+        <>
           <svg
-            width="20"
-            height="21"
-            viewBox="0 0 20 21"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
           >
-            <path
-              className="search-white"
-              d="M8.89863 15.1971C12.1192 15.1971 14.7299 12.5864 14.7299 9.36586C14.7299 6.14529 12.1192 3.53461 8.89863 3.53461C5.67807 3.53461 3.06738 6.14529 3.06738 9.36586C3.06738 12.5864 5.67807 15.1971 8.89863 15.1971Z"
-              stroke=""
-              strokeWidth="1.5"
+            <circle
+              cx="8.26125"
+              cy="8.44917"
+              r="5.52297"
+              stroke="#14435B"
+              strokeWidth="2"
             />
             <path
-              className="search-white"
-              d="M13.397 13.9301L16.9324 17.4655"
-              stroke=""
-              strokeWidth="1.5"
-              strokeLinecap="square"
+              d="M14.5839 15.724L15.291 16.4311L16.7052 15.0169L15.9981 14.3098L14.5839 15.724ZM11.5292 12.6693L14.5839 15.724L15.9981 14.3098L12.9434 11.2551L11.5292 12.6693Z"
+              fill="#14435B"
             />
           </svg>
-        </div>
+        </>
       ) : (
-        <div onClick={toggleSearchBar}>
+        <>
           <svg
-            width="20"
-            height="21"
-            viewBox="0 0 20 21"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
           >
-            <path
-              className="search-black"
-              d="M8.89863 15.1971C12.1192 15.1971 14.7299 12.5864 14.7299 9.36586C14.7299 6.14529 12.1192 3.53461 8.89863 3.53461C5.67807 3.53461 3.06738 6.14529 3.06738 9.36586C3.06738 12.5864 5.67807 15.1971 8.89863 15.1971Z"
-              stroke=""
-              strokeWidth="1.5"
+            <circle
+              cx="8.26125"
+              cy="8.44917"
+              r="5.52297"
+              stroke="#14435B"
+              strokeWidth="2"
             />
             <path
-              className="search-black"
-              d="M13.397 13.9301L16.9324 17.4655"
-              stroke=""
-              strokeWidth="1.5"
-              strokeLinecap="square"
+              d="M14.5839 15.724L15.291 16.4311L16.7052 15.0169L15.9981 14.3098L14.5839 15.724ZM11.5292 12.6693L14.5839 15.724L15.9981 14.3098L12.9434 11.2551L11.5292 12.6693Z"
+              fill="#14435B"
             />
           </svg>
-        </div>
+        </>
       )}
 
       <div
         className={`${
           searchBarActive
-            ? "top-[98px] h-[80px] opacity-100 sm:top-[70px]"
+            ? "top-[152px] h-[80px] opacity-100 sm:top-[70px]"
             : "top-[-100px] h-[0px] opacity-0"
-        } transition-opacity ease-in-out delay-250 z-0 absolute right-0 left-0 flex bg-gmt-300 justify-center items-center  gap-3 sm:px-[20px]`}
+        } transition-opacity ease-in-out delay-250 z-0 absolute right-0 left-0 flex bg-white justify-center items-center  gap-3 sm:px-[20px]`}
       >
         <input
           onChange={handleChange}
@@ -106,6 +106,6 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
           Search
         </Link>
       </div>
-    </>
+    </div>
   );
 };

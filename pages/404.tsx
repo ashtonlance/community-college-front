@@ -8,7 +8,7 @@ const NOT_FOUND = gql`
   ${Header.fragments.entry}
   ${PreFooter.fragments.entry}
   query NotFound {
-    menu(id: "main", idType: SLUG) {
+    menu(id: "primary", idType: SLUG) {
       menuItems {
         nodes {
           ...NavigationMenuFragment

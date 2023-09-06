@@ -23,3 +23,5 @@ export const Modal = ({ modalActive, handleClose, modalContent, id = "" }) => {
     </div>
   );
 };
+
+export default Modal;

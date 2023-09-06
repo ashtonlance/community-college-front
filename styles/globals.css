@@ -7,25 +7,25 @@
     @apply font-sans antialiased;
   }
   p {
-    @apply text-[16px] font-medium leading-[150%] text-black font-sans antialiased;
+    @apply text-[16px] font-medium leading-[150%] text-darkGrey font-sans antialiased;
   }
   h1 {
-    @apply text-[64px] md:text-[62px] sm:text-[50px] font-extrabold leading-[105%] tracking-[-0.02em] text-black font-sans antialiased;
+    @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
   h2 {
-    @apply text-[46px] sm:text-[38px] font-bold leading-[115%] sm:leading-[110%] tracking-[-0.02em] text-black font-sans antialiased;
+    @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-0.35px] text-navy font-serif antialiased;
   }
   h3 {
-    @apply text-[34px] sm:text-[26px] font-bold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-black font-sans antialiased;
+    @apply text-[38px] sm:text-[28px] leading-[110%] tracking-[-0.38px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
   }
   h4 {
-    @apply text-[26px] sm:text-[22px] font-extrabold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-black font-sans antialiased;
+    @apply text-[28px] sm:text-[26px] font-extrabold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-navy font-condensed antialiased;
   }
   h5 {
-    @apply text-[15px] sm:text-[14px] font-black leading-[100%] tracking-[0.06em] text-black font-sans uppercase antialiased;
+    @apply text-[15px] sm:text-[14px] font-black leading-[100%] tracking-[0.06em] text-navy font-sans uppercase antialiased;
   }
   ul li {
-    @apply list-disc list-inside text-gmt-500;
+    @apply list-disc list-inside text-darkGrey font-sans antialiased;
   }
   a {
     @apply cursor-pointer;

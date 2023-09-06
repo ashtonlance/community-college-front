@@ -93,7 +93,7 @@ Category.query = gql`
         }
       }
     }
-    menu(id: "main", idType: SLUG) {
+    menu(id: "primary", idType: SLUG) {
       menuItems {
         nodes {
           ...NavigationMenuFragment

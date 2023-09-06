@@ -15,11 +15,7 @@ export default function FrontPage(props: FrontPageProps) {
   const preFooterContent = props.data?.menus.nodes[0];
   const blocks = homePageData && [...homePageData?.blocks];
   return (
-    <Layout
-      menuItems={menuItems}
-      seo={homePageData?.seo}
-      headerVariant="transparent"
-    >
+    <Layout menuItems={menuItems} seo={homePageData?.seo}>
       {blocks && <WordPressBlocksViewer blocks={blocks} />}
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
@@ -45,7 +41,7 @@ FrontPage.query = gql`
         }
       }
     }
-    menu(id: "main", idType: SLUG) {
+    menu(id: "primary", idType: SLUG) {
       menuItems {
         nodes {
           ...NavigationMenuFragment

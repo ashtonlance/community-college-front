@@ -4,7 +4,7 @@ const Document = () => {
   return (
     <Html>
       <Head>
-        <link rel="stylesheet" href="https://use.typekit.net/bgb5bly.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/baf1lym.css" />
       </Head>
       <body>
         <Main />
