@@ -1,59 +1,59 @@
-import Image from "next/image";
-import quote from "../../assets/imgs/quote.svg";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { FadeIn } from "components/FadeIn";
-export type MarginSizesType = "none" | "medium" | "large";
-export type BackgroundColorType = "white" | "light" | "dark";
+import Image from 'next/image'
+import quote from '../../assets/imgs/quote.svg'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { FadeIn } from 'components/FadeIn'
+export type MarginSizesType = 'none' | 'medium' | 'large'
+export type BackgroundColorType = 'white' | 'light' | 'dark'
 
 type TestimonialSliderProps = {
   attributes: {
     data: {
-      slide: number;
-      background_color: BackgroundColorType;
-      component_spacing_bottom_spacing: MarginSizesType;
-      component_spacing_top_spacing: MarginSizesType;
-    };
-  };
-};
+      slide: number
+      background_color: BackgroundColorType
+      component_spacing_bottom_spacing: MarginSizesType
+      component_spacing_top_spacing: MarginSizesType
+    }
+  }
+}
 
 export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
-  const slides = attributes.data.slide;
-  const bgColorCard = attributes.data.background_color;
-  const marginBottom = attributes.data.component_spacing_bottom_spacing || null;
-  const marginTop = attributes.data.component_spacing_top_spacing || null;
-  const bgColorFullModule = bgColorCard == "white" ? "bg-stone" : "bg-white";
+  const slides = attributes.data.slide
+  const bgColorCard = attributes.data.background_color
+  const marginBottom = attributes.data.component_spacing_bottom_spacing || null
+  const marginTop = attributes.data.component_spacing_top_spacing || null
+  const bgColorFullModule = bgColorCard == 'white' ? 'bg-stone' : 'bg-white'
 
   const autoplay = useRef(
     Autoplay(
       { delay: 3000, stopOnInteraction: false },
       // @ts-expect-error
-      (embla) => embla.parentElement
+      embla => embla.parentElement
     )
-  );
+  )
   const options = {
     skipSnaps: true,
     loop: true,
     slidesToScroll: 1,
-  };
-  const [emblaRef, embla] = useEmblaCarousel(options, [autoplay.current]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState([]);
+  }
+  const [emblaRef, embla] = useEmblaCarousel(options, [autoplay.current])
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState([])
 
   const onSelect = useCallback(() => {
-    if (!embla) return;
-    setSelectedIndex(embla.selectedScrollSnap());
-  }, [embla]);
+    if (!embla) return
+    setSelectedIndex(embla.selectedScrollSnap())
+  }, [embla])
 
   useEffect(() => {
-    if (!embla) return;
-    onSelect();
+    if (!embla) return
+    onSelect()
 
-    setScrollSnaps(embla.scrollSnapList());
+    setScrollSnaps(embla.scrollSnapList())
 
-    embla.on("select", onSelect);
-  }, [embla, setScrollSnaps, onSelect]);
+    embla.on('select', onSelect)
+  }, [embla, setScrollSnaps, onSelect])
 
   const createCarouselItem = (val, options = {}) => (
     <div
@@ -80,11 +80,11 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
         {attributes.data[`slide_${val}_business_name`]}
       </h5>
     </div>
-  );
+  )
 
   const baseChildren = (
     <div>{[...Array(slides).keys()].map(createCarouselItem)}</div>
-  );
+  )
 
   return (
     <FadeIn>
@@ -104,8 +104,8 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
               <div
                 className={`cursor-pointer ${
                   selectedIndex === index
-                    ? "h-[10px] w-[10px] bg-green "
-                    : "h-2 w-2 bg-sky"
+                    ? 'h-[10px] w-[10px] bg-green '
+                    : 'h-2 w-2 bg-sky'
                 } rounded-full`}
                 key={index}
                 onClick={() => scrollTo(index as any)}
@@ -115,7 +115,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
         </div>
       </div>
     </FadeIn>
-  );
-};
+  )
+}
 
-TestimonialSlider.displayName = "nextword/testimonialslider";
+TestimonialSlider.displayName = 'nextword/testimonialslider'

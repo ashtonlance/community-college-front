@@ -1,31 +1,31 @@
-import Link from "next/link";
-import Cookies from "js-cookie";
-import { MouseEvent, useEffect, useState } from "react";
+import Link from 'next/link'
+import Cookies from 'js-cookie'
+import { MouseEvent, useEffect, useState } from 'react'
 
-const USER_CONSENT_COOKIE_KEY = "cookie_consent_is_true";
-const USER_CONSENT_COOKIE_EXPIRE_DATE = 365;
+const USER_CONSENT_COOKIE_KEY = 'cookie_consent_is_true'
+const USER_CONSENT_COOKIE_EXPIRE_DATE = 365
 
 export const CookieBanner = () => {
-  const [cookieConsentIsTrue, setCookieConsentIsTrue] = useState(true);
+  const [cookieConsentIsTrue, setCookieConsentIsTrue] = useState(true)
 
   useEffect(() => {
-    const consentIsTrue = Cookies.get(USER_CONSENT_COOKIE_KEY) === "true";
-    setCookieConsentIsTrue(consentIsTrue);
-  }, []);
+    const consentIsTrue = Cookies.get(USER_CONSENT_COOKIE_KEY) === 'true'
+    setCookieConsentIsTrue(consentIsTrue)
+  }, [])
 
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!cookieConsentIsTrue) {
-      Cookies.set(USER_CONSENT_COOKIE_KEY, "true", {
+      Cookies.set(USER_CONSENT_COOKIE_KEY, 'true', {
         expires: USER_CONSENT_COOKIE_EXPIRE_DATE,
-      });
-      setCookieConsentIsTrue(true);
+      })
+      setCookieConsentIsTrue(true)
     }
-  };
+  }
 
   if (cookieConsentIsTrue) {
-    return null;
+    return null
   }
 
   return (
@@ -37,13 +37,13 @@ export const CookieBanner = () => {
               Our site uses cookies and external scripts to create a
               personalized and improved experience for users like you. By
               continuing to browse our site, you give consent for cookies to be
-              used. See our{" "}
+              used. See our{' '}
               <Link
                 href="/privacy-policy"
                 className="text-sm underline hover:text-lightAccent"
               >
                 privacy policy
-              </Link>{" "}
+              </Link>{' '}
               for more details or adjust your Cookie Settings.
             </p>
           </div>
@@ -58,5 +58,5 @@ export const CookieBanner = () => {
         </div>
       </>
     </section>
-  );
-};
+  )
+}

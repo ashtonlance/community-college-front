@@ -1,25 +1,25 @@
-import Link from "next/link";
-import { getHeadingTag } from "../../utils/headingType";
-import { useState, useContext } from "react";
-import { PageContext } from "wp-templates/single-event";
-import { ButtonWithModalForm } from "components/Button/ButtonWithModalForm";
+import Link from 'next/link'
+import { getHeadingTag } from '../../utils/headingType'
+import { useState, useContext } from 'react'
+import { PageContext } from 'wp-templates/single-event'
+import { ButtonWithModalForm } from 'components/Button/ButtonWithModalForm'
 
 export const TextBlock = ({ attributes }) => {
-  const ctaLabel = attributes.data.button_button_text;
-  const ctaURL = attributes.data.button_button_link;
-  const requestInvite = attributes.data.button_request_invite;
-  const headingContent = attributes.data.heading;
-  const headingSize = attributes.data.heading_size;
-  const heading = getHeadingTag(headingSize, headingContent);
-  const description = attributes.data.body_copy;
-  const tags = attributes.data.above_header_content_tags;
-  const aboveHeading = attributes.data.above_header_content_headline;
-  const colorModule = attributes.data.background_color;
-  const bottomSpacing = attributes.data.component_spacing_bottom_spacing;
-  const topSpacing = attributes.data.component_spacing_top_spacing;
-  const formEventRegistration = useContext(PageContext);
+  const ctaLabel = attributes.data.button_button_text
+  const ctaURL = attributes.data.button_button_link
+  const requestInvite = attributes.data.button_request_invite
+  const headingContent = attributes.data.heading
+  const headingSize = attributes.data.heading_size
+  const heading = getHeadingTag(headingSize, headingContent)
+  const description = attributes.data.body_copy
+  const tags = attributes.data.above_header_content_tags
+  const aboveHeading = attributes.data.above_header_content_headline
+  const colorModule = attributes.data.background_color
+  const bottomSpacing = attributes.data.component_spacing_bottom_spacing
+  const topSpacing = attributes.data.component_spacing_top_spacing
+  const formEventRegistration = useContext(PageContext)
 
-  const [modalActive, setModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState(false)
 
   return (
     <div
@@ -33,7 +33,7 @@ export const TextBlock = ({ attributes }) => {
             <h5>{aboveHeading}</h5>
           ) : (
             tags > 0 &&
-            [...Array(tags).keys()].map((val) => (
+            [...Array(tags).keys()].map(val => (
               <div
                 key={val}
                 className="flex gap-[10px] items-center justify-center"
@@ -57,7 +57,7 @@ export const TextBlock = ({ attributes }) => {
           />
         )}
 
-        {requestInvite == "1" ? (
+        {requestInvite == '1' ? (
           <ButtonWithModalForm
             setModalActive={setModalActive}
             modalActive={modalActive}
@@ -78,7 +78,7 @@ export const TextBlock = ({ attributes }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-TextBlock.displayName = "nextword/text";
+TextBlock.displayName = 'nextword/text'

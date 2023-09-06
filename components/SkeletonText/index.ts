@@ -1,1 +1,1 @@
-export * from "./SkeletonText";
+export * from './SkeletonText'

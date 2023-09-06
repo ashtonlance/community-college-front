@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { Button } from "../../Button";
-import arrowright from "../../../assets/icons/arrow-right.svg";
-import arrowleft from "../../../assets/icons/arrow-left.svg";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import { AboutMenu } from "../MegaMenu/AboutMenu";
-import { ServicesMenu } from "../MegaMenu/ServicesMenu";
-import { ResourcesMenu } from "../MegaMenu/ResourcesMenu";
-import { Modal } from "components/Modal";
-import { Login } from "components/Modal/Login";
-import Link from "next/link";
-import { Separator } from "components/Separator";
+import { useState } from 'react'
+import { Button } from '../../Button'
+import arrowright from '../../../assets/icons/arrow-right.svg'
+import arrowleft from '../../../assets/icons/arrow-left.svg'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import { AboutMenu } from '../MegaMenu/AboutMenu'
+import { ServicesMenu } from '../MegaMenu/ServicesMenu'
+import { ResourcesMenu } from '../MegaMenu/ResourcesMenu'
+import { Modal } from 'components/Modal'
+import { Login } from 'components/Modal/Login'
+import Link from 'next/link'
+import { Separator } from 'components/Separator'
 
 const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
   return (
@@ -18,12 +18,12 @@ const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
       className={`flex justify-center flex-col items-start text-white w-full ${classes}`}
     >
       {items &&
-        items?.map((item) => (
+        items?.map(item => (
           <div
             onClick={() => setActiveMenuAs(item)}
             key={item.id}
             className={`links-mobile-nav flex w-full justify-between border-b-[1.5px] border-gmt-400
-                    ${item.label === "Events" ? "order-6 hide-border" : ""}
+                    ${item.label === 'Events' ? 'order-6 hide-border' : ''}
                     `}
           >
             <div className=""> {item.label} </div>
@@ -33,22 +33,22 @@ const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}
 
 const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
-  const router = useRouter();
+  const router = useRouter()
   let content = (
     <TopLevelMenu
       classes="top-[90px]"
       items={items}
       setActiveMenuAs={setActiveMenu}
     />
-  );
+  )
 
-  if (activeMenu?.label !== "") {
+  if (activeMenu?.label !== '') {
     switch (activeMenu?.label) {
-      case "About":
+      case 'About':
         content = (
           <div className="w-full internal-menu-mobile text-left min-h-[90px] md:min-h-[80px]">
             <Link
@@ -63,10 +63,10 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
               subItems={activeMenu.navigationMenu.items}
             />
           </div>
-        );
+        )
 
-        break;
-      case "Services":
+        break
+      case 'Services':
         content = (
           <div className="w-full internal-menu-mobile text-left  min-h-[90px] md:min-h-[80px]">
             <Link
@@ -81,9 +81,9 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
               subItems={activeMenu.navigationMenu.items}
             />
           </div>
-        );
-        break;
-      case "Resources":
+        )
+        break
+      case 'Resources':
         content = (
           <div className="w-full internal-menu-mobile text-left  min-h-[90px] md:min-h-[80px]">
             <Link
@@ -99,26 +99,26 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
               featuredResource={activeMenu.navigationMenu.featuredResource}
             />
           </div>
-        );
-        break;
-      case "Events":
-        router.push(activeMenu.url);
-        break;
+        )
+        break
+      case 'Events':
+        router.push(activeMenu.url)
+        break
     }
   }
-  return content;
-};
+  return content
+}
 
 export const MobileSubmenu = ({ items }) => {
-  const [activeMenu, setActiveMenu] = useState(null);
-  const [loginModalActive, setLoginModalActive] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null)
+  const [loginModalActive, setLoginModalActive] = useState(false)
   const menu = (
     <InternalMenu
       activeMenu={activeMenu}
       items={items}
       setActiveMenu={setActiveMenu}
     />
-  );
+  )
 
   return (
     <div className="semi-modal">
@@ -165,5 +165,5 @@ export const MobileSubmenu = ({ items }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

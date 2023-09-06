@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
-import useGravityForm, { ACTION_TYPES } from "../../../utils/useGravityForms";
-import { useEffect } from "react";
+import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { useEffect } from 'react'
 
 export const EMAIL_FIELD_FIELDS = gql`
   fragment EmailFieldFields on EmailField {
@@ -12,12 +12,12 @@ export const EMAIL_FIELD_FIELDS = gql`
     isRequired
     placeholder
   }
-`;
+`
 
-const DEFAULT_VALUE = "";
+const DEFAULT_VALUE = ''
 
 export default function EmailField({ field, fieldErrors }) {
-  const { state, dispatch } = useGravityForm();
+  const { state, dispatch } = useGravityForm()
   const {
     id,
     formId,
@@ -27,7 +27,7 @@ export default function EmailField({ field, fieldErrors }) {
     cssClass,
     isRequired,
     placeholder,
-  } = field;
+  } = field
 
   useEffect(() => {
     // @ts-ignore
@@ -36,16 +36,16 @@ export default function EmailField({ field, fieldErrors }) {
       fieldValue: {
         id,
         emailValues: {
-          value: localStorage.getItem("userEmail") || "",
-          confirmationValue: localStorage.getItem("userEmail") || "",
+          value: localStorage.getItem('userEmail') || '',
+          confirmationValue: localStorage.getItem('userEmail') || '',
         },
       },
-    });
-  }, [dispatch, id]);
+    })
+  }, [dispatch, id])
 
-  const htmlId = `field_${formId}_${id}`;
-  const fieldValue = state.find((fieldValue) => fieldValue.id === id);
-  const value = fieldValue?.emailValues?.value || DEFAULT_VALUE;
+  const htmlId = `field_${formId}_${id}`
+  const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  const value = fieldValue?.emailValues?.value || DEFAULT_VALUE
 
   return (
     <div className={`gfield gfield-${type} ${cssClass} w-[48%]`.trim()}>
@@ -61,7 +61,7 @@ export default function EmailField({ field, fieldErrors }) {
         placeholder={placeholder}
         required={Boolean(isRequired)}
         value={value.toLowerCase()}
-        onChange={(event) => {
+        onChange={event => {
           // @ts-ignore
           dispatch({
             type: ACTION_TYPES.updateEmailFieldValue,
@@ -72,17 +72,17 @@ export default function EmailField({ field, fieldErrors }) {
                 confirmationValue: event.target.value,
               },
             },
-          });
+          })
         }}
       />
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </div>
-  );
+  )
 }

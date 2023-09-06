@@ -1,74 +1,72 @@
-import { gql } from "@apollo/client";
-import { Header } from "components/Header";
-import { PreFooter } from "components/PreFooter";
-import { WordPressBlocksViewer } from "@faustwp/blocks";
-import { Layout } from "components/Layout";
-import { ResourcesSinglePageHero } from "components/ResourcesHero/ResourcesSinglePageHero";
-import SharePost from "components/SharePost/SharePost";
-import { ResourceTags } from "components/ResourceTags/ResourceTags";
-import { NewsletterBanner } from "components/NewsletterBanner";
-import { RelatedResourcesByTaxonomy } from "components/RelatedResources";
+import { gql } from '@apollo/client'
+import { Header } from 'components/Header'
+import { PreFooter } from 'components/PreFooter'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
+import { Layout } from 'components/Layout'
+import { ResourcesSinglePageHero } from 'components/ResourcesHero/ResourcesSinglePageHero'
+import SharePost from 'components/SharePost/SharePost'
+import { ResourceTags } from 'components/ResourceTags/ResourceTags'
+import { NewsletterBanner } from 'components/NewsletterBanner'
+import { RelatedResourcesByTaxonomy } from 'components/RelatedResources'
 
 type ResourcesArticleProps = {
   data: {
     resource: {
-      id: string;
-      title: string;
-      link: string;
-      date: string;
-      excerpt: string;
-      blocks: any;
+      id: string
+      title: string
+      link: string
+      date: string
+      excerpt: string
+      blocks: any
       tags: {
         nodes: [
           {
-            name: string;
-            link: string;
-            id: string;
+            name: string
+            link: string
+            id: string
           }
-        ];
-      };
+        ]
+      }
       categories: {
         nodes: [
           {
-            id: string;
+            id: string
           }
-        ];
-      };
-      seo: {};
+        ]
+      }
+      seo: {}
       featuredImage: {
         node: {
-          sourceUrl: string;
-        };
-      };
-    };
+          sourceUrl: string
+        }
+      }
+    }
     menus: {
-      nodes: {};
-    };
+      nodes: {}
+    }
     menu: {
-      menuItems: {};
-    };
-  };
-  loading: boolean;
-};
+      menuItems: {}
+    }
+  }
+  loading: boolean
+}
 
 export default function ResourcesArticle(props: ResourcesArticleProps) {
   if (props.loading) {
-    return <>Loading...</>;
+    return <>Loading...</>
   }
-  const menuItems = props.data?.menu?.menuItems || [];
-  const seo = props.data?.resource?.seo;
-  const preFooterContent = props.data?.menus?.nodes[0];
-  const postImg = props.data?.resource?.featuredImage?.node?.sourceUrl;
-  const postTitle = props.data?.resource?.title;
-  const postDate = props.data?.resource?.date;
-  const postExcerpt = props.data?.resource?.excerpt;
-  const postLink = props.data?.resource?.link;
-  const blocks = props.data?.resource?.blocks;
-  const tags = props.data?.resource?.tags?.nodes;
-  const categories = props.data?.resource?.categories?.nodes?.map(
-    (cat) => cat.id
-  );
-  const tagIds = props.data?.resource?.tags?.nodes?.map((tag) => tag.id);
+  const menuItems = props.data?.menu?.menuItems || []
+  const seo = props.data?.resource?.seo
+  const preFooterContent = props.data?.menus?.nodes[0]
+  const postImg = props.data?.resource?.featuredImage?.node?.sourceUrl
+  const postTitle = props.data?.resource?.title
+  const postDate = props.data?.resource?.date
+  const postExcerpt = props.data?.resource?.excerpt
+  const postLink = props.data?.resource?.link
+  const blocks = props.data?.resource?.blocks
+  const tags = props.data?.resource?.tags?.nodes
+  const categories = props.data?.resource?.categories?.nodes?.map(cat => cat.id)
+  const tagIds = props.data?.resource?.tags?.nodes?.map(tag => tag.id)
 
   return (
     <Layout menuItems={menuItems} seo={seo}>
@@ -101,17 +99,17 @@ export default function ResourcesArticle(props: ResourcesArticleProps) {
       </div>
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
-  );
+  )
 }
 
 ResourcesArticle.query = gql`
   ${Header.fragments.entry}
   ${PreFooter.fragments.entry}
-`;
+`
 
 ResourcesArticle.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
-  };
-};
+  }
+}

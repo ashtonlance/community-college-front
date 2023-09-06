@@ -1,1 +1,1 @@
-export * from "./LinksBlock";
+export * from './LinksBlock'

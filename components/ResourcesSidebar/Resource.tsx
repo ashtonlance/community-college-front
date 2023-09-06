@@ -1,47 +1,47 @@
-import Link from "next/link";
-import arrowright from "../../assets/icons/arrow-right.svg";
-import Image from "next/image";
-import arrowdown from "../../assets/icons/arrow-down.svg";
+import Link from 'next/link'
+import arrowright from '../../assets/icons/arrow-right.svg'
+import Image from 'next/image'
+import arrowdown from '../../assets/icons/arrow-down.svg'
 
 type ResourceSidebarType = {
-  title: string;
-  linkList: any;
-  classList: string;
-  onClick?: (id: string) => void;
-  active?: string;
-  selectedTaxonomy?: string;
-  tag?: boolean;
-  category?: boolean;
-};
+  title: string
+  linkList: any
+  classList: string
+  onClick?: (id: string) => void
+  active?: string
+  selectedTaxonomy?: string
+  tag?: boolean
+  category?: boolean
+}
 
 export const Resource = (props: ResourceSidebarType) => {
   const transformNameToClass = (name: string) => {
-    return name?.split(" ")?.join("-")?.toLowerCase();
-  };
+    return name?.split(' ')?.join('-')?.toLowerCase()
+  }
 
   const returnItemId = (item: string) => {
     if (props.tag) {
-      return "tag-".concat(transformNameToClass(item));
+      return 'tag-'.concat(transformNameToClass(item))
     }
     if (props.category) {
-      return "category-".concat(transformNameToClass(item));
+      return 'category-'.concat(transformNameToClass(item))
     }
-  };
+  }
 
   const getActiveClass = (name: string, title: string) => {
     return title == props.selectedTaxonomy || name == props.selectedTaxonomy
-      ? "active-taxonomy-item"
-      : "inactive-taxonomy-item";
-  };
+      ? 'active-taxonomy-item'
+      : 'inactive-taxonomy-item'
+  }
 
   const selectedTaxonomy =
-    transformNameToClass(props?.selectedTaxonomy) || "no-selection";
-  let className = selectedTaxonomy;
+    transformNameToClass(props?.selectedTaxonomy) || 'no-selection'
+  let className = selectedTaxonomy
   if (props.tag) {
-    className = `tag-wrapper selected-tag-${selectedTaxonomy}`;
+    className = `tag-wrapper selected-tag-${selectedTaxonomy}`
   }
   if (props.category) {
-    className = `category-wrapper selected-category-${selectedTaxonomy}`;
+    className = `category-wrapper selected-category-${selectedTaxonomy}`
   }
 
   return (
@@ -62,7 +62,7 @@ export const Resource = (props: ResourceSidebarType) => {
         </div>
 
         <div className="md:hidden">
-          {props.linkList?.map((item) => (
+          {props.linkList?.map(item => (
             <Link
               id={`${
                 item.name ? returnItemId(item.name) : returnItemId(item.title)
@@ -85,7 +85,7 @@ export const Resource = (props: ResourceSidebarType) => {
       {props.active && props.active == props.title && (
         <div className="bg-white absolute top-[98px] sm:relative sm:top-0 w-full px-[40px] pb-[40px]">
           <div className="md:mt-[40px]">
-            {props.linkList?.map((item) => (
+            {props.linkList?.map(item => (
               <Link
                 id={`${
                   item.name ? returnItemId(item.name) : returnItemId(item.title)
@@ -107,5 +107,5 @@ export const Resource = (props: ResourceSidebarType) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

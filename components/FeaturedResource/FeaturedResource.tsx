@@ -1,12 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
-import Link from "next/link";
-import Image from "next/image";
-import border from "../../assets/imgs/white-border.svg";
+import { gql, useQuery } from '@apollo/client'
+import Link from 'next/link'
+import Image from 'next/image'
+import border from '../../assets/imgs/white-border.svg'
 import {
   getLabelFromCategory,
   getCategoryForResource,
-} from "utils/getButtonLabels";
-import { formatDate } from "utils/dates";
+} from 'utils/getButtonLabels'
+import { formatDate } from 'utils/dates'
 
 // Instead of letting the editor choose the article manually, we are getting the one flagged as featured
 const GET_FEATURED_RESOURCE = gql`
@@ -30,7 +30,7 @@ const GET_FEATURED_RESOURCE = gql`
       }
     }
   }
-`;
+`
 
 const GET_FEATURED_RESOURCE_BY_CATEGORY = gql`
   query GetResource($category: String) {
@@ -53,48 +53,48 @@ const GET_FEATURED_RESOURCE_BY_CATEGORY = gql`
       }
     }
   }
-`;
+`
 
 export const FeaturedResource = () => {
-  const { loading, error, data } = useQuery(GET_FEATURED_RESOURCE);
+  const { loading, error, data } = useQuery(GET_FEATURED_RESOURCE)
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
   if (data) {
-    return <FeaturedResourceInternal dataInfo={data} />;
+    return <FeaturedResourceInternal dataInfo={data} />
   }
-};
+}
 
 export const FeaturedResourceByCategory = ({ categoryName }) => {
-  let category = "featured+" + categoryName;
+  let category = 'featured+' + categoryName
   const { loading, error, data } = useQuery(GET_FEATURED_RESOURCE_BY_CATEGORY, {
     variables: { category },
-  });
+  })
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
   if (data) {
-    return <FeaturedResourceInternal dataInfo={data} />;
+    return <FeaturedResourceInternal dataInfo={data} />
   }
-};
+}
 
 const FeaturedResourceInternal = ({ dataInfo }) => {
   const imgUrl =
-    dataInfo?.resources?.nodes[0]?.featuredImage?.node?.sourceUrl || "";
-  const excerpt = dataInfo?.resources?.nodes[0]?.excerpt || "";
-  const category = getCategoryForResource(dataInfo?.resources?.nodes[0]?.name);
-  const date = formatDate(dataInfo?.resources?.nodes[0]?.date);
-  const title = dataInfo?.resources?.nodes[0]?.title;
-  const resourceURL = dataInfo?.resources?.nodes[0]?.link || "";
-  const readMoreLabel = getLabelFromCategory(category);
+    dataInfo?.resources?.nodes[0]?.featuredImage?.node?.sourceUrl || ''
+  const excerpt = dataInfo?.resources?.nodes[0]?.excerpt || ''
+  const category = getCategoryForResource(dataInfo?.resources?.nodes[0]?.name)
+  const date = formatDate(dataInfo?.resources?.nodes[0]?.date)
+  const title = dataInfo?.resources?.nodes[0]?.title
+  const resourceURL = dataInfo?.resources?.nodes[0]?.link || ''
+  const readMoreLabel = getLabelFromCategory(category)
 
   return (
     <div
@@ -126,7 +126,7 @@ const FeaturedResourceInternal = ({ dataInfo }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-FeaturedResource.displayName = "nextword/resourcefeaturedcard";
+FeaturedResource.displayName = 'nextword/resourcefeaturedcard'

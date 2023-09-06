@@ -1,23 +1,23 @@
-import Link from "next/link";
-import { getLabelFromCategory } from "utils/getButtonLabels";
-import { formatDate } from "../../utils/dates";
+import Link from 'next/link'
+import { getLabelFromCategory } from 'utils/getButtonLabels'
+import { formatDate } from '../../utils/dates'
 
 type Resource = {
-  title: string;
-  date: Date;
-  excerpt: string;
-  link: string;
-  featuredImage: any;
-  categories: any;
-};
+  title: string
+  date: Date
+  excerpt: string
+  link: string
+  featuredImage: any
+  categories: any
+}
 
 export const ResourceCard = ({ resource }) => {
-  const title = resource?.title;
-  const text = resource?.excerpt;
-  const img = resource?.featuredImage?.node?.sourceUrl;
-  const date = formatDate(resource?.date);
-  const link = resource?.link;
-  const category = resource?.categories?.nodes[0]?.name;
+  const title = resource?.title
+  const text = resource?.excerpt
+  const img = resource?.featuredImage?.node?.sourceUrl
+  const date = formatDate(resource?.date)
+  const link = resource?.link
+  const category = resource?.categories?.nodes[0]?.name
 
   return (
     <div className="bg-gmt-100 flex my-[20px] md:flex-col">
@@ -28,13 +28,13 @@ export const ResourceCard = ({ resource }) => {
           }}
           className="bg-cover bg-center bg-no-repeat w-[33%] md:w-full md:h-[200px] sm:h-[160px]"
         >
-          {" "}
+          {' '}
         </div>
       )}
 
       <div
         className={`${
-          img ? "w-[66%] md:w-fit" : "w-full"
+          img ? 'w-[66%] md:w-fit' : 'w-full'
         } flex flex-col p-[40px] md:p-[32px]`}
       >
         <div>
@@ -67,5 +67,5 @@ export const ResourceCard = ({ resource }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}

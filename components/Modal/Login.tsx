@@ -1,6 +1,6 @@
-import Link from "next/link";
-import arrow from "../../assets/icons/arrow-go.svg";
-import Image from "next/image";
+import Link from 'next/link'
+import arrow from '../../assets/icons/arrow-go.svg'
+import Image from 'next/image'
 
 export const Login = () => {
   return (
@@ -23,5 +23,5 @@ export const Login = () => {
         </Link>
       </div>
     </>
-  );
-};
+  )
+}

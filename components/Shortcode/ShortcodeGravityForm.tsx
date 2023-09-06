@@ -1,5 +1,5 @@
-import { GravityForm } from "components/GravityForm/GravityForm";
-import { gql, useQuery } from "@apollo/client";
+import { GravityForm } from 'components/GravityForm/GravityForm'
+import { gql, useQuery } from '@apollo/client'
 
 const GET_GRAVITY_FORM = gql`
   ${GravityForm.fragments.entry}
@@ -8,18 +8,18 @@ const GET_GRAVITY_FORM = gql`
       ...GravityFormFragment
     }
   }
-`;
+`
 
 export const ShortcodeGravityForm = ({ ID }) => {
   const { loading, error, data } = useQuery(GET_GRAVITY_FORM, {
     variables: { ID },
-  });
+  })
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
-  return <GravityForm customClasses="" form={data?.gfForm} />;
-};
+  return <GravityForm customClasses="" form={data?.gfForm} />
+}

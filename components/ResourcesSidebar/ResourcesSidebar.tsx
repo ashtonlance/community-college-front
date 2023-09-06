@@ -1,7 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
-import { Resource } from "components/ResourcesSidebar/Resource";
-import { ResourcesSidebarMobile } from "./ResourceSidebarMobile";
-import { NewsletterInput } from "components/NewsletterBanner";
+import { gql, useQuery } from '@apollo/client'
+import { Resource } from 'components/ResourcesSidebar/Resource'
+import { ResourcesSidebarMobile } from './ResourceSidebarMobile'
+import { NewsletterInput } from 'components/NewsletterBanner'
 
 const GET_RESOURCE = gql`
   query GetResources {
@@ -34,18 +34,18 @@ const GET_RESOURCE = gql`
       }
     }
   }
-`;
+`
 
 type ResourcesSidebarProps = {
-  selectedTaxonomy?: string;
-};
+  selectedTaxonomy?: string
+}
 
 export const ResourcesSidebar = (props: ResourcesSidebarProps) => {
-  const { loading, error, data } = useQuery(GET_RESOURCE);
-  const tags = data?.tags?.nodes;
-  const categories = data?.categories?.nodes;
-  const popularResources = data?.popularPosts?.nodes;
-  const latestResources = data?.resources?.nodes;
+  const { loading, error, data } = useQuery(GET_RESOURCE)
+  const tags = data?.tags?.nodes
+  const categories = data?.categories?.nodes
+  const popularResources = data?.popularPosts?.nodes
+  const latestResources = data?.resources?.nodes
 
   return (
     <>
@@ -77,5 +77,5 @@ export const ResourcesSidebar = (props: ResourcesSidebarProps) => {
 
       <ResourcesSidebarMobile tags={tags} categories={categories} />
     </>
-  );
-};
+  )
+}

@@ -5,8 +5,8 @@
   "scripts": {
     "build": "faust build",
     "dev": "faust dev",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "lint": "eslint \"./**/*.{js,jsx}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "codegen": "graphql-codegen --config codegen.ts",
     "postinstall": "husky install",
     "prepare": "husky install",
@@ -92,7 +92,7 @@
   },
   "lint-staged": {
     "*.js,ts,tsx,jsx": "npm run lint",
-    "*.{js,jsx,ts,tsx,css,md,html,json}": "npm run format"
+    "*.{js,jsx,ts,tsx,css,html}": "npm run format"
   },
   "readme": "ERROR: No README data found!",
   "_id": "nextword@0.1.0"

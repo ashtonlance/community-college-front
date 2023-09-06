@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
-export const Heading = (props) => {
+export const Heading = props => {
   return (
     <div
       className="mb-[32px] sm:mb-[24px]"
       dangerouslySetInnerHTML={{ __html: props.originalContent }}
     />
-  );
-};
+  )
+}
 
-Heading.displayName = "core/heading";
+Heading.displayName = 'core/heading'

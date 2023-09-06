@@ -1,1 +1,1 @@
-export * from "./ContactBlock";
+export * from './ContactBlock'

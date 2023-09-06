@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import useGravityForm, { ACTION_TYPES } from "../../../utils/useGravityForms";
+import { gql } from '@apollo/client'
+import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
 export const WEBSITE_FIELD_FIELDS = gql`
   fragment WebsiteFieldFields on WebsiteField {
@@ -10,9 +10,9 @@ export const WEBSITE_FIELD_FIELDS = gql`
     isRequired
     placeholder
   }
-`;
+`
 
-const DEFAULT_VALUE = "";
+const DEFAULT_VALUE = ''
 
 export default function WebsiteField({ field, fieldErrors }) {
   const {
@@ -24,11 +24,11 @@ export default function WebsiteField({ field, fieldErrors }) {
     cssClass,
     isRequired,
     placeholder,
-  } = field;
-  const htmlId = `field_${formId}_${id}`;
-  const { state, dispatch } = useGravityForm();
-  const fieldValue = state.find((fieldValue) => fieldValue.id === id);
-  const value = fieldValue?.value || DEFAULT_VALUE;
+  } = field
+  const htmlId = `field_${formId}_${id}`
+  const { state, dispatch } = useGravityForm()
+  const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  const value = fieldValue?.value || DEFAULT_VALUE
 
   return (
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
@@ -38,9 +38,9 @@ export default function WebsiteField({ field, fieldErrors }) {
         name={String(id)}
         id={htmlId}
         required={Boolean(isRequired)}
-        placeholder={placeholder || ""}
+        placeholder={placeholder || ''}
         value={value}
-        onChange={(event) => {
+        onChange={event => {
           // @ts-ignore
           dispatch({
             type: ACTION_TYPES.updateWebsiteFieldValue,
@@ -48,17 +48,17 @@ export default function WebsiteField({ field, fieldErrors }) {
               id,
               value: event.target.value,
             },
-          });
+          })
         }}
       />
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </div>
-  );
+  )
 }

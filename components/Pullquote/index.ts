@@ -1,1 +1,1 @@
-export * from "./Pullquote";
+export * from './Pullquote'

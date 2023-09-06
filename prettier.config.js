@@ -1,4 +1,4 @@
 module.exports = {
-    ...require('@simplefocus/prettier-config'),
-    tabWidth: 2,
+  ...require('@simplefocus/prettier-config'),
+  tabWidth: 2,
 }

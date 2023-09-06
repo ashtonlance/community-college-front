@@ -1,7 +1,7 @@
-import { HeroPropsType } from "./HomeHero";
-import Link from "next/link";
-import { GuideLine } from "../AnimatedLines/GuideLine";
-import Image from "next/image";
+import { HeroPropsType } from './HomeHero'
+import Link from 'next/link'
+import { GuideLine } from '../AnimatedLines/GuideLine'
+import Image from 'next/image'
 export const DefaultHero = ({
   bgColor,
   bgImg,
@@ -60,5 +60,5 @@ export const DefaultHero = ({
         )
       )}
     </div>
-  );
-};
+  )
+}

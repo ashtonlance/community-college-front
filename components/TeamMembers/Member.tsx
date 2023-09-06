@@ -1,10 +1,10 @@
-import Link from "next/link";
-import linkedinUser from "../../assets/icons/linkedinUser.svg";
-import Image from "next/image";
+import Link from 'next/link'
+import linkedinUser from '../../assets/icons/linkedinUser.svg'
+import Image from 'next/image'
 
 export const Member = ({ img, name, job, linkedinURL, email }) => {
   return (
-    <div className={`${email ? " bg-white" : " bg-gmt-100"} flex flex-col`}>
+    <div className={`${email ? ' bg-white' : ' bg-gmt-100'} flex flex-col`}>
       <div
         className="h-[300px] bg-cover bg-no-repeat"
         style={{
@@ -35,5 +35,5 @@ export const Member = ({ img, name, job, linkedinURL, email }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

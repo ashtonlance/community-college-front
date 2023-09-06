@@ -1,1 +1,1 @@
-export * from "./ResourceTags";
+export * from './ResourceTags'

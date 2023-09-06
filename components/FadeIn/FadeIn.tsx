@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 type FadeInProps = {
-  children: React.ReactNode;
-  delay?: boolean;
-  delayAmount?: number;
-  classes?: string;
-};
+  children: React.ReactNode
+  delay?: boolean
+  delayAmount?: number
+  classes?: string
+}
 
 export const FadeIn = ({
   children,
@@ -27,5 +27,5 @@ export const FadeIn = ({
     >
       {children}
     </motion.div>
-  );
-};
+  )
+}

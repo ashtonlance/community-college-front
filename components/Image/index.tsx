@@ -1,13 +1,13 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 type ImageProps = {
   attributes: {
-    height: number;
-    id: number;
-    url: string;
-    width: number;
-  };
-};
+    height: number
+    id: number
+    url: string
+    width: number
+  }
+}
 
 export default function Component(props: ImageProps) {
   return (
@@ -17,7 +17,7 @@ export default function Component(props: ImageProps) {
       width={props?.attributes?.width}
       height={props?.attributes?.height}
     />
-  );
+  )
 }
 
-Component.displayName = "core/image";
+Component.displayName = 'core/image'

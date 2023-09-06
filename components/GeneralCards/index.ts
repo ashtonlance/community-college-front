@@ -1,1 +1,1 @@
-export * from "./GeneralCards";
+export * from './GeneralCards'

@@ -1,24 +1,23 @@
-export const getLabelFromCategory = (category) => {
+export const getLabelFromCategory = category => {
   if (!category) {
-    return "Read Article";
+    return 'Read Article'
   }
 
-  const key = category?.toLowerCase();
+  const key = category?.toLowerCase()
 
   const labelCategoryMap = {
-    webinar: "Watch Video",
-    news: "Read Article",
-    article: "Read Article",
-    "case-study": "Read Case Study",
-    report: "Get Report",
-  };
+    webinar: 'Watch Video',
+    news: 'Read Article',
+    article: 'Read Article',
+    'case-study': 'Read Case Study',
+    report: 'Get Report',
+  }
 
-  return labelCategoryMap[key] || "Read Article";
-};
+  return labelCategoryMap[key] || 'Read Article'
+}
 
-export const getCategoryForResource = (resource) => {
+export const getCategoryForResource = resource => {
   const categories =
-    resource?.categories?.nodes?.filter((node) => node.name !== "Featured") ||
-    [];
-  return categories[0] || "Resource";
-};
+    resource?.categories?.nodes?.filter(node => node.name !== 'Featured') || []
+  return categories[0] || 'Resource'
+}

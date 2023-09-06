@@ -1,30 +1,30 @@
-import { ServicesMenu } from "./ServicesMenu";
-import { ResourcesMenu } from "./ResourcesMenu";
-import { AboutMenu } from "./AboutMenu";
+import { ServicesMenu } from './ServicesMenu'
+import { ResourcesMenu } from './ResourcesMenu'
+import { AboutMenu } from './AboutMenu'
 
 export const MegaMenu = ({ item, handleActiveItem }) => {
-  const subItems = item.navigationMenu.items;
+  const subItems = item.navigationMenu.items
 
   switch (item.label) {
-    case "About":
+    case 'About':
       return (
         <AboutMenu handleActiveItem={handleActiveItem} subItems={subItems} />
-      );
-    case "Services":
+      )
+    case 'Services':
       return (
         <ServicesMenu handleActiveItem={handleActiveItem} subItems={subItems} />
-      );
-    case "Resources":
+      )
+    case 'Resources':
       return (
         <ResourcesMenu
           handleActiveItem={handleActiveItem}
           featuredResource={item.navigationMenu.featuredResource}
           subItems={subItems}
         />
-      );
+      )
     default:
       return (
         <AboutMenu handleActiveItem={handleActiveItem} subItems={subItems} />
-      );
+      )
   }
-};
+}

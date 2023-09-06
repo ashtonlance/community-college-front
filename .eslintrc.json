@@ -4,5 +4,10 @@
     "prettier",
     "plugin:storybook/recommended"
   ],
-  "plugins": ["prettier"]
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "semi": "off"
+  }
 }

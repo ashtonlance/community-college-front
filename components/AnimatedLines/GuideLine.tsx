@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 export const GuideLine = () => {
   return (
@@ -15,7 +15,7 @@ export const GuideLine = () => {
         animate={{ pathLength: 1, r: 5 }}
         stroke="#00BB54"
         strokeWidth="1.5"
-        fill={"none"}
+        fill={'none'}
       />
       <motion.path
         d="M11 6L91 6"
@@ -25,9 +25,9 @@ export const GuideLine = () => {
         animate={{ pathLength: 1 }}
         transition={{
           duration: 1.25,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
       />
     </motion.svg>
-  );
-};
+  )
+}

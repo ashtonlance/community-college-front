@@ -1,11 +1,11 @@
-import { MobileSubmenu } from "./MobileSubmenu";
+import { MobileSubmenu } from './MobileSubmenu'
 
 export type HamburgerMenuProps = {
-  menuItems: any;
-  bgTransparent: boolean;
-  isOpen: boolean;
-  toggleHamburgerMenu: (val: boolean) => void;
-};
+  menuItems: any
+  bgTransparent: boolean
+  isOpen: boolean
+  toggleHamburgerMenu: (val: boolean) => void
+}
 
 export const HamburgerMenu = ({
   menuItems,
@@ -14,8 +14,8 @@ export const HamburgerMenu = ({
   toggleHamburgerMenu,
 }: HamburgerMenuProps) => {
   const handleclick = () => {
-    toggleHamburgerMenu(!isOpen);
-  };
+    toggleHamburgerMenu(!isOpen)
+  }
 
   return (
     <div className="hamburguer-menu">
@@ -109,5 +109,5 @@ export const HamburgerMenu = ({
       )}
       {isOpen && <MobileSubmenu items={menuItems} />}
     </div>
-  );
-};
+  )
+}

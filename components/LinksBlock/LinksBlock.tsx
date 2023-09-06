@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import arrow from "../../assets/icons/arrow-right.svg";
+import Image from 'next/image'
+import Link from 'next/link'
+import arrow from '../../assets/icons/arrow-right.svg'
 
 export const LinksBlock = ({ attributes }) => {
-  const linkList = attributes.data.links_lists;
+  const linkList = attributes.data.links_lists
 
   return (
     <div className="flex justify-between max-w-[1220px] mx-auto my-[40px] gap-[20px] md:flex-col w-[90%]">
       {linkList > 0 &&
-        [...Array(linkList).keys()].map((val) => (
+        [...Array(linkList).keys()].map(val => (
           <div
             key={val}
             className="flex flex-col gap-[10px] bg-gmt-100 p-[40px] grow"
@@ -19,7 +19,7 @@ export const LinksBlock = ({ attributes }) => {
             <div className="grid grid-rows-3 grid-flow-col md:grid-rows-5 sm:flex sm:flex-col">
               {[
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),
-              ].map((num) => (
+              ].map(num => (
                 <Link
                   className="sub-nav mb-[12px] flex items-center gap-[7px]"
                   key={num}
@@ -39,7 +39,7 @@ export const LinksBlock = ({ attributes }) => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}
 
-LinksBlock.displayName = "nextword/links";
+LinksBlock.displayName = 'nextword/links'

@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
-import useGravityForm, { ACTION_TYPES } from "../../../utils/useGravityForms";
-import { MultiSelect } from "react-multi-select-component";
+import { gql } from '@apollo/client'
+import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { MultiSelect } from 'react-multi-select-component'
 
 export const MULTI_SELECT_FIELD_FIELDS = gql`
   fragment MultiSelectFieldFields on MultiSelectField {
@@ -14,9 +14,9 @@ export const MULTI_SELECT_FIELD_FIELDS = gql`
       value
     }
   }
-`;
+`
 
-const DEFAULT_VALUE = [];
+const DEFAULT_VALUE = []
 
 export default function MultiSelectField({ field, fieldErrors }) {
   const {
@@ -28,25 +28,25 @@ export default function MultiSelectField({ field, fieldErrors }) {
     cssClass,
     isRequired,
     choices,
-  } = field;
-  const htmlId = `field_${formId}_${id}`;
-  const { state, dispatch } = useGravityForm();
-  const fieldValue = state.find((fieldValue) => fieldValue.id === id);
-  const values = fieldValue?.values || DEFAULT_VALUE;
+  } = field
+  const htmlId = `field_${formId}_${id}`
+  const { state, dispatch } = useGravityForm()
+  const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  const values = fieldValue?.values || DEFAULT_VALUE
   const options =
-    choices?.map((choice) => ({ value: choice?.value, label: choice?.text })) ||
-    [];
-  const selectedOptions = options.filter((option) =>
+    choices?.map(choice => ({ value: choice?.value, label: choice?.text })) ||
+    []
+  const selectedOptions = options.filter(option =>
     values.includes(String(option?.value))
-  );
+  )
 
   function handleChange(value, actionMeta) {
-    const values = value.map((option) => option.value);
+    const values = value.map(option => option.value)
     // @ts-ignore
     dispatch({
       type: ACTION_TYPES.updateMultiSelectFieldValue,
       fieldValue: { id, values },
-    });
+    })
   }
 
   return (
@@ -67,12 +67,12 @@ export default function MultiSelectField({ field, fieldErrors }) {
       />
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </div>
-  );
+  )
 }

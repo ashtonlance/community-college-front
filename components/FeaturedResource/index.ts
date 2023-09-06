@@ -1,1 +1,1 @@
-export * from "./FeaturedResource";
+export * from './FeaturedResource'

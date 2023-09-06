@@ -1,24 +1,24 @@
-import Link from "next/link";
-import Image from "next/image";
-import linkedinGray from "../../assets/icons/linkedinGray.svg";
-import twitter from "../../assets/icons/twitter.svg";
-import fb from "../../assets/icons/fb.svg";
-import copy_link from "../../assets/icons/copy_link.svg";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { useState } from "react";
+import Link from 'next/link'
+import Image from 'next/image'
+import linkedinGray from '../../assets/icons/linkedinGray.svg'
+import twitter from '../../assets/icons/twitter.svg'
+import fb from '../../assets/icons/fb.svg'
+import copy_link from '../../assets/icons/copy_link.svg'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { useState } from 'react'
 
 import {
   TwitterShareButton,
   FacebookShareButton,
   LinkedinShareButton,
-} from "react-share";
+} from 'react-share'
 
 type SharePostProps = {
-  postUrl: string;
-};
+  postUrl: string
+}
 
 export default function SharePost(props: SharePostProps) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   return (
     <div className="flex gap-[20px] items-center">
@@ -48,5 +48,5 @@ export default function SharePost(props: SharePostProps) {
         <Image alt="" src={linkedinGray} width={24} height={24} className="" />
       </LinkedinShareButton>
     </div>
-  );
+  )
 }

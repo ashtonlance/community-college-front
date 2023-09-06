@@ -1,14 +1,14 @@
-import { Button } from "components/Button/Button";
+import { Button } from 'components/Button/Button'
 
-export const Buttons = (props) => {
-  const allButtons = props.innerBlocks;
+export const Buttons = props => {
+  const allButtons = props.innerBlocks
 
   return (
     <>
-      {allButtons.map((buttonContent) => (
+      {allButtons.map(buttonContent => (
         <Button content={buttonContent} key={buttonContent.originalContent} />
       ))}
     </>
-  );
-};
-Buttons.displayName = "core/buttons";
+  )
+}
+Buttons.displayName = 'core/buttons'

@@ -1,7 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
-import Link from "next/link";
-import { formatDate } from "../../utils/dates";
-import { getLabelFromCategory } from "utils/getButtonLabels";
+import { gql, useQuery } from '@apollo/client'
+import Link from 'next/link'
+import { formatDate } from '../../utils/dates'
+import { getLabelFromCategory } from 'utils/getButtonLabels'
 
 const GET_RESOURCE = gql`
   query GetResource($resourceId: ID!) {
@@ -23,24 +23,24 @@ const GET_RESOURCE = gql`
       }
     }
   }
-`;
+`
 
 type ResourcePresentationalType = {
-  imgUrl: string;
-  category: string;
-  date: string;
-  title: string;
-  sourceUrl: string;
-  readMoreLabel: string;
-};
+  imgUrl: string
+  category: string
+  date: string
+  title: string
+  sourceUrl: string
+  readMoreLabel: string
+}
 
 export const ResourcePresentational = (props: ResourcePresentationalType) => {
-  const imgUrl = props.imgUrl;
-  const category = props.category;
-  const date = props.date;
-  const title = props.title;
-  const resourceURL = props.sourceUrl;
-  const readMoreLabel = props.readMoreLabel;
+  const imgUrl = props.imgUrl
+  const category = props.category
+  const date = props.date
+  const title = props.title
+  const resourceURL = props.sourceUrl
+  const readMoreLabel = props.readMoreLabel
 
   return (
     <div className="flex flex-col bg-gmt-100 w-full">
@@ -64,21 +64,21 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const Resource = ({ resourceId }) => {
   const { loading, error, data } = useQuery(GET_RESOURCE, {
     variables: { resourceId },
-  });
+  })
 
-  const imgUrl = data?.resource?.featuredImage?.node?.sourceUrl || "";
-  const category = data?.resource?.categories?.nodes?.[0]?.name || "Resource";
-  const date = formatDate(data?.resource?.date);
+  const imgUrl = data?.resource?.featuredImage?.node?.sourceUrl || ''
+  const category = data?.resource?.categories?.nodes?.[0]?.name || 'Resource'
+  const date = formatDate(data?.resource?.date)
 
-  const title = data?.resource?.title;
-  const resourceURL = data?.resource?.link || "";
-  const readMoreLabel = getLabelFromCategory(category);
+  const title = data?.resource?.title
+  const resourceURL = data?.resource?.link || ''
+  const readMoreLabel = getLabelFromCategory(category)
 
   return (
     <ResourcePresentational
@@ -89,5 +89,5 @@ export const Resource = ({ resourceId }) => {
       sourceUrl={resourceURL}
       readMoreLabel={readMoreLabel}
     />
-  );
-};
+  )
+}

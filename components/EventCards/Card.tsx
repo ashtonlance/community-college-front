@@ -1,21 +1,21 @@
-import Link from "next/link";
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import { BackgroundColorType } from "components/TestimonialSlider";
+import Link from 'next/link'
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import { BackgroundColorType } from 'components/TestimonialSlider'
 
 type EventCardType = {
-  date?: string;
-  location?: string;
-  title?: string;
-  description?: string;
-  btnLink?: string;
-  btnText?: string;
-  image?: string;
-  boothTime?: string;
-  boothNumber?: string;
-  color?: BackgroundColorType;
-  tag?: string;
-};
+  date?: string
+  location?: string
+  title?: string
+  description?: string
+  btnLink?: string
+  btnText?: string
+  image?: string
+  boothTime?: string
+  boothNumber?: string
+  color?: BackgroundColorType
+  tag?: string
+}
 
 export const Card = ({
   date,
@@ -56,7 +56,7 @@ export const Card = ({
         <span className="flex gap-2">
           {boothNumber && (
             <p className="body-regular font-bold text-gmt-500 mb-[24px]">
-              {" "}
+              {' '}
               {boothNumber}
             </p>
           )}
@@ -65,18 +65,18 @@ export const Card = ({
           )}
           {boothTime && (
             <p className="body-regular font-bold text-gmt-500 mb-[24px]">
-              {" "}
+              {' '}
               {boothTime}
             </p>
           )}
         </span>
         <Link
-          href={btnLink || ""}
+          href={btnLink || ''}
           className="primary-btn bg-gmt-500 text-white"
         >
           {btnText}
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}

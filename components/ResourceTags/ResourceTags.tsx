@@ -1,19 +1,19 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export type ResourceTagsProps = {
   nodes: [
     {
-      name: string;
-      link: string;
+      name: string
+      link: string
     }
-  ];
-};
+  ]
+}
 
 export const ResourceTags = (props: ResourceTagsProps) => {
-  const tags = props.nodes;
+  const tags = props.nodes
   return (
     <div className="flex gap-[20px] md:flex-wrap md:gap-[10px]">
-      {tags.map((tag) => (
+      {tags.map(tag => (
         <Link
           key={tag.name}
           href={tag.link}
@@ -23,5 +23,5 @@ export const ResourceTags = (props: ResourceTagsProps) => {
         </Link>
       ))}
     </div>
-  );
-};
+  )
+}

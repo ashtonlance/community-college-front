@@ -10,9 +10,9 @@ export const convertImage = (w, h) => `
   <rect width="${w}" height="${h}" fill="#333" />
   <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
   <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`;
+</svg>`
 
-export const toBase64 = (str) =>
-  typeof window === "undefined"
-    ? Buffer.from(str).toString("base64")
-    : window.btoa(str);
+export const toBase64 = str =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)

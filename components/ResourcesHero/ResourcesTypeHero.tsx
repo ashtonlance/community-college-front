@@ -1,24 +1,24 @@
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import { ResourcesBackBtn } from "./ResourcesBackBtn";
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import { ResourcesBackBtn } from './ResourcesBackBtn'
 
-export type ResourcesTypeBreadcrumbPosition = "root" | "subtype";
+export type ResourcesTypeBreadcrumbPosition = 'root' | 'subtype'
 
 export type ResourcesTypeProps = {
-  title: string;
-  breadcrumbPosition: ResourcesTypeBreadcrumbPosition;
-  category?: string;
-};
+  title: string
+  breadcrumbPosition: ResourcesTypeBreadcrumbPosition
+  category?: string
+}
 
 export const ResourcesTypeHero = (props: ResourcesTypeProps) => {
-  const title = props.title;
-  const breadcrumbPosition = props.breadcrumbPosition;
+  const title = props.title
+  const breadcrumbPosition = props.breadcrumbPosition
 
   return (
     <div className="relative">
-      {breadcrumbPosition == "subtype" && <ResourcesBackBtn />}
+      {breadcrumbPosition == 'subtype' && <ResourcesBackBtn />}
 
-      {breadcrumbPosition == "root" ? (
+      {breadcrumbPosition == 'root' ? (
         <p className="font-bold mb-[32px]">Resource Center</p>
       ) : (
         <p className="font-bold mb-[32px] text-gmt-500 flex gap-2">
@@ -37,5 +37,5 @@ export const ResourcesTypeHero = (props: ResourcesTypeProps) => {
         className="mb-[60px] sm:mb-[50px]"
       />
     </div>
-  );
-};
+  )
+}

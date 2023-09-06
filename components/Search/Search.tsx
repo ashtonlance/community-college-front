@@ -1,33 +1,33 @@
-import Image from "next/image";
-import { useState } from "react";
-import close from "../../assets/icons/close.svg";
+import Image from 'next/image'
+import { useState } from 'react'
+import close from '../../assets/icons/close.svg'
 
-import Link from "next/link";
+import Link from 'next/link'
 
 type SearchProps = {
-  transparentMode: boolean;
-  searchOpened: (val: boolean) => void;
-};
+  transparentMode: boolean
+  searchOpened: (val: boolean) => void
+}
 
 export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
-  const [searchedTerm, setSearchedTerm] = useState("");
-  const [searchBarActive, setSearchBarActive] = useState(false);
+  const [searchedTerm, setSearchedTerm] = useState('')
+  const [searchBarActive, setSearchBarActive] = useState(false)
 
-  const handleChange = (event) => {
-    setSearchedTerm(event.target.value);
-  };
+  const handleChange = event => {
+    setSearchedTerm(event.target.value)
+  }
 
   const toggleSearchBar = () => {
-    searchOpened(!searchBarActive);
-    setSearchBarActive(!searchBarActive);
-  };
+    searchOpened(!searchBarActive)
+    setSearchBarActive(!searchBarActive)
+  }
 
   return (
     <div
       className="flex gap-[10px] items-center hover:cursor-pointer"
       onClick={toggleSearchBar}
     >
-      {"Search"}
+      {'Search'}
       {searchBarActive ? (
         <Image
           alt=""
@@ -86,8 +86,8 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       <div
         className={`${
           searchBarActive
-            ? "top-[152px] h-[80px] opacity-100 sm:top-[70px]"
-            : "top-[-100px] h-[0px] opacity-0"
+            ? 'top-[152px] h-[80px] opacity-100 sm:top-[70px]'
+            : 'top-[-100px] h-[0px] opacity-0'
         } transition-opacity ease-in-out delay-250 z-0 absolute right-0 left-0 flex bg-white justify-center items-center  gap-3 sm:px-[20px]`}
       >
         <input
@@ -99,7 +99,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
         <Link
           className="primary-btn bg-white text-black flex"
           href={{
-            pathname: "/search",
+            pathname: '/search',
             query: { searchedTerm },
           }}
         >
@@ -107,5 +107,5 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}

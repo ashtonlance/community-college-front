@@ -1,4 +1,4 @@
-import { GravityForm } from "../GravityForm/GravityForm";
+import { GravityForm } from '../GravityForm/GravityForm'
 
 export const EventRegistration = ({ form }) => {
   return (
@@ -12,5 +12,5 @@ export const EventRegistration = ({ form }) => {
         />
       </div>
     </>
-  );
-};
+  )
+}

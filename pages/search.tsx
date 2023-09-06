@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import { gql, useQuery } from "@apollo/client";
-import { PreFooter } from "components/PreFooter";
-import { Layout } from "components/Layout";
-import { Header } from "components/Header";
-import { GravityForm } from "components/GravityForm/GravityForm";
-import Image from "next/image";
-import separator from "../assets/imgs/separator.svg";
-import { ResourceCard } from "components/PaginatedResources/ResourceCard";
-import { Pagination } from "components/Pagination";
+import { useRouter } from 'next/router'
+import { gql, useQuery } from '@apollo/client'
+import { PreFooter } from 'components/PreFooter'
+import { Layout } from 'components/Layout'
+import { Header } from 'components/Header'
+import { GravityForm } from 'components/GravityForm/GravityForm'
+import Image from 'next/image'
+import separator from '../assets/imgs/separator.svg'
+import { ResourceCard } from 'components/PaginatedResources/ResourceCard'
+import { Pagination } from 'components/Pagination'
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 3
 
 const GET_SEARCH = gql`
   ${Header.fragments.entry}
@@ -62,43 +62,43 @@ const GET_SEARCH = gql`
       ...GravityFormFragment
     }
   }
-`;
+`
 
 export default function Search() {
-  const router = useRouter();
-  const { page } = router.query;
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || "1");
-  const offset = (currentPage - 1) * PAGE_SIZE;
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+  const offset = (currentPage - 1) * PAGE_SIZE
 
-  const searchedTerm = router.query["searchedTerm"];
+  const searchedTerm = router.query['searchedTerm']
   const { loading, error, data } = useQuery(GET_SEARCH, {
     variables: { offset, searchedTerm },
-  });
+  })
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
 
-  const menuItems = data?.menu?.menuItems || [];
-  const preFooterContent = data?.menus.nodes[0];
-  const eventRegistrationForm = data?.gfForm;
-  const itemsTotal = data?.resources?.pageInfo?.offsetPagination?.total;
+  const menuItems = data?.menu?.menuItems || []
+  const preFooterContent = data?.menus.nodes[0]
+  const eventRegistrationForm = data?.gfForm
+  const itemsTotal = data?.resources?.pageInfo?.offsetPagination?.total
   const seo = {
-    metaDesc: "",
-    canonical: "",
-    title: "Search Results",
+    metaDesc: '',
+    canonical: '',
+    title: 'Search Results',
     schema: data?.resources?.pageInfo?.seo?.schema,
-  };
-  const items = data?.resources?.nodes;
+  }
+  const items = data?.resources?.nodes
 
   const handlePageClick = (page: number) => {
-    router.push(`${router.asPath?.split("&")?.[0]}&page=${page}`, null, {
+    router.push(`${router.asPath?.split('&')?.[0]}&page=${page}`, null, {
       shallow: true,
-    });
-  };
+    })
+  }
 
   return (
     <Layout menuItems={menuItems} form={eventRegistrationForm} seo={seo}>
@@ -118,7 +118,7 @@ export default function Search() {
           <>
             {items?.length > 0 ? (
               <div>
-                {items?.map((item) => (
+                {items?.map(item => (
                   <ResourceCard key={item.id} resource={item} />
                 ))}
                 <Pagination
@@ -126,7 +126,7 @@ export default function Search() {
                   totalItems={itemsTotal}
                   pageSize={PAGE_SIZE}
                   onPageClick={handlePageClick}
-                />{" "}
+                />{' '}
               </div>
             ) : (
               <h3> No results were found for your searched term.</h3>
@@ -136,5 +136,5 @@ export default function Search() {
       </div>
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
-  );
+  )
 }

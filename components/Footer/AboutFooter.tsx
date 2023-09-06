@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
+import Link from 'next/link'
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
 
-export const AboutFooter = ({ subItems, classlist = "" }) => (
+export const AboutFooter = ({ subItems, classlist = '' }) => (
   <div className={`md:mt-[20px] ${classlist}`}>
     <h4 className="text-white sub-nav font-bold	mb-[20px] md:hidden">About</h4>
     <Image
@@ -16,7 +16,7 @@ export const AboutFooter = ({ subItems, classlist = "" }) => (
       {subItems?.map((subItem, i) => (
         <Link
           key={subItem?.title}
-          href={subItem.url?.url || ""}
+          href={subItem.url?.url || ''}
           className="cursor-pointer text-[15px] font-semibold tracking-[-0.01em] leading-[110%] text-white mb-[12px] md:p-regular"
         >
           {subItem.title}
@@ -27,4 +27,4 @@ export const AboutFooter = ({ subItems, classlist = "" }) => (
       Home
     </Link>
   </div>
-);
+)

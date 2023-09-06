@@ -1,18 +1,18 @@
-import Link from "next/link";
-import border from "../../assets/imgs/white-border.svg";
-import Image from "next/image";
+import Link from 'next/link'
+import border from '../../assets/imgs/white-border.svg'
+import Image from 'next/image'
 
 export const EventHero = ({ attributes }) => {
-  const bgColor = attributes.data.background_color;
-  const bgImg = attributes.data.background_image;
-  const ctaLabel = attributes.data.cta_button_label;
-  const ctaURL = attributes.data.cta_button_link;
-  const heading = attributes.data.heading;
-  const subheading = attributes.data["sub-heading"];
-  const description = attributes.data.description;
-  const location = attributes.data.location || "";
-  const dateRange = attributes.data.date;
-  const booth = attributes.data.booth_no || "";
+  const bgColor = attributes.data.background_color
+  const bgImg = attributes.data.background_image
+  const ctaLabel = attributes.data.cta_button_label
+  const ctaURL = attributes.data.cta_button_link
+  const heading = attributes.data.heading
+  const subheading = attributes.data['sub-heading']
+  const description = attributes.data.description
+  const location = attributes.data.location || ''
+  const dateRange = attributes.data.date
+  const booth = attributes.data.booth_no || ''
 
   return (
     <div
@@ -68,7 +68,7 @@ export const EventHero = ({ attributes }) => {
         )
       )}
     </div>
-  );
-};
+  )
+}
 
-EventHero.displayName = "nextword/heroevent";
+EventHero.displayName = 'nextword/heroevent'

@@ -1,15 +1,15 @@
-import { Resource } from "components/ResourcesSidebar/Resource";
-import { useState } from "react";
+import { Resource } from 'components/ResourcesSidebar/Resource'
+import { useState } from 'react'
 
 export const ResourcesSidebarMobile = ({ tags, categories }) => {
-  const [activeItem, setActiveItem] = useState(null);
-  const handleClick = (id) => {
+  const [activeItem, setActiveItem] = useState(null)
+  const handleClick = id => {
     if (activeItem === id) {
-      setActiveItem(null);
+      setActiveItem(null)
     } else {
-      setActiveItem(id);
+      setActiveItem(id)
     }
-  };
+  }
 
   return (
     <div className="bg-gmt-100 w-full hidden md:flex relative sm:flex-col">
@@ -28,5 +28,5 @@ export const ResourcesSidebarMobile = ({ tags, categories }) => {
         active={activeItem}
       />
     </div>
-  );
-};
+  )
+}

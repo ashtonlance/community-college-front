@@ -1,9 +1,9 @@
-export const cleanHTMLText = (htmlString = "") => {
+export const cleanHTMLText = (htmlString = '') => {
   return (
     htmlString
-      .split(" ")
+      .split(' ')
       .slice(0, 30)
-      .join(" ")
-      .replace(/<\/?[^>]+(>|$)/g, "") + "..."
-  );
-};
+      .join(' ')
+      .replace(/<\/?[^>]+(>|$)/g, '') + '...'
+  )
+}

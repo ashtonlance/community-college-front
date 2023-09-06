@@ -1,1 +1,1 @@
-export * from "./ResourcesSidebar";
+export * from './ResourcesSidebar'

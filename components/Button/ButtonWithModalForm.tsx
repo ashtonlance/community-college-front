@@ -1,11 +1,11 @@
-import { Modal } from "components/Modal";
-import { EventRegistration } from "components/Modal/EventRegistration";
+import { Modal } from 'components/Modal'
+import { EventRegistration } from 'components/Modal/EventRegistration'
 
 export const ButtonWithModalForm = ({
   setModalActive,
   modalActive,
   ctaLabel = false,
-  classList = "primary-btn",
+  classList = 'primary-btn',
   form,
 }) => {
   return (
@@ -17,5 +17,5 @@ export const ButtonWithModalForm = ({
         handleClose={() => setModalActive(false)}
       />
     </div>
-  );
-};
+  )
+}

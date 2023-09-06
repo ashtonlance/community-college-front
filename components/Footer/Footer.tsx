@@ -1,27 +1,27 @@
-import { NewsletterBanner } from "components/NewsletterBanner";
-import { Button } from "components/Button";
-import Link from "next/link";
-import linkedin from "../../assets/icons/linkedin.svg";
-import Image from "next/image";
-import { AboutFooter } from "./AboutFooter";
-import { ResourcesFooter } from "./ResourcesFooter";
-import { ServicesFooter } from "./ServicesFooter";
-import { MobileFooter } from "./MobileFooter";
+import { NewsletterBanner } from 'components/NewsletterBanner'
+import { Button } from 'components/Button'
+import Link from 'next/link'
+import linkedin from '../../assets/icons/linkedin.svg'
+import Image from 'next/image'
+import { AboutFooter } from './AboutFooter'
+import { ResourcesFooter } from './ResourcesFooter'
+import { ServicesFooter } from './ServicesFooter'
+import { MobileFooter } from './MobileFooter'
 
 export const Footer = ({ menuItems }) => {
   const aboutSubitems = menuItems?.nodes?.filter(
-    (node) => node.label === "About"
-  )[0];
+    node => node.label === 'About'
+  )[0]
   const resourcesSubitems =
     menuItems?.nodes
-      ?.filter((node) => node.label === "Resources")[0]
+      ?.filter(node => node.label === 'Resources')[0]
       ?.navigationMenu?.items.filter(
-        (item) => item.title === "Resource Types"
-      )[0] || [];
+        item => item.title === 'Resource Types'
+      )[0] || []
   const servicesSubitems = menuItems?.nodes?.filter(
-    (node) => node.label === "Services"
-  )[0];
-  const events = menuItems?.nodes?.filter((node) => node.label === "Events");
+    node => node.label === 'Services'
+  )[0]
+  const events = menuItems?.nodes?.filter(node => node.label === 'Events')
 
   return (
     <div className="bg-black text-white flex py-[80px] px-[100px] md:p-[60px] sm:p-[40px] justify-between items-start md:flex-col">
@@ -84,5 +84,5 @@ export const Footer = ({ menuItems }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

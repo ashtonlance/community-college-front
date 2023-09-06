@@ -1,11 +1,11 @@
-import { useMutation, gql, ApolloProvider } from "@apollo/client";
-import useGravityForm from "../../utils/useGravityForms";
-import GravityFormsField from "./GravityFormsField";
-import Image from "next/image";
-import arrowright from "../../assets/icons/arrow-right.svg";
-import { getApolloClient } from "utils/apollo-faust";
-import { validateEmail } from "utils/validations";
-import { FadeIn } from "components/FadeIn";
+import { useMutation, gql, ApolloProvider } from '@apollo/client'
+import useGravityForm from '../../utils/useGravityForms'
+import GravityFormsField from './GravityFormsField'
+import Image from 'next/image'
+import arrowright from '../../assets/icons/arrow-right.svg'
+import { getApolloClient } from 'utils/apollo-faust'
+import { validateEmail } from 'utils/validations'
+import { FadeIn } from 'components/FadeIn'
 // import { getApolloClient } from "@faustwp/core";
 
 const SUBMIT_FORM = gql`
@@ -25,28 +25,28 @@ const SUBMIT_FORM = gql`
       }
     }
   }
-`;
+`
 
 type GravityFormsFormInternalProps = {
-  form: any;
-  customClasses: string;
-  onSubmit?: (arg: any) => {};
-  disclaimer?: string;
-  reportDownload?: boolean;
-};
+  form: any
+  customClasses: string
+  onSubmit?: (arg: any) => {}
+  disclaimer?: string
+  reportDownload?: boolean
+}
 
 const DownloadButton = ({ description }) => {
-  const { state } = useGravityForm();
-  const email = state.find((item) => item?.emailValues)?.emailValues?.value;
-  const jobTitle = state.find((item) => item?.value)?.value;
-  const active = validateEmail(email) && jobTitle;
+  const { state } = useGravityForm()
+  const email = state.find(item => item?.emailValues)?.emailValues?.value
+  const jobTitle = state.find(item => item?.value)?.value
+  const active = validateEmail(email) && jobTitle
 
   return (
     <div className="flex justify-center items-center gap-[60px] sm:flex-col sm:items-start sm:gap-[20px]">
       <button
         type="submit"
         className={`primary-btn bg-white text-emerald flex gap-[11px] ${
-          active ? "active" : "inactive cursor-not-allowed opacity-[0.75]"
+          active ? 'active' : 'inactive cursor-not-allowed opacity-[0.75]'
         }`}
         disabled={!active}
       >
@@ -58,8 +58,8 @@ const DownloadButton = ({ description }) => {
         dangerouslySetInnerHTML={{ __html: description }}
       ></p>
     </div>
-  );
-};
+  )
+}
 
 const ArrowButton = () => {
   return (
@@ -78,8 +78,8 @@ const ArrowButton = () => {
         </svg>
       </span>
     </button>
-  );
-};
+  )
+}
 
 const DefaultButton = ({ loading, form, disclaimer = null }) => {
   return (
@@ -90,14 +90,14 @@ const DefaultButton = ({ loading, form, disclaimer = null }) => {
         disabled={loading}
         aria-label="Submit form"
       >
-        {" "}
-        {form?.button?.text || "Submit"}
+        {' '}
+        {form?.button?.text || 'Submit'}
         <Image alt="" src={arrowright} width={9} height={9} />
       </button>
       {disclaimer && <p className="p-small text-white">{disclaimer}</p>}
     </div>
-  );
-};
+  )
+}
 
 function GravityFormsFormInternal({
   form,
@@ -106,8 +106,8 @@ function GravityFormsFormInternal({
   disclaimer,
   reportDownload,
 }: GravityFormsFormInternalProps) {
-  const { state } = useGravityForm();
-  const [submitForm, { data, loading, error }] = useMutation(SUBMIT_FORM);
+  const { state } = useGravityForm()
+  const [submitForm, { data, loading, error }] = useMutation(SUBMIT_FORM)
 
   if (loading) {
     return (
@@ -132,26 +132,26 @@ function GravityFormsFormInternal({
           <span className="sr-only">Loading...</span>
         </div>
       </div>
-    );
+    )
   }
 
-  const haveEntryId = Boolean(data?.submitGfForm?.entry?.id);
-  const haveFieldErrors = Boolean(data?.submitGfForm?.errors?.length);
-  const wasSuccessfullySubmitted = haveEntryId && !haveFieldErrors;
+  const haveEntryId = Boolean(data?.submitGfForm?.entry?.id)
+  const haveFieldErrors = Boolean(data?.submitGfForm?.errors?.length)
+  const wasSuccessfullySubmitted = haveEntryId && !haveFieldErrors
 
   const defaultConfirmation = form?.confirmations?.find(
-    (confirmation) => confirmation?.isDefault
-  );
-  const formFields = form?.formFields?.nodes || [];
+    confirmation => confirmation?.isDefault
+  )
+  const formFields = form?.formFields?.nodes || []
 
-  const button = customClasses.includes("submit-button-as-arrow") ? (
+  const button = customClasses.includes('submit-button-as-arrow') ? (
     <ArrowButton />
   ) : (
     <DefaultButton loading={loading} disclaimer={disclaimer} form={form} />
-  );
+  )
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     if (loading) {
       return (
         <div className="flex justify-center items-center py-8">
@@ -175,7 +175,7 @@ function GravityFormsFormInternal({
             <span className="sr-only">Loading...</span>
           </div>
         </div>
-      );
+      )
     }
 
     submitForm({
@@ -184,23 +184,23 @@ function GravityFormsFormInternal({
         fieldValues: state,
       },
     })
-      .then((res) => {
+      .then(res => {
         if (res?.data?.submitGfForm?.errors === null) {
-          onSubmit?.(res?.data?.submitGfForm);
+          onSubmit?.(res?.data?.submitGfForm)
         } else {
-          const error = res?.data?.submitGfForm?.errors;
-          throw new Error(`Form submission invalid: ${error}`);
+          const error = res?.data?.submitGfForm?.errors
+          throw new Error(`Form submission invalid: ${error}`)
         }
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   function getFieldErrors(id) {
-    if (!haveFieldErrors) return [];
-    console.log(error);
-    return data.submitGfForm.errors.filter((error) => error.id === id);
+    if (!haveFieldErrors) return []
+    console.log(error)
+    return data.submitGfForm.errors.filter(error => error.id === id)
   }
 
   if (wasSuccessfullySubmitted) {
@@ -215,13 +215,13 @@ function GravityFormsFormInternal({
               dangerouslySetInnerHTML={{
                 __html:
                   defaultConfirmation?.message ||
-                  "Form successfully submitted - thank you.",
+                  'Form successfully submitted - thank you.',
               }}
             ></div>
           </div>
         </div>
       </FadeIn>
-    );
+    )
   } else {
     return (
       <form
@@ -229,7 +229,7 @@ function GravityFormsFormInternal({
         onSubmit={handleSubmit}
         className={`flex flex-col items-center mt-[40px] ${customClasses}`}
       >
-        {formFields.map((field) => (
+        {formFields.map(field => (
           <GravityFormsField
             key={field?.id}
             field={field}
@@ -247,11 +247,11 @@ function GravityFormsFormInternal({
           button
         )}
       </form>
-    );
+    )
   }
 }
 
-const client = getApolloClient();
+const client = getApolloClient()
 
 // @ts-ignore
 export default function GravityFormsForm(props) {
@@ -259,7 +259,7 @@ export default function GravityFormsForm(props) {
     <ApolloProvider client={client}>
       <GravityFormsFormInternal {...props} />
     </ApolloProvider>
-  );
+  )
 }
 // function createUploadLink(arg0: {
 //   uri: string;

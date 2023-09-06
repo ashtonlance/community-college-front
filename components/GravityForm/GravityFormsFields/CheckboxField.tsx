@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import useGravityForm, { ACTION_TYPES } from "../../../utils/useGravityForms";
+import { gql } from '@apollo/client'
+import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
 export const CHECKBOX_FIELD_FIELDS = gql`
   fragment CheckboxFieldFields on CheckboxField {
@@ -15,29 +15,29 @@ export const CHECKBOX_FIELD_FIELDS = gql`
       value
     }
   }
-`;
+`
 
-const DEFAULT_VALUE = [];
+const DEFAULT_VALUE = []
 
 export default function CheckboxField({ field, fieldErrors }) {
   const { id, formId, type, label, description, cssClass, inputs, choices } =
-    field;
+    field
   const checkboxInputs =
     choices?.map((choice, index) => ({ ...choice, id: inputs?.[index]?.id })) ||
-    [];
-  const htmlId = `field_${formId}_${id}`;
-  const { state, dispatch } = useGravityForm();
-  const fieldValue = state.find((fieldValue) => fieldValue.id === id);
-  const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE;
+    []
+  const htmlId = `field_${formId}_${id}`
+  const { state, dispatch } = useGravityForm()
+  const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  const checkboxValues = fieldValue?.checkboxValues || DEFAULT_VALUE
 
   function handleChange(event) {
-    const { name, value, checked } = event.target;
+    const { name, value, checked } = event.target
     const otherCheckboxValues = checkboxValues.filter(
-      (checkboxValue) => checkboxValue.inputId !== Number(name)
-    );
+      checkboxValue => checkboxValue.inputId !== Number(name)
+    )
     const newCheckboxValues = checked
       ? [...otherCheckboxValues, { fieldValue, value }]
-      : otherCheckboxValues;
+      : otherCheckboxValues
 
     // @ts-ignore
     dispatch({
@@ -46,7 +46,7 @@ export default function CheckboxField({ field, fieldErrors }) {
         id,
         checkboxValues: newCheckboxValues,
       },
-    });
+    })
   }
 
   return (
@@ -69,12 +69,12 @@ export default function CheckboxField({ field, fieldErrors }) {
       ))}
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </fieldset>
-  );
+  )
 }

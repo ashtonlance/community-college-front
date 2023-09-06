@@ -1,40 +1,40 @@
-import Image from "next/image";
-import arrowright from "../../assets/icons/arrow-right.svg";
-import Link from "next/link";
-import { useEffect, useRef } from "react";
+import Image from 'next/image'
+import arrowright from '../../assets/icons/arrow-right.svg'
+import Link from 'next/link'
+import { useEffect, useRef } from 'react'
 
 export const Button = ({
   content,
   arrow = false,
-  classes = "primary-btn",
-  linkto = "/",
+  classes = 'primary-btn',
+  linkto = '/',
   attributes = null,
-  target = "",
+  target = '',
 }) => {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   useEffect(() => {
     if (ref.current) {
-      const currentElement = ref.current;
+      const currentElement = ref.current
       const targetElement =
-        currentElement?.parentElement?.previousElementSibling?.children[0];
+        currentElement?.parentElement?.previousElementSibling?.children[0]
 
-      if (currentElement.classList.contains("module-spacing-top-none")) {
-        targetElement.classList.add("!pb-4");
+      if (currentElement.classList.contains('module-spacing-top-none')) {
+        targetElement.classList.add('!pb-4')
       }
     }
   }),
-    [ref];
+    [ref]
 
   if (attributes?.data) {
-    const bgColorModule = attributes.data.background;
-    const marginBottom = attributes.data.component_spacing_bottom_spacing;
-    const marginTop = attributes.data.component_spacing_top_spacing;
-    const buttonLabel = attributes.data.button_label;
-    const buttonLink = attributes.data.button_link["url"];
-    const alignment = attributes.data.button_alignment;
-    const buttonColor = attributes.data.button_background || "green";
-    const target = attributes.data.button_link["target"];
+    const bgColorModule = attributes.data.background
+    const marginBottom = attributes.data.component_spacing_bottom_spacing
+    const marginTop = attributes.data.component_spacing_top_spacing
+    const buttonLabel = attributes.data.button_label
+    const buttonLink = attributes.data.button_link['url']
+    const alignment = attributes.data.button_alignment
+    const buttonColor = attributes.data.button_background || 'green'
+    const target = attributes.data.button_link['target']
     return (
       <div>
         <div
@@ -52,7 +52,7 @@ export const Button = ({
           </Link>
         </div>
       </div>
-    );
+    )
   } else if (content) {
     return (
       <Link
@@ -65,9 +65,9 @@ export const Button = ({
         {content}
         {arrow && <Image alt="" src={arrowright} width={9} height={9} />}
       </Link>
-    );
+    )
   } else {
-    return null;
+    return null
   }
-};
-Button.displayName = "nextword/button";
+}
+Button.displayName = 'nextword/button'

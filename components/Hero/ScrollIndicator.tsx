@@ -4,15 +4,15 @@ import {
   useTransform,
   MotionValue,
   useMotionValue,
-} from "framer-motion";
-import { useRef } from "react";
+} from 'framer-motion'
+import { useRef } from 'react'
 
 function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
+  return useTransform(value, [0, 1], [-distance, distance])
 }
 
 export const ScrollIndicator = () => {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
   return (
     <span className="p-small capitalize absolute bottom-0 right-[90px] text-white flex items-center gap-2 sm:hidden">
@@ -35,10 +35,10 @@ export const ScrollIndicator = () => {
           animate={{ pathLength: 1 }}
           transition={{
             duration: 1,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
       </svg>
     </span>
-  );
-};
+  )
+}

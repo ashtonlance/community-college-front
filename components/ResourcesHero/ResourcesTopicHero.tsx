@@ -1,16 +1,16 @@
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import { ReadMore } from "./ReadMore";
-import { ResourcesBackBtn } from "./ResourcesBackBtn";
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import { ReadMore } from './ReadMore'
+import { ResourcesBackBtn } from './ResourcesBackBtn'
 
 export type ResourcesTopicProps = {
-  title: string;
-  content?: string;
-};
+  title: string
+  content?: string
+}
 
 export const ResourceTopicHero = (props: ResourcesTopicProps) => {
-  const title = props.title;
-  const content = props.content;
+  const title = props.title
+  const content = props.content
 
   return (
     <div className="relative">
@@ -31,5 +31,5 @@ export const ResourceTopicHero = (props: ResourcesTopicProps) => {
       />
       <ReadMore content={content} />
     </div>
-  );
-};
+  )
+}

@@ -1,12 +1,12 @@
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import Link from "next/link";
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import Link from 'next/link'
 
 export const ContactBlock = ({ attributes }) => {
-  const title = attributes.data.title;
-  const address = attributes.data.address;
-  const map = attributes.data.map;
-  const directionsLink = attributes.data.directions_link || "";
+  const title = attributes.data.title
+  const address = attributes.data.address
+  const map = attributes.data.map
+  const directionsLink = attributes.data.directions_link || ''
 
   return (
     <div className="gap-[80px] md:gap-[40px] sm:flex-col max-w-[1220px] w-[90%] mx-auto h-fit max-h-[320px] sm:max-h-fit my-[40px] flex">
@@ -28,7 +28,7 @@ export const ContactBlock = ({ attributes }) => {
         dangerouslySetInnerHTML={{ __html: map }}
       />
     </div>
-  );
-};
+  )
+}
 
-ContactBlock.displayName = "nextword/contactblock";
+ContactBlock.displayName = 'nextword/contactblock'

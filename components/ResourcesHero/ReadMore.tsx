@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-const MAX_TEXT_WORDS = 40;
+const MAX_TEXT_WORDS = 40
 
 const getLimitedWords = (text: string) => {
-  return text?.split(/\s+/).slice(0, MAX_TEXT_WORDS).join(" ").concat("...");
-};
+  return text?.split(/\s+/).slice(0, MAX_TEXT_WORDS).join(' ').concat('...')
+}
 
 const wordCount = (text: string) => {
-  return text?.split(/\s+/).length;
-};
+  return text?.split(/\s+/).length
+}
 
 export const ReadMore = ({ content }) => {
-  const [readMore, setReadMore] = useState(false);
+  const [readMore, setReadMore] = useState(false)
 
   const toggleReadMore = () => {
-    setReadMore(!readMore);
-  };
+    setReadMore(!readMore)
+  }
 
   return (
     <div className="flex flex-col gap-[20px] sm:gap-[10px]">
@@ -36,7 +36,7 @@ export const ReadMore = ({ content }) => {
             onClick={toggleReadMore}
             className="mb-[20px] secondary-btn border-[1.5px] border-black w-fit"
           >
-            {readMore ? "Show Less" : "Read More"}
+            {readMore ? 'Show Less' : 'Read More'}
           </span>
         </>
       ) : (
@@ -46,5 +46,5 @@ export const ReadMore = ({ content }) => {
         />
       )}
     </div>
-  );
-};
+  )
+}

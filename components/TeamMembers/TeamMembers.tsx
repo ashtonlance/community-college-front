@@ -1,20 +1,20 @@
-import { Separator } from "components/Separator";
-import { Member } from "./Member";
+import { Separator } from 'components/Separator'
+import { Member } from './Member'
 
 type TeamMemberProps = {
   attributes: {
     data: {
-      team_member: number;
-      background_color: string;
-      title: string;
-    };
-  };
-};
+      team_member: number
+      background_color: string
+      title: string
+    }
+  }
+}
 
 export const TeamMembers = ({ attributes }: TeamMemberProps) => {
-  const members = attributes.data.team_member;
-  const bgColor = attributes.data.background_color;
-  const title = attributes.data.title;
+  const members = attributes.data.team_member
+  const bgColor = attributes.data.background_color
+  const title = attributes.data.title
 
   return (
     <div
@@ -24,12 +24,12 @@ export const TeamMembers = ({ attributes }: TeamMemberProps) => {
         {title && (
           <>
             <h2 className="mb-[40px]">{title}</h2>
-            <Separator classes={"mb-[60px]"} />
+            <Separator classes={'mb-[60px]'} />
           </>
         )}
         <div className="grid grid-cols-3 grid-flow-row gap-[20px] md:grid-cols-2 sm:grid-cols-1">
           {members > 0 &&
-            [...Array(members).keys()].map((val) => (
+            [...Array(members).keys()].map(val => (
               <Member
                 key={val}
                 img={attributes.data[`team_member_${val}_photo`]}
@@ -44,7 +44,7 @@ export const TeamMembers = ({ attributes }: TeamMemberProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-TeamMembers.displayName = "nextword/teammembercards";
+TeamMembers.displayName = 'nextword/teammembercards'

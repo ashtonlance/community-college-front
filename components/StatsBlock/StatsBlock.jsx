@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { FadeIn } from "components/FadeIn";
-import { Center } from "components/AnimatedLines/Center";
+import Image from 'next/image'
+import { FadeIn } from 'components/FadeIn'
+import { Center } from 'components/AnimatedLines/Center'
 
 export const StatsBlock = ({ attributes }) => {
-  const title = attributes.data.stats_title;
-  const copy = attributes.data.stats_copy;
-  const items = attributes.data.stats;
-  const splitTitle = title.split("-");
+  const title = attributes.data.stats_title
+  const copy = attributes.data.stats_copy
+  const items = attributes.data.stats
+  const splitTitle = title.split('-')
 
   return (
     <FadeIn>
@@ -33,7 +33,7 @@ export const StatsBlock = ({ attributes }) => {
         )}
         <div className="flex gap-[100px] flex-wrap justify-center sm:flex-col sm:gap-0">
           {items > 0 &&
-            [...Array(items).keys()].map((val) => (
+            [...Array(items).keys()].map(val => (
               <div
                 key={val}
                 className="flex flex-col gap-[10px] items-center justify-center"
@@ -49,7 +49,7 @@ export const StatsBlock = ({ attributes }) => {
         </div>
       </div>
     </FadeIn>
-  );
-};
+  )
+}
 
-StatsBlock.displayName = "nextword/stats";
+StatsBlock.displayName = 'nextword/stats'

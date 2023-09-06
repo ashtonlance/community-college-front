@@ -1,1 +1,1 @@
-export * from "./PaginatedResources";
+export * from './PaginatedResources'

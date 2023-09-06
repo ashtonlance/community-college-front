@@ -1,5 +1,5 @@
-import { gql } from "@apollo/client";
-import useGravityForm, { ACTION_TYPES } from "../../../utils/useGravityForms";
+import { gql } from '@apollo/client'
+import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
 export const SELECT_FIELD_FIELDS = gql`
   fragment SelectFieldFields on SelectField {
@@ -14,7 +14,7 @@ export const SELECT_FIELD_FIELDS = gql`
       value
     }
   }
-`;
+`
 
 export default function SelectField({ field, fieldErrors }) {
   const {
@@ -27,11 +27,11 @@ export default function SelectField({ field, fieldErrors }) {
     isRequired,
     defaultValue,
     choices,
-  } = field;
-  const htmlId = `field_${formId}_${id}`;
-  const { state, dispatch } = useGravityForm();
-  const fieldValue = state.find((fieldValue) => fieldValue.id === id);
-  const value = fieldValue?.value || String(defaultValue);
+  } = field
+  const htmlId = `field_${formId}_${id}`
+  const { state, dispatch } = useGravityForm()
+  const fieldValue = state.find(fieldValue => fieldValue.id === id)
+  const value = fieldValue?.value || String(defaultValue)
 
   return (
     <div className={`gfield w-[48%] gfield-${type} ${cssClass}`.trim()}>
@@ -45,7 +45,7 @@ export default function SelectField({ field, fieldErrors }) {
         id={htmlId}
         required={Boolean(isRequired)}
         value={value}
-        onChange={(event) => {
+        onChange={event => {
           // @ts-ignore
           dispatch({
             type: ACTION_TYPES.updateSelectFieldValue,
@@ -53,20 +53,20 @@ export default function SelectField({ field, fieldErrors }) {
               id,
               value: event.target.value,
             },
-          });
+          })
         }}
       >
         {/* <option value="" className="text-emerald" suppressHydrationWarning>
           {label}
         </option> */}
-        {choices?.map((choice) => (
+        {choices?.map(choice => (
           <option
             className="text-emerald"
-            key={choice?.value || ""}
-            value={choice?.value || ""}
+            key={choice?.value || ''}
+            value={choice?.value || ''}
             suppressHydrationWarning
           >
-            {choice?.text || ""}
+            {choice?.text || ''}
           </option>
         ))}
       </select>
@@ -74,12 +74,12 @@ export default function SelectField({ field, fieldErrors }) {
         <p className="field-description text-emerald">{description}</p>
       ) : null}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </div>
-  );
+  )
 }

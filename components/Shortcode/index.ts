@@ -1,1 +1,1 @@
-export * from "./Shortcode";
+export * from './Shortcode'

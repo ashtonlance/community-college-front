@@ -1,14 +1,14 @@
-import { Card } from "./Card";
+import { Card } from './Card'
 
-export const EventCards = (props) => {
-  const eventPosts = props?.events?.nodes;
-  const cards = eventPosts?.map((post) =>
+export const EventCards = props => {
+  const eventPosts = props?.events?.nodes
+  const cards = eventPosts?.map(post =>
     post?.blocks?.find(
-      (postBlock) =>
-        postBlock?.name === "nextword/externalevent" ||
-        postBlock?.name === "nextword/heroevent"
+      postBlock =>
+        postBlock?.name === 'nextword/externalevent' ||
+        postBlock?.name === 'nextword/heroevent'
     )
-  );
+  )
 
   return (
     <div
@@ -17,11 +17,11 @@ export const EventCards = (props) => {
       <div
         className={`${
           cards.length === 1
-            ? "max-w-[600px] mx-auto"
-            : "grid grid-cols-2 grid-flow-row gap-[20px] md:grid-cols-1"
+            ? 'max-w-[600px] mx-auto'
+            : 'grid grid-cols-2 grid-flow-row gap-[20px] md:grid-cols-1'
         } w-full`}
       >
-        {cards.map((card) => (
+        {cards.map(card => (
           <Card
             key={card?.attributes?.data?.heading}
             date={card?.attributes?.data?.date}
@@ -39,5 +39,5 @@ export const EventCards = (props) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

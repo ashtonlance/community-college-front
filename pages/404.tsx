@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Layout } from "components/Layout";
-import { PreFooter } from "components/PreFooter";
-import { Header } from "components/Header";
-import { gql, useQuery } from "@apollo/client";
+import Link from 'next/link'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { Header } from 'components/Header'
+import { gql, useQuery } from '@apollo/client'
 
 const NOT_FOUND = gql`
   ${Header.fragments.entry}
@@ -21,19 +21,19 @@ const NOT_FOUND = gql`
       }
     }
   }
-`;
+`
 
 export default function Custom404() {
-  const { loading, error, data } = useQuery(NOT_FOUND);
+  const { loading, error, data } = useQuery(NOT_FOUND)
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
 
-  const menuItems = data?.menu?.menuItems || [];
+  const menuItems = data?.menu?.menuItems || []
 
   return (
     <Layout menuItems={menuItems}>
@@ -48,5 +48,5 @@ export default function Custom404() {
         </Link>
       </div>
     </Layout>
-  );
+  )
 }

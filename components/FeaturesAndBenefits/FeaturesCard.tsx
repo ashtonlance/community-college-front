@@ -1,12 +1,12 @@
-import Image from "next/image";
-import arrow from "../../assets/icons/arrow-full-right.svg";
+import Image from 'next/image'
+import arrow from '../../assets/icons/arrow-full-right.svg'
 
 import {
   getTextAlign,
   getWidth,
   getFeaturesCardStyle,
-} from "../../utils/attributesToClassNames";
-import Link from "next/link";
+} from '../../utils/attributesToClassNames'
+import Link from 'next/link'
 
 export const FeaturesCard = ({
   size,
@@ -18,7 +18,7 @@ export const FeaturesCard = ({
   bgColor,
 }) => {
   const cardFinalStyle =
-    cardStyle == "black" ? getFeaturesCardStyle(cardStyle) : bgColor;
+    cardStyle == 'black' ? getFeaturesCardStyle(cardStyle) : bgColor
 
   return (
     <div
@@ -37,7 +37,7 @@ export const FeaturesCard = ({
       />
       {optionalLink && (
         <div className="mt-[30px]">
-          {cardStyle === "black" && (
+          {cardStyle === 'black' && (
             <Link
               className="secondary-btn border-[1.5px] border-solid border-white"
               href={optionalLink}
@@ -54,5 +54,5 @@ export const FeaturesCard = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}

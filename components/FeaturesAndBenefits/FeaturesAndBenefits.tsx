@@ -1,28 +1,28 @@
 import {
   BackgroundColorType,
   MarginSizesType,
-} from "components/TestimonialSlider";
-import { FeaturesCard } from "./FeaturesCard";
+} from 'components/TestimonialSlider'
+import { FeaturesCard } from './FeaturesCard'
 
 type FeaturesAndBenefitsProps = {
   attributes: {
     data: {
-      card: number;
-      background_color: BackgroundColorType;
-      component_spacing_bottom_spacing: MarginSizesType;
-      component_spacing_top_spacing: MarginSizesType;
-    };
-  };
-};
+      card: number
+      background_color: BackgroundColorType
+      component_spacing_bottom_spacing: MarginSizesType
+      component_spacing_top_spacing: MarginSizesType
+    }
+  }
+}
 
 export const FeaturesAndBenefits = ({
   attributes,
 }: FeaturesAndBenefitsProps) => {
-  const cards = attributes.data.card;
-  const bgColorModule = attributes.data.background_color;
-  const marginBottom = attributes.data.component_spacing_bottom_spacing;
-  const marginTop = attributes.data.component_spacing_top_spacing;
-  const bgColorCard = bgColorModule == "light" ? "bg-white" : "bg-gmt-200";
+  const cards = attributes.data.card
+  const bgColorModule = attributes.data.background_color
+  const marginBottom = attributes.data.component_spacing_bottom_spacing
+  const marginTop = attributes.data.component_spacing_top_spacing
+  const bgColorCard = bgColorModule == 'light' ? 'bg-white' : 'bg-gmt-200'
 
   return (
     <div
@@ -30,7 +30,7 @@ export const FeaturesAndBenefits = ({
     >
       <div className="max-w-[1220px] flex justify-between gap-[15px] flex-wrap mx-auto md:flex-col md:items-center">
         {cards > 0 &&
-          [...Array(cards).keys()].map((card) => (
+          [...Array(cards).keys()].map(card => (
             <FeaturesCard
               bgColor={bgColorCard}
               key={card}
@@ -44,7 +44,7 @@ export const FeaturesAndBenefits = ({
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-FeaturesAndBenefits.displayName = "nextword/featuresandbenefits";
+FeaturesAndBenefits.displayName = 'nextword/featuresandbenefits'

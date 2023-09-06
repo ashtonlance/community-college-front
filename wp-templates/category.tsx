@@ -1,41 +1,41 @@
-import { gql } from "@apollo/client";
-import { Header } from "components/Header";
-import { ResourcesTypeHero } from "components/ResourcesHero/ResourcesTypeHero";
-import { PreFooter } from "components/PreFooter";
-import { Layout } from "components/Layout";
-import { ResourcesSidebar } from "components/ResourcesSidebar/ResourcesSidebar";
-import { PaginatedResources } from "components/PaginatedResources/PaginatedResources";
-import { FeaturedResourceByCategory } from "components/FeaturedResource";
-import { useRouter } from "next/router";
+import { gql } from '@apollo/client'
+import { Header } from 'components/Header'
+import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
+import { PreFooter } from 'components/PreFooter'
+import { Layout } from 'components/Layout'
+import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
+import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
+import { FeaturedResourceByCategory } from 'components/FeaturedResource'
+import { useRouter } from 'next/router'
 
 type CategoryProps = {
   data: {
     nodeByUri: {
-      name: string;
-      seo: {};
-    };
+      name: string
+      seo: {}
+    }
     menus: {
-      nodes: {};
-    };
+      nodes: {}
+    }
     menu: {
-      menuItems: {};
-    };
-  };
-  loading: boolean;
-};
+      menuItems: {}
+    }
+  }
+  loading: boolean
+}
 
 export default function Category(props: CategoryProps) {
-  const router = useRouter();
+  const router = useRouter()
 
   if (props.loading) {
-    return <>Loading...</>;
+    return <>Loading...</>
   } else {
-    const menuItems = props.data?.menu?.menuItems || [];
-    const seo = props.data?.nodeByUri?.seo;
-    const preFooterContent = props.data?.menus.nodes[0];
-    const { page } = router.query;
-    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || "1");
-    const categoryName = props.data?.nodeByUri?.name;
+    const menuItems = props.data?.menu?.menuItems || []
+    const seo = props.data?.nodeByUri?.seo
+    const preFooterContent = props.data?.menus.nodes[0]
+    const { page } = router.query
+    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+    const categoryName = props.data?.nodeByUri?.name
 
     return (
       <Layout menuItems={menuItems} seo={seo}>
@@ -64,7 +64,7 @@ export default function Category(props: CategoryProps) {
 
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
       </Layout>
-    );
+    )
   }
 }
 
@@ -72,8 +72,8 @@ Category.variables = ({ uri }, ctx) => {
   return {
     uri,
     asPreview: ctx?.asPreview,
-  };
-};
+  }
+}
 
 Category.query = gql`
   ${Header.fragments.entry}
@@ -106,4 +106,4 @@ Category.query = gql`
       }
     }
   }
-`;
+`

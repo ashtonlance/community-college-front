@@ -1,16 +1,16 @@
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import { formatDate } from "../../utils/dates";
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import { formatDate } from '../../utils/dates'
 
 type ResourcesSinglePageProps = {
-  image: string;
-  date: string;
-  title: string;
-  excerpt: string;
-};
+  image: string
+  date: string
+  title: string
+  excerpt: string
+}
 
 export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
-  const formatedDate = formatDate(props?.date);
+  const formatedDate = formatDate(props?.date)
 
   return (
     <div className="flex w-full h-fit sm:flex-col">
@@ -46,5 +46,5 @@ export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
         }}
       ></div>
     </div>
-  );
-};
+  )
+}

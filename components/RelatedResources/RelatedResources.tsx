@@ -1,25 +1,25 @@
-import { Resource, ResourcePresentational } from "./Resource";
-import Image from "next/image";
-import separator from "../../assets/imgs/separator.svg";
-import { gql, useQuery } from "@apollo/client";
-import { formatDate } from "../../utils/dates";
-import { getLabelFromCategory } from "utils/getButtonLabels";
-import { MarginSizesType } from "components/TestimonialSlider";
+import { Resource, ResourcePresentational } from './Resource'
+import Image from 'next/image'
+import separator from '../../assets/imgs/separator.svg'
+import { gql, useQuery } from '@apollo/client'
+import { formatDate } from '../../utils/dates'
+import { getLabelFromCategory } from 'utils/getButtonLabels'
+import { MarginSizesType } from 'components/TestimonialSlider'
 
 type RelatedResourcesProps = {
   attributes?: {
     data: {
-      related_resources: number;
-      component_spacing_bottom_spacing: MarginSizesType;
-      component_spacing_top_spacing: MarginSizesType;
-    };
-  };
-};
+      related_resources: number
+      component_spacing_bottom_spacing: MarginSizesType
+      component_spacing_top_spacing: MarginSizesType
+    }
+  }
+}
 
 type RelatedResourcesByTaxonomyProps = {
-  tags: string[];
-  categories: string[];
-};
+  tags: string[]
+  categories: string[]
+}
 
 const GET_RESOURCES_BY_TAXONOMY = gql`
   query GetRelatedResources($resourceIDs: [ID]) {
@@ -43,23 +43,23 @@ const GET_RESOURCES_BY_TAXONOMY = gql`
       }
     }
   }
-`;
+`
 
 export const RelatedResourcesByTaxonomy = (
   props: RelatedResourcesByTaxonomyProps
 ) => {
-  const resourceIDs = props.categories;
+  const resourceIDs = props.categories
   const { loading, error, data } = useQuery(GET_RESOURCES_BY_TAXONOMY, {
     variables: { resourceIDs },
-  });
+  })
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log(error);
+    console.log(error)
   }
-  const items = data?.resources?.nodes;
+  const items = data?.resources?.nodes
   return (
     <div className="bg-white flex flex-col justify-between wrapper-default-inner-pages mx-auto max-w-[2000px]">
       <div className="flex justify-center items-center mb-[40px] sm:mb-[32px] flex-col">
@@ -73,7 +73,7 @@ export const RelatedResourcesByTaxonomy = (
         />
       </div>
       <div className="flex gap-[20px] justify-between w-full sm:flex-col">
-        {items?.map((item) => (
+        {items?.map(item => (
           <ResourcePresentational
             key={item.id}
             imgUrl={item.featuredImage?.node?.sourceUrl}
@@ -88,19 +88,19 @@ export const RelatedResourcesByTaxonomy = (
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const RelatedResources = (props: RelatedResourcesProps) => {
-  const items = props?.attributes?.data?.related_resources;
+  const items = props?.attributes?.data?.related_resources
   const bottomSpacing =
-    props?.attributes?.data?.component_spacing_bottom_spacing;
-  const topSpacing = props?.attributes?.data?.component_spacing_top_spacing;
+    props?.attributes?.data?.component_spacing_bottom_spacing
+  const topSpacing = props?.attributes?.data?.component_spacing_top_spacing
 
   const postIds = [...Array(items).keys()].map(
-    (num) =>
-      props?.attributes?.data[`related_resources_${num}_resource_item`]?.["ID"]
-  );
+    num =>
+      props?.attributes?.data[`related_resources_${num}_resource_item`]?.['ID']
+  )
 
   return (
     <div
@@ -118,10 +118,10 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
       </div>
 
       <div
-        className={`grid gap-[20px] ${items == 1 && "grid-cols-1"} ${
-          items == 2 && "grid-cols-2"
+        className={`grid gap-[20px] ${items == 1 && 'grid-cols-1'} ${
+          items == 2 && 'grid-cols-2'
         } ${
-          items > 2 && "grid-cols-3"
+          items > 2 && 'grid-cols-3'
         } grid-flow-row md:grid-cols-2 sm:grid-cols-1`}
       >
         {postIds.map((id, i) => (
@@ -129,7 +129,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-RelatedResources.displayName = "nextword/relatedresourcesblock";
+RelatedResources.displayName = 'nextword/relatedresourcesblock'

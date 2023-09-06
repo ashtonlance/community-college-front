@@ -1,9 +1,9 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-export const Center = ({ classes = "" }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+export const Center = ({ classes = '' }) => {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true })
   return (
     <motion.svg
       viewBox="0 0 40 3"
@@ -21,9 +21,9 @@ export const Center = ({ classes = "" }) => {
         animate={{ scaleX: inView ? 1 : 0 }}
         transition={{
           duration: 1.25,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
       />
     </motion.svg>
-  );
-};
+  )
+}

@@ -1,21 +1,21 @@
-import { Button } from "components/Button";
-import { PageContext } from "wp-templates/single-event";
-import { ButtonWithModalForm } from "components/Button/ButtonWithModalForm";
-import { useState, useContext } from "react";
-import { FadeIn } from "components/FadeIn";
+import { Button } from 'components/Button'
+import { PageContext } from 'wp-templates/single-event'
+import { ButtonWithModalForm } from 'components/Button/ButtonWithModalForm'
+import { useState, useContext } from 'react'
+import { FadeIn } from 'components/FadeIn'
 
 export const CTABanner = ({ attributes }) => {
-  const copy = attributes.data.cta_copy;
-  const btn_link = attributes.data.button_link;
-  const btn_label = attributes.data.button_label;
-  const requestInvite = attributes.data.button_request_invite;
-  const bottomSpacing = attributes.data.component_spacing_bottom_spacing;
-  const topSpacing = attributes.data.component_spacing_top_spacing;
-  const bgColor = attributes.data.background_color || "green";
+  const copy = attributes.data.cta_copy
+  const btn_link = attributes.data.button_link
+  const btn_label = attributes.data.button_label
+  const requestInvite = attributes.data.button_request_invite
+  const bottomSpacing = attributes.data.component_spacing_bottom_spacing
+  const topSpacing = attributes.data.component_spacing_top_spacing
+  const bgColor = attributes.data.background_color || 'green'
 
-  const formEventRegistration = useContext(PageContext);
+  const formEventRegistration = useContext(PageContext)
 
-  const [modalActive, setModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState(false)
 
   return (
     <FadeIn>
@@ -25,13 +25,13 @@ export const CTABanner = ({ attributes }) => {
         <div className="max-w-[1030px] flex justify-between mx-auto md:flex-col items-center">
           <h2
             className={`${
-              bgColor === "sky" ? "text-black" : "text-white"
+              bgColor === 'sky' ? 'text-black' : 'text-white'
             } md:mb-[40px] md:text-center`}
           >
             {copy}
           </h2>
 
-          {requestInvite == "1" ? (
+          {requestInvite == '1' ? (
             <ButtonWithModalForm
               setModalActive={setModalActive}
               modalActive={modalActive}
@@ -50,7 +50,7 @@ export const CTABanner = ({ attributes }) => {
         </div>
       </div>
     </FadeIn>
-  );
-};
+  )
+}
 
-CTABanner.displayName = "nextword/cta";
+CTABanner.displayName = 'nextword/cta'

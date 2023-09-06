@@ -1,11 +1,11 @@
-import { FadeIn } from "components/FadeIn";
+import { FadeIn } from 'components/FadeIn'
 
 export const Testimonial = ({ attributes }) => {
-  const business = attributes.data.business_name;
-  const person = attributes.data.persons_name;
-  const quote = attributes.data.quote;
-  const label = attributes.data.label;
-  const colorModule = attributes.data.background_color;
+  const business = attributes.data.business_name
+  const person = attributes.data.persons_name
+  const quote = attributes.data.quote
+  const label = attributes.data.label
+  const colorModule = attributes.data.background_color
 
   return (
     <FadeIn>
@@ -28,7 +28,7 @@ export const Testimonial = ({ attributes }) => {
         </div>
       </div>
     </FadeIn>
-  );
-};
+  )
+}
 
-Testimonial.displayName = "nextword/testimonial";
+Testimonial.displayName = 'nextword/testimonial'

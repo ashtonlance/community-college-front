@@ -1,5 +1,5 @@
-export const Table = (props) => {
-  return <div dangerouslySetInnerHTML={{ __html: props.originalContent }} />;
-};
+export const Table = props => {
+  return <div dangerouslySetInnerHTML={{ __html: props.originalContent }} />
+}
 
-Table.displayName = "core/table";
+Table.displayName = 'core/table'

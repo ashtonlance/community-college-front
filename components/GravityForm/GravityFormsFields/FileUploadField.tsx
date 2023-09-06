@@ -1,10 +1,10 @@
-import { gql } from "@apollo/client";
-import React from "react";
+import { gql } from '@apollo/client'
+import React from 'react'
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,
   FileUploadFieldValue,
-} from "../../../utils/useGravityForms";
+} from '../../../utils/useGravityForms'
 
 export const FILE_FIELD_FIELDS = gql`
   fragment FileUploadFields on FileUploadField {
@@ -17,9 +17,9 @@ export const FILE_FIELD_FIELDS = gql`
     maxFileSize
     isRequired
   }
-`;
+`
 
-const DEFAULT_VALUE = {};
+const DEFAULT_VALUE = {}
 
 export default function FileUploadField({ field, fieldErrors }) {
   const {
@@ -33,18 +33,18 @@ export default function FileUploadField({ field, fieldErrors }) {
     label,
     type,
     isRequired,
-  } = field;
-  const htmlId = `field_${formId}_${id}`;
-  const { state, dispatch } = useGravityForm();
+  } = field
+  const htmlId = `field_${formId}_${id}`
+  const { state, dispatch } = useGravityForm()
   const fieldValue = state.find(
     (fieldValue: FieldValue) => fieldValue.id === id
-  ) as FileUploadFieldValue | undefined;
+  ) as FileUploadFieldValue | undefined
 
   function handleChange(event) {
-    const { files } = event.target;
-    const file = files?.[0];
-    console.log({ file }, "file");
-    console.log({ event, files });
+    const { files } = event.target
+    const file = files?.[0]
+    console.log({ file }, 'file')
+    console.log({ event, files })
 
     // @ts-ignore
     dispatch({
@@ -53,7 +53,7 @@ export default function FileUploadField({ field, fieldErrors }) {
         id,
         fileUploadValues: files,
       },
-    });
+    })
   }
 
   return (
@@ -67,9 +67,9 @@ export default function FileUploadField({ field, fieldErrors }) {
           type="file"
           // onChange={handleChange}
           required={Boolean(isRequired)}
-          onChange={(event) => {
-            const { files } = event.target;
-            const file = files?.[0];
+          onChange={event => {
+            const { files } = event.target
+            const file = files?.[0]
             // @ts-ignore
             dispatch({
               type: ACTION_TYPES.updateFileUploadFieldValue,
@@ -77,9 +77,9 @@ export default function FileUploadField({ field, fieldErrors }) {
                 id,
                 fileUploadValues: [
                   file,
-                ] as FileUploadFieldValue["fileUploadValues"],
+                ] as FileUploadFieldValue['fileUploadValues'],
               },
-            });
+            })
           }}
         />
       </div>
@@ -91,7 +91,7 @@ export default function FileUploadField({ field, fieldErrors }) {
       {allowedExtensions?.length > 0 && (
         <div>
           <small className="text-emerald font-semibold">
-            Allowed Extensions: {allowedExtensions.map((ext) => ext)}{" "}
+            Allowed Extensions: {allowedExtensions.map(ext => ext)}{' '}
           </small>
         </div>
       )}
@@ -112,12 +112,12 @@ export default function FileUploadField({ field, fieldErrors }) {
         </div>
       )}
       {fieldErrors?.length
-        ? fieldErrors.map((fieldError) => (
+        ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">
               {fieldError.message}
             </p>
           ))
         : null}
     </fieldset>
-  );
+  )
 }

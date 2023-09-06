@@ -1,6 +1,6 @@
-import Image from "next/image";
-import arrowleft from "../../assets/icons/arrow-left.svg";
-import Link from "next/link";
+import Image from 'next/image'
+import arrowleft from '../../assets/icons/arrow-left.svg'
+import Link from 'next/link'
 
 export const ResourcesBackBtn = () => {
   return (
@@ -11,5 +11,5 @@ export const ResourcesBackBtn = () => {
       <Image alt="" src={arrowleft} width={6} height={6} />
       Back to All Resources
     </Link>
-  );
-};
+  )
+}

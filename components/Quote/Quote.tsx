@@ -1,9 +1,9 @@
-import Image from "next/image";
-import quote from "../../assets/imgs/quote.svg";
-import { WordPressBlocksViewer } from "@faustwp/blocks";
+import Image from 'next/image'
+import quote from '../../assets/imgs/quote.svg'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
 
-export const Quote = (props) => {
-  const quoteMessage = props.dynamicContent;
+export const Quote = props => {
+  const quoteMessage = props.dynamicContent
 
   return (
     <div className="flex flex-col justify-center items-center flex-shrink-0 flex-grow-0 basis-full">
@@ -13,7 +13,7 @@ export const Quote = (props) => {
         dangerouslySetInnerHTML={{ __html: quoteMessage }}
       />
     </div>
-  );
-};
+  )
+}
 
-Quote.displayName = "core/quote";
+Quote.displayName = 'core/quote'

@@ -1,9 +1,9 @@
-import { getServerSideSitemap } from "next-sitemap";
+import { getServerSideSitemap } from 'next-sitemap'
 
-import { gql } from "@apollo/client";
-import { getApolloClient } from "@faustwp/core/dist/mjs/client";
+import { gql } from '@apollo/client'
+import { getApolloClient } from '@faustwp/core/dist/mjs/client'
 
-const client = getApolloClient();
+const client = getApolloClient()
 
 const SITEMAP_QUERY = gql`
   query SitemapQuery($after: String) {
@@ -22,7 +22,7 @@ const SITEMAP_QUERY = gql`
       }
     }
   }
-`;
+`
 
 async function getAllWPContent(after = null, acc = []) {
   const { data } = await client.query({
@@ -30,36 +30,36 @@ async function getAllWPContent(after = null, acc = []) {
     variables: {
       after,
     },
-  });
+  })
 
-  acc = [...acc, ...data.contentNodes.nodes];
+  acc = [...acc, ...data.contentNodes.nodes]
 
   if (data.contentNodes.pageInfo.hasNextPage) {
-    acc = await getAllWPContent(data.contentNodes.pageInfo.endCursor, acc);
+    acc = await getAllWPContent(data.contentNodes.pageInfo.endCursor, acc)
   }
 
-  return acc;
+  return acc
 }
 
 // Sitemap component
 export default function WPSitemap() {}
 
 // collect all the post
-export const getServerSideProps = async (ctx) => {
-  const nodes = await getAllWPContent();
+export const getServerSideProps = async ctx => {
+  const nodes = await getAllWPContent()
 
   const allRoutes = nodes.reduce((acc, node) => {
     if (!node.uri) {
-      return acc;
+      return acc
     }
 
     acc.push({
       loc: node.uri,
       lastmod: new Date(node.modifiedGmt).toISOString(),
-    });
+    })
 
-    return acc;
-  }, []);
+    return acc
+  }, [])
 
-  return await getServerSideSitemap(ctx, allRoutes);
-};
+  return await getServerSideSitemap(ctx, allRoutes)
+}

@@ -1,5 +1,5 @@
-import { Header } from "./Header";
-import type { Meta, StoryObj } from "@storybook/react";
+import { Header } from './Header'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Header> = {
   component: Header,
@@ -7,34 +7,34 @@ const meta: Meta<typeof Header> = {
     menuItems: {
       nodes: [
         {
-          id: "1",
-          label: "Home",
-          url: "/",
+          id: '1',
+          label: 'Home',
+          url: '/',
           childItems: {
             nodes: [
               {
-                id: "2",
-                label: "About",
-                url: "/about",
+                id: '2',
+                label: 'About',
+                url: '/about',
               },
-              { id: "3", label: "Contact", url: "/contact" },
+              { id: '3', label: 'Contact', url: '/contact' },
             ],
           },
         },
-        { id: "4", label: "Blog", url: "/blog" },
-        { id: "5", label: "Shop", url: "/shop" },
+        { id: '4', label: 'Blog', url: '/blog' },
+        { id: '5', label: 'Shop', url: '/shop' },
       ],
     },
     form: {
-      id: "1",
-      formId: "1",
+      id: '1',
+      formId: '1',
       formFields: {
         nodes: [
           {
-            id: "1",
-            label: "Name",
-            name: "name",
-            type: "text",
+            id: '1',
+            label: 'Name',
+            name: 'name',
+            type: 'text',
           },
         ],
       },
@@ -42,15 +42,15 @@ const meta: Meta<typeof Header> = {
   },
   argTypes: {
     variant: {
-      options: ["default", "transparent"],
-      control: { type: "radio" },
+      options: ['default', 'transparent'],
+      control: { type: 'radio' },
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof Header>;
+export default meta
+type Story = StoryObj<typeof Header>
 
 export const Primary: Story = {
-  render: (args) => <Header {...args} />,
-};
+  render: args => <Header {...args} />,
+}

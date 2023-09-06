@@ -1,15 +1,15 @@
-import { gql, useQuery } from "@apollo/client";
-import { GravityForm } from "components/GravityForm/GravityForm";
+import { gql, useQuery } from '@apollo/client'
+import { GravityForm } from 'components/GravityForm/GravityForm'
 
-export type NewsletterTypeTitleHeading = "h2" | "h3" | "h4";
+export type NewsletterTypeTitleHeading = 'h2' | 'h3' | 'h4'
 
-const NEWSLETTER_FORM_ID = 1;
+const NEWSLETTER_FORM_ID = 1
 
 type NewsletterProps = {
-  title: string;
-  titleHeading: NewsletterTypeTitleHeading;
-  classes: string;
-};
+  title: string
+  titleHeading: NewsletterTypeTitleHeading
+  classes: string
+}
 
 const GET_NEWSLETTER_FORM = gql`
 ${GravityForm.fragments.entry}
@@ -17,10 +17,10 @@ query GetNewsletterForm{
   gfForm(id: ${NEWSLETTER_FORM_ID}, idType: DATABASE_ID) {
     ...GravityFormFragment
   }
-}`;
+}`
 
 export const NewsletterBanner = (props: NewsletterProps) => {
-  const headline = `<${props.titleHeading}> ${props.title} </${props.titleHeading}>`;
+  const headline = `<${props.titleHeading}> ${props.title} </${props.titleHeading}>`
 
   return (
     <div className={`newsletter-banner ${props.classes}`}>
@@ -29,18 +29,18 @@ export const NewsletterBanner = (props: NewsletterProps) => {
         <NewsletterInput customClasses="submit-button-as-arrow" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export const NewsletterInput = ({ customClasses = "" }) => {
-  const { loading, error, data } = useQuery(GET_NEWSLETTER_FORM);
+export const NewsletterInput = ({ customClasses = '' }) => {
+  const { loading, error, data } = useQuery(GET_NEWSLETTER_FORM)
 
   if (loading) {
-    return;
+    return
   }
   if (error) {
-    console.log({ error });
+    console.log({ error })
   }
 
-  return <GravityForm form={data?.gfForm} customClasses={customClasses} />;
-};
+  return <GravityForm form={data?.gfForm} customClasses={customClasses} />
+}
