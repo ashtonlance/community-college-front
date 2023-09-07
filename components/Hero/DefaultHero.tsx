@@ -14,21 +14,21 @@ export const DefaultHero = ({
 }: HeroPropsType) => {
   return (
     <div
-      className={`relative h-fit flex md:flex-col md:h-fit sm:justify-center sm:items-center bg-${bgColor}`}
+      className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center bg-${bgColor}`}
     >
-      <div className="w-[60%] md:w-full wrapper-default-inner-pages md:pb-0 flex flex-col justify-center items-baseline">
+      <div className="wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center md:w-full md:pb-0">
         {subheading && (
-          <div className="flex gap-[15px] mb-[32px] items-center">
+          <div className="mb-[32px] flex items-center gap-[15px]">
             <GuideLine />
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {subheading}
             </h2>
           </div>
         )}
-        <h1 className="text-white mb-[32px]">{heading}</h1>
+        <h1 className="mb-[32px] text-white">{heading}</h1>
 
         {description && bgImg && (
-          <p className="body-large text-white mb-[60px] md:mb-[20px]">
+          <p className="body-large mb-[60px] text-white md:mb-[20px]">
             {description}
           </p>
         )}
@@ -36,14 +36,14 @@ export const DefaultHero = ({
         {ctaURL && ctaLabel && (
           <Link
             href={ctaURL}
-            className="primary-btn bg-white flex text-black w-fit"
+            className="primary-btn flex w-fit bg-white text-black"
           >
             {ctaLabel}
           </Link>
         )}
       </div>
       {bgImg ? (
-        <div className="relative w-[40%] md:w-full wrapper-default-inner-pages pl-0 md:pl-[60px] sm:pl-[40px] md:pt-0 flex flex-col justify-center items-baseline bg-cover min-h-[400px]">
+        <div className="wrapper-default-inner-pages relative flex min-h-[400px] w-[40%] flex-col items-baseline justify-center bg-cover pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
           <Image
             src={bgImg}
             alt=""
@@ -54,7 +54,7 @@ export const DefaultHero = ({
         </div>
       ) : (
         description && (
-          <div className="w-[40%] md:w-full wrapper-default-inner-pages pl-0 md:pl-[60px] sm:pl-[40px] md:pt-0 flex flex-col justify-center items-baseline">
+          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
             <p className="body-large text-white md:mb-[20px]">{description}</p>
           </div>
         )

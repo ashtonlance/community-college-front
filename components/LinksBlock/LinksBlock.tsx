@@ -6,17 +6,17 @@ export const LinksBlock = ({ attributes }) => {
   const linkList = attributes.data.links_lists
 
   return (
-    <div className="flex justify-between max-w-[1220px] mx-auto my-[40px] gap-[20px] md:flex-col w-[90%]">
+    <div className="mx-auto my-[40px] flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col">
       {linkList > 0 &&
         [...Array(linkList).keys()].map(val => (
           <div
             key={val}
-            className="flex flex-col gap-[10px] bg-gmt-100 p-[40px] grow"
+            className="flex grow flex-col gap-[10px] bg-gmt-100 p-[40px]"
           >
             <h5 className="mb-[32px]">
               {attributes.data[`links_lists_${val}_link_list_label`]}
             </h5>
-            <div className="grid grid-rows-3 grid-flow-col md:grid-rows-5 sm:flex sm:flex-col">
+            <div className="grid grid-flow-col grid-rows-3 md:grid-rows-5 sm:flex sm:flex-col">
               {[
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),
               ].map(num => (

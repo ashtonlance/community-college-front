@@ -16,26 +16,26 @@ export const EventHero = ({ attributes }) => {
 
   return (
     <div
-      className={`relative h-auto flex md:flex-col md:h-fit sm:justify-center sm:items-center `}
+      className={`relative flex h-auto md:h-fit md:flex-col sm:items-center sm:justify-center `}
     >
       <div
-        className={`w-[50%] md:w-full wrapper-default-inner-pages flex flex-col justify-center items-baseline bg-${bgColor}`}
+        className={`wrapper-default-inner-pages flex w-[50%] flex-col items-baseline justify-center md:w-full bg-${bgColor}`}
       >
         {subheading && (
-          <div className="flex gap-[15px] mb-[32px]">
+          <div className="mb-[32px] flex gap-[15px]">
             <Image alt="" src={border} width={40} height={1.5} />
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {subheading}
             </h2>
           </div>
         )}
-        <h1 className="text-white mb-[32px]">{heading}</h1>
+        <h1 className="mb-[32px] text-white">{heading}</h1>
         <div className="body-large text-white">
           <span>{dateRange}</span> • <span> {location}</span>
           <div> {booth} </div>
         </div>
         {description && bgImg && (
-          <p className="body-large text-white mb-[60px] md:mb-[20px]">
+          <p className="body-large mb-[60px] text-white md:mb-[20px]">
             {description}
           </p>
         )}
@@ -43,7 +43,7 @@ export const EventHero = ({ attributes }) => {
         {ctaURL && ctaLabel && (
           <Link
             href={ctaURL}
-            className="primary-btn bg-white hover:bg-stone flex text-emerald w-fit"
+            className="primary-btn hover:bg-stone text-emerald flex w-fit bg-white"
             suppressHydrationWarning
           >
             {ctaLabel}
@@ -51,18 +51,18 @@ export const EventHero = ({ attributes }) => {
         )}
       </div>
       {bgImg ? (
-        <div className="relative w-[50%] md:w-full flex flex-col justify-center items-baseline">
+        <div className="relative flex w-[50%] flex-col items-baseline justify-center md:w-full">
           <Image
             src={bgImg}
             alt=""
             width={600}
             height={600}
-            className="object-cover h-full w-full"
+            className="h-full w-full object-cover"
           />
         </div>
       ) : (
         description && (
-          <div className="w-[40%] md:w-full wrapper-default-inner-pages pl-0 md:pl-[60px] sm:pl-[40px] md:pt-0 flex flex-col justify-center items-baseline">
+          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
             <p className="body-large text-white md:mb-[20px]">{description}</p>
           </div>
         )

@@ -16,28 +16,28 @@ export const ServicesMenu = ({
       onMouseLeave={() => handleActiveItem('')}
       className={`mega-menu md:top-0 ${classes}`}
     >
-      <div className="flex justify-between max-w-[1600px] w-full items-center mx-auto">
-        <div className="grid grid-cols-3 max-w-[75%] border-r-[1.5px] border-r-solid border-r-gmt-400 md:border-0 md:grid-cols-1 md:max-w-full md:w-full">
+      <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
+        <div className="border-r-solid grid max-w-[75%] grid-cols-3 border-r-[1.5px] border-r-gmt-400 md:w-full md:max-w-full md:grid-cols-1 md:border-0">
           {subItems?.map(subItem => (
             <div
-              className="flex flex-col mb-[40px] pr-[40px] md:pr-0 md:mb-[32px] sm:mb-[24px]"
+              className="mb-[40px] flex flex-col pr-[40px] md:mb-[32px] md:pr-0 sm:mb-[24px]"
               key={subItem.title}
             >
               <Link
-                className="links-sub-nav text-white mb-[10px]"
+                className="links-sub-nav mb-[10px] text-white"
                 href={subItem?.url?.url || ''}
               >
                 {subItem.title.replace('&amp;', '&')}
               </Link>
-              <p className="p-regular text-gmt-300 max-w-[80%]">
+              <p className="p-regular max-w-[80%] text-gmt-300">
                 {subItem.description}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="max-w-[20%] text-center pl-[40px] md:hidden">
-          <h4 className="text-white mb-[32px]">
+        <div className="max-w-[20%] pl-[40px] text-center md:hidden">
+          <h4 className="mb-[32px] text-white">
             Not sure which tier is right for you?
           </h4>
           <button className="secondary-btn border-[1.5px] border-solid border-white">

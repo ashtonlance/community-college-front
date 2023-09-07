@@ -15,7 +15,7 @@ import { Separator } from 'components/Separator'
 const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
   return (
     <div
-      className={`flex justify-center flex-col items-start text-white w-full ${classes}`}
+      className={`flex w-full flex-col items-start justify-center text-white ${classes}`}
     >
       {items &&
         items?.map(item => (
@@ -23,7 +23,7 @@ const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
             onClick={() => setActiveMenuAs(item)}
             key={item.id}
             className={`links-mobile-nav flex w-full justify-between border-b-[1.5px] border-gmt-400
-                    ${item.label === 'Events' ? 'order-6 hide-border' : ''}
+                    ${item.label === 'Events' ? 'hide-border order-6' : ''}
                     `}
           >
             <div className=""> {item.label} </div>
@@ -50,7 +50,7 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
     switch (activeMenu?.label) {
       case 'About':
         content = (
-          <div className="w-full internal-menu-mobile text-left min-h-[90px] md:min-h-[80px]">
+          <div className="internal-menu-mobile min-h-[90px] w-full text-left md:min-h-[80px]">
             <Link
               href={activeMenu?.url}
               className="links-mobile-nav text-white"
@@ -68,7 +68,7 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
         break
       case 'Services':
         content = (
-          <div className="w-full internal-menu-mobile text-left  min-h-[90px] md:min-h-[80px]">
+          <div className="internal-menu-mobile min-h-[90px] w-full  text-left md:min-h-[80px]">
             <Link
               href={activeMenu?.url}
               className="links-mobile-nav text-white"
@@ -85,7 +85,7 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
         break
       case 'Resources':
         content = (
-          <div className="w-full internal-menu-mobile text-left  min-h-[90px] md:min-h-[80px]">
+          <div className="internal-menu-mobile min-h-[90px] w-full  text-left md:min-h-[80px]">
             <Link
               href={activeMenu?.url}
               className="links-mobile-nav text-white"
@@ -126,7 +126,7 @@ export const MobileSubmenu = ({ items }) => {
         {activeMenu && (
           <div
             onClick={() => setActiveMenu(null)}
-            className="tag bg-gmt-500 text-white flex gap-2 relative top-[-5px] z-10"
+            className="tag relative top-[-5px] z-10 flex gap-2 bg-gmt-500 text-white"
           >
             <Image alt="" src={arrowleft} width={6} height={6} />
             Back
@@ -137,7 +137,7 @@ export const MobileSubmenu = ({ items }) => {
 
         {!activeMenu && (
           <>
-            <div className="mt-[100px] flex justify-between w-full">
+            <div className="mt-[100px] flex w-full justify-between">
               <Link
                 href="/customer-support"
                 className="links-sub-nav text-white"

@@ -4,6 +4,7 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { Page, RootQuery } from 'generated/graphql'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 type FrontPageProps = {
   data: Pick<RootQuery, 'nodeByUri' | 'menu' | 'menus'>
@@ -14,8 +15,15 @@ export default function FrontPage(props: FrontPageProps) {
   const homePageData = props.data?.nodeByUri as Page
   const preFooterContent = props.data?.menus.nodes[0]
   const blocks = homePageData && [...homePageData?.blocks]
+  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
+
   return (
-    <Layout menuItems={menuItems} seo={homePageData?.seo}>
+    <Layout
+      menuItems={hierarchicalMenuItems}
+      seo={homePageData?.seo}
+      utilityNavigation={utilityNavigation}
+    >
       {blocks && <WordPressBlocksViewer blocks={blocks} />}
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
@@ -45,6 +53,15 @@ FrontPage.query = gql`
       menuItems {
         nodes {
           ...NavigationMenuFragment
+        }
+      }
+      utilityNavigation {
+        navigationItems {
+          navItem {
+            title
+            url
+            target
+          }
         }
       }
     }

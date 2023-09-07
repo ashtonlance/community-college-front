@@ -8,12 +8,12 @@ export const Modal = ({ modalActive, handleClose, modalContent, id = '' }) => {
       data-testid={id}
       className={`${
         modalActive ? 'flex' : 'hidden'
-      } modal flex justify-center items-center`}
+      } modal flex items-center justify-center`}
     >
-      <div className="bg-white relative flex flex-col w-[610px] md:w-[466px] h-fit sm:w-[295px] justify-center items-center p-[60px] md:p-[40px] sm:p-[20px]">
+      <div className="relative flex h-fit w-[610px] flex-col items-center justify-center bg-white p-[60px] md:w-[466px] md:p-[40px] sm:w-[295px] sm:p-[20px]">
         <div
           onClick={handleClose}
-          className="absolute top-[30px] right-[30px] sm:top-[20px] sm:right-[20px]"
+          className="absolute right-[30px] top-[30px] sm:right-[20px] sm:top-[20px]"
         >
           {' '}
           <Image alt="" src={close} />{' '}

@@ -61,7 +61,7 @@ export default function FileUploadField({ field, fieldErrors }) {
       <legend className="text-emerald my-2">{label}</legend>
       <div className="field" data-id={id} data-type={type}>
         <input
-          className="secondary-btn p-regular text-emerald w-full lowercase !px-0"
+          className="secondary-btn p-regular text-emerald w-full !px-0 lowercase"
           id={htmlId}
           name={field.label}
           type="file"
@@ -84,7 +84,7 @@ export default function FileUploadField({ field, fieldErrors }) {
         />
       </div>
       {description ? (
-        <p className="field-description capitalize my-2 text-sm text-emerald">
+        <p className="field-description text-emerald my-2 text-sm capitalize">
           {description}
         </p>
       ) : null}
@@ -98,7 +98,7 @@ export default function FileUploadField({ field, fieldErrors }) {
 
       {maxFileSize > 0 && (
         <div>
-          <small className="text-emerald capitalize font-semibold">
+          <small className="text-emerald font-semibold capitalize">
             Maximum File Size: {maxFileSize}
           </small>
         </div>
@@ -106,7 +106,7 @@ export default function FileUploadField({ field, fieldErrors }) {
 
       {maxFiles > 0 && (
         <div>
-          <small className="text-emerald capitalize font-semibold">
+          <small className="text-emerald font-semibold capitalize">
             Maximum Number of Files: {maxFiles}
           </small>
         </div>

@@ -38,12 +38,12 @@ export const Button = ({
     return (
       <div>
         <div
-          className={`button flex px-[100px] md:px-[60px] sm:px-[40px] sm:w-full sm:mx-auto module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColorModule} justify-${alignment}`}
+          className={`button flex px-[100px] md:px-[60px] sm:mx-auto sm:w-full sm:px-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColorModule} justify-${alignment}`}
           ref={ref}
         >
           <Link
             href={buttonLink}
-            className={`primary-btn bg-${buttonColor} text-white hover:bg-stone hover:text-emerald border-[1.5px] border-emerald w-fit justify-center items-center ${classes} flex gap-[11px]`}
+            className={`primary-btn bg-${buttonColor} hover:bg-stone hover:text-emerald border-emerald w-fit items-center justify-center border-[1.5px] text-white ${classes} flex gap-[11px]`}
             suppressHydrationWarning
             target={target}
           >
@@ -57,7 +57,7 @@ export const Button = ({
     return (
       <Link
         href={linkto}
-        className={`button w-fit justify-center items-center flex gap-[11px] ${classes}`}
+        className={`button flex w-fit items-center justify-center gap-[11px] ${classes}`}
         ref={ref}
         suppressHydrationWarning
         target={target}

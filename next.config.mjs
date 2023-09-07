@@ -1,4 +1,4 @@
-import { withFaust } from "@faustwp/core";
+import { withFaust } from '@faustwp/core'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,12 +6,20 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     domains: [process.env.WP_IMAGES_URL],
-    formats: ["image/avif", "image/webp"],
+    formats: ['image/avif', 'image/webp'],
   },
   experimental: {
     optimizeCss: true,
     legacyBrowsers: false,
   },
-};
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
 
-export default withFaust(nextConfig);
+    return config
+  },
+}
+
+export default withFaust(nextConfig)

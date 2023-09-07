@@ -33,29 +33,29 @@ export const Card = ({
   return (
     <div className={`flex flex-col module-color-${color}`}>
       <div
-        className="h-[300px] md:h-[250px] bg-cover bg-no-repeat relative"
+        className="relative h-[300px] bg-cover bg-no-repeat md:h-[250px]"
         style={{
           backgroundImage: `url(${image})`,
         }}
       >
-        <div className="absolute top-[20px] right-[20px] bg-white text-black tag">
+        <div className="tag absolute right-[20px] top-[20px] bg-white text-black">
           {tag}
         </div>
       </div>
-      <div className="flex flex-col gap-[10px] items-center justify-center p-[40px] sm:p-[32px]">
-        <div className="flex justify-center items-center gap-[15px] text-gmt-500 mb-[24px] sm:flex-col">
+      <div className="flex flex-col items-center justify-center gap-[10px] p-[40px] sm:p-[32px]">
+        <div className="mb-[24px] flex items-center justify-center gap-[15px] text-gmt-500 sm:flex-col">
           <p className="body-large font-bold text-gmt-500">{location}</p>
           <Image alt="Event banner" src={separator} width={40} height={1.5} />
           <p className="body-large font-bold text-gmt-500">{date}</p>
         </div>
-        <h3 className="text-black mb-[20px] sm:mb-0">{title}</h3>
+        <h3 className="mb-[20px] text-black sm:mb-0">{title}</h3>
         <div
-          className="body-large text-center text-gmt-500 mb-[24px]"
+          className="body-large mb-[24px] text-center text-gmt-500"
           dangerouslySetInnerHTML={{ __html: description }}
         />
         <span className="flex gap-2">
           {boothNumber && (
-            <p className="body-regular font-bold text-gmt-500 mb-[24px]">
+            <p className="body-regular mb-[24px] font-bold text-gmt-500">
               {' '}
               {boothNumber}
             </p>
@@ -64,7 +64,7 @@ export const Card = ({
             <span className="text-gmt-500"> • </span>
           )}
           {boothTime && (
-            <p className="body-regular font-bold text-gmt-500 mb-[24px]">
+            <p className="body-regular mb-[24px] font-bold text-gmt-500">
               {' '}
               {boothTime}
             </p>

@@ -4,12 +4,15 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { getHeroType } from '../utils/heroBlockHelper'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function Page(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
   const preFooterContent = props.data?.menus.nodes[0]
   const blocks = pageData && [...pageData.blocks]
+  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -18,9 +21,10 @@ export default function Page(props) {
   const heroType = getHeroType(blocks)
   return (
     <Layout
-      menuItems={menuItems}
+      menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       headerVariant={heroType === 'default' ? 'default' : 'transparent'}
+      utilityNavigation={utilityNavigation}
     >
       {blocks && (
         <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
@@ -58,6 +62,15 @@ Page.query = gql`
       menuItems {
         nodes {
           ...NavigationMenuFragment
+        }
+      }
+      utilityNavigation {
+        navigationItems {
+          navItem {
+            title
+            url
+            target
+          }
         }
       }
     }

@@ -3,8 +3,8 @@ import { ResourcesMenu } from './ResourcesMenu'
 import { AboutMenu } from './AboutMenu'
 
 export const MegaMenu = ({ item, handleActiveItem }) => {
-  const subItems = item.navigationMenu.items
-
+  const subItems = item.children
+  console.log(item, 'item')
   switch (item.label) {
     case 'About':
       return (

@@ -5,7 +5,7 @@ export type ResourceTagsProps = {
     {
       name: string
       link: string
-    }
+    },
   ]
 }
 

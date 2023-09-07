@@ -7,18 +7,18 @@ export const SkeletonCard = () => {
   return (
     <div className={card}>
       <div className={cardImage}>
-        <div className={`h-[300px] lg:h-[331px] w-full bg-beige`}></div>
+        <div className={`h-[300px] w-full bg-beige lg:h-[331px]`}></div>
       </div>
       <div className={cardContent}>
         <h2 className={`my-3 h-10 rounded-md bg-beige`}></h2>
         <div
-          className={`md:text-md flex flex-col gap-2 pb-4 font-body text-xs text-gray-500`}
+          className={`md:text-md font-body flex flex-col gap-2 pb-4 text-xs text-gray-500`}
         >
           <div className={`h-4 rounded-md bg-beige`}></div>
           <div className={`h-4 rounded-md bg-beige`}></div>
           <div className={`h-4 rounded-md bg-beige`}></div>
         </div>
-        <div className="hidden lg:block w-full min-w-[165px] h-12 rounded-full border-2 border-secondary bg-secondary px-8 py-2 text-center font-body uppercase text-white transition duration-300 ease-in-out hover:bg-white hover:text-secondary"></div>
+        <div className="border-secondary bg-secondary font-body hover:text-secondary hidden h-12 w-full min-w-[165px] rounded-full border-2 px-8 py-2 text-center uppercase text-white transition duration-300 ease-in-out hover:bg-white lg:block"></div>
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cn } from 'utils'
 
 type AboutMenuProps = {
   subItems: any
@@ -14,20 +15,25 @@ export const AboutMenu = ({
   return (
     <div className="semi-modal">
       <div
-        onMouseLeave={() => handleActiveItem('')}
-        className={`mega-menu h-[100px] py-[40px] md:top-[65px] md:min-h-[170px] ${classes}`}
+        // onMouseLeave={() => handleActiveItem('')}
+        className={cn(
+          `mega-menu h-[100px] py-[40px] md:top-[65px] md:min-h-[170px] ${classes}`
+        )}
       >
-        <div className="flex justify-between max-w-[1600px] w-full items-center mx-auto">
-          <div className="flex justify-around flex-1 md:flex-col md:gap-[10px] md:mt-[24px] sm:mt-0">
-            {subItems?.map(subItem => (
-              <Link
-                href={subItem?.url?.url}
-                className="flex links-sub-nav text-white mb-[10px] capitalize"
-                key={subItem?.title}
-              >
-                {subItem?.title}
-              </Link>
-            ))}
+        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
+          <div className="flex flex-1 justify-around md:mt-[24px] md:flex-col md:gap-[10px] sm:mt-0">
+            {subItems?.map(subItem => {
+              console.log(subItem, 'subItem')
+              return (
+                <Link
+                  href={subItem?.url || ''}
+                  className="links-sub-nav mb-[10px] flex capitalize text-white"
+                  key={subItem?.label}
+                >
+                  {subItem?.label}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </div>

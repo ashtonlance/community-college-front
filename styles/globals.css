@@ -46,7 +46,7 @@
     @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-black font-sans;
   }
   .main-nav {
-    @apply cursor-pointer p-[16px] rounded-[3px] text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-black font-sans hover:bg-gmt-200;
+    @apply cursor-pointer p-4 pb-0 rounded-[3px] text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
   }
   .links-mobile-nav {
     @apply cursor-pointer py-[20px] text-[28px] font-bold tracking-[-0.02em] leading-[110%] font-sans;
@@ -88,7 +88,7 @@
     @apply bg-gmt-transparent backdrop-blur-[7.5px] fixed w-full h-full left-0 right-0 top-0 bottom-0;
   }
   .semi-modal {
-    @apply bg-gmt-transparent backdrop-blur-[7.5px] fixed w-full left-0  top-[115px] md:top-[91px] right-0 bottom-0;
+    @apply bg-gmt-transparent backdrop-blur-[7.5px] fixed w-full left-0 top-[155px] md:top-[91px] right-0 bottom-0;
   }
   .internal-menu-mobile .semi-modal {
     @apply top-[110px];

@@ -9,6 +9,7 @@ export type LayoutProps = {
   seo?: any
   pageClassName?: string
   children: any
+  utilityNavigation: any
 }
 
 export function Layout(props: LayoutProps) {
@@ -16,9 +17,10 @@ export function Layout(props: LayoutProps) {
   const metaDesc = props?.seo?.metaDesc || ''
   const canonical = props?.seo?.canonical || ''
   const schema = props?.seo?.schema || ''
-  const className = props?.seo?.className || ''
   const variant = props?.headerVariant || 'default'
-
+  const menuItems = props?.menuItems || []
+  const utilityNavigation = props?.utilityNavigation || []
+  console.log(menuItems, 'menuItems layout')
   return (
     <>
       <Head>
@@ -35,8 +37,12 @@ export function Layout(props: LayoutProps) {
           href={process.env.NEXT_PUBLIC_WORDPRESS_URL}
         ></link>
       </Head>
-      {/* <div className={props?.pageClassName || ""}> */}
-      <Header menuItems={props.menuItems} form={props.form} variant={variant} />
+      <Header
+        menuItems={menuItems}
+        utilityNavigation={utilityNavigation}
+        form={props.form}
+        variant={variant}
+      />
       <main
         className={`flex flex-col ${
           variant == 'default' && 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
@@ -46,7 +52,6 @@ export function Layout(props: LayoutProps) {
         {props.children}
       </main>
       <Footer menuItems={props.menuItems} />
-      {/* </div> */}
     </>
   )
 }

@@ -19,9 +19,9 @@ export const ResourcesTypeHero = (props: ResourcesTypeProps) => {
       {breadcrumbPosition == 'subtype' && <ResourcesBackBtn />}
 
       {breadcrumbPosition == 'root' ? (
-        <p className="font-bold mb-[32px]">Resource Center</p>
+        <p className="mb-[32px] font-bold">Resource Center</p>
       ) : (
-        <p className="font-bold mb-[32px] text-gmt-500 flex gap-2">
+        <p className="mb-[32px] flex gap-2 font-bold text-gmt-500">
           Resource Center
           <span>/</span>
           <span className="text-black">Resources by type</span>

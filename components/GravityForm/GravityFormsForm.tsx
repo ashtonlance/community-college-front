@@ -42,10 +42,10 @@ const DownloadButton = ({ description }) => {
   const active = validateEmail(email) && jobTitle
 
   return (
-    <div className="flex justify-center items-center gap-[60px] sm:flex-col sm:items-start sm:gap-[20px]">
+    <div className="flex items-center justify-center gap-[60px] sm:flex-col sm:items-start sm:gap-[20px]">
       <button
         type="submit"
-        className={`primary-btn bg-white text-emerald flex gap-[11px] ${
+        className={`primary-btn text-emerald flex gap-[11px] bg-white ${
           active ? 'active' : 'inactive cursor-not-allowed opacity-[0.75]'
         }`}
         disabled={!active}
@@ -54,7 +54,7 @@ const DownloadButton = ({ description }) => {
         <Image alt="" src={arrowright} width={9} height={9} />
       </button>
       <p
-        className="p-small !text-white !mb-0"
+        className="p-small !mb-0 !text-white"
         dangerouslySetInnerHTML={{ __html: description }}
       ></p>
     </div>
@@ -83,10 +83,10 @@ const ArrowButton = () => {
 
 const DefaultButton = ({ loading, form, disclaimer = null }) => {
   return (
-    <div className="flex gap-[40px] submit-gravity-form">
+    <div className="submit-gravity-form flex gap-[40px]">
       <button
         type="submit"
-        className={`border-[1.5px] border-emerald w-fit justify-center items-center primary-btn bg-emerald text-white flex gap-[11px]`}
+        className={`border-emerald primary-btn bg-emerald flex w-fit items-center justify-center gap-[11px] border-[1.5px] text-white`}
         disabled={loading}
         aria-label="Submit form"
       >
@@ -111,11 +111,11 @@ function GravityFormsFormInternal({
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-8">
+      <div className="flex items-center justify-center py-8">
         <div role="status">
           <svg
             aria-hidden="true"
-            className="w-10 h-10 fill-green mr-2 text-stone animate-spin"
+            className="fill-green text-stone mr-2 h-10 w-10 animate-spin"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -154,11 +154,11 @@ function GravityFormsFormInternal({
     event.preventDefault()
     if (loading) {
       return (
-        <div className="flex justify-center items-center py-8">
+        <div className="flex items-center justify-center py-8">
           <div role="status">
             <svg
               aria-hidden="true"
-              className="w-10 h-10 fill-green mr-2 text-stone animate-spin"
+              className="fill-green text-stone mr-2 h-10 w-10 animate-spin"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -206,12 +206,12 @@ function GravityFormsFormInternal({
   if (wasSuccessfullySubmitted) {
     return (
       <FadeIn>
-        <div className="success w-full h-fit bg-white module-spacing-bottom-none module-spacing-top-none">
+        <div className="success module-spacing-bottom-none module-spacing-top-none h-fit w-full bg-white">
           <div
-            className={`flex flex-col py-[80px] md:px-[100px] justify-center sm:p-[40px]max-w-[1030px] mx-auto wrapper`}
+            className={`sm:p-[40px]max-w-[1030px] wrapper mx-auto flex flex-col justify-center py-[80px] md:px-[100px]`}
           >
             <div
-              className={`h3 text-emerald text-center mt-[24px]`}
+              className={`h3 text-emerald mt-[24px] text-center`}
               dangerouslySetInnerHTML={{
                 __html:
                   defaultConfirmation?.message ||
@@ -227,7 +227,7 @@ function GravityFormsFormInternal({
       <form
         method="post"
         onSubmit={handleSubmit}
-        className={`flex flex-col items-center mt-[40px] ${customClasses}`}
+        className={`mt-[40px] flex flex-col items-center ${customClasses}`}
       >
         {formFields.map(field => (
           <GravityFormsField

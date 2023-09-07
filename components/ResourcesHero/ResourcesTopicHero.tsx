@@ -15,7 +15,7 @@ export const ResourceTopicHero = (props: ResourcesTopicProps) => {
   return (
     <div className="relative">
       <ResourcesBackBtn />
-      <p className="font-bold mb-[32px] text-gmt-500 flex gap-2">
+      <p className="mb-[32px] flex gap-2 font-bold text-gmt-500">
         Resource Center
         <span>/</span>
         <span className="text-black">Resources by topic</span>

@@ -69,9 +69,7 @@ export const PaginatedResources = (props: PaginatedResourcesProps) => {
 
   return (
     <>
-      {items?.map(item => (
-        <ResourceCard key={item.id} resource={item} />
-      ))}
+      {items?.map(item => <ResourceCard key={item.id} resource={item} />)}
       {items.length > 0 && (
         <Pagination
           currentPage={props.currentPage}

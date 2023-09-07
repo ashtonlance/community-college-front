@@ -61,8 +61,8 @@ export const RelatedResourcesByTaxonomy = (
   }
   const items = data?.resources?.nodes
   return (
-    <div className="bg-white flex flex-col justify-between wrapper-default-inner-pages mx-auto max-w-[2000px]">
-      <div className="flex justify-center items-center mb-[40px] sm:mb-[32px] flex-col">
+    <div className="wrapper-default-inner-pages mx-auto flex max-w-[2000px] flex-col justify-between bg-white">
+      <div className="mb-[40px] flex flex-col items-center justify-center sm:mb-[32px]">
         <h5>Related resources</h5>
         <Image
           alt=""
@@ -72,7 +72,7 @@ export const RelatedResourcesByTaxonomy = (
           className="mt-[24px]"
         />
       </div>
-      <div className="flex gap-[20px] justify-between w-full sm:flex-col">
+      <div className="flex w-full justify-between gap-[20px] sm:flex-col">
         {items?.map(item => (
           <ResourcePresentational
             key={item.id}
@@ -104,9 +104,9 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
 
   return (
     <div
-      className={`flex flex-col w-[90%] max-w-[1220px] mx-auto items-center my-[40px] sm:my-[32px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
+      className={`mx-auto my-[40px] flex w-[90%] max-w-[1220px] flex-col items-center sm:my-[32px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
-      <div className="my-[40px] sm:my-[32px] flex flex-col items-center">
+      <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
         <h5>Related Resources</h5>
         <Image
           alt=""

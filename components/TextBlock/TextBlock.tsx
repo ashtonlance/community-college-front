@@ -23,12 +23,12 @@ export const TextBlock = ({ attributes }) => {
 
   return (
     <div
-      className={`w-full h-fit module-color-${colorModule} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
+      className={`h-fit w-full module-color-${colorModule} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
-        className={`flex flex-col py-[80px] md:px-[100px] justify-center sm:p-[40px] items-center max-w-[1030px] mx-auto`}
+        className={`mx-auto flex max-w-[1030px] flex-col items-center justify-center py-[80px] md:px-[100px] sm:p-[40px]`}
       >
-        <div className="flex gap-[10px] flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center gap-[10px]">
           {aboveHeading ? (
             <h5>{aboveHeading}</h5>
           ) : (
@@ -36,7 +36,7 @@ export const TextBlock = ({ attributes }) => {
             [...Array(tags).keys()].map(val => (
               <div
                 key={val}
-                className="flex gap-[10px] items-center justify-center"
+                className="flex items-center justify-center gap-[10px]"
               >
                 <small className="text-[16px] font-bold leading-[150%] text-black sm:text-[14px]">
                   {attributes.data[`above_header_content_tags_${val}_tag`]}
@@ -46,13 +46,13 @@ export const TextBlock = ({ attributes }) => {
             ))
           )}
         </div>
-        <span className="text-black mt-[32px] sm:mt-[24px] text-center">
+        <span className="mt-[32px] text-center text-black sm:mt-[24px]">
           {heading}
         </span>
 
         {description && (
           <div
-            className="body-large text-gmt-400 text-center mt-[24px]"
+            className="body-large mt-[24px] text-center text-gmt-400"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
@@ -70,7 +70,7 @@ export const TextBlock = ({ attributes }) => {
           ctaLabel && (
             <Link
               href={ctaURL}
-              className="mt-[40px] sm:mt-[24px] primary-btn bg-black flex text-white w-fit"
+              className="primary-btn mt-[40px] flex w-fit bg-black text-white sm:mt-[24px]"
             >
               {ctaLabel}
             </Link>

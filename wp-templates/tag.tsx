@@ -44,15 +44,15 @@ export default function Tag(props: TagProps) {
 
     return (
       <Layout menuItems={menuItems} seo={seo}>
-        <div className="flex md:overflow-hidden md:flex-col justify-end border-t-[1.5px] border-t-gmt-200 tag-page">
+        <div className="tag-page flex justify-end border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
           <div className="wrapper-default-inner-pages w-[70%] md:w-full">
             <ResourceTopicHero title={tagName} content={tagContent} />
-            <div className="hidden mx-[-100px] mb-[60px] md:block top-[-1.5px]">
+            <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
               <ResourcesSidebar selectedTaxonomy={tagSlug} />
             </div>
             <PaginatedResources tagName={tagSlug} currentPage={currentPage} />
           </div>
-          <div className="relative w-[30%] md:hidden right-0 top-[-1.5px] max-w-[600px]">
+          <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar selectedTaxonomy={tagName} />
           </div>
         </div>

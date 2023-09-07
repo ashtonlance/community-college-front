@@ -12,7 +12,7 @@ export const ResourcesSidebarMobile = ({ tags, categories }) => {
   }
 
   return (
-    <div className="bg-gmt-100 w-full hidden md:flex relative sm:flex-col">
+    <div className="relative hidden w-full bg-gmt-100 md:flex sm:flex-col">
       <Resource
         classList="body-large font-bold"
         title="Filter by Resource Type"

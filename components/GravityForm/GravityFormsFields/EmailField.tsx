@@ -54,7 +54,7 @@ export default function EmailField({ field, fieldErrors }) {
         {isRequired ? <span className="text-rust">*</span> : null}
       </label>
       <input
-        className="border-[1.5px] px-[22px] py-[14px] p-regular placeholder:text-sky w-full"
+        className="p-regular placeholder:text-sky w-full border-[1.5px] px-[22px] py-[14px]"
         type="email"
         name={String(id)}
         id={htmlId}

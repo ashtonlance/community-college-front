@@ -18,20 +18,20 @@ export const TextAndImageBlock = ({ attributes }) => {
       className={`px-[100px] md:px-[60px] sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
-        className={`gap-[80px] max-w-[1220px] w-full mx-auto h-[550px] my-[40px] flex ${
+        className={`mx-auto my-[40px] flex h-[550px] w-full max-w-[1220px] gap-[80px] ${
           imgPosition.includes('right') && 'flex-row-reverse'
-        } md:gap-[60px] md:flex-col md:h-fit`}
+        } md:h-fit md:flex-col md:gap-[60px]`}
       >
         <div
           style={{
             backgroundImage: `url(${img})`,
           }}
-          className="bg-contain bg-center bg-no-repeat w-[50%] md:w-full md:h-[400px] md:bg-cover"
+          className="w-[50%] bg-contain bg-center bg-no-repeat md:h-[400px] md:w-full md:bg-cover"
         >
           {' '}
         </div>
-        <div className="flex flex-col w-[50%] justify-center md:w-[90%] sm:w-full md:mx-auto">
-          <p className="body-large font-bold mb-[32px]">{title}</p>
+        <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full">
+          <p className="body-large mb-[32px] font-bold">{title}</p>
           <span className="mb-[32px]">{heading}</span>
           <div
             className="body-regular text-gmt-400"

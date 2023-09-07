@@ -4,7 +4,7 @@ export const Gallery = props => {
   const blocks = props.innerBlocks
 
   return (
-    <div className="max-w-[50%] mx-[auto] flex justify-center items-center">
+    <div className="mx-[auto] flex max-w-[50%] items-center justify-center">
       <EmblaCarousel blocks={blocks} />
     </div>
   )

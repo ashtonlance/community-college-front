@@ -25,7 +25,7 @@ export const NewsletterBanner = (props: NewsletterProps) => {
   return (
     <div className={`newsletter-banner ${props.classes}`}>
       <div dangerouslySetInnerHTML={{ __html: headline }} />
-      <div className="relative min-w-[40%] md:min-w-[60%] sm:min-w-[100%] text-white">
+      <div className="relative min-w-[40%] text-white md:min-w-[60%] sm:min-w-[100%]">
         <NewsletterInput customClasses="submit-button-as-arrow" />
       </div>
     </div>

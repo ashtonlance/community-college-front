@@ -51,7 +51,7 @@ export default function MultiSelectField({ field, fieldErrors }) {
 
   return (
     <div
-      className={`gfield gfield-${type} ${cssClass} secondary-btn border-[1.5px] border-black p-regular text-emerald w-full max-w-[400px] mx-auto`.trim()}
+      className={`gfield gfield-${type} ${cssClass} secondary-btn p-regular text-emerald mx-auto w-full max-w-[400px] border-[1.5px] border-black`.trim()}
     >
       <label htmlFor={htmlId}>{label}</label>
       <MultiSelect

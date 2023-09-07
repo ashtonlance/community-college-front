@@ -91,7 +91,7 @@ export default function TextField({ field, fieldErrors }) {
       <input
         type="text"
         name={String(id)}
-        className="border-[1.5px] border-black p-regular placeholder:text-sky w-full"
+        className="p-regular placeholder:text-sky w-full border-[1.5px] border-black"
         id={htmlId}
         required={Boolean(isRequired)}
         placeholder={placeholder}

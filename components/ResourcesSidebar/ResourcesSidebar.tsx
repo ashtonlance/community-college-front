@@ -49,7 +49,7 @@ export const ResourcesSidebar = (props: ResourcesSidebarProps) => {
 
   return (
     <>
-      <div className="flex flex-col bg-gmt-100 border-l-[1.5px] border-l-gmt-200 w-full md:hidden sidebar-module">
+      <div className="sidebar-module flex w-full flex-col border-l-[1.5px] border-l-gmt-200 bg-gmt-100 md:hidden">
         <Resource
           classList="body-large font-bold"
           title="Filter by Resource Type"

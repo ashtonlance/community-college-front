@@ -2,7 +2,7 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 
 export const Column = ({ content }) => {
   return (
-    <div className="flex flex-col flex-1 gap-3">
+    <div className="flex flex-1 flex-col gap-3">
       <WordPressBlocksViewer fallbackBlock={[] as any} blocks={content} />
     </div>
   )

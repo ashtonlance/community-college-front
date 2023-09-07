@@ -3,6 +3,7 @@ import { useState } from 'react'
 import close from '../../assets/icons/close.svg'
 
 import Link from 'next/link'
+import { cn } from 'utils/index'
 
 type SearchProps = {
   transparentMode: boolean
@@ -24,7 +25,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
 
   return (
     <div
-      className="flex gap-[10px] items-center hover:cursor-pointer"
+      className="flex items-center gap-[10px] hover:cursor-pointer"
       onClick={toggleSearchBar}
     >
       {'Search'}
@@ -84,20 +85,22 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       )}
 
       <div
-        className={`${
-          searchBarActive
-            ? 'top-[152px] h-[80px] opacity-100 sm:top-[70px]'
-            : 'top-[-100px] h-[0px] opacity-0'
-        } transition-opacity ease-in-out delay-250 z-0 absolute right-0 left-0 flex bg-white justify-center items-center  gap-3 sm:px-[20px]`}
+        className={cn(
+          `${
+            searchBarActive
+              ? 'top-[152px] h-[80px] opacity-100 sm:top-[70px]'
+              : 'top-[-100px] h-[0px] opacity-0'
+          } delay-250 absolute left-0 right-0 z-0 flex items-center justify-center gap-3 bg-white transition-opacity  ease-in-out sm:px-[20px]`
+        )}
       >
         <input
           onChange={handleChange}
-          className="h-[50px] primary-btn w-[80%]"
+          className="primary-btn h-[50px] w-[80%]"
           type="text"
           defaultValue={searchedTerm}
         />
         <Link
-          className="primary-btn bg-white text-black flex"
+          className="primary-btn flex bg-white text-black"
           href={{
             pathname: '/search',
             query: { searchedTerm },

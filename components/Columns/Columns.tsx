@@ -4,7 +4,7 @@ export const Columns = props => {
   const allColumns = props.innerBlocks
 
   return (
-    <div className="flex py-8 px-10">
+    <div className="flex px-10 py-8">
       {allColumns.map(column => (
         <Column content={column.innerBlocks} key={column.dynamicContent} />
       ))}

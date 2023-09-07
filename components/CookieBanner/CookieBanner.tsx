@@ -29,18 +29,18 @@ export const CookieBanner = () => {
   }
 
   return (
-    <section className="fixed bottom-0 left-0 w-full shadow-banner z-[2147483645]">
+    <section className="shadow-banner fixed bottom-0 left-0 z-[2147483645] w-full">
       <>
-        <div className="flex sm:flex-col justify-between sm:px-[40px] px-[60px] py-10 space-y-2 bg-white md:flex-row md:space-y-0 md:items-stretch sm:space-x-0 sm:space-y-2 md:space-x-2">
+        <div className="flex justify-between space-y-2 bg-white px-[60px] py-10 md:flex-row md:items-stretch md:space-x-2 md:space-y-0 sm:flex-col sm:space-x-0 sm:space-y-2 sm:px-[40px]">
           <div className="flex text-black">
-            <p className="sm:text-sm md:text-base font-bold max-w-[1052px]">
+            <p className="max-w-[1052px] font-bold md:text-base sm:text-sm">
               Our site uses cookies and external scripts to create a
               personalized and improved experience for users like you. By
               continuing to browse our site, you give consent for cookies to be
               used. See our{' '}
               <Link
                 href="/privacy-policy"
-                className="text-sm underline hover:text-lightAccent"
+                className="hover:text-lightAccent text-sm underline"
               >
                 privacy policy
               </Link>{' '}
@@ -49,7 +49,7 @@ export const CookieBanner = () => {
           </div>
           <div className="flex items-center">
             <button
-              className="secondary-btn text-white bg-emerald whitespace-nowrap"
+              className="secondary-btn bg-emerald whitespace-nowrap text-white"
               onClick={onClick}
             >
               Ok

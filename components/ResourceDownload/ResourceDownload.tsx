@@ -49,10 +49,10 @@ const ResourceDownloadInternal = (props: DownloadProps) => {
   }
 
   return (
-    <div className="flex mt-[60px] md:mt-[52px] sm:mt-[24px] bg-gmt-500 w-full py-[60px] sm:py-[40px] px-[105px] md:px-[80px] sm:px-[40px] flex-col justify-center items-center">
+    <div className="mt-[60px] flex w-full flex-col items-center justify-center bg-gmt-500 px-[105px] py-[60px] md:mt-[52px] md:px-[80px] sm:mt-[24px] sm:px-[40px] sm:py-[40px]">
       <h3 className="text-white">{title}</h3>
       {hasForm && (
-        <div className="flex flex-col gap-[30px] body-large text-white">
+        <div className="body-large flex flex-col gap-[30px] text-white">
           <GravityFormsForm
             reportDownload={true}
             form={form}

@@ -24,14 +24,14 @@ type ResourcesArticleProps = {
             name: string
             link: string
             id: string
-          }
+          },
         ]
       }
       categories: {
         nodes: [
           {
             id: string
-          }
+          },
         ]
       }
       seo: {}
@@ -78,17 +78,17 @@ export default function ResourcesArticle(props: ResourcesArticleProps) {
           excerpt={postExcerpt}
         />
       </div>
-      <div className="bg-gmt-100 w-full pt-[100px]">
-        <div className="w-[80%] max-w-[1080px] mx-auto resource-single-template">
+      <div className="w-full bg-gmt-100 pt-[100px]">
+        <div className="resource-single-template mx-auto w-[80%] max-w-[1080px]">
           {blocks && (
             <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
           )}
-          <div className="mt-[64px] md:mt-[52px] sm:mt-[36px] flex justify-between items-center md:flex-col md:items-start md:gap-[26px] border-t-solid border-t-[1.5px] border-t-gmt-300 pt-[64px] md:py-[52px] sm:py-[36px]">
+          <div className="border-t-solid mt-[64px] flex items-center justify-between border-t-[1.5px] border-t-gmt-300 pt-[64px] md:mt-[52px] md:flex-col md:items-start md:gap-[26px] md:py-[52px] sm:mt-[36px] sm:py-[36px]">
             <ResourceTags nodes={tags} />
             <SharePost postUrl={postLink} />
           </div>
         </div>
-        <div className="bg-gmt-100 w-full wrapper-default-inner-pages mx-auto max-w-[2000px]">
+        <div className="wrapper-default-inner-pages mx-auto w-full max-w-[2000px] bg-gmt-100">
           <NewsletterBanner
             title="Sign up for our newsletter to get the latest from GMT."
             titleHeading="h3"

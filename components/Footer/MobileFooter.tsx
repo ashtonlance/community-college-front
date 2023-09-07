@@ -37,14 +37,14 @@ export const MobileFooter = ({ items }) => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-center flex-col items-start text-white w-full">
+      <div className="flex w-full flex-col items-start justify-center text-white">
         {items &&
           items?.map(item => (
             <div
               key={item.id}
               className={`${
-                item.label === 'Events' ? 'order-6 hide-border' : ''
-              } flex flex-col w-full`}
+                item.label === 'Events' ? 'hide-border order-6' : ''
+              } flex w-full flex-col`}
             >
               <div
                 onClick={() => openSubmenu(item)}

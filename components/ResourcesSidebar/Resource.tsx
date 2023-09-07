@@ -46,7 +46,7 @@ export const Resource = (props: ResourceSidebarType) => {
 
   return (
     <div className={`${className} w-full`}>
-      <div className="border-t-[1.5px] border-t-gmt-200 p-[40px] md:border-r-[1.5px] md:border-y-[1.5px] md:border-r-gmt-200 md:border-y-gmt-200 md:w-full sm:flex sm:justify-center">
+      <div className="border-t-[1.5px] border-t-gmt-200 p-[40px] md:w-full md:border-y-[1.5px] md:border-r-[1.5px] md:border-y-gmt-200 md:border-r-gmt-200 sm:flex sm:justify-center">
         <div
           className="md:flex md:items-center md:justify-center md:gap-[20px]"
           onClick={() => props.onClick(props.title)}
@@ -70,11 +70,11 @@ export const Resource = (props: ResourceSidebarType) => {
               className={`${getActiveClass(
                 item.name,
                 item.title
-              )} mb-[20px] flex items-center gap-[8px] link-name`}
+              )} link-name mb-[20px] flex items-center gap-[8px]`}
               key={item.title || item.name}
               href={item.link}
             >
-              <p className={`${props.classList} text-black  max-w-[300px]`}>
+              <p className={`${props.classList} max-w-[300px]  text-black`}>
                 {item.name ? item.name : item.title}
               </p>
               <Image alt="" src={arrowright} width={8} height={8} />
@@ -83,7 +83,7 @@ export const Resource = (props: ResourceSidebarType) => {
         </div>
       </div>
       {props.active && props.active == props.title && (
-        <div className="bg-white absolute top-[98px] sm:relative sm:top-0 w-full px-[40px] pb-[40px]">
+        <div className="absolute top-[98px] w-full bg-white px-[40px] pb-[40px] sm:relative sm:top-0">
           <div className="md:mt-[40px]">
             {props.linkList?.map(item => (
               <Link
@@ -93,11 +93,11 @@ export const Resource = (props: ResourceSidebarType) => {
                 className={`${getActiveClass(
                   item.name,
                   item.title
-                )} mb-[20px] flex items-center gap-[8px] link-name`}
+                )} link-name mb-[20px] flex items-center gap-[8px]`}
                 key={item.title || item.name}
                 href={item.link}
               >
-                <p className={`${props.classList} text-black  max-w-[300px]`}>
+                <p className={`${props.classList} max-w-[300px]  text-black`}>
                   {item.name ? item.name : item.title}
                 </p>
                 <Image alt="" src={arrowright} width={8} height={8} />

@@ -2,23 +2,24 @@ import { Card } from './Card'
 
 export const EventCards = props => {
   const eventPosts = props?.events?.nodes
-  const cards = eventPosts?.map(post =>
-    post?.blocks?.find(
-      postBlock =>
-        postBlock?.name === 'nextword/externalevent' ||
-        postBlock?.name === 'nextword/heroevent'
-    )
+  const cards = eventPosts?.map(
+    post =>
+      post?.blocks?.find(
+        postBlock =>
+          postBlock?.name === 'nextword/externalevent' ||
+          postBlock?.name === 'nextword/heroevent'
+      )
   )
 
   return (
     <div
-      className={`flex flex-col w-[90%] max-w-[1220px] mx-auto items-center my-[40px] sm:my-[32px]`}
+      className={`mx-auto my-[40px] flex w-[90%] max-w-[1220px] flex-col items-center sm:my-[32px]`}
     >
       <div
         className={`${
           cards.length === 1
-            ? 'max-w-[600px] mx-auto'
-            : 'grid grid-cols-2 grid-flow-row gap-[20px] md:grid-cols-1'
+            ? 'mx-auto max-w-[600px]'
+            : 'grid grid-flow-row grid-cols-2 gap-[20px] md:grid-cols-1'
         } w-full`}
       >
         {cards.map(card => (

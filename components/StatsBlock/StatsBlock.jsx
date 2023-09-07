@@ -10,35 +10,35 @@ export const StatsBlock = ({ attributes }) => {
 
   return (
     <FadeIn>
-      <div className="flex flex-col p-[80px] justify-center sm:p-[40px] items-center bg-emerald gap-y-[50px] sm:gap-y-[10px]">
+      <div className="bg-emerald flex flex-col items-center justify-center gap-y-[50px] p-[80px] sm:gap-y-[10px] sm:p-[40px]">
         {splitTitle.length > 1 ? (
-          <div className="flex gap-[15px] items-center">
-            <h5 className="text-[16px] sm:text-[14px] font-bold leading-[150%] text-white  text-center">
+          <div className="flex items-center gap-[15px]">
+            <h5 className="text-center text-[16px] font-bold leading-[150%] text-white  sm:text-[14px]">
               {splitTitle[0]}
             </h5>
             <Center className="" />
-            <h5 className="text-[16px] sm:text-[14px] font-bold leading-[150%] text-white text-center">
+            <h5 className="text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {splitTitle[1]}
             </h5>
           </div>
         ) : (
-          <h5 className="text-[16px] sm:text-[14px] font-bold leading-[150%] text-white text-center">
+          <h5 className="text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
             {title}
           </h5>
         )}
         {copy && (
           <div className="flex flex-col items-center">
-            <p className="body-large text-white text-center">{copy}</p>
+            <p className="body-large text-center text-white">{copy}</p>
           </div>
         )}
-        <div className="flex gap-[100px] flex-wrap justify-center sm:flex-col sm:gap-0">
+        <div className="flex flex-wrap justify-center gap-[100px] sm:flex-col sm:gap-0">
           {items > 0 &&
             [...Array(items).keys()].map(val => (
               <div
                 key={val}
-                className="flex flex-col gap-[10px] items-center justify-center"
+                className="flex flex-col items-center justify-center gap-[10px]"
               >
-                <h3 className="home-h1 text-white mb-[20px] sm:mb-0">
+                <h3 className="home-h1 mb-[20px] text-white sm:mb-0">
                   {attributes.data[`stats_${val}_number`]}
                 </h3>
                 <h4 className=" text-sky">

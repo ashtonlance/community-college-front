@@ -20,13 +20,13 @@ export const ResourceCard = ({ resource }) => {
   const category = resource?.categories?.nodes[0]?.name
 
   return (
-    <div className="bg-gmt-100 flex my-[20px] md:flex-col">
+    <div className="my-[20px] flex bg-gmt-100 md:flex-col">
       {img && (
         <div
           style={{
             backgroundImage: `url(${img})`,
           }}
-          className="bg-cover bg-center bg-no-repeat w-[33%] md:w-full md:h-[200px] sm:h-[160px]"
+          className="w-[33%] bg-cover bg-center bg-no-repeat md:h-[200px] md:w-full sm:h-[160px]"
         >
           {' '}
         </div>
@@ -39,29 +39,29 @@ export const ResourceCard = ({ resource }) => {
       >
         <div>
           {category && date && (
-            <div className="mb-[10px] text-gmt-400 font-bold gap-[10px]">
+            <div className="mb-[10px] gap-[10px] font-bold text-gmt-400">
               {category} • {date}
             </div>
           )}
           {category && !date && (
-            <div className="mb-[10px] text-gmt-400 font-bold gap-[10px]">
+            <div className="mb-[10px] gap-[10px] font-bold text-gmt-400">
               {category}
             </div>
           )}
           {date && !category && (
-            <div className="mb-[10px] text-gmt-400 font-bold gap-[10px]">
+            <div className="mb-[10px] gap-[10px] font-bold text-gmt-400">
               {date}
             </div>
           )}
         </div>
-        <h4 className="body-large font-bold mb-[20px]">{title}</h4>
+        <h4 className="body-large mb-[20px] font-bold">{title}</h4>
         <div
           className="body-regular darker-font-color mb-[24px]"
           dangerouslySetInnerHTML={{ __html: text }}
         />
         <Link
           href={link}
-          className="secondary-btn border-[1.5px] border-gmt-500 text-gmt-500 w-fit"
+          className="secondary-btn w-fit border-[1.5px] border-gmt-500 text-gmt-500"
         >
           {getLabelFromCategory(category)}
         </Link>

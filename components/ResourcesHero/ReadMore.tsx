@@ -23,25 +23,25 @@ export const ReadMore = ({ content }) => {
         <>
           {readMore ? (
             <div
-              className="mb-[20px] flex flex-col gap-[20px] body-large text-gmt-400"
+              className="body-large mb-[20px] flex flex-col gap-[20px] text-gmt-400"
               dangerouslySetInnerHTML={{ __html: content }}
             />
           ) : (
             <div
-              className="mb-[20px] flex flex-col gap-[20px] body-large text-gmt-400"
+              className="body-large mb-[20px] flex flex-col gap-[20px] text-gmt-400"
               dangerouslySetInnerHTML={{ __html: getLimitedWords(content) }}
             />
           )}
           <span
             onClick={toggleReadMore}
-            className="mb-[20px] secondary-btn border-[1.5px] border-black w-fit"
+            className="secondary-btn mb-[20px] w-fit border-[1.5px] border-black"
           >
             {readMore ? 'Show Less' : 'Read More'}
           </span>
         </>
       ) : (
         <div
-          className="mb-[20px] flex flex-col gap-[20px] body-large text-gmt-400"
+          className="body-large mb-[20px] flex flex-col gap-[20px] text-gmt-400"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       )}

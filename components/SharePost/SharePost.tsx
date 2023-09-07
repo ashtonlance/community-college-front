@@ -21,8 +21,8 @@ export default function SharePost(props: SharePostProps) {
   const [copied, setCopied] = useState(false)
 
   return (
-    <div className="flex gap-[20px] items-center">
-      <small className="font-bold body-small text-gmt-400">
+    <div className="flex items-center gap-[20px]">
+      <small className="body-small font-bold text-gmt-400">
         Share this page:
       </small>
 

@@ -58,13 +58,13 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
   const createCarouselItem = (val, options = {}) => (
     <div
       key={`slide${val}`}
-      className={`flex flex-col justify-center items-center flex-shrink-0 flex-grow-0 basis-full`}
+      className={`flex flex-shrink-0 flex-grow-0 basis-full flex-col items-center justify-center`}
     >
       <Image src={quote} alt="" width={30} height={65} className="mb-[20px]" />
-      <p className="body-large font-bold mb-[40px]">
+      <p className="body-large mb-[40px] font-bold">
         {attributes.data[`slide_${val}_quote`]}
       </p>
-      <div className="flex flex-wrap justify-center gap-2 items-center mb-[10px]">
+      <div className="mb-[10px] flex flex-wrap items-center justify-center gap-2">
         <p className="body-regular text-emerald font-bold sm:mb-0">
           {attributes.data[`slide_${val}_persons_name`]}
         </p>
@@ -92,20 +92,20 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
         className={`w-full py-[100px] md:p-[60px] sm:p-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} bg-${bgColorCard}`}
       >
         <div
-          className={`flex flex-col p-[80px] md:px-[32px] md:w-full justify-center sm:p-[40px] items-center w-[90%] max-w-[1220px] mx-auto text-center ${bgColorFullModule}`}
+          className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center p-[80px] text-center md:w-full md:px-[32px] sm:p-[40px] ${bgColorFullModule}`}
         >
-          <div className="overflow-hidden max-w-full" ref={emblaRef}>
+          <div className="max-w-full overflow-hidden" ref={emblaRef}>
             <div className="flex w-full gap-[20px]">
               {baseChildren.props.children}
             </div>
           </div>
-          <div className="w-full relative flex items-center justify-center gap-2 h-2 lg:pt-10 ">
+          <div className="relative flex h-2 w-full items-center justify-center gap-2 lg:pt-10 ">
             {scrollSnaps.map((_, index) => (
               <div
                 className={`cursor-pointer ${
                   selectedIndex === index
-                    ? 'h-[10px] w-[10px] bg-green '
-                    : 'h-2 w-2 bg-sky'
+                    ? 'bg-green h-[10px] w-[10px] '
+                    : 'bg-sky h-2 w-2'
                 } rounded-full`}
                 key={index}
                 onClick={() => scrollTo(index as any)}

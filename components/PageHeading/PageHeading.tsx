@@ -32,7 +32,7 @@ export const PageHeading = ({ attributes }: PageHeadingAttributes) => {
 
   return (
     <div
-      className={`pt-[100px] pb-[40px] px-[60px] md:px-[24px] ${alignment} module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColor}`}
+      className={`px-[60px] pb-[40px] pt-[100px] md:px-[24px] ${alignment} module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColor}`}
     >
       {title}
     </div>

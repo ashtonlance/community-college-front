@@ -4,7 +4,7 @@ export const EventRegistration = ({ form }) => {
   return (
     <>
       <h3 className=""> Request an Invite </h3>
-      <div className="flex gap-[20px] flex-col">
+      <div className="flex flex-col gap-[20px]">
         <GravityForm
           form={form}
           customClasses="flex flex-wrap gap-y-[20px] gap-x-[4%] event-registration-form"

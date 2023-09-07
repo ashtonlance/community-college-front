@@ -11,8 +11,8 @@ export const Member = ({ img, name, job, linkedinURL, email }) => {
           backgroundImage: `url(${img})`,
         }}
       ></div>
-      <div className="flex flex-col gap-[10px] items-start justify-center p-[32px]">
-        <div className="flex justify-between items-center gap-[10px] w-full">
+      <div className="flex flex-col items-start justify-center gap-[10px] p-[32px]">
+        <div className="flex w-full items-center justify-between gap-[10px]">
           <h4 className="">{name}</h4>
           <Link href={linkedinURL}>
             <Image
@@ -28,7 +28,7 @@ export const Member = ({ img, name, job, linkedinURL, email }) => {
         {email && (
           <Link
             href={`mailto:${email}`}
-            className="secondary-btn bg-transparent border-[1.5px] border-solid border-gmt-500 mt-[1  0px] text-gmt-500"
+            className="secondary-btn mt-[1 0px] border-[1.5px] border-solid border-gmt-500  bg-transparent text-gmt-500"
           >
             Email
           </Link>

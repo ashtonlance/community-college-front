@@ -12,7 +12,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
 }
 export type MakeEmpty<
   T extends { [key: string]: unknown },
-  K extends keyof T
+  K extends keyof T,
 > = { [_ in K]?: never }
 export type Incremental<T> =
   | T
@@ -2621,8 +2621,6 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
-  GraphqlDocument = 'GRAPHQL_DOCUMENT',
-  /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
   Post = 'POST',
@@ -2885,43 +2883,6 @@ export type CreateCommentPayload = {
   comment?: Maybe<Comment>
   /** Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache */
   success?: Maybe<Scalars['Boolean']['output']>
-}
-
-/** Input for the createGraphqlDocument mutation. */
-export type CreateGraphqlDocumentInput = {
-  /** Alias names for saved GraphQL query documents */
-  alias?: InputMaybe<Array<Scalars['String']['input']>>
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>
-  /** Description for the saved GraphQL document */
-  description?: InputMaybe<Scalars['String']['input']>
-  /** Allow, deny or default access grant for specific query */
-  grant?: InputMaybe<Scalars['String']['input']>
-  /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-  maxAgeHeader?: InputMaybe<Scalars['Int']['input']>
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>
-}
-
-/** The payload for the createGraphqlDocument mutation. */
-export type CreateGraphqlDocumentPayload = {
-  __typename?: 'CreateGraphqlDocumentPayload'
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  /** The Post object mutation type. */
-  graphqlDocument?: Maybe<GraphqlDocument>
 }
 
 /** Input for the createMediaItem mutation. */
@@ -3410,29 +3371,6 @@ export type DeleteGfEntryPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>
   /** The entry object before it was deleted. */
   entry?: Maybe<GfSubmittedEntry>
-}
-
-/** Input for the deleteGraphqlDocument mutation. */
-export type DeleteGraphqlDocumentInput = {
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** Whether the object should be force deleted instead of being moved to the trash */
-  forceDelete?: InputMaybe<Scalars['Boolean']['input']>
-  /** The ID of the graphqlDocument to delete */
-  id: Scalars['ID']['input']
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>
-}
-
-/** The payload for the deleteGraphqlDocument mutation. */
-export type DeleteGraphqlDocumentPayload = {
-  __typename?: 'DeleteGraphqlDocumentPayload'
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  /** The ID of the deleted object */
-  deletedId?: Maybe<Scalars['ID']['output']>
-  /** The object before it was deleted */
-  graphqlDocument?: Maybe<GraphqlDocument>
 }
 
 /** Input for the deleteMediaItem mutation. */
@@ -6121,184 +6059,6 @@ export enum GlobalStylesheetTypesEnum {
   Variables = 'VARIABLES',
 }
 
-/** The graphqlDocument type */
-export type GraphqlDocument = ContentNode &
-  DatabaseIdentifier &
-  Node &
-  NodeWithContentEditor &
-  NodeWithTemplate &
-  NodeWithTitle &
-  UniformResourceIdentifiable & {
-    __typename?: 'GraphqlDocument'
-    /** Alias names for saved GraphQL query documents */
-    alias?: Maybe<Array<Scalars['String']['output']>>
-    /** Returns all blocks as a JSON object */
-    blocks?: Maybe<Scalars['JSON']['output']>
-    /** @deprecated Deprecated in favor of using Next.js pages */
-    conditionalTags?: Maybe<ConditionalTags>
-    /** The content of the post. */
-    content?: Maybe<Scalars['String']['output']>
-    /** Connection between the ContentNode type and the ContentType type */
-    contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>
-    /** The name of the Content Type the node belongs to */
-    contentTypeName: Scalars['String']['output']
-    /** The unique identifier stored in the database */
-    databaseId: Scalars['Int']['output']
-    /** Post publishing date. */
-    date?: Maybe<Scalars['String']['output']>
-    /** The publishing date set in GMT. */
-    dateGmt?: Maybe<Scalars['String']['output']>
-    /** Description for the saved GraphQL document */
-    description?: Maybe<Scalars['String']['output']>
-    /** The desired slug of the post */
-    desiredSlug?: Maybe<Scalars['String']['output']>
-    /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
-    editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>
-    /** The RSS enclosure for the object */
-    enclosure?: Maybe<Scalars['String']['output']>
-    /** Connection between the ContentNode type and the EnqueuedScript type */
-    enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>
-    /** Connection between the ContentNode type and the EnqueuedStylesheet type */
-    enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>
-    /** Allow, deny or default access grant for specific query */
-    grant?: Maybe<Scalars['String']['output']>
-    /**
-     * The id field matches the WP_Post-&gt;ID field.
-     * @deprecated Deprecated in favor of the databaseId field
-     */
-    graphqlDocumentId: Scalars['Int']['output']
-    /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
-    guid?: Maybe<Scalars['String']['output']>
-    /** The globally unique identifier of the graphql_document object. */
-    id: Scalars['ID']['output']
-    /** Whether the node is a Content Node */
-    isContentNode: Scalars['Boolean']['output']
-    /** Whether the object is a node in the preview state */
-    isPreview?: Maybe<Scalars['Boolean']['output']>
-    /** Whether the object is restricted from the current viewer */
-    isRestricted?: Maybe<Scalars['Boolean']['output']>
-    /** Whether the node is a Term */
-    isTermNode: Scalars['Boolean']['output']
-    /** The user that most recently edited the node */
-    lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>
-    /** The permalink of the post */
-    link?: Maybe<Scalars['String']['output']>
-    /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-    maxAgeHeader?: Maybe<Scalars['Int']['output']>
-    /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
-    modified?: Maybe<Scalars['String']['output']>
-    /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
-    modifiedGmt?: Maybe<Scalars['String']['output']>
-    /**
-     * Connection between the GraphqlDocument type and the graphqlDocument type
-     * @deprecated The &quot;GraphqlDocument&quot; Type is not publicly queryable and does not support previews. This field will be removed in the future.
-     */
-    preview?: Maybe<GraphqlDocumentToPreviewConnectionEdge>
-    /** The database id of the preview node */
-    previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>
-    /** Whether the object is a node in the preview state */
-    previewRevisionId?: Maybe<Scalars['ID']['output']>
-    /** The Yoast SEO data of the ContentNode */
-    seo?: Maybe<PostTypeSeo>
-    /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
-    slug?: Maybe<Scalars['String']['output']>
-    /** The current status of the object */
-    status?: Maybe<Scalars['String']['output']>
-    /** The template assigned to the node */
-    template?: Maybe<ContentTemplate>
-    templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>
-    /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
-    title?: Maybe<Scalars['String']['output']>
-    /** The unique resource identifier path */
-    uri?: Maybe<Scalars['String']['output']>
-  }
-
-/** The graphqlDocument type */
-export type GraphqlDocumentContentArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>
-}
-
-/** The graphqlDocument type */
-export type GraphqlDocumentEnqueuedScriptsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>
-  before?: InputMaybe<Scalars['String']['input']>
-  first?: InputMaybe<Scalars['Int']['input']>
-  last?: InputMaybe<Scalars['Int']['input']>
-}
-
-/** The graphqlDocument type */
-export type GraphqlDocumentEnqueuedStylesheetsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>
-  before?: InputMaybe<Scalars['String']['input']>
-  first?: InputMaybe<Scalars['Int']['input']>
-  last?: InputMaybe<Scalars['Int']['input']>
-}
-
-/** The graphqlDocument type */
-export type GraphqlDocumentTitleArgs = {
-  format?: InputMaybe<PostObjectFieldFormatEnum>
-}
-
-/** Connection to graphqlDocument Nodes */
-export type GraphqlDocumentConnection = {
-  /** A list of edges (relational context) between RootQuery and connected graphqlDocument Nodes */
-  edges: Array<GraphqlDocumentConnectionEdge>
-  /** A list of connected graphqlDocument Nodes */
-  nodes: Array<GraphqlDocument>
-  /** Information about pagination in a connection. */
-  pageInfo: GraphqlDocumentConnectionPageInfo
-}
-
-/** Edge between a Node and a connected graphqlDocument */
-export type GraphqlDocumentConnectionEdge = {
-  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-  cursor?: Maybe<Scalars['String']['output']>
-  /** The connected graphqlDocument Node */
-  node: GraphqlDocument
-}
-
-/** Page Info on the connected GraphqlDocumentConnectionEdge */
-export type GraphqlDocumentConnectionPageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean']['output']
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean']['output']
-  /** Get information about the offset pagination state in the current connection */
-  offsetPagination?: Maybe<OffsetPaginationPageInfo>
-  /** Raw schema for page */
-  seo?: Maybe<SeoPostTypePageInfo>
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>
-}
-
-/** The Type of Identifier used to fetch a single resource. Default is ID. */
-export enum GraphqlDocumentIdType {
-  /** Identify a resource by the Database ID. */
-  DatabaseId = 'DATABASE_ID',
-  /** Identify a resource by the (hashed) Global ID. */
-  Id = 'ID',
-  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
-  Slug = 'SLUG',
-  /** Identify a resource by the URI. */
-  Uri = 'URI',
-}
-
-/** Connection between the GraphqlDocument type and the graphqlDocument type */
-export type GraphqlDocumentToPreviewConnectionEdge = Edge &
-  GraphqlDocumentConnectionEdge &
-  OneToOneConnection & {
-    __typename?: 'GraphqlDocumentToPreviewConnectionEdge'
-    /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
-    cursor?: Maybe<Scalars['String']['output']>
-    /**
-     * The node of the connection, without the edges
-     * @deprecated The &quot;GraphqlDocument&quot; Type is not publicly queryable and does not support previews. This field will be removed in the future.
-     */
-    node: GraphqlDocument
-  }
-
 /** A Gravity Forms hidden field. */
 export type HiddenField = FormField &
   GfFieldWithDefaultValueSetting &
@@ -7750,10 +7510,19 @@ export type MenuItem_Navigationmenu_Items_ResourcesLinks = AcfFieldGroup & {
 /** Field Group */
 export type MenuItem_Utilitynavigation = AcfFieldGroup & {
   __typename?: 'MenuItem_Utilitynavigation'
-  ctaButtonLink?: Maybe<AcfLink>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']['output']>
-  loginLink?: Maybe<AcfLink>
+  navigationItems?: Maybe<
+    Array<Maybe<MenuItem_Utilitynavigation_NavigationItems>>
+  >
+}
+
+/** Field Group */
+export type MenuItem_Utilitynavigation_NavigationItems = AcfFieldGroup & {
+  __typename?: 'MenuItem_Utilitynavigation_navigationItems'
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']['output']>
+  navItem?: Maybe<AcfLink>
 }
 
 /** Registered menu locations */
@@ -7853,10 +7622,17 @@ export type Menu_Prefooter_Certifications = AcfFieldGroup & {
 /** Field Group */
 export type Menu_Utilitynavigation = AcfFieldGroup & {
   __typename?: 'Menu_Utilitynavigation'
-  ctaButtonLink?: Maybe<AcfLink>
   /** The name of the ACF Field Group */
   fieldGroupName?: Maybe<Scalars['String']['output']>
-  loginLink?: Maybe<AcfLink>
+  navigationItems?: Maybe<Array<Maybe<Menu_Utilitynavigation_NavigationItems>>>
+}
+
+/** Field Group */
+export type Menu_Utilitynavigation_NavigationItems = AcfFieldGroup & {
+  __typename?: 'Menu_Utilitynavigation_navigationItems'
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']['output']>
+  navItem?: Maybe<AcfLink>
 }
 
 /** The MimeType of the object */
@@ -15386,8 +15162,6 @@ export type RootMutation = {
   createCategory?: Maybe<CreateCategoryPayload>
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>
-  /** The createGraphqlDocument mutation */
-  createGraphqlDocument?: Maybe<CreateGraphqlDocumentPayload>
   /** The createMediaItem mutation */
   createMediaItem?: Maybe<CreateMediaItemPayload>
   /** The createPage mutation */
@@ -15408,8 +15182,6 @@ export type RootMutation = {
   deleteGfDraftEntry?: Maybe<DeleteGfDraftEntryPayload>
   /** The deleteGfEntry mutation */
   deleteGfEntry?: Maybe<DeleteGfEntryPayload>
-  /** The deleteGraphqlDocument mutation */
-  deleteGraphqlDocument?: Maybe<DeleteGraphqlDocumentPayload>
   /** The deleteMediaItem mutation */
   deleteMediaItem?: Maybe<DeleteMediaItemPayload>
   /** The deletePage mutation */
@@ -15446,8 +15218,6 @@ export type RootMutation = {
   updateGfDraftEntry?: Maybe<UpdateGfDraftEntryPayload>
   /** The updateGfEntry mutation */
   updateGfEntry?: Maybe<UpdateGfEntryPayload>
-  /** The updateGraphqlDocument mutation */
-  updateGraphqlDocument?: Maybe<UpdateGraphqlDocumentPayload>
   /** The updateMediaItem mutation */
   updateMediaItem?: Maybe<UpdateMediaItemPayload>
   /** The updatePage mutation */
@@ -15472,11 +15242,6 @@ export type RootMutationCreateCategoryArgs = {
 /** The root mutation */
 export type RootMutationCreateCommentArgs = {
   input: CreateCommentInput
-}
-
-/** The root mutation */
-export type RootMutationCreateGraphqlDocumentArgs = {
-  input: CreateGraphqlDocumentInput
 }
 
 /** The root mutation */
@@ -15527,11 +15292,6 @@ export type RootMutationDeleteGfDraftEntryArgs = {
 /** The root mutation */
 export type RootMutationDeleteGfEntryArgs = {
   input: DeleteGfEntryInput
-}
-
-/** The root mutation */
-export type RootMutationDeleteGraphqlDocumentArgs = {
-  input: DeleteGraphqlDocumentInput
 }
 
 /** The root mutation */
@@ -15625,11 +15385,6 @@ export type RootMutationUpdateGfEntryArgs = {
 }
 
 /** The root mutation */
-export type RootMutationUpdateGraphqlDocumentArgs = {
-  input: UpdateGraphqlDocumentInput
-}
-
-/** The root mutation */
 export type RootMutationUpdateMediaItemArgs = {
   input: UpdateMediaItemInput
 }
@@ -15707,15 +15462,6 @@ export type RootQuery = {
   gfSubmittedEntry?: Maybe<GfSubmittedEntry>
   /** Returns the stylesheet resulting of merging core, theme, and user data. */
   globalStylesheet?: Maybe<Scalars['String']['output']>
-  /** An object of the graphqlDocument Type. Saved GraphQL Documents */
-  graphqlDocument?: Maybe<GraphqlDocument>
-  /**
-   * A graphqlDocument object
-   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
-   */
-  graphqlDocumentBy?: Maybe<GraphqlDocument>
-  /** Connection between the RootQuery type and the graphqlDocument type */
-  graphqlDocuments?: Maybe<RootQueryToGraphqlDocumentConnection>
   /** An object of the mediaItem Type.  */
   mediaItem?: Maybe<MediaItem>
   /**
@@ -15918,30 +15664,6 @@ export type RootQueryGfSubmittedEntryArgs = {
 /** The root entry point into the Graph */
 export type RootQueryGlobalStylesheetArgs = {
   types?: InputMaybe<Array<InputMaybe<GlobalStylesheetTypesEnum>>>
-}
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentArgs = {
-  asPreview?: InputMaybe<Scalars['Boolean']['input']>
-  id: Scalars['ID']['input']
-  idType?: InputMaybe<GraphqlDocumentIdType>
-}
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentByArgs = {
-  graphqlDocumentId?: InputMaybe<Scalars['Int']['input']>
-  id?: InputMaybe<Scalars['ID']['input']>
-  slug?: InputMaybe<Scalars['String']['input']>
-  uri?: InputMaybe<Scalars['String']['input']>
-}
-
-/** The root entry point into the Graph */
-export type RootQueryGraphqlDocumentsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>
-  before?: InputMaybe<Scalars['String']['input']>
-  first?: InputMaybe<Scalars['Int']['input']>
-  last?: InputMaybe<Scalars['Int']['input']>
-  where?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgs>
 }
 
 /** The root entry point into the Graph */
@@ -16809,136 +16531,6 @@ export type RootQueryToGfSubmittedEntryConnectionWhereArgs = {
   orderby?: InputMaybe<EntriesConnectionOrderbyInput>
   /** Entry status. Default is "ACTIVE". */
   status?: InputMaybe<EntryStatusEnum>
-}
-
-/** Connection between the RootQuery type and the graphqlDocument type */
-export type RootQueryToGraphqlDocumentConnection = Connection &
-  GraphqlDocumentConnection & {
-    __typename?: 'RootQueryToGraphqlDocumentConnection'
-    /** Edges for the RootQueryToGraphqlDocumentConnection connection */
-    edges: Array<RootQueryToGraphqlDocumentConnectionEdge>
-    /** The nodes of the connection, without the edges */
-    nodes: Array<GraphqlDocument>
-    /** Information about pagination in a connection. */
-    pageInfo: RootQueryToGraphqlDocumentConnectionPageInfo
-  }
-
-/** An edge in a connection */
-export type RootQueryToGraphqlDocumentConnectionEdge = Edge &
-  GraphqlDocumentConnectionEdge & {
-    __typename?: 'RootQueryToGraphqlDocumentConnectionEdge'
-    /** A cursor for use in pagination */
-    cursor?: Maybe<Scalars['String']['output']>
-    /** The item at the end of the edge */
-    node: GraphqlDocument
-  }
-
-/** Page Info on the &quot;RootQueryToGraphqlDocumentConnection&quot; */
-export type RootQueryToGraphqlDocumentConnectionPageInfo =
-  GraphqlDocumentConnectionPageInfo &
-    PageInfo &
-    WpPageInfo & {
-      __typename?: 'RootQueryToGraphqlDocumentConnectionPageInfo'
-      /** When paginating forwards, the cursor to continue. */
-      endCursor?: Maybe<Scalars['String']['output']>
-      /** When paginating forwards, are there more items? */
-      hasNextPage: Scalars['Boolean']['output']
-      /** When paginating backwards, are there more items? */
-      hasPreviousPage: Scalars['Boolean']['output']
-      /** Get information about the offset pagination state in the current connection */
-      offsetPagination?: Maybe<OffsetPaginationPageInfo>
-      /** Raw schema for page */
-      seo?: Maybe<SeoPostTypePageInfo>
-      /** When paginating backwards, the cursor to continue. */
-      startCursor?: Maybe<Scalars['String']['output']>
-    }
-
-/** Arguments for filtering the RootQueryToGraphqlDocumentConnection connection */
-export type RootQueryToGraphqlDocumentConnectionWhereArgs = {
-  /** Filter the connection based on dates */
-  dateQuery?: InputMaybe<DateQueryInput>
-  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
-  hasPassword?: InputMaybe<Scalars['Boolean']['input']>
-  /** Specific database ID of the object */
-  id?: InputMaybe<Scalars['Int']['input']>
-  /** Array of IDs for the objects to retrieve */
-  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>
-  metaQuery?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgsMetaQuery>
-  /** Get objects with a specific mimeType property */
-  mimeType?: InputMaybe<MimeTypeEnum>
-  /** Slug / post_name of the object */
-  name?: InputMaybe<Scalars['String']['input']>
-  /** Specify objects to retrieve. Use slugs */
-  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
-  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>
-  /** Paginate GraphqlDocuments with offsets */
-  offsetPagination?: InputMaybe<OffsetPagination>
-  /** What paramater to use to order the objects by. */
-  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>
-  /** Use ID to return only children. Use 0 to return only top-level items */
-  parent?: InputMaybe<Scalars['ID']['input']>
-  /** Specify objects whose parent is in an array */
-  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>
-  /** Specify posts whose parent is not in an array */
-  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>
-  /** Show posts with a specific password. */
-  password?: InputMaybe<Scalars['String']['input']>
-  /** Show Posts based on a keyword search */
-  search?: InputMaybe<Scalars['String']['input']>
-  /** Retrieve posts where post status is in an array. */
-  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>
-  /** Show posts with a specific status. */
-  status?: InputMaybe<PostStatusEnum>
-  /** Title of the object */
-  title?: InputMaybe<Scalars['String']['input']>
-}
-
-export type RootQueryToGraphqlDocumentConnectionWhereArgsMetaArray = {
-  /** Custom field value */
-  compare?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgsMetaCompareEnum>
-  /** Custom field key */
-  key?: InputMaybe<Scalars['String']['input']>
-  /** Custom field value */
-  type?: InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgsMetaTypeEnum>
-  /** Custom field value */
-  value?: InputMaybe<Scalars['String']['input']>
-}
-
-export enum RootQueryToGraphqlDocumentConnectionWhereArgsMetaCompareEnum {
-  Between = 'BETWEEN',
-  EqualTo = 'EQUAL_TO',
-  Exists = 'EXISTS',
-  GreaterThan = 'GREATER_THAN',
-  GreaterThanOrEqualTo = 'GREATER_THAN_OR_EQUAL_TO',
-  In = 'IN',
-  LessThan = 'LESS_THAN',
-  LessThanOrEqualTo = 'LESS_THAN_OR_EQUAL_TO',
-  Like = 'LIKE',
-  NotBetween = 'NOT_BETWEEN',
-  NotEqualTo = 'NOT_EQUAL_TO',
-  NotExists = 'NOT_EXISTS',
-  NotIn = 'NOT_IN',
-  NotLike = 'NOT_LIKE',
-}
-
-export type RootQueryToGraphqlDocumentConnectionWhereArgsMetaQuery = {
-  metaArray?: InputMaybe<
-    Array<InputMaybe<RootQueryToGraphqlDocumentConnectionWhereArgsMetaArray>>
-  >
-  relation?: InputMaybe<RelationEnum>
-}
-
-export enum RootQueryToGraphqlDocumentConnectionWhereArgsMetaTypeEnum {
-  Binary = 'BINARY',
-  Char = 'CHAR',
-  Date = 'DATE',
-  Datetime = 'DATETIME',
-  Decimal = 'DECIMAL',
-  Numeric = 'NUMERIC',
-  Signed = 'SIGNED',
-  Time = 'TIME',
-  Unsigned = 'UNSIGNED',
 }
 
 /** Connection between the RootQuery type and the mediaItem type */
@@ -18183,7 +17775,6 @@ export type SeoContentTypeArchive = {
 /** The Yoast SEO search appearance content types */
 export type SeoContentTypes = {
   __typename?: 'SEOContentTypes'
-  graphqlDocument?: Maybe<SeoContentType>
   mediaItem?: Maybe<SeoContentType>
   page?: Maybe<SeoContentType>
   post?: Maybe<SeoContentType>
@@ -20451,47 +20042,6 @@ export type UpdateGfEntryPayload = {
   entry?: Maybe<GfSubmittedEntry>
   /** Field errors. */
   errors?: Maybe<Array<Maybe<FieldError>>>
-}
-
-/** Input for the updateGraphqlDocument mutation. */
-export type UpdateGraphqlDocumentInput = {
-  /** Alias names for saved GraphQL query documents */
-  alias?: InputMaybe<Array<Scalars['String']['input']>>
-  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: InputMaybe<Scalars['String']['input']>
-  /** The content of the object */
-  content?: InputMaybe<Scalars['String']['input']>
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: InputMaybe<Scalars['String']['input']>
-  /** Description for the saved GraphQL document */
-  description?: InputMaybe<Scalars['String']['input']>
-  /** Allow, deny or default access grant for specific query */
-  grant?: InputMaybe<Scalars['String']['input']>
-  /** The ID of the graphqlDocument object */
-  id: Scalars['ID']['input']
-  /** Override the edit lock when another user is editing the post */
-  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>
-  /** HTTP Cache-Control max-age directive for a saved GraphQL document */
-  maxAgeHeader?: InputMaybe<Scalars['Int']['input']>
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: InputMaybe<Scalars['Int']['input']>
-  /** The password used to protect the content of the object */
-  password?: InputMaybe<Scalars['String']['input']>
-  /** The slug of the object */
-  slug?: InputMaybe<Scalars['String']['input']>
-  /** The status of the object */
-  status?: InputMaybe<PostStatusEnum>
-  /** The title of the object */
-  title?: InputMaybe<Scalars['String']['input']>
-}
-
-/** The payload for the updateGraphqlDocument mutation. */
-export type UpdateGraphqlDocumentPayload = {
-  __typename?: 'UpdateGraphqlDocumentPayload'
-  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
-  clientMutationId?: Maybe<Scalars['String']['output']>
-  /** The Post object mutation type. */
-  graphqlDocument?: Maybe<GraphqlDocument>
 }
 
 /** Input for the updateMediaItem mutation. */

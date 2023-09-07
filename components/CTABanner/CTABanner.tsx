@@ -22,7 +22,7 @@ export const CTABanner = ({ attributes }) => {
       <div
         className={`bg-${bgColor} p-[80px] md:p-[60px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
       >
-        <div className="max-w-[1030px] flex justify-between mx-auto md:flex-col items-center">
+        <div className="mx-auto flex max-w-[1030px] items-center justify-between md:flex-col">
           <h2
             className={`${
               bgColor === 'sky' ? 'text-black' : 'text-white'

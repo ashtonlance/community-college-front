@@ -102,7 +102,7 @@ export default function Search() {
 
   return (
     <Layout menuItems={menuItems} form={eventRegistrationForm} seo={seo}>
-      <div className="flex md:overflow-hidden md:flex-col justify-center border-t-[1.5px] border-t-gmt-200">
+      <div className="flex justify-center border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
         <div className="wrapper-default-inner-pages w-[90%] md:w-full">
           <div>
             <p>Search Results for</p>

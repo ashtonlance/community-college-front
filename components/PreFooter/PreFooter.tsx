@@ -7,9 +7,9 @@ export const PreFooter = ({ preFooterContent }) => {
   const certifications = preFooterContent?.prefooter?.certifications
 
   return (
-    <div className="bg-gmt-200 w-full py-[60px] px-[100px] flex flex-col sm:p-[40px]">
+    <div className="flex w-full flex-col bg-gmt-200 px-[100px] py-[60px] sm:p-[40px]">
       <h3 className="mb-[40px] text-center">{heading}</h3>
-      <div className="flex gap-[10%] w-full justify-center items-center sm:flex-col">
+      <div className="flex w-full items-center justify-center gap-[10%] sm:flex-col">
         {certifications?.map(item => (
           <Link href={item.link} key={item.link} className="sm:mb-[32px]">
             <Image src={item.image.sourceUrl} alt="" width={100} height={50} />

@@ -15,7 +15,7 @@ export const ScrollIndicator = () => {
   const ref = useRef(null)
 
   return (
-    <span className="p-small capitalize absolute bottom-0 right-[90px] text-white flex items-center gap-2 sm:hidden">
+    <span className="p-small absolute bottom-0 right-[90px] flex items-center gap-2 capitalize text-white sm:hidden">
       <svg
         width="17"
         height="141"

@@ -43,19 +43,19 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
   const readMoreLabel = props.readMoreLabel
 
   return (
-    <div className="flex flex-col bg-gmt-100 w-full">
+    <div className="flex w-full flex-col bg-gmt-100">
       <div
         className="h-[200px] bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url(${imgUrl})`,
         }}
       ></div>
-      <div className="flex flex-col gap-[10px] items-start justify-center p-[40px] sm:p-[32px]">
-        <div className="flex justify-center items-center gap-[10px] text-gmt-400">
+      <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
+        <div className="flex items-center justify-center gap-[10px] text-gmt-400">
           <p className="body-regular font-bold text-gmt-400">{category}</p>•
           <p className="body-regular font-bold text-gmt-400">{date}</p>
         </div>
-        <h4 className="text-black mb-[20px] sm:mb-0">{title}</h4>
+        <h4 className="mb-[20px] text-black sm:mb-0">{title}</h4>
         <Link
           href={resourceURL}
           className="secondary-btn border-[1.5px] border-solid border-gmt-500 text-gmt-500"

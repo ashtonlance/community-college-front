@@ -98,28 +98,28 @@ const FeaturedResourceInternal = ({ dataInfo }) => {
 
   return (
     <div
-      className="relative p-[60px] sm:p-[32px] min-h-[600px] mx-auto"
+      className="relative mx-auto min-h-[600px] p-[60px] sm:p-[32px]"
       style={{
         background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 22.92%, rgba(0, 0, 0, 0.7) 75.52%), linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url(${imgUrl})`,
       }}
     >
-      <p className="absolute right-[40px] top-[40px] tag bg-white text-black">
+      <p className="tag absolute right-[40px] top-[40px] bg-white text-black">
         Featured
       </p>
-      <div className="absolute bottom-[60px] left-[60px] max-w-[65%] md:max-w-[80%] sm:left-[32px] sm:bottom-[32px] sm:max-w-[80%]">
-        <div className="flex gap-[15px] items-center mb-[12px]">
+      <div className="absolute bottom-[60px] left-[60px] max-w-[65%] md:max-w-[80%] sm:bottom-[32px] sm:left-[32px] sm:max-w-[80%]">
+        <div className="mb-[12px] flex items-center gap-[15px]">
           <Image alt="" src={border} width={40} height={1.5} />
-          <p className="text-white body-large font-bold">{category}</p>
+          <p className="body-large font-bold text-white">{category}</p>
           <span className="text-white"> • </span>
-          <p className="text-white body-large font-bold">{date}</p>
+          <p className="body-large font-bold text-white">{date}</p>
         </div>
-        <h3 className="text-white mb-[24px]">{title}</h3>
+        <h3 className="mb-[24px] text-white">{title}</h3>
 
         <p
           className="featured-resource-content mb-[32px]"
           dangerouslySetInnerHTML={{ __html: excerpt }}
         />
-        <div className="secondary-btn border-[1.5px] border-white w-fit">
+        <div className="secondary-btn w-fit border-[1.5px] border-white">
           <Link className="text-white" href={resourceURL}>
             {readMoreLabel}
           </Link>

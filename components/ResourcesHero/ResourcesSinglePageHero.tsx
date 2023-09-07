@@ -13,9 +13,9 @@ export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
   const formatedDate = formatDate(props?.date)
 
   return (
-    <div className="flex w-full h-fit sm:flex-col">
-      <div className="relative wrapper-default-inner-pages w-[66%] sm:w-full">
-        <p className="font-bold mb-[32px] text-gmt-400 flex gap-2">
+    <div className="flex h-fit w-full sm:flex-col">
+      <div className="wrapper-default-inner-pages relative w-[66%] sm:w-full">
+        <p className="mb-[32px] flex gap-2 font-bold text-gmt-400">
           Resource Center
           <span>/</span>
           <span className="text-black">
@@ -24,11 +24,11 @@ export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
           </span>
         </p>
 
-        <h1 className="mb-[32px] text-[46px] sm:text-[38px] font-bold leading-[115%] sm:leading-[110%] ">
+        <h1 className="mb-[32px] text-[46px] font-bold leading-[115%] sm:text-[38px] sm:leading-[110%] ">
           {props.title}
         </h1>
         <div
-          className="mb-[40px] flex flex-col gap-[20px] single-page-resource-excerpt"
+          className="single-page-resource-excerpt mb-[40px] flex flex-col gap-[20px]"
           dangerouslySetInnerHTML={{ __html: props.excerpt }}
         />
         <Image
@@ -40,7 +40,7 @@ export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
         />
       </div>
       <div
-        className="bg-cover bg-no-repeat relative w-[34%] sm:w-full sm:h-[300px]"
+        className="relative w-[34%] bg-cover bg-no-repeat sm:h-[300px] sm:w-full"
         style={{
           backgroundImage: `url(${props.image})`,
         }}

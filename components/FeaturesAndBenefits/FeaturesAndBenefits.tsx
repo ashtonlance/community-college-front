@@ -26,9 +26,9 @@ export const FeaturesAndBenefits = ({
 
   return (
     <div
-      className={`features-and-benefits px-[100px] md:px-[60px] sm:px-[40px] sm:w-full sm:mx-auto module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColorModule}`}
+      className={`features-and-benefits px-[100px] md:px-[60px] sm:mx-auto sm:w-full sm:px-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColorModule}`}
     >
-      <div className="max-w-[1220px] flex justify-between gap-[15px] flex-wrap mx-auto md:flex-col md:items-center">
+      <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-[15px] md:flex-col md:items-center">
         {cards > 0 &&
           [...Array(cards).keys()].map(card => (
             <FeaturesCard

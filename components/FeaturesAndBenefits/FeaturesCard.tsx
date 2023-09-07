@@ -24,7 +24,7 @@ export const FeaturesCard = ({
     <div
       className={`${getWidth(size)} ${getTextAlign(
         alignment
-      )}  ${cardFinalStyle} p-[40px] sm:p-[32px] md:w-full`}
+      )}  ${cardFinalStyle} p-[40px] md:w-full sm:p-[32px]`}
     >
       <h4 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px]`}>
         {heading}

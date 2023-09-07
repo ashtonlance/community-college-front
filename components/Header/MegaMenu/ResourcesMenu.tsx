@@ -5,17 +5,17 @@ import { formatDate } from '../../../utils/dates'
 
 const FeaturedResource = ({ featuredResource }) => (
   <div className="w-[50%] pl-[40px] md:hidden">
-    <p className="p-small text-gmt-300 mb-[24px]">
+    <p className="p-small mb-[24px] text-gmt-300">
       {' '}
       Featured Resource • {formatDate(featuredResource?.date)}
     </p>
-    <h4 className="text-white mb-[24px]">{featuredResource.title}</h4>
+    <h4 className="mb-[24px] text-white">{featuredResource.title}</h4>
     <p className="text-gmt-300">
       {' '}
       {cleanHTMLText(featuredResource.excerpt ?? featuredResource.content)}
     </p>
 
-    <div className="flex my-[24px] items-baseline gap-[40px]">
+    <div className="my-[24px] flex items-baseline gap-[40px]">
       <Link
         href={relativeToAbsoluteUrls(featuredResource.uri)}
         target="_blank"
@@ -25,7 +25,7 @@ const FeaturedResource = ({ featuredResource }) => (
       </Link>
       <Link
         href="/all-resources"
-        className="p-small text-gmt-300 border-b-[1.5px] border-b-solid border-b-gmt-300 text-[14px]"
+        className="p-small border-b-solid border-b-[1.5px] border-b-gmt-300 text-[14px] text-gmt-300"
       >
         {' '}
         View All Resources
@@ -52,15 +52,15 @@ export const ResourcesMenu = ({
       onMouseLeave={() => handleActiveItem('')}
       className={`mega-menu  md:top-0 ${classes}`}
     >
-      <div className="flex justify-between max-w-[1600px] w-full items-center mx-auto">
-        <div className="flex justify-around flex-1 border-r-[1.5px] border-r-solid border-r-gmt-400 md:border-0 md:flex-col md:text-left">
+      <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
+        <div className="border-r-solid flex flex-1 justify-around border-r-[1.5px] border-r-gmt-400 md:flex-col md:border-0 md:text-left">
           {subItems?.map(subItem => (
             <div
-              className="flex flex-col mb-[40px] pr-[40px]"
+              className="mb-[40px] flex flex-col pr-[40px]"
               key={subItem.title}
             >
               <Link
-                className="p-small text-gmt-300 mb-[24px]"
+                className="p-small mb-[24px] text-gmt-300"
                 href={subItem?.url?.url || ''}
               >
                 {subItem.title}
@@ -68,7 +68,7 @@ export const ResourcesMenu = ({
               {subItem.resourcesLinks.map(link => (
                 <Link
                   key={link.label}
-                  className="links-sub-nav text-white mb-[10px]"
+                  className="links-sub-nav mb-[10px] text-white"
                   href={link.pageLink?.url || ''}
                 >
                   {link.label}

@@ -18,7 +18,7 @@ export const TeamMembers = ({ attributes }: TeamMemberProps) => {
 
   return (
     <div
-      className={`module-color-${bgColor} flex flex-col w-full items-center`}
+      className={`module-color-${bgColor} flex w-full flex-col items-center`}
     >
       <div className="wrapper-default-inner-pages mx-auto">
         {title && (
@@ -27,7 +27,7 @@ export const TeamMembers = ({ attributes }: TeamMemberProps) => {
             <Separator classes={'mb-[60px]'} />
           </>
         )}
-        <div className="grid grid-cols-3 grid-flow-row gap-[20px] md:grid-cols-2 sm:grid-cols-1">
+        <div className="grid grid-flow-row grid-cols-3 gap-[20px] md:grid-cols-2 sm:grid-cols-1">
           {members > 0 &&
             [...Array(members).keys()].map(val => (
               <Member
