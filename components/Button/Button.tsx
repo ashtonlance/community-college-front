@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import arrowright from '../../assets/icons/arrow-right.svg'
+import ArrowRight from '../../assets/icons/arrow-right.svg'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
@@ -48,7 +48,7 @@ export const Button = ({
             target={target}
           >
             {buttonLabel}
-            {arrow && <Image alt="" src={arrowright} width={9} height={9} />}
+            {arrow && <ArrowRight alt="" width={9} height={9} />}
           </Link>
         </div>
       </div>
@@ -63,7 +63,7 @@ export const Button = ({
         target={target}
       >
         {content}
-        {arrow && <Image alt="" src={arrowright} width={9} height={9} />}
+        {arrow && <ArrowRight alt="" width={9} height={9} />}
       </Link>
     )
   } else {

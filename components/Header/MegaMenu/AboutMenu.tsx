@@ -9,7 +9,7 @@ type AboutMenuProps = {
 
 export const AboutMenu = ({
   subItems,
-  classes,
+  classes = '',
   handleActiveItem,
 }: AboutMenuProps) => {
   return (
@@ -23,7 +23,6 @@ export const AboutMenu = ({
         <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="flex flex-1 justify-around md:mt-[24px] md:flex-col md:gap-[10px] sm:mt-0">
             {subItems?.map(subItem => {
-              console.log(subItem, 'subItem')
               return (
                 <Link
                   href={subItem?.url || ''}

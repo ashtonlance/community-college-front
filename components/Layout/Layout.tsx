@@ -20,7 +20,7 @@ export function Layout(props: LayoutProps) {
   const variant = props?.headerVariant || 'default'
   const menuItems = props?.menuItems || []
   const utilityNavigation = props?.utilityNavigation || []
-  console.log(menuItems, 'menuItems layout')
+
   return (
     <>
       <Head>

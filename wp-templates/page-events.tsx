@@ -5,13 +5,15 @@ import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { EventCards } from 'components/EventCards'
 import { getHeroType } from '../utils/heroBlockHelper'
-
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 export default function PageEvents(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
   const preFooterContent = props.data?.menus.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const events = props.data?.events
+  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -20,9 +22,10 @@ export default function PageEvents(props) {
   const heroType = getHeroType(blocks)
   return (
     <Layout
-      menuItems={menuItems}
+      menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       headerVariant={heroType === 'default' ? 'default' : 'transparent'}
+      utilityNavigation={utilityNavigation}
     >
       {blocks && (
         <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
@@ -58,9 +61,18 @@ PageEvents.query = gql`
       }
     }
     menu(id: "primary", idType: SLUG) {
-      menuItems {
+      menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
+        }
+      }
+      utilityNavigation {
+        navigationItems {
+          navItem {
+            title
+            url
+            target
+          }
         }
       }
     }
@@ -69,10 +81,10 @@ PageEvents.query = gql`
         ...PreFooterFragment
       }
     }
-    events {
-      nodes {
-        blocks
-      }
-    }
+    # events {
+    #   nodes {
+    #     blocks
+    #   }
+    # }
   }
 `

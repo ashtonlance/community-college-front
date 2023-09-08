@@ -32,6 +32,7 @@
     "@storybook/addons": "^7.0.23",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.9",
+    "@uidotdev/usehooks": "^2.2.0",
     "apollo-upload-client": "^17.0.0",
     "clsx": "^2.0.0",
     "crypto-hash": "^2.0.1",

@@ -9,19 +9,19 @@
   p {
     @apply text-[16px] font-medium leading-[150%] text-darkGrey font-sans antialiased;
   }
-  h1 {
+  h1, .h1 {
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
-  h2 {
+  h2, .h2 {
     @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-0.35px] text-navy font-serif antialiased;
   }
-  h3 {
+  h3, .h3 {
     @apply text-[38px] sm:text-[28px] leading-[110%] tracking-[-0.38px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
   }
-  h4 {
+  h4, .h4 {
     @apply text-[28px] sm:text-[26px] font-extrabold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-navy font-condensed antialiased;
   }
-  h5 {
+  h5, .h5 {
     @apply text-[15px] sm:text-[14px] font-black leading-[100%] tracking-[0.06em] text-navy font-sans uppercase antialiased;
   }
   ul li {
@@ -46,34 +46,34 @@
     @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-black font-sans;
   }
   .main-nav {
-    @apply cursor-pointer p-4 pb-0 rounded-[3px] text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
+    @apply cursor-pointer p-4 pb-0 rounded-lg text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
   }
   .links-mobile-nav {
     @apply cursor-pointer py-[20px] text-[28px] font-bold tracking-[-0.02em] leading-[110%] font-sans;
   }
   .secondary-nav {
-    @apply cursor-pointer text-[13px] py-[18px] px-[16px] rounded-[3px] sm:text-[12px] font-bold leading-[110%] text-black font-sans hover:bg-gmt-200 hover:text-black;
+    @apply cursor-pointer text-[13px] py-[18px] px-[16px] rounded-lg sm:text-[12px] font-bold leading-[110%] text-black font-sans hover:bg-gmt-200 hover:text-black;
   }
   .sub-nav {
     @apply cursor-pointer text-[16px] sm:text-[15px] font-semibold tracking-[-0.01em] leading-[110%] text-black font-sans;
   }
   .links-sub-nav {
-    @apply cursor-pointer text-[20px] font-semibold tracking-[-0.02em] leading-[110%] text-black font-sans;
+    @apply cursor-pointer text-[20px] font-semibold tracking-[-0.02em] leading-[110%] text-white font-sans hover:text-grey;
   }
   .primary-btn {
-    @apply border-none cursor-pointer text-[15px] rounded-[3px] hover:border-gmt-200 hover:bg-gmt-200 hover:text-black sm:text-[14px] font-extrabold leading-[100%] tracking-[0.06em] font-sans uppercase py-[18px] px-[24px] sm:py-[16px] sm:px-[22px];
+    @apply border-none cursor-pointer text-[15px] rounded-lg hover:border-gmt-200 hover:bg-gmt-200 hover:text-black sm:text-[14px] font-extrabold leading-[100%] tracking-[0.06em] font-sans uppercase py-[18px] px-[24px] sm:py-[16px] sm:px-[22px];
   }
   .secondary-btn {
-    @apply border-none cursor-pointer text-[14px] rounded-[3px] hover:border-gmt-200 hover:bg-gmt-200 hover:text-black sm:text-[13px] font-extrabold leading-[100%] tracking-[0.01em] font-sans capitalize py-[14px] px-[22px] sm:py-[12px] sm:px-[18px];
+    @apply border-none cursor-pointer text-base rounded-lg bg-gold text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
   .filled-btn {
     @apply w-fit primary-btn bg-black text-white md:ml-[20px] sm:hidden border-none;
   }
   .tag {
-    @apply capitalize text-[12px] w-fit rounded-[3px] sm:text-[11px] font-bold leading-[140%] font-sans py-[6px] px-[12px] sm:py-[6px] sm:px-[10px];
+    @apply capitalize text-[12px] w-fit rounded-lg sm:text-[11px] font-bold leading-[140%] font-sans py-[6px] px-[12px] sm:py-[6px] sm:px-[10px];
   }
   .mega-menu {
-    @apply flex absolute left-0 right-0 bg-black text-white py-[80px] px-[100px] h-[400px] md:py-[60px] md:pr-[110px] md:pl-[100px] md:h-fit md:flex-col md:top-[88px] sm:px-[40px] sm:py-[20px] md:justify-end md:items-end w-full;
+    @apply flex absolute left-0 right-0 bg-navy text-white py-[60px] px-[100px] h-fit md:py-[60px] md:pr-[110px] md:pl-[100px] md:h-fit md:flex-col md:top-[88px] sm:px-[40px] sm:py-[20px] md:justify-end md:items-end w-full;
   }
   .mobile-submenu {
     @apply flex absolute left-0 right-0 bg-black text-white py-[40px] pr-[110px] pl-[100px] h-fit flex-col top-[88px] sm:top-[70px] justify-end items-end sm:px-[40px] sm:py-[20px] w-full;
@@ -103,14 +103,14 @@
     @apply text-gmt-500;
   }
   .pagination-item {
-    @apply flex cursor-pointer w-[40px] h-[40px] text-[20px] sm:text-[16px] rounded-[3px] justify-center items-center font-bold leading-[160%] sm:leading-[150%] text-gmt-400 font-sans hover:bg-gmt-200 hover:text-black;
+    @apply flex cursor-pointer w-[40px] h-[40px] text-[20px] sm:text-[16px] rounded-lg justify-center items-center font-bold leading-[160%] sm:leading-[150%] text-gmt-400 font-sans hover:bg-gmt-200 hover:text-black;
   }
   .single-page-resource-excerpt p {
     @apply body-large text-gmt-400;
   }
 
   .gfield {
-    @apply border-[1.5px] border-gmt-400 text-[14px] rounded-[3px] mb-[20px];
+    @apply border-[1.5px] border-gmt-400 text-[14px] rounded-lg mb-[20px];
   }
   .gfield input,
   .gfield textarea {
@@ -135,7 +135,7 @@
   }
   .newsletter-banner .gfield-EMAIL input,
   .sidebar-module .gfield-EMAIL input {
-    @apply border-gmt-400 bg-transparent text-gmt-400 rounded-[3px] cursor-pointer;
+    @apply border-gmt-400 bg-transparent text-gmt-400 rounded-lg cursor-pointer;
   }
   .resource-single-template p,
   .resource-single-template h2,

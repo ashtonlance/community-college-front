@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { cn } from 'utils'
 import Stroke from 'assets/icons/stroke.svg'
+import { useRef } from 'react'
+import { useOutsideClick } from 'utils/hooks/useOutsideClick'
+import { useClickAway } from '@uidotdev/usehooks'
 
 export const isCurrentPage = (url, asPath) => {
   // Check if the domain is in the url
@@ -18,77 +21,68 @@ export const isCurrentPage = (url, asPath) => {
 
 export const NavigationItem = ({
   item,
-  dropdownOpened,
-  transparentMode,
+  dropdownOpened = false,
+  transparentMode = false,
   handleActiveItem,
 }) => {
   const router = useRouter()
   const hasDropdownItems = item?.children?.length > 0
+  const ref = useClickAway(() => {
+    console.log('Clicked outside of MyComponent')
+  })
   const navigationElement = hasDropdownItems ? (
     <>
       {item?.children?.length > 0 && (
-        <div className="group flex h-[50px] flex-col items-center justify-center">
+        <div className="group flex h-[50px] flex-col items-center justify-center gap-[6px]">
           <Link
             suppressHydrationWarning
             onClick={e => handleActiveItem(e, item.id)}
             href={item.url}
             className={cn(`
-            main-nav group mb-[6px] flex cursor-pointer justify-center gap-2 pr-[30px]
-            ${dropdownOpened ? 'active items-center' : 'items-baseline'} ${
+            main-nav group flex cursor-pointer flex-col items-center justify-center gap-2 pr-[30px]
+            ${dropdownOpened ? 'active' : ''} ${
               transparentMode && 'text-white hover:text-black'
             }`)}
           >
             {item.label}
+
+            <Stroke
+              alt=""
+              className={cn(
+                `pointer-events-none ml-4 h-[10px] min-h-[10px] w-[135%] text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
+                  isCurrentPage(item.url, router.asPath)
+                    ? 'text-lightBlue opacity-100'
+                    : ''
+                }${dropdownOpened ? 'text-gold opacity-100' : ''}`
+              )}
+              preserveAspectRatio="none"
+            />
           </Link>{' '}
-          {dropdownOpened ? (
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="7"
-                viewBox="0 0 10 7"
-                fill="none"
-                className="absolute right-[16px] top-[40%] text-navy"
-              >
-                <path
-                  d="M9.24264 5.75736L5 1.51472L0.75736 5.75736"
-                  strokeWidth="1.5"
-                  className="stroke-navy"
-                />
-              </svg>
-              <MegaMenu
-                handleActiveItem={handleActiveItem}
-                item={item}
-                key={item.id}
-              />
-            </div>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="none"
-              className="absolute right-[16px] top-[42%] text-navy"
-            >
-              <path
-                d="M0.757359 3.24264L5 7.48528L9.24264 3.24264"
-                strokeWidth="1.5"
-                className="stroke-navy"
-              />
-            </svg>
-          )}
-          <Stroke
-            alt=""
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
             className={cn(
-              `h-[10px] min-h-[10px] w-full text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
-                isCurrentPage(item.url, router.asPath)
-                  ? 'text-lightBlue opacity-100'
-                  : ''
+              `absolute right-[16px] top-[40%] transform-gpu text-navy transition duration-150 group-hover:top-[42%] ${
+                dropdownOpened ? 'rotate-180' : ''
               }`
             )}
-            preserveAspectRatio="none"
-          />
+          >
+            <path
+              d="M0.757359 3.24264L5 7.48528L9.24264 3.24264"
+              strokeWidth="1.5"
+              className="stroke-navy"
+            />
+          </svg>
+          {dropdownOpened ? (
+            <MegaMenu
+              handleActiveItem={handleActiveItem}
+              item={item}
+              key={item.id}
+            />
+          ) : null}
         </div>
       )}
     </>
@@ -98,11 +92,7 @@ export const NavigationItem = ({
         onMouseOver={() => handleActiveItem(item.id)}
         className={cn(`
       no-child main-nav group flex cursor-pointer justify-center gap-2
-      ${
-        dropdownOpened
-          ? 'active items-center bg-black text-white hover:bg-black'
-          : 'items-baseline'
-      }
+      
     ${transparentMode ? 'text-white hover:text-black' : ''}
     `)}
         href={item.url}

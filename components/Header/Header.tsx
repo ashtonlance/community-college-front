@@ -30,13 +30,12 @@ const Logo = ({ scrolled }) => {
   const NCCCSLogo = scrolled ? LogoShort : LogoTall
   const { width } = useWindowDimensions()
   return (
-    <div className="md:w-max">
+    <div className="flex flex-col items-center justify-center md:w-max">
       <Link href="/" className="cursor-pointer">
         <NCCCSLogo
           alt="header-logo"
           width={width > 768 ? 145 : 99}
           height={width > 768 ? 50 : 24}
-          className="md:h-[24px] md:w-[99px]"
         />
       </Link>
     </div>
@@ -107,7 +106,7 @@ export const Header = (props: HeaderProps) => {
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null
-    setActiveItem(id)
+    id === activeItem ? setActiveItem('') : setActiveItem(id)
   }
   const displayTransparentMode = false
   const transparentScrolledMode = scrollPosition > 0 && activeItem === ''
@@ -184,29 +183,28 @@ Header.fragments = {
     fragment NavigationMenuFragment on MenuItem {
       id
       parentId
-      cssClasses
       description
       label
       url
-      navigationMenu {
-        fieldGroupName
-        items {
-          description
-          fieldGroupName
-          title
-          url {
-            target
-            title
-            url
-          }
-          resourcesLinks {
-            label
-            pageLink {
-              url
-            }
-          }
-        }
-      }
+      # navigationMenu {
+      #   fieldGroupName
+      #   items {
+      #     description
+      #     fieldGroupName
+      #     title
+      #     url {
+      #       target
+      #       title
+      #       url
+      #     }
+      #     resourcesLinks {
+      #       label
+      #       pageLink {
+      #         url
+      #       }
+      #     }
+      #   }
+      # }
     }
   `,
 }

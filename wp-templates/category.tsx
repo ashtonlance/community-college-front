@@ -94,7 +94,7 @@ Category.query = gql`
       }
     }
     menu(id: "primary", idType: SLUG) {
-      menuItems {
+      menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
         }

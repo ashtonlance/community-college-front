@@ -1,10 +1,43 @@
-import { ServicesMenu } from './ServicesMenu'
-import { ResourcesMenu } from './ResourcesMenu'
-import { AboutMenu } from './AboutMenu'
+// import { ServicesMenu } from './ServicesMenu'
+// import { ResourcesMenu } from './ResourcesMenu'
+// import { AboutMenu } from './AboutMenu'
+import dynamic from 'next/dynamic'
+
+const AboutMenu = dynamic(
+  async () => {
+    const { AboutMenu } = await import('./AboutMenu')
+    return { default: AboutMenu }
+  },
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+) as unknown as React.FC<any>
+
+const ResourcesMenu = dynamic(
+  async () => {
+    const { ResourcesMenu } = await import('./ResourcesMenu')
+    return { default: ResourcesMenu }
+  },
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+) as unknown as React.FC<any>
+
+const TwoColumnMenu = dynamic(
+  async () => {
+    const { TwoColumnMenu } = await import('./TwoColumnMenu')
+    return { default: TwoColumnMenu }
+  },
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+) as unknown as React.FC<any>
 
 export const MegaMenu = ({ item, handleActiveItem }) => {
   const subItems = item.children
-  console.log(item, 'item')
   switch (item.label) {
     case 'About':
       return (
@@ -12,7 +45,10 @@ export const MegaMenu = ({ item, handleActiveItem }) => {
       )
     case 'Services':
       return (
-        <ServicesMenu handleActiveItem={handleActiveItem} subItems={subItems} />
+        <TwoColumnMenu
+          handleActiveItem={handleActiveItem}
+          subItems={subItems}
+        />
       )
     case 'Resources':
       return (
@@ -24,7 +60,11 @@ export const MegaMenu = ({ item, handleActiveItem }) => {
       )
     default:
       return (
-        <AboutMenu handleActiveItem={handleActiveItem} subItems={subItems} />
+        <TwoColumnMenu
+          handleActiveItem={handleActiveItem}
+          subItems={subItems}
+          parentItem={item}
+        />
       )
   }
 }

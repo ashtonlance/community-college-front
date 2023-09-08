@@ -17,7 +17,7 @@ export default function FrontPage(props: FrontPageProps) {
   const blocks = homePageData && [...homePageData?.blocks]
   const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-
+  console.log(props, 'props')
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
@@ -50,7 +50,7 @@ FrontPage.query = gql`
       }
     }
     menu(id: "primary", idType: SLUG) {
-      menuItems {
+      menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
         }
