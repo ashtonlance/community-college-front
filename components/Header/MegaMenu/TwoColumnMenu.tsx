@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import { cn } from 'utils'
+import { useOutsideClick } from 'utils/hooks/useOutsideClick'
+import { useClickAway } from '@uidotdev/usehooks'
+import { MutableRefObject } from 'react'
 
 type TwoColumnMenuProps = {
   subItems: any
   classes?: string
   handleActiveItem?: (id: string) => void
   parentItem?: any
+  activeItem?: string
 }
 
 export const TwoColumnMenu = ({
@@ -13,12 +17,20 @@ export const TwoColumnMenu = ({
   classes,
   handleActiveItem,
   parentItem,
+  activeItem,
 }: TwoColumnMenuProps) => {
+  const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
+    const target = e.target as Element
+    if (!target.classList.contains('main-nav')) {
+      handleActiveItem('')
+    }
+  })
   return (
-    <div className="semi-modal">
+    <div className="fixed left-0 top-[155px] w-full">
       <div
         // onMouseLeave={() => handleActiveItem('')}
-        className={cn(`mega-menu md:top-0 ${classes}`)}
+        className={cn(`mega-menu z-10 md:top-0 ${classes}`)}
+        ref={ref}
       >
         <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="border-r-solid flex max-h-[425px] flex-1 flex-col flex-wrap justify-around gap-y-6 border-r-[1.5px] border-r-lightBlue md:border-0 md:text-left">
@@ -77,6 +89,7 @@ export const TwoColumnMenu = ({
           </div>
         </div>
       </div>
+      <div className="semi-modal"></div>
     </div>
   )
 }

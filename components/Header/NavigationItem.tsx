@@ -3,10 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { cn } from 'utils'
 import Stroke from 'assets/icons/stroke.svg'
-import { useRef } from 'react'
-import { useOutsideClick } from 'utils/hooks/useOutsideClick'
-import { useClickAway } from '@uidotdev/usehooks'
-
 export const isCurrentPage = (url, asPath) => {
   // Check if the domain is in the url
   if (!url?.startsWith(process.env.NEXT_PUBLIC_SITE_URL)) {
@@ -16,7 +12,10 @@ export const isCurrentPage = (url, asPath) => {
   if (!url?.endsWith('/')) {
     url = url + '/'
   }
-  return url === process.env.NEXT_PUBLIC_SITE_URL + asPath
+  const slugToMatch =
+    asPath.split('/')[1] !== '/' ? asPath.split('/')[1] : asPath
+
+  return asPath !== '/' && url.includes(slugToMatch)
 }
 
 export const NavigationItem = ({
@@ -24,12 +23,10 @@ export const NavigationItem = ({
   dropdownOpened = false,
   transparentMode = false,
   handleActiveItem,
+  activeItem,
 }) => {
   const router = useRouter()
   const hasDropdownItems = item?.children?.length > 0
-  const ref = useClickAway(() => {
-    console.log('Clicked outside of MyComponent')
-  })
   const navigationElement = hasDropdownItems ? (
     <>
       {item?.children?.length > 0 && (
@@ -81,6 +78,7 @@ export const NavigationItem = ({
               handleActiveItem={handleActiveItem}
               item={item}
               key={item.id}
+              activeItem={activeItem}
             />
           ) : null}
         </div>

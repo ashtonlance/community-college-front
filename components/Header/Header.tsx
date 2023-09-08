@@ -79,6 +79,7 @@ export const DynamicNavigationMenu = ({
               item={item}
               transparentMode={transparentMode}
               dropdownOpened={item.id === openDropdownItem}
+              activeItem={openDropdownItem}
             />
           </div>
         )

@@ -36,7 +36,7 @@ const TwoColumnMenu = dynamic(
   }
 ) as unknown as React.FC<any>
 
-export const MegaMenu = ({ item, handleActiveItem }) => {
+export const MegaMenu = ({ item, handleActiveItem, activeItem }) => {
   const subItems = item.children
   switch (item.label) {
     case 'About':
@@ -64,6 +64,7 @@ export const MegaMenu = ({ item, handleActiveItem }) => {
           handleActiveItem={handleActiveItem}
           subItems={subItems}
           parentItem={item}
+          activeItem={activeItem}
         />
       )
   }
