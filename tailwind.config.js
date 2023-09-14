@@ -15,7 +15,7 @@ module.exports = {
     extend: {
       colors: {
         gmt: {
-          transparent: '#00000065',
+          transparent: '#231F20BF',
           100: '#F8F8F8',
           200: '#EBEBEB',
           300: '#CCCCCC',

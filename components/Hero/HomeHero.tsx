@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import { GuideLine } from '../AnimatedLines/GuideLine'
 import Image from 'next/image'
+import { cn } from 'utils'
+import angles from 'assets/imgs/bg-angles-blue.png'
+
 export type HeroPropsType = {
   bgColor?: string
   bgImg?: string
@@ -24,10 +26,11 @@ export const HomeHero = ({
 }: HeroPropsType) => {
   return (
     <div
-      className={`flex h-full items-center bg-cover bg-no-repeat pb-[150px] pt-[240px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px]`}
-      style={{
-        backgroundColor: !bgImg && bgColor,
-      }}
+      className={cn(
+        `home-hero flex h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
+          !bgImg && `bg-${bgColor}`
+        }`
+      )}
       suppressHydrationWarning
     >
       {bgImg && (
@@ -41,20 +44,27 @@ export const HomeHero = ({
       )}
       <div
         className="absolute bottom-0 left-0 right-0 top-0 w-full"
-        style={{
-          backgroundImage: `radial-gradient(13.02% 27.98% at 93.08% 79.69%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(35.95% 35.95% at 39.06% 64.05%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(84.11deg, rgba(0, 0, 0, 0.5) 2.71%, rgba(0, 0, 0, 0) 58.68%)`,
-        }}
-      ></div>
+        // style={{
+        //   backgroundImage: `radial-gradient(13.02% 27.98% at 93.08% 79.69%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%), radial-gradient(35.95% 35.95% at 39.06% 64.05%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(84.11deg, rgba(0, 0, 0, 0.5) 2.71%, rgba(0, 0, 0, 0) 58.68%)`,
+        // }}
+      >
+        <Image
+          src={angles}
+          alt=""
+          fill
+          className={`z-0 object-fill`}
+          priority
+        />
+      </div>
       <div className="landing-hero-text relative ml-[15%] mr-[30%] flex w-[55%] flex-col md:mx-[100px] md:w-full sm:mx-[40px]">
         {subheading && (
           <div className="flex items-center gap-[15px]">
-            <GuideLine />
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {subheading}
             </h2>
           </div>
         )}
-        <h1 className="home-h1 text-white">{heading}</h1>
+        <h1 className="h1-home mb-8 text-white">{heading}</h1>
 
         {description && <p className="body-large text-white">{description}</p>}
 

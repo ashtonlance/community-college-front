@@ -12,8 +12,11 @@
   h1, .h1 {
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
+  .h1-home {
+    @apply font-serif text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-white antialiased;
+  }
   h2, .h2 {
-    @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-0.35px] text-navy font-serif antialiased;
+    @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] text-navy font-serif antialiased;
   }
   h3, .h3 {
     @apply text-[38px] sm:text-[28px] leading-[110%] tracking-[-0.38px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
@@ -22,7 +25,7 @@
     @apply text-[28px] sm:text-[26px] font-extrabold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-navy font-condensed antialiased;
   }
   h5, .h5 {
-    @apply text-[15px] sm:text-[14px] font-black leading-[100%] tracking-[0.06em] text-navy font-sans uppercase antialiased;
+    @apply text-[15px] sm:text-[14px] leading-[100%] tracking-[0.96px] text-navy font-sans uppercase antialiased font-extrabold;
   }
   ul li {
     @apply list-disc list-inside text-darkGrey font-sans antialiased;
@@ -37,7 +40,7 @@
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
   .body-large {
-    @apply text-[20px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-black font-sans;
+    @apply text-[18px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-black font-sans;
   }
   .body-regular {
     @apply text-[16px] sm:text-[14px] font-medium leading-[150%] sm:leading-[140%] text-black font-sans;
@@ -88,7 +91,7 @@
     @apply bg-gmt-transparent backdrop-blur-[7.5px] fixed w-full h-full left-0 right-0 top-0 bottom-0;
   }
   .semi-modal {
-    @apply bg-gmt-transparent backdrop-blur-[7.5px] fixed w-full left-0 top-[155px] md:top-[91px] right-0 bottom-0;
+    @apply bg-gmt-transparent backdrop-blur-[6px] fixed w-full left-0 top-[155px] md:top-[91px] right-0 bottom-0;
   }
   .internal-menu-mobile .semi-modal {
     @apply top-[110px];

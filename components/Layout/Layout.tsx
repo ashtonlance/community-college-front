@@ -1,6 +1,7 @@
 import { Header, HeaderVariant } from '../Header'
 import { Footer } from '../Footer'
 import Head from 'next/head'
+import { cn } from 'utils/index'
 
 export type LayoutProps = {
   menuItems?: any
@@ -45,10 +46,10 @@ export function Layout(props: LayoutProps) {
         variant={variant}
       />
       <main
-        className={`flex flex-col ${
+        className={cn(`flex flex-col ${
           variant == 'default' && 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
         }
-        `}
+        `)}
       >
         {props.children}
       </main>

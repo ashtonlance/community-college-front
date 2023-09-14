@@ -3,6 +3,7 @@ import { getHeadingTag } from '../../utils/headingType'
 import { useState, useContext } from 'react'
 import { PageContext } from 'wp-templates/single-event'
 import { ButtonWithModalForm } from 'components/Button/ButtonWithModalForm'
+import Stroke from 'assets/icons/long-stroke.svg'
 
 export const TextBlock = ({ attributes }) => {
   const ctaLabel = attributes.data.button_button_text
@@ -49,10 +50,10 @@ export const TextBlock = ({ attributes }) => {
         <span className="mt-[32px] text-center text-black sm:mt-[24px]">
           {heading}
         </span>
-
+        <Stroke className="my-6 h-[15px] text-gold " />
         {description && (
           <div
-            className="body-large mt-[24px] text-center text-gmt-400"
+            className="body-large max-w-[800px] text-center text-darkGrey"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
