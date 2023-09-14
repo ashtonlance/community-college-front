@@ -57,14 +57,14 @@ export const TextBlock = ({ attributes }) => {
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
-        ctaURL && ctaLabel && (
-        <Link
-          href={ctaURL}
-          className="primary-btn mt-[40px] flex w-fit bg-black text-white sm:mt-[24px]"
-        >
-          {ctaLabel}
-        </Link>
-        )
+        {ctaURL && ctaLabel && (
+          <Link
+            href={ctaURL}
+            className="primary-btn mt-[40px] flex w-fit bg-black text-white sm:mt-[24px]"
+          >
+            {ctaLabel}
+          </Link>
+        )}
       </div>
     </div>
   )
