@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import arrow from '../../assets/icons/arrow-right.svg'
-
+import Arrow from 'assets/icons/angled-arrow.svg'
 export const LinksBlock = ({ attributes }) => {
   const linkList = attributes.data.links_lists
 
@@ -11,9 +11,9 @@ export const LinksBlock = ({ attributes }) => {
         [...Array(linkList).keys()].map(val => (
           <div
             key={val}
-            className="flex grow flex-col gap-[10px] bg-gmt-100 p-[40px]"
+            className="mx-auto flex max-w-[1030px] grow flex-col gap-[10px] rounded-xl border border-lightBlue p-[40px]"
           >
-            <h5 className="mb-[32px]">
+            <h5 className="mb-[32px] font-extrabold">
               {attributes.data[`links_lists_${val}_link_list_label`]}
             </h5>
             <div className="grid grid-flow-col grid-rows-3 md:grid-rows-5 sm:flex sm:flex-col">
@@ -21,7 +21,7 @@ export const LinksBlock = ({ attributes }) => {
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),
               ].map(num => (
                 <Link
-                  className="sub-nav mb-[12px] flex items-center gap-[7px]"
+                  className="sub-nav mb-[12px] flex items-center gap-[7px] text-darkGrey hover:text-navy"
                   key={num}
                   href={
                     attributes.data[`links_lists_${val}_items_${num}_link_url`]
@@ -32,7 +32,7 @@ export const LinksBlock = ({ attributes }) => {
                       `links_lists_${val}_items_${num}_link_label`
                     ]
                   }
-                  <Image alt="" src={arrow} width={6} height={6} />
+                  <Arrow className="text-gold" />
                 </Link>
               ))}
             </div>

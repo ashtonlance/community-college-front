@@ -37,7 +37,7 @@ export const PageHeading = ({ attributes }: PageHeadingAttributes) => {
     >
       <div className="mb-5">{title}</div>
 
-      <Stroke className="mx-auto h-[15px] text-gold" />
+      <Stroke className="mx-auto h-[15px] max-w-full text-gold" />
     </div>
   )
 }

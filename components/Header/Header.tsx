@@ -118,8 +118,8 @@ export const Header = (props: HeaderProps) => {
       className={cn(
         `${
           displayTransparentMode
-            ? 'topbar-transparent fixed z-10 w-full'
-            : 'fixed top-0 z-10 w-full bg-white'
+            ? 'topbar-transparent fixed z-20 w-full'
+            : 'fixed top-0 z-20 w-full bg-white'
         } transition-background border-b-2 border-solid border-grey duration-200`
       )}
     >

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 
 import {

@@ -5,6 +5,7 @@ import { gql, useQuery } from '@apollo/client'
 import { formatDate } from '../../utils/dates'
 import { getLabelFromCategory } from 'utils/getButtonLabels'
 import { MarginSizesType } from 'components/TestimonialSlider'
+import { cn } from 'utils'
 
 type RelatedResourcesProps = {
   attributes?: {
@@ -12,6 +13,8 @@ type RelatedResourcesProps = {
       related_resources: number
       component_spacing_bottom_spacing: MarginSizesType
       component_spacing_top_spacing: MarginSizesType
+      heading: string
+      background_color: string
     }
   }
 }
@@ -19,6 +22,7 @@ type RelatedResourcesProps = {
 type RelatedResourcesByTaxonomyProps = {
   tags: string[]
   categories: string[]
+  backgroundColor: string
 }
 
 const GET_RESOURCES_BY_TAXONOMY = gql`
@@ -96,37 +100,40 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
   const bottomSpacing =
     props?.attributes?.data?.component_spacing_bottom_spacing
   const topSpacing = props?.attributes?.data?.component_spacing_top_spacing
-
+  const heading = props?.attributes?.data?.heading
+  const background = props?.attributes?.data?.background_color
   const postIds = [...Array(items).keys()].map(
     num =>
       props?.attributes?.data[`related_resources_${num}_resource_item`]?.['ID']
   )
+  const cardColor = background === 'grey' ? 'bg-white' : 'bg-grey'
 
   return (
-    <div
-      className={`mx-auto my-[40px] flex w-[90%] max-w-[1220px] flex-col items-center sm:my-[32px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
-    >
-      <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
-        <h5>Related Resources</h5>
-        <Image
-          alt=""
-          src={separator}
-          width={40}
-          height={1.5}
-          className="mt-[24px]"
-        />
-      </div>
-
+    <div className={`bg-${background}`}>
       <div
-        className={`grid gap-[20px] ${items == 1 && 'grid-cols-1'} ${
-          items == 2 && 'grid-cols-2'
-        } ${
-          items > 2 && 'grid-cols-3'
-        } grid-flow-row md:grid-cols-2 sm:grid-cols-1`}
+        className={`mx-auto my-[40px] flex w-[90%] max-w-[1220px] flex-col items-center sm:my-[32px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
-        {postIds.map((id, i) => (
-          <Resource key={`${id}-${i}`} resourceId={id} />
-        ))}
+        <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
+          <h5>{heading}</h5>
+        </div>
+
+        <div
+          className={cn(
+            `grid gap-[20px] ${items == 1 && 'grid-cols-1'} ${
+              items == 2 && 'grid-cols-2'
+            } ${
+              items > 2 && 'grid-cols-3'
+            } w-full grid-flow-row md:grid-cols-2 sm:grid-cols-1`
+          )}
+        >
+          {postIds.map((id, i) => (
+            <Resource
+              key={`${id}-${i}`}
+              resourceId={id}
+              backgroundColor={cardColor}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

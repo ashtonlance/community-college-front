@@ -50,33 +50,21 @@ export const TextBlock = ({ attributes }) => {
         <span className="mt-[32px] text-center text-black sm:mt-[24px]">
           {heading}
         </span>
-        <Stroke className="my-6 h-[15px] text-gold " />
+        <Stroke className="my-6 h-[15px] max-w-full text-gold" />
         {description && (
           <div
             className="body-large max-w-[800px] text-center text-darkGrey"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
-
-        {requestInvite == '1' ? (
-          <ButtonWithModalForm
-            setModalActive={setModalActive}
-            modalActive={modalActive}
-            ctaLabel={ctaLabel}
-            classList="mt-[40px] sm:mt-[24px] primary-btn bg-black flex text-white w-fit"
-            form={formEventRegistration}
-          />
-        ) : (
-          ctaURL &&
-          ctaLabel && (
-            <Link
-              href={ctaURL}
-              className="primary-btn mt-[40px] flex w-fit bg-black text-white sm:mt-[24px]"
-            >
-              {ctaLabel}
-            </Link>
-          )
-        )}
+        ctaURL && ctaLabel && (
+        <Link
+          href={ctaURL}
+          className="primary-btn mt-[40px] flex w-fit bg-black text-white sm:mt-[24px]"
+        >
+          {ctaLabel}
+        </Link>
+        )
       </div>
     </div>
   )
