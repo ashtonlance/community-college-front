@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { cn } from 'utils'
-import { useOutsideClick } from 'utils/hooks/useOutsideClick'
 import { useClickAway } from '@uidotdev/usehooks'
 import { MutableRefObject } from 'react'
+import Image from 'next/image'
+import bg from 'assets/imgs/angled-bg-menu.jpg'
 
 type TwoColumnMenuProps = {
   subItems: any
@@ -32,7 +33,15 @@ export const TwoColumnMenu = ({
         className={cn(`mega-menu z-10 md:top-0 ${classes}`)}
         ref={ref}
       >
-        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
+        <Image
+          className="pointer-events-none object-fill object-center"
+          src={bg}
+          alt=""
+          fill
+          loading="eager"
+          priority
+        />
+        <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="border-r-solid flex max-h-[425px] flex-1 flex-col flex-wrap justify-around gap-y-6 border-r-[1.5px] border-r-lightBlue md:border-0 md:text-left">
             {parentItem ? (
               <div className="flex flex-col pr-[40px]" key={parentItem.label}>

@@ -7,22 +7,25 @@ import { Page, RootQuery } from 'generated/graphql'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 type FrontPageProps = {
-  data: Pick<RootQuery, 'nodeByUri' | 'menu' | 'menus'>
+  data: Pick<RootQuery, 'nodeByUri' | 'menu' | 'menus' | any>
 }
 
 export default function FrontPage(props: FrontPageProps) {
   const menuItems = props.data?.menu?.menuItems || []
   const homePageData = props.data?.nodeByUri as Page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0] || []
   const blocks = homePageData && [...homePageData?.blocks]
   const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-
+  const footerMenuItems = props.data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
       seo={homePageData?.seo}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
     >
       {blocks && <WordPressBlocksViewer blocks={blocks} />}
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -32,7 +35,6 @@ export default function FrontPage(props: FrontPageProps) {
 
 FrontPage.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query HomePage {
     nodeByUri(uri: "/") {
       ... on Page {
@@ -65,9 +67,11 @@ FrontPage.query = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
   }

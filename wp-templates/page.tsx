@@ -9,10 +9,13 @@ import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 export default function Page(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
+  const footerMenuItems = props.data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -25,6 +28,7 @@ export default function Page(props) {
       seo={pageData?.seo}
       headerVariant={heroType === 'default' ? 'default' : 'transparent'}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
     >
       {blocks && (
         <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
@@ -43,7 +47,6 @@ Page.variables = ({ databaseId }, ctx) => {
 
 Page.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
@@ -74,9 +77,11 @@ Page.query = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
   }

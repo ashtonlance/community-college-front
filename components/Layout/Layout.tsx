@@ -10,6 +10,7 @@ export type LayoutProps = {
   pageClassName?: string
   children: any
   utilityNavigation: any
+  footerNavigation?: any
 }
 
 export function Layout(props: LayoutProps) {
@@ -20,7 +21,7 @@ export function Layout(props: LayoutProps) {
   const variant = props?.headerVariant || 'default'
   const menuItems = props?.menuItems || []
   const utilityNavigation = props?.utilityNavigation || []
-
+  const footerNavigation = props?.footerNavigation || []
   return (
     <>
       <Head>
@@ -51,7 +52,7 @@ export function Layout(props: LayoutProps) {
       >
         {props.children}
       </main>
-      <Footer menuItems={props.menuItems} />
+      <Footer footerNavigation={footerNavigation} menuItems={props.menuItems} />
     </>
   )
 }
