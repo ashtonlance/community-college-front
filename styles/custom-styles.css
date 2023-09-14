@@ -78,11 +78,30 @@ table td {
 .module-spacing-top-large {
   padding-top: 80px;
 }
+
+.module-margin-bottom-none {
+  margin-bottom: 0;
+}
+.module-margin-bottom-medium {
+  margin-bottom: 40px;
+}
+.module-margin-bottom-large {
+  margin-bottom: 80px;
+}
+.module-margin-top-none {
+  margin-top: 0;
+}
+.module-margin-top-medium {
+  margin-top: 40px;
+}
+.module-margin-top-large {
+  margin-top: 80px;
+}
 .module-color-white {
   background-color: #fff;
 }
 .module-color-light {
-  background-color: #f8f8f8;
+  background-color: #F5F5F5;
 }
 .module-color-dark {
   background-color: #ccc;

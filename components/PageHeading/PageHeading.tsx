@@ -4,6 +4,7 @@ import {
 } from 'components/TestimonialSlider'
 import { getHeadingTag } from '../../utils/headingType'
 import { getTextAlign } from '../../utils/attributesToClassNames'
+import Stroke from 'assets/icons/long-stroke.svg'
 
 export type AlignmentType = 'left' | 'center' | 'right'
 export type HeadingType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -32,9 +33,11 @@ export const PageHeading = ({ attributes }: PageHeadingAttributes) => {
 
   return (
     <div
-      className={`px-[60px] pb-[40px] pt-[100px] md:px-[24px] ${alignment} module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColor}`}
+      className={`${alignment} module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColor} px-[60px] pb-[40px] pt-[100px] md:px-[24px]`}
     >
-      {title}
+      <div className="mb-5">{title}</div>
+
+      <Stroke className="mx-auto h-[15px] text-gold" />
     </div>
   )
 }

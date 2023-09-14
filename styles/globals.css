@@ -22,7 +22,7 @@
     @apply text-[38px] sm:text-[28px] leading-[110%] tracking-[-0.38px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
   }
   h4, .h4 {
-    @apply text-[28px] sm:text-[26px] font-extrabold leading-[120%] sm:leading-[115%] tracking-[-0.01em] text-navy font-condensed antialiased;
+    @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] text-navy font-condensed antialiased;
   }
   h5, .h5 {
     @apply text-[15px] sm:text-[14px] leading-[100%] tracking-[0.96px] text-navy font-sans uppercase antialiased font-extrabold;
@@ -71,6 +71,9 @@
   }
   .filled-btn {
     @apply w-fit primary-btn bg-black text-white md:ml-[20px] sm:hidden border-none;
+  }
+  .outline-btn {
+    @apply w-fit bg-white secondary-btn border-[2px] border-solid border-navy text-navy hover:bg-gold hover:border-gold;
   }
   .tag {
     @apply capitalize text-[12px] w-fit rounded-lg sm:text-[11px] font-bold leading-[140%] font-sans py-[6px] px-[12px] sm:py-[6px] sm:px-[10px];

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import arrow from '../../assets/icons/arrow-full-right.svg'
+import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 
 import {
   getTextAlign,
@@ -19,18 +19,17 @@ export const FeaturesCard = ({
 }) => {
   const cardFinalStyle =
     cardStyle == 'black' ? getFeaturesCardStyle(cardStyle) : bgColor
-
   return (
     <div
       className={`${getWidth(size)} ${getTextAlign(
         alignment
-      )}  ${cardFinalStyle} p-[40px] md:w-full sm:p-[32px]`}
+      )}  ${cardFinalStyle} rounded-xl p-[40px] md:w-full sm:p-[32px]`}
     >
       <h4 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px]`}>
         {heading}
       </h4>
       <div
-        className={`body-regular text-gmt-500 ${getFeaturesCardStyle(
+        className={`body-regular text-darkGrey ${getFeaturesCardStyle(
           cardStyle
         )}`}
         dangerouslySetInnerHTML={{ __html: content }}
@@ -47,8 +46,12 @@ export const FeaturesCard = ({
           )}
 
           {optionalLink && (
-            <Link href={optionalLink}>
-              <Image alt="" src={arrow} width={24} height={11} />
+            <Link
+              className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+              href={optionalLink.url}
+            >
+              {optionalLink.title}
+              <Arrow className="text-gold transition-colors duration-100 group-hover:text-navy" />
             </Link>
           )}
         </div>
