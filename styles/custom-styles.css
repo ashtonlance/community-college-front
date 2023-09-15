@@ -175,3 +175,16 @@ table td {
 .hide-the-input-field > input {
   display: none;
 }
+
+.wysiwyg h2, h3, h4, h5 {
+  margin-bottom: 32px;
+}
+
+.wysiwyg table {
+  @apply rounded-xl border-spacing-0 border-grey;
+}
+
+
+.wysiwyg tr:first-of-type {
+  @apply bg-lightBlue font-extrabold text-navy uppercase;
+}

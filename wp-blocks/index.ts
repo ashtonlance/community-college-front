@@ -1,4 +1,3 @@
-import { DynamicNavigationMenu } from '../components/Header'
 import { Columns } from '../components/Columns'
 import { Pullquote } from '../components/Pullquote'
 import { Separator } from '../components/Separator'
@@ -30,6 +29,7 @@ import { TestimonialSlider } from '../components/TestimonialSlider'
 import { FeaturedResource } from '../components/FeaturedResource'
 import { ResourceDownload } from '../components/ResourceDownload'
 import { PageHeading } from '../components/PageHeading'
+import { WYSIWYG } from '../components/WYSIWYG'
 
 type WordPressBlock = React.FC & {
   displayName?: string
@@ -39,7 +39,6 @@ type WordPressBlock = React.FC & {
   }
 }
 const blocks = {
-  DynamicNavigationMenu,
   Columns,
   Pullquote,
   Separator,
@@ -71,6 +70,7 @@ const blocks = {
   Quote,
   Table,
   PageHeading,
+  WYSIWYG,
 }
 
 export default blocks

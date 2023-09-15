@@ -42,7 +42,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
   const category = props.category
   const date = props.date
   const title = props.title
-  const resourceURL = props.sourceUrl
+  const postUrl = props.sourceUrl
   const readMoreLabel = props.readMoreLabel
   const backgroundColor = props.backgroundColor
 
@@ -50,7 +50,9 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
     <div
       className={`flex w-full ${backgroundColor} overflow-hidden rounded-xl`}
     >
-      <Image src={imgUrl} alt={title} height={191} width={210} />
+      {imgUrl ? (
+        <Image src={imgUrl} alt={title} height={191} width={210} />
+      ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
         <div className="flex items-center justify-center gap-[10px] text-darkGrey">
           <p className="body-regular font-bold text-darkGrey">{category}</p>•
@@ -60,7 +62,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
 
         <Link
           className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
-          href={resourceURL}
+          href={postUrl}
         >
           {readMoreLabel}
           <Arrow className="text-gold transition-colors duration-100 group-hover:text-navy" />
@@ -80,9 +82,8 @@ export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
   const date = formatDate(data?.post?.date)
 
   const title = data?.post?.title
-  const resourceURL = data?.post?.link || ''
+  const postUrl = data?.post?.link || ''
   const readMoreLabel = getLabelFromCategory(category)
-  console.log(data, 'data')
 
   return (
     <ResourcePresentational
@@ -90,7 +91,7 @@ export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
       category={category}
       date={date}
       title={title}
-      sourceUrl={resourceURL}
+      sourceUrl={postUrl}
       readMoreLabel={readMoreLabel}
       backgroundColor={backgroundColor}
     />

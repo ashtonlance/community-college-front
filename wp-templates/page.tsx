@@ -26,7 +26,7 @@ export default function Page(props) {
     <Layout
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
-      headerVariant={heroType === 'default' ? 'default' : 'transparent'}
+      headerVariant={'default'}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
     >

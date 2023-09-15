@@ -46,8 +46,10 @@ export function Layout(props: LayoutProps) {
         variant={variant}
       />
       <main
-        className={cn(`flex flex-col ${
-          variant == 'default' && 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
+        className={cn(`flex min-h-screen flex-col ${
+          variant === 'default'
+            ? 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
+            : null
         }
         `)}
       >
