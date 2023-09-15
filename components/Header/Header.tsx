@@ -14,7 +14,8 @@ import { decode } from 'html-entities'
 import { useRouter } from 'next/router'
 import { cn } from 'utils'
 import { isCurrentPage } from './NavigationItem'
-
+import { AnnouncementBar } from 'components/AnnouncementBar'
+import { useCookies } from 'react-cookie'
 const Modal = dynamic(
   async () => {
     const { Modal } = await import('components/Modal')
@@ -94,6 +95,8 @@ export type HeaderProps = {
   variant?: HeaderVariant
   form: any
   utilityNavigation: any
+  showAnnouncementBar?: string
+  announcementBarText?: string
 }
 
 export const Header = (props: HeaderProps) => {
@@ -104,6 +107,10 @@ export const Header = (props: HeaderProps) => {
   const [searchOpened, setSearchOpened] = useState(false)
   const [hamburgerMenuOpened, setHamburgerMenuOpen] = useState(false)
   const scrollPosition = useScrollPosition()
+  const showAnnouncementBar = props.showAnnouncementBar ?? false
+  const announcementBarText = props.announcementBarText ?? ''
+  const [getCookie] = useCookies(['ncccs-announcement-bar'])
+  console.log('getCookie', getCookie)
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null
@@ -123,6 +130,9 @@ export const Header = (props: HeaderProps) => {
         } transition-background border-b-2 border-solid border-grey duration-200`
       )}
     >
+      {showAnnouncementBar === '1' ? (
+        <AnnouncementBar announcementBarText={announcementBarText} />
+      ) : null}
       <div className="flex w-full justify-between bg-navy">
         <div className="flex w-full items-center justify-between">
           {utilityNavigation && (

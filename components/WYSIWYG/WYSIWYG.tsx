@@ -13,7 +13,6 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
     props?.attributes?.data?.component_spacing_bottom_spacing || ''
   const topSpacing =
     props?.attributes?.data?.component_spacing_top_spacing || ''
-  console.log(props, 'props')
 
   const parser = new (Parser as any)()
   const reactElement = parser.parse(content)

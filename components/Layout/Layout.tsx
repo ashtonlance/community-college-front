@@ -12,6 +12,7 @@ export type LayoutProps = {
   children: any
   utilityNavigation: any
   footerNavigation?: any
+  settings?: any
 }
 
 export function Layout(props: LayoutProps) {
@@ -23,6 +24,9 @@ export function Layout(props: LayoutProps) {
   const menuItems = props?.menuItems || []
   const utilityNavigation = props?.utilityNavigation || []
   const footerNavigation = props?.footerNavigation || []
+  const settings = props?.settings || []
+  console.log('settings', settings.announcementBar.showAnnouncementBar)
+
   return (
     <>
       <Head>
@@ -44,6 +48,8 @@ export function Layout(props: LayoutProps) {
         utilityNavigation={utilityNavigation}
         form={props.form}
         variant={variant}
+        showAnnouncementBar={settings?.announcementBar?.showAnnouncementBar}
+        announcementBarText={settings?.announcementBar?.announcementBarText}
       />
       <main
         className={cn(`flex min-h-screen flex-col ${

@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-  <path d="M2.74902 15.2507L15.2507 2.74906" stroke="#14435B"
-    style="stroke:#14435B;stroke:color(display-p3 0.0784 0.2627 0.3569);stroke-opacity:1;" stroke-width="2"
-    stroke-linecap="square" />
-  <path d="M2.74902 2.74927L15.2507 15.2509" stroke="#14435B"
-    style="stroke:#14435B;stroke:color(display-p3 0.0784 0.2627 0.3569);stroke-opacity:1;" stroke-width="2"
-    stroke-linecap="square" />
+<svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="Frame 35">
+    <path id="Vector 5" d="M2.13824 12.3616L11.8617 2.63805" stroke="currentColor" stroke-width="2"
+      stroke-linecap="square" />
+    <path id="Vector 7" d="M2.13824 2.63843L11.8617 12.3619" stroke="currentColor" stroke-width="2"
+      stroke-linecap="square" />
+  </g>
 </svg>
