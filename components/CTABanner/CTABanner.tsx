@@ -1,7 +1,6 @@
 import { Button } from 'components/Button'
 import { FadeIn } from 'components/FadeIn'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 
 export const CTABanner = ({ attributes }) => {
   const copy = attributes.data.cta_copy
