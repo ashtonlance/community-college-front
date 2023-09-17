@@ -31,7 +31,7 @@ export default function PhoneField({ field, fieldErrors }) {
   const value = fieldValue?.value || DEFAULT_VALUE
 
   return (
-    <div className={`gfield w-[48%] gfield-${type} ${cssClass}`.trim()}>
+    <div className={`gfield  gfield-${type} ${cssClass}`.trim()}>
       <label htmlFor={htmlId} className="gfield_label">
         {label}
         {isRequired ? <span className="text-rust">*</span> : null}

@@ -56,15 +56,21 @@ export default function CheckboxField({ field, fieldErrors }) {
     >
       <legend>{label}</legend>
       {checkboxInputs.map(({ id: inputId, text, value }) => (
-        <div key={inputId}>
+        <div className="mb-2 flex items-center" key={inputId}>
           <input
+            className="h-5 w-5 !rounded !p-0 accent-navy focus-within:outline-lightBlue"
             type="checkbox"
             name={String(inputId)}
             id={`input_${formId}_${id}_${inputId}`}
             value={String(value)}
             onChange={handleChange}
           />
-          <label htmlFor={`input_${formId}_${id}_${inputId}`}>{text}</label>
+          <label
+            className="p-label body-regular ml-3 text-navy"
+            htmlFor={`input_${formId}_${id}_${inputId}`}
+          >
+            {text}
+          </label>
         </div>
       ))}
       {description ? <p className="field-description">{description}</p> : null}

@@ -57,7 +57,7 @@ export default function FileUploadField({ field, fieldErrors }) {
   }
 
   return (
-    <fieldset className={`gfield gfield-${type} w-[48%] ${cssClass}`.trim()}>
+    <fieldset className={`gfield gfield-${type}  ${cssClass}`.trim()}>
       <legend className="text-emerald my-2">{label}</legend>
       <div className="field" data-id={id} data-type={type}>
         <input

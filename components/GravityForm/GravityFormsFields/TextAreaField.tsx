@@ -22,13 +22,13 @@ export default function TextAreaField({ field, fieldErrors }) {
   const value = fieldValue?.value || DEFAULT_VALUE
 
   return (
-    <div className={`gfield w-[48%] gfield-${type} ${cssClass}`.trim()}>
+    <div className={`gfield  gfield-${type} ${cssClass} basis-full`.trim()}>
       <label htmlFor={htmlId} className="gfield_label">
         {label}
-        {isRequired ? <span className="text-rust">*</span> : null}
+        {isRequired ? <span className="pl-1 text-rust">*</span> : null}
       </label>
       <textarea
-        className="w-full"
+        className="h-52 w-full text-navy"
         placeholder={label || ''}
         name={String(id)}
         id={htmlId}
@@ -45,7 +45,12 @@ export default function TextAreaField({ field, fieldErrors }) {
           })
         }}
       />
-      {description ? <p className="field-description">{description}</p> : null}
+      {description ? (
+        <p
+          className="field-description"
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></p>
+      ) : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
             <p key={fieldError.id} className="error-message">

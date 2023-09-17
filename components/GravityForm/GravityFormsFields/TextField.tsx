@@ -29,6 +29,7 @@ export default function TextField({ field, fieldErrors }) {
     placeholder,
     visibility,
   } = field
+  console.log(field)
   const htmlId = `field_${formId}_${id}`
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
   const value = fieldValue?.value || DEFAULT_VALUE
@@ -82,7 +83,7 @@ export default function TextField({ field, fieldErrors }) {
     <div
       className={`gfield gfield-${type} ${cssClass} ${
         fieldIsHidden ? 'hidden' : ''
-      } w-[48%]`.trim()}
+      } `.trim()}
     >
       <label htmlFor={htmlId} className="gfield_label">
         {label}

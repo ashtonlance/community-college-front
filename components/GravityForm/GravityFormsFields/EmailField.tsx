@@ -48,10 +48,10 @@ export default function EmailField({ field, fieldErrors }) {
   const value = fieldValue?.emailValues?.value || DEFAULT_VALUE
 
   return (
-    <div className={`gfield gfield-${type} ${cssClass} w-[48%]`.trim()}>
+    <div className={`gfield gfield-${type} ${cssClass} basis-[48%]`.trim()}>
       <label htmlFor={htmlId} className="gfield_label">
         {label}
-        {isRequired ? <span className="text-rust">*</span> : null}
+        {isRequired ? <span className="text-rust pl-1">*</span> : null}
       </label>
       <input
         className="p-regular placeholder:text-sky w-full border-[1.5px] px-[22px] py-[14px]"

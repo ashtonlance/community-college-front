@@ -10,6 +10,8 @@ type ImageProps = {
 }
 
 export default function Component(props: ImageProps) {
+  console.log(props)
+
   return (
     <Image
       alt=""

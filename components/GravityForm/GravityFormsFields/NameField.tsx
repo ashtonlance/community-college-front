@@ -6,9 +6,16 @@ export const NAME_FIELD_FIELDS = gql`
     id
     label
     description
+    isRequired
     cssClass
     inputs {
       label
+      ... on NameInputProperty {
+        id
+        name
+        placeholder
+        isHidden
+      }
     }
   }
 `
@@ -24,7 +31,9 @@ const AUTOCOMPLETE_ATTRIBUTES = {
 const DEFAULT_VALUE = {}
 
 export default function NameField({ field, fieldErrors }) {
-  const { id, formId, type, label, description, cssClass, inputs } = field
+  const { id, formId, type, label, description, cssClass, inputs, isRequired } =
+    field
+
   const htmlId = `field_${formId}_${id}`
   const { state, dispatch } = useGravityForm()
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
@@ -50,9 +59,8 @@ export default function NameField({ field, fieldErrors }) {
   return (
     <fieldset
       id={htmlId}
-      className={`gfield gfield-${type} ${cssClass}`.trim()}
+      className={`gfield flex w-full justify-between gap-4 md:flex-col gfield-${type} ${cssClass}`.trim()}
     >
-      <legend>{label}</legend>
       {prefixInput ? (
         <>
           <select
@@ -78,9 +86,16 @@ export default function NameField({ field, fieldErrors }) {
         const key = input?.key || input?.label
         const inputLabel = input?.label || ''
         const placeholder = input?.placeholder || ''
+        const isHidden = input?.isHidden || false
+        if (isHidden) return null
         return (
-          <div key={key}>
+          <div className="gfield gfield-name-input basis-[48%]" key={key}>
+            <label htmlFor={`input_${formId}_${id}_${key}`}>
+              {inputLabel}{' '}
+              {isRequired ? <span className="pl-1 text-rust">*</span> : null}
+            </label>
             <input
+              className="w-full"
               type="text"
               name={String(key).toLowerCase()}
               id={`input_${formId}_${id}_${key}`}
@@ -89,7 +104,6 @@ export default function NameField({ field, fieldErrors }) {
               value={nameValues?.[key.toLowerCase()] || ''}
               onChange={handleChange}
             />
-            <label htmlFor={`input_${formId}_${id}_${key}`}>{inputLabel}</label>
           </div>
         )
       })}

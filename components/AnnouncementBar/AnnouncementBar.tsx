@@ -37,7 +37,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = props => {
           exit={{ opacity: 0, height: 0 }}
           className={`body-regular flex w-full items-center justify-between border-b-[1px] border-[#51525540] bg-lightBlue text-center`}
         >
-          <span className="body-regular basis-full px-52 py-4 text-navy">
+          <span className="body-regular basis-full px-52 py-4 text-navy md:px-8 md:py-4 sm:px-3 sm:py-6">
             {announcementBarText}
           </span>
           <span

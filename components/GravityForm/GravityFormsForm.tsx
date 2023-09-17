@@ -6,8 +6,8 @@ import arrowright from '../../assets/icons/arrow-right.svg'
 import { getApolloClient } from 'utils/apollo-faust'
 import { validateEmail } from 'utils/validations'
 import { FadeIn } from 'components/FadeIn'
-// import { getApolloClient } from "@faustwp/core";
-
+import { cn } from 'utils'
+import Arrow from 'assets/icons/arrow-forward-sharp-reverse.svg'
 const SUBMIT_FORM = gql`
   mutation submitGfForm($formId: ID!, $fieldValues: [FormFieldValuesInput]!) {
     submitGfForm(input: { id: $formId, fieldValues: $fieldValues }) {
@@ -45,9 +45,11 @@ const DownloadButton = ({ description }) => {
     <div className="flex items-center justify-center gap-[60px] sm:flex-col sm:items-start sm:gap-[20px]">
       <button
         type="submit"
-        className={`primary-btn text-emerald flex gap-[11px] bg-white ${
-          active ? 'active' : 'inactive cursor-not-allowed opacity-[0.75]'
-        }`}
+        className={cn(
+          `primary-btn text-emerald flex gap-[11px] bg-navy ${
+            active ? 'active' : 'inactive cursor-not-allowed opacity-[0.75]'
+          }`
+        )}
         disabled={!active}
       >
         Download
@@ -63,7 +65,11 @@ const DownloadButton = ({ description }) => {
 
 const ArrowButton = () => {
   return (
-    <button type="submit" aria-label="Submit form">
+    <button
+      className="primary-btn bg-navy"
+      type="submit"
+      aria-label="Submit form"
+    >
       <span className="arrow-submit-parent">
         <svg
           className="arrow-submit stroke-green"
@@ -86,13 +92,13 @@ const DefaultButton = ({ loading, form, disclaimer = null }) => {
     <div className="submit-gravity-form flex gap-[40px]">
       <button
         type="submit"
-        className={`border-emerald primary-btn bg-emerald flex w-fit items-center justify-center gap-[11px] border-[1.5px] text-white`}
+        className={`primary-btn group flex w-fit items-center justify-center gap-[11px] border-[1.5px] bg-navy text-white`}
         disabled={loading}
         aria-label="Submit form"
       >
         {' '}
         {form?.button?.text || 'Submit'}
-        <Image alt="" src={arrowright} width={9} height={9} />
+        <Arrow className="text-gold group-hover:text-white" />
       </button>
       {disclaimer && <p className="p-small text-white">{disclaimer}</p>}
     </div>
@@ -227,7 +233,7 @@ function GravityFormsFormInternal({
       <form
         method="post"
         onSubmit={handleSubmit}
-        className={`mt-[40px] flex flex-col items-center ${customClasses}`}
+        className={`flex flex-wrap justify-between ${customClasses}`}
       >
         {formFields.map(field => (
           <GravityFormsField

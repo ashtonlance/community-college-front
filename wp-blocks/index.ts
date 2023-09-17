@@ -30,6 +30,8 @@ import { FeaturedResource } from '../components/FeaturedResource'
 import { ResourceDownload } from '../components/ResourceDownload'
 import { PageHeading } from '../components/PageHeading'
 import { WYSIWYG } from '../components/WYSIWYG'
+import { Form } from '../components/Form'
+import { MediaEmbed } from '../components/MediaEmbed'
 
 type WordPressBlock = React.FC & {
   displayName?: string
@@ -71,6 +73,8 @@ const blocks = {
   Table,
   PageHeading,
   WYSIWYG,
+  Form,
+  MediaEmbed,
 }
 
 export default blocks

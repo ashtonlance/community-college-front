@@ -31,6 +31,7 @@ module.exports = {
         beige: '#C2B59B',
         lightBlue: '#AED5E7',
         grey: '#F5F5F5',
+        rust: '#C05325',
       },
       fontFamily: {
         sans: [
@@ -52,5 +53,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 }

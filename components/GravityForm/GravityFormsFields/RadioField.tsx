@@ -44,15 +44,21 @@ export default function RadioField({ field, fieldErrors }) {
         const text = input?.text || ''
         const inputValue = input?.value || ''
         return (
-          <div key={inputValue}>
+          <div className="mb-2 flex items-center" key={inputValue}>
             <input
+              className="h-5 w-5 !rounded-full !p-0 accent-navy focus-within:outline-lightBlue"
               type="radio"
               name={String(id)}
               id={`choice_${formId}_${id}_${inputValue}`}
               value={inputValue}
               onChange={handleChange}
             />
-            <label htmlFor={`choice_${formId}_${id}_${value}`}>{text}</label>
+            <label
+              className="p-label body-regular ml-3 text-navy"
+              htmlFor={`choice_${formId}_${id}_${value}`}
+            >
+              {text}
+            </label>
           </div>
         )
       })}

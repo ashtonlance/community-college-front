@@ -34,13 +34,13 @@ export default function SelectField({ field, fieldErrors }) {
   const value = fieldValue?.value || String(defaultValue)
 
   return (
-    <div className={`gfield w-[48%] gfield-${type} ${cssClass}`.trim()}>
+    <div className={`gfield  gfield-${type} ${cssClass} w-full`.trim()}>
       <label htmlFor={htmlId} className="gfield_label">
         {label}
         {isRequired ? <span className="text-rust">*</span> : null}
       </label>
       <select
-        className="secondary-btn p-regular text-emerald w-full border-[1.5px] border-black"
+        className="p-regular w-full rounded  px-[20px] py-[14px] text-navy accent-navy focus-within:outline-lightBlue focus:outline-lightBlue focus:ring-lightBlue active:outline-lightBlue"
         name={String(id)}
         id={htmlId}
         required={Boolean(isRequired)}

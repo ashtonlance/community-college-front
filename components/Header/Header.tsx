@@ -110,7 +110,6 @@ export const Header = (props: HeaderProps) => {
   const showAnnouncementBar = props.showAnnouncementBar ?? false
   const announcementBarText = props.announcementBarText ?? ''
   const [getCookie] = useCookies(['ncccs-announcement-bar'])
-  console.log('getCookie', getCookie)
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null

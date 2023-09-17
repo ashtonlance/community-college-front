@@ -25,7 +25,6 @@ export function Layout(props: LayoutProps) {
   const utilityNavigation = props?.utilityNavigation || []
   const footerNavigation = props?.footerNavigation || []
   const settings = props?.settings || []
-  console.log('settings', settings.announcementBar.showAnnouncementBar)
 
   return (
     <>
