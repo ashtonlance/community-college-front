@@ -1,9 +1,10 @@
-import Image from 'next/image'
-import quote from '../../assets/imgs/quote.svg'
+import Quote from '/assets/imgs/quote.svg'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { FadeIn } from 'components/FadeIn'
+import Image from 'next/image'
+
 export type MarginSizesType = 'none' | 'medium' | 'large'
 export type BackgroundColorType = 'white' | 'light' | 'dark'
 
@@ -23,7 +24,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
   const bgColorCard = attributes.data.background_color
   const marginBottom = attributes.data.component_spacing_bottom_spacing || null
   const marginTop = attributes.data.component_spacing_top_spacing || null
-  const bgColorFullModule = bgColorCard == 'white' ? 'bg-stone' : 'bg-white'
+  const bgColorFullModule = bgColorCard == 'white' ? 'bg-grey' : 'bg-white'
 
   const autoplay = useRef(
     Autoplay(
@@ -58,25 +59,23 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
   const createCarouselItem = (val, options = {}) => (
     <div
       key={`slide${val}`}
-      className={`flex flex-shrink-0 flex-grow-0 basis-full flex-col items-center justify-center`}
+      className={`flex flex-shrink-0 flex-grow-0 basis-full flex-col items-center justify-center overflow-hidden`}
     >
-      <Image src={quote} alt="" width={30} height={65} className="mb-[20px]" />
-      <p className="body-large mb-[40px] font-bold">
-        {attributes.data[`slide_${val}_quote`]}
-      </p>
+      <Quote className="mb-[40px] h-7 w-7 text-gold" />
+      <p className="h4 mb-10">{attributes.data[`slide_${val}_quote`]}</p>
       <div className="mb-[10px] flex flex-wrap items-center justify-center gap-2">
-        <p className="body-regular text-emerald font-bold sm:mb-0">
+        <p className="body-regular font-bold text-darkGrey sm:mb-0">
           {attributes.data[`slide_${val}_persons_name`]}
         </p>
         {attributes.data[`slide_${val}_persons_name`] &&
           attributes.data[`slide_${val}_job_title`] && (
-            <span className="text-emerald sm:hidden"> • </span>
+            <span className="text-darkGrey sm:hidden"> • </span>
           )}
-        <p className="body-regular text-emerald font-bold">
+        <p className="body-regular font-bold text-darkGrey">
           {attributes.data[`slide_${val}_job_title`]}
         </p>
       </div>
-      <h5 className="text-blue mb-[40px]">
+      <h5 className="mb-[40px] text-navy">
         {attributes.data[`slide_${val}_business_name`]}
       </h5>
     </div>
@@ -89,8 +88,14 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
   return (
     <FadeIn>
       <div
-        className={`w-full py-[100px] md:p-[60px] sm:p-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} bg-${bgColorCard}`}
+        className={`w-full py-[100px] md:p-[60px] sm:p-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} relative`}
       >
+        <Image
+          src={`/angles/angled-bg_${bgColorCard}-btm.jpg`}
+          fill
+          alt="background"
+          className="object-fill"
+        />
         <div
           className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center p-[80px] text-center md:w-full md:px-[32px] sm:p-[40px] ${bgColorFullModule}`}
         >
@@ -104,8 +109,8 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
               <div
                 className={`cursor-pointer ${
                   selectedIndex === index
-                    ? 'bg-green h-[10px] w-[10px] '
-                    : 'bg-sky h-2 w-2'
+                    ? 'h-[10px] w-[10px] bg-gold '
+                    : 'h-2 w-2 bg-beige'
                 } rounded-full`}
                 key={index}
                 onClick={() => scrollTo(index as any)}

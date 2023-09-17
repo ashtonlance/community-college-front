@@ -19,7 +19,7 @@ export const Testimonial = ({ attributes }) => {
               src={`/angles/angled-bg_${color}-btm.jpg`}
               fill
               alt="background"
-              className="absolute left-0 top-0 h-full w-full object-cover"
+              className="object-fill"
             />
             <div className="relative z-10">
               <p className="p-small relative top-[-40px] mx-auto w-fit rounded-b-xl bg-lightBlue px-4 py-2 text-navy md:mb-[24px] sm:mb-[20px]">
