@@ -10,7 +10,7 @@ export type LayoutProps = {
   seo?: any
   pageClassName?: string
   children: any
-  utilityNavigation: any
+  utilityNavigation?: any
   footerNavigation?: any
   settings?: any
 }

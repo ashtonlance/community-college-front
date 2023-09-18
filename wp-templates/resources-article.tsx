@@ -95,7 +95,7 @@ export default function ResourcesArticle(props: ResourcesArticleProps) {
             classes="bg-black py-[60px] px-[100px] sm:p-[40px] flex justify-between items-center gap-[60px] md:flex-col md:gap-[40px] md:text-center"
           />
         </div>
-        <RelatedResourcesByTaxonomy tags={tagIds} categories={categories} />
+        {/* <RelatedResourcesByTaxonomy tags={tagIds} categories={categories} /> */}
       </div>
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
