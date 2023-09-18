@@ -6,6 +6,8 @@ import Single from './single-event'
 import Events from './page-events'
 import Category from './category'
 import Tag from './tag'
+import CollegesAchive from './archive-colleges'
+import SingleCollege from './single-college'
 
 const templates = {
   'front-page': FrontPage,
@@ -16,6 +18,8 @@ const templates = {
   'page-all-resources': ResourcesIndex,
   'single-event': Single,
   'page-events': Events,
+  'archive-colleges': CollegesAchive,
+  'single-colleges': SingleCollege,
 }
 
 export default templates

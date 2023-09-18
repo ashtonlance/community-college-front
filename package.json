@@ -27,6 +27,7 @@
     "@faustwp/core": "^1.1.1",
     "@formspree/react": "^2.4.1",
     "@next/bundle-analyzer": "^13.4.12",
+    "@react-google-maps/api": "^2.19.2",
     "@simplefocus/prettier-config": "^1.0.3",
     "@storybook/addon-console": "^2.0.0",
     "@storybook/addons": "^7.0.23",

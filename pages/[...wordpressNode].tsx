@@ -1,5 +1,4 @@
 import { getWordPressProps, WordPressTemplate } from '@faustwp/core'
-import { GetServerSideProps } from 'next'
 
 export default function Page(props) {
   return <WordPressTemplate {...props} />

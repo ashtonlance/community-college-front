@@ -32,6 +32,7 @@ import { PageHeading } from '../components/PageHeading'
 import { WYSIWYG } from '../components/WYSIWYG'
 import { Form } from '../components/Form'
 import { MediaEmbed } from '../components/MediaEmbed'
+import { Location } from '../components/Location'
 
 type WordPressBlock = React.FC & {
   displayName?: string
@@ -40,6 +41,7 @@ type WordPressBlock = React.FC & {
     name: string
   }
 }
+
 const blocks = {
   Columns,
   Pullquote,
@@ -75,6 +77,7 @@ const blocks = {
   WYSIWYG,
   Form,
   MediaEmbed,
+  Location,
 }
 
 export default blocks

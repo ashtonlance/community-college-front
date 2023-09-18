@@ -244,3 +244,16 @@ table td {
   opacity: 0;
   pointer-events: none;
 }
+.map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.address-h4 *{
+  @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] text-navy font-condensed antialiased;
+}
+
+.address-body * {
+  @apply text-[18px] sm:text-[16px] leading-[160%] sm:leading-[150%] text-navy font-sans font-bold;
+}

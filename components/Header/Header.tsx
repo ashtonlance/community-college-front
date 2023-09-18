@@ -16,16 +16,16 @@ import { cn } from 'utils'
 import { isCurrentPage } from './NavigationItem'
 import { AnnouncementBar } from 'components/AnnouncementBar'
 import { useCookies } from 'react-cookie'
-const Modal = dynamic(
-  async () => {
-    const { Modal } = await import('components/Modal')
-    return { default: Modal }
-  },
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-)
+// const Modal = dynamic(
+//   async () => {
+//     const { Modal } = await import('components/Modal')
+//     return { default: Modal }
+//   },
+//   {
+//     ssr: false,
+//     loading: () => <p>Loading...</p>,
+//   }
+// )
 
 const Logo = ({ scrolled }) => {
   const NCCCSLogo = scrolled ? LogoShort : LogoTall
@@ -137,14 +137,18 @@ export const Header = (props: HeaderProps) => {
           {utilityNavigation && (
             <>
               <div className="flex items-center justify-center">
-                {utilityNavigation.slice(0, 4).map(item => (
-                  <UtilityItem key={item?.navItem?.title} item={item} />
-                ))}
+                {utilityNavigation
+                  .slice(0, 4)
+                  ?.map(item => (
+                    <UtilityItem key={item?.navItem?.title} item={item} />
+                  ))}
               </div>
               <div className="flex items-center justify-center">
-                {utilityNavigation.slice(4).map(item => (
-                  <UtilityItem key={item?.navItem?.title} item={item} />
-                ))}
+                {utilityNavigation
+                  .slice(4)
+                  ?.map(item => (
+                    <UtilityItem key={item?.navItem?.title} item={item} />
+                  ))}
               </div>
             </>
           )}

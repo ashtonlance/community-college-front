@@ -7,7 +7,6 @@ import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 const NOT_FOUND = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query NotFound {
     menu(id: "primary", idType: SLUG) {
       menuItems(first: 200) {
@@ -25,9 +24,11 @@ const NOT_FOUND = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
   }
@@ -46,10 +47,14 @@ export default function Custom404() {
   const menuItems = data?.menu?.menuItems || []
   const utilityNavigation = data?.menu?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
+  const footerMenuItems = data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
     >
       <div className="flex h-screen flex-col items-center justify-center gap-[20px]">
         <h1>404</h1>

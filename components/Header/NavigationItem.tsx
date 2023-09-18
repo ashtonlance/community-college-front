@@ -34,14 +34,14 @@ export const NavigationItem = ({
           <Link
             suppressHydrationWarning
             onClick={e => handleActiveItem(e, item.id)}
-            href={item.url}
+            href={item?.url || ''}
             className={cn(`
             main-nav group flex cursor-pointer flex-col items-center justify-center gap-2 pr-[30px]
             ${dropdownOpened ? 'active' : ''} ${
               transparentMode && 'text-white hover:text-black'
             }`)}
           >
-            {item.label}
+            {item?.label}
 
             <Stroke
               alt=""
@@ -93,9 +93,9 @@ export const NavigationItem = ({
       
     ${transparentMode ? 'text-white hover:text-black' : ''}
     `)}
-        href={item.url}
+        href={item?.url || ''}
       >
-        {item.label}
+        {item?.label}
       </Link>
       <Stroke
         alt=""

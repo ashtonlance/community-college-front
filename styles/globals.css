@@ -40,13 +40,13 @@
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
   .body-large {
-    @apply text-[18px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-black font-sans;
+    @apply text-[18px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-navy font-sans;
   }
   .body-regular {
-    @apply text-[16px] sm:text-[14px] font-medium leading-[150%] sm:leading-[140%] text-black font-sans;
+    @apply text-[16px] sm:text-[14px] font-medium leading-[150%] sm:leading-[140%] text-navy font-sans;
   }
   .body-small {
-    @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-black font-sans;
+    @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-navy font-sans;
   }
   .main-nav {
     @apply cursor-pointer p-4 pb-0 rounded-lg text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
@@ -64,10 +64,10 @@
     @apply cursor-pointer text-[20px] font-semibold tracking-[-0.02em] leading-[110%] text-white font-sans hover:text-grey;
   }
   .primary-btn {
-    @apply border-none cursor-pointer text-[20px] rounded-lg hover:border-gold hover:bg-gold hover:text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.06em] font-sans uppercase py-[18px] px-[24px] sm:py-[16px] sm:px-[22px];
+    @apply border-none text-navy cursor-pointer text-[20px] rounded-lg hover:border-gold hover:bg-gold hover:text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.06em] font-sans py-[18px] px-[24px] sm:py-[16px] sm:px-[22px];
   }
   .secondary-btn {
-    @apply border-none cursor-pointer text-base rounded-lg bg-gold text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
+    @apply border-none cursor-pointer text-base rounded-lg hover:bg-gold text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
   .filled-btn {
     @apply w-fit primary-btn bg-black text-white md:ml-[20px] sm:hidden border-none;
