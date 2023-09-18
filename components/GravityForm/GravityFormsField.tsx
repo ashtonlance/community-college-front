@@ -1,46 +1,47 @@
 import dynamic from 'next/dynamic'
 const AddressField = dynamic(() =>
   import('./GravityFormsFields/AddressField').then(mod => mod.default)
-)
+) as any
+
 const CheckboxField = dynamic(() =>
   import('./GravityFormsFields/CheckboxField').then(mod => mod.default)
-)
+) as any
 const DateField = dynamic(() =>
   import('./GravityFormsFields/DateField').then(mod => mod.default)
-)
+) as any
 const EmailField = dynamic(() =>
   import('./GravityFormsFields/EmailField').then(mod => mod.default)
-)
+) as any
 const MultiSelectField = dynamic(() =>
   import('./GravityFormsFields/MultiSelectField').then(mod => mod.default)
-)
+) as any
 const NameField = dynamic(() =>
   import('./GravityFormsFields/NameField').then(mod => mod.default)
-)
+) as any
 const PhoneField = dynamic(() =>
   import('./GravityFormsFields/PhoneField').then(mod => mod.default)
-)
+) as any
 const RadioField = dynamic(() =>
   import('./GravityFormsFields/RadioField').then(mod => mod.default)
-)
+) as any
 const SelectField = dynamic(() =>
   import('./GravityFormsFields/SelectField').then(mod => mod.default)
-)
+) as any
 const TextField = dynamic(() =>
   import('./GravityFormsFields/TextField').then(mod => mod.default)
-)
+) as any
 const TextAreaField = dynamic(() =>
   import('./GravityFormsFields/TextAreaField').then(mod => mod.default)
-)
+) as any
 const TimeField = dynamic(() =>
   import('./GravityFormsFields/TimeField').then(mod => mod.default)
-)
+) as any
 const WebsiteField = dynamic(() =>
   import('./GravityFormsFields/WebsiteField').then(mod => mod.default)
-)
+) as any
 const FileUploadField = dynamic(() =>
   import('./GravityFormsFields/FileUploadField').then(mod => mod.default)
-)
+) as any
 
 export default function GravityFormsField({ field, fieldErrors, formId }) {
   switch (field?.type?.toLowerCase()) {

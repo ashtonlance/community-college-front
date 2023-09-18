@@ -1523,6 +1523,172 @@ export type CheckboxInputProperty = GfFieldInput & GfFieldInputWithSelectAllChoi
   name?: Maybe<Scalars['String']['output']>;
 };
 
+/** The College type */
+export type College = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & {
+  __typename?: 'College';
+  /** Returns all blocks as a JSON object */
+  blocks?: Maybe<Scalars['JSON']['output']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  collegeId: Scalars['Int']['output'];
+  /** @deprecated Deprecated in favor of using Next.js pages */
+  conditionalTags?: Maybe<ConditionalTags>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** The globally unique identifier of the colleges object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /** Connection between the College type and the College type */
+  preview?: Maybe<CollegeToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The Yoast SEO data of the ContentNode */
+  seo?: Maybe<PostTypeSeo>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  templates?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The College type */
+export type CollegeContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The College type */
+export type CollegeEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The College type */
+export type CollegeEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The College type */
+export type CollegeTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** Connection to College Nodes */
+export type CollegeConnection = {
+  /** A list of edges (relational context) between RootQuery and connected College Nodes */
+  edges: Array<CollegeConnectionEdge>;
+  /** A list of connected College Nodes */
+  nodes: Array<College>;
+  /** Information about pagination in a connection. */
+  pageInfo: CollegeConnectionPageInfo;
+};
+
+/** Edge between a Node and a connected College */
+export type CollegeConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected College Node */
+  node: College;
+};
+
+/** Page Info on the connected CollegeConnectionEdge */
+export type CollegeConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Get information about the offset pagination state in the current connection */
+  offsetPagination?: Maybe<OffsetPaginationPageInfo>;
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum CollegeIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the College type and the College type */
+export type CollegeToPreviewConnectionEdge = CollegeConnectionEdge & Edge & OneToOneConnection & {
+  __typename?: 'CollegeToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: College;
+};
+
 /** A Comment object */
 export type Comment = DatabaseIdentifier & Node & {
   __typename?: 'Comment';
@@ -2504,6 +2670,8 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
   /** The Type of Content object */
+  Colleges = 'COLLEGES',
+  /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
   Post = 'POST'
@@ -2718,6 +2886,35 @@ export type CreateCategoryPayload = {
   category?: Maybe<Category>;
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
+};
+
+/** Input for the createCollege mutation. */
+export type CreateCollegeInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createCollege mutation. */
+export type CreateCollegePayload = {
+  __typename?: 'CreateCollegePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  college?: Maybe<College>;
 };
 
 /** Input for the createComment mutation. */
@@ -3160,6 +3357,29 @@ export type DeleteCategoryPayload = {
   category?: Maybe<Category>;
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+};
+
+/** Input for the deleteCollege mutation. */
+export type DeleteCollegeInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the College to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteCollege mutation. */
+export type DeleteCollegePayload = {
+  __typename?: 'DeleteCollegePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The object before it was deleted */
+  college?: Maybe<College>;
   /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']['output']>;
 };
@@ -7163,7 +7383,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Category | Page | Post | Tag;
+export type MenuItemObjectUnion = Category | College | Page | Post | Tag;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -14001,6 +14221,8 @@ export type RootMutation = {
   __typename?: 'RootMutation';
   /** The createCategory mutation */
   createCategory?: Maybe<CreateCategoryPayload>;
+  /** The createCollege mutation */
+  createCollege?: Maybe<CreateCollegePayload>;
   /** The createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
   /** The createMediaItem mutation */
@@ -14017,6 +14239,8 @@ export type RootMutation = {
   createUser?: Maybe<CreateUserPayload>;
   /** The deleteCategory mutation */
   deleteCategory?: Maybe<DeleteCategoryPayload>;
+  /** The deleteCollege mutation */
+  deleteCollege?: Maybe<DeleteCollegePayload>;
   /** The deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
   /** The deleteGfDraftEntry mutation */
@@ -14053,6 +14277,8 @@ export type RootMutation = {
   submitGfForm?: Maybe<SubmitGfFormPayload>;
   /** The updateCategory mutation */
   updateCategory?: Maybe<UpdateCategoryPayload>;
+  /** The updateCollege mutation */
+  updateCollege?: Maybe<UpdateCollegePayload>;
   /** The updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
   /** The updateGfDraftEntry mutation */
@@ -14079,6 +14305,12 @@ export type RootMutation = {
 /** The root mutation */
 export type RootMutationCreateCategoryArgs = {
   input: CreateCategoryInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateCollegeArgs = {
+  input: CreateCollegeInput;
 };
 
 
@@ -14127,6 +14359,12 @@ export type RootMutationCreateUserArgs = {
 /** The root mutation */
 export type RootMutationDeleteCategoryArgs = {
   input: DeleteCategoryInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteCollegeArgs = {
+  input: DeleteCollegeInput;
 };
 
 
@@ -14239,6 +14477,12 @@ export type RootMutationUpdateCategoryArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateCollegeArgs = {
+  input: UpdateCollegeInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateCommentArgs = {
   input: UpdateCommentInput;
 };
@@ -14306,6 +14550,15 @@ export type RootQuery = {
   categories?: Maybe<RootQueryToCategoryConnection>;
   /** A 0bject */
   category?: Maybe<Category>;
+  /** An object of the College Type.  */
+  college?: Maybe<College>;
+  /**
+   * A College object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  collegeBy?: Maybe<College>;
+  /** Connection between the RootQuery type and the College type */
+  colleges?: Maybe<RootQueryToCollegeConnection>;
   /** Returns a Comment */
   comment?: Maybe<Comment>;
   /** Connection between the RootQuery type and the Comment type */
@@ -14397,6 +14650,8 @@ export type RootQuery = {
   revisions?: Maybe<RootQueryToRevisionsConnection>;
   /** Returns seo site data */
   seo?: Maybe<SeoConfig>;
+  /** Settings options. */
+  settings?: Maybe<Settings>;
   /** A 0bject */
   tag?: Maybe<Tag>;
   /** Connection between the RootQuery type and the tag type */
@@ -14442,6 +14697,33 @@ export type RootQueryCategoriesArgs = {
 export type RootQueryCategoryArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<CategoryIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCollegeArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<CollegeIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCollegeByArgs = {
+  collegeId?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryCollegesArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToCollegeConnectionWhereArgs>;
 };
 
 
@@ -14927,6 +15209,129 @@ export type RootQueryToCategoryConnectionWhereArgs = {
   /** Whether to prime meta caches for matched terms. Default true. */
   updateTermMetaCache?: InputMaybe<Scalars['Boolean']['input']>;
 };
+
+/** Connection between the RootQuery type and the College type */
+export type RootQueryToCollegeConnection = CollegeConnection & Connection & {
+  __typename?: 'RootQueryToCollegeConnection';
+  /** Edges for the RootQueryToCollegeConnection connection */
+  edges: Array<RootQueryToCollegeConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<College>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToCollegeConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToCollegeConnectionEdge = CollegeConnectionEdge & Edge & {
+  __typename?: 'RootQueryToCollegeConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: College;
+};
+
+/** Page Info on the &quot;RootQueryToCollegeConnection&quot; */
+export type RootQueryToCollegeConnectionPageInfo = CollegeConnectionPageInfo & PageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToCollegeConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** Get information about the offset pagination state in the current connection */
+  offsetPagination?: Maybe<OffsetPaginationPageInfo>;
+  /** Raw schema for page */
+  seo?: Maybe<SeoPostTypePageInfo>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToCollegeConnection connection */
+export type RootQueryToCollegeConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  metaQuery?: InputMaybe<RootQueryToCollegeConnectionWhereArgsMetaQuery>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Paginate Colleges with offsets */
+  offsetPagination?: InputMaybe<OffsetPagination>;
+  /** What paramater to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type RootQueryToCollegeConnectionWhereArgsMetaArray = {
+  /** Custom field value */
+  compare?: InputMaybe<RootQueryToCollegeConnectionWhereArgsMetaCompareEnum>;
+  /** Custom field key */
+  key?: InputMaybe<Scalars['String']['input']>;
+  /** Custom field value */
+  type?: InputMaybe<RootQueryToCollegeConnectionWhereArgsMetaTypeEnum>;
+  /** Custom field value */
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum RootQueryToCollegeConnectionWhereArgsMetaCompareEnum {
+  Between = 'BETWEEN',
+  EqualTo = 'EQUAL_TO',
+  Exists = 'EXISTS',
+  GreaterThan = 'GREATER_THAN',
+  GreaterThanOrEqualTo = 'GREATER_THAN_OR_EQUAL_TO',
+  In = 'IN',
+  LessThan = 'LESS_THAN',
+  LessThanOrEqualTo = 'LESS_THAN_OR_EQUAL_TO',
+  Like = 'LIKE',
+  NotBetween = 'NOT_BETWEEN',
+  NotEqualTo = 'NOT_EQUAL_TO',
+  NotExists = 'NOT_EXISTS',
+  NotIn = 'NOT_IN',
+  NotLike = 'NOT_LIKE'
+}
+
+export type RootQueryToCollegeConnectionWhereArgsMetaQuery = {
+  metaArray?: InputMaybe<Array<InputMaybe<RootQueryToCollegeConnectionWhereArgsMetaArray>>>;
+  relation?: InputMaybe<RelationEnum>;
+};
+
+export enum RootQueryToCollegeConnectionWhereArgsMetaTypeEnum {
+  Binary = 'BINARY',
+  Char = 'CHAR',
+  Date = 'DATE',
+  Datetime = 'DATETIME',
+  Decimal = 'DECIMAL',
+  Numeric = 'NUMERIC',
+  Signed = 'SIGNED',
+  Time = 'TIME',
+  Unsigned = 'UNSIGNED'
+}
 
 /** Connection between the RootQuery type and the Comment type */
 export type RootQueryToCommentConnection = CommentConnection & Connection & {
@@ -16594,6 +16999,7 @@ export type SeoContentTypeArchive = {
 /** The Yoast SEO search appearance content types */
 export type SeoContentTypes = {
   __typename?: 'SEOContentTypes';
+  college?: Maybe<SeoContentType>;
   mediaItem?: Maybe<SeoContentType>;
   page?: Maybe<SeoContentType>;
   post?: Maybe<SeoContentType>;
@@ -16962,45 +17368,30 @@ export type SendPasswordResetEmailPayload = {
   user?: Maybe<User>;
 };
 
-/** All of the registered settings */
+/** Settings options. */
 export type Settings = {
   __typename?: 'Settings';
-  /** Settings of the the string Settings Group */
-  discussionSettingsDefaultCommentStatus?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  discussionSettingsDefaultPingStatus?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsDateFormat?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsDescription?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsEmail?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsLanguage?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the integer Settings Group */
-  generalSettingsStartOfWeek?: Maybe<Scalars['Int']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsTimeFormat?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsTimezone?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsTitle?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the string Settings Group */
-  generalSettingsUrl?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the integer Settings Group */
-  readingSettingsPageForPosts?: Maybe<Scalars['Int']['output']>;
-  /** Settings of the the integer Settings Group */
-  readingSettingsPageOnFront?: Maybe<Scalars['Int']['output']>;
-  /** Settings of the the integer Settings Group */
-  readingSettingsPostsPerPage?: Maybe<Scalars['Int']['output']>;
-  /** Settings of the the string Settings Group */
-  readingSettingsShowOnFront?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the integer Settings Group */
-  writingSettingsDefaultCategory?: Maybe<Scalars['Int']['output']>;
-  /** Settings of the the string Settings Group */
-  writingSettingsDefaultPostFormat?: Maybe<Scalars['String']['output']>;
-  /** Settings of the the boolean Settings Group */
-  writingSettingsUseSmilies?: Maybe<Scalars['Boolean']['output']>;
+  pageSlug?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;Site Settings&quot; was set to Show in GraphQL. */
+  siteSettings?: Maybe<Settings_Sitesettings>;
+};
+
+/** Field Group */
+export type Settings_Sitesettings = AcfFieldGroup & {
+  __typename?: 'Settings_Sitesettings';
+  announcementBar?: Maybe<Settings_Sitesettings_AnnouncementBar>;
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+};
+
+/** Field Group */
+export type Settings_Sitesettings_AnnouncementBar = AcfFieldGroup & {
+  __typename?: 'Settings_Sitesettings_AnnouncementBar';
+  announcementBarText?: Maybe<Scalars['String']['output']>;
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  showAnnouncementBar?: Maybe<Scalars['String']['output']>;
 };
 
 /** A Gravity Forms shipping field. */
@@ -18577,6 +18968,39 @@ export type UpdateCategoryPayload = {
   category?: Maybe<Category>;
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
+};
+
+/** Input for the updateCollege mutation. */
+export type UpdateCollegeInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the College object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateCollege mutation. */
+export type UpdateCollegePayload = {
+  __typename?: 'UpdateCollegePayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  college?: Maybe<College>;
 };
 
 /** Input for the updateComment mutation. */
