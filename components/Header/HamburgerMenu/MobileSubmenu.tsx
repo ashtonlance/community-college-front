@@ -5,7 +5,7 @@ import arrowleft from '../../../assets/icons/arrow-left.svg'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { AboutMenu } from '../MegaMenu/AboutMenu'
-import { ServicesMenu } from '../MegaMenu/TwoColumnMenu'
+import { TwoColumnMenu } from '../MegaMenu/TwoColumnMenu'
 import { ResourcesMenu } from '../MegaMenu/ResourcesMenu'
 import { Modal } from 'components/Modal'
 import { Login } from 'components/Modal/Login'
@@ -76,10 +76,10 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
               {activeMenu?.label}
             </Link>
             <Separator classes="relative bg-gmt-400 h-[1.5px] w-[40px] z-10" />
-            <ServicesMenu
+            {/* <ServicesMenu
               classes="pt-[32px] sm:pt-0"
               subItems={activeMenu.navigationMenu.items}
-            />
+            /> */}
           </div>
         )
         break
