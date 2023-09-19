@@ -37,7 +37,6 @@ export const LandingHero = ({
       <div className="landing-hero-text ml-[15%] mr-[35%] flex w-[50%] flex-col md:mx-[100px] md:w-full sm:mx-[40px]">
         {subheading && (
           <div className="mb-[32px] flex items-center gap-[15px]">
-            <GuideLine />
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {subheading}
             </h2>
@@ -53,7 +52,6 @@ export const LandingHero = ({
             {ctaLabel}
           </Link>
         )}
-        d
       </div>
     </div>
   )

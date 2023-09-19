@@ -6,8 +6,9 @@ const center = {
   lng: -38.523,
 }
 const containerStyle = {
-  width: '400px',
-  height: '400px',
+  width: '100%',
+  height: '450px',
+  borderRadius: '12px',
 }
 
 const MapInternal = GoogleMap as any
@@ -33,16 +34,18 @@ export const Map = () => {
   }, [])
 
   return isLoaded ? (
-    <MapInternal
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={10}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    >
-      {/* Child components, such as markers, info windows, etc. */}
-      <></>
-    </MapInternal>
+    <div className="w-full px-[100px] pb-[60px]">
+      <MapInternal
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={8}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        <></>
+      </MapInternal>
+    </div>
   ) : (
     <></>
   )

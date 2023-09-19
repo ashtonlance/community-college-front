@@ -1,17 +1,20 @@
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
-import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
-import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
-import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
-import { FeaturedResource } from 'components/FeaturedResource'
-import { useRouter } from 'next/router'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
+import { Map } from '@/components/Map'
+import parseDMS from 'parse-dms'
+import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { GeneralCard } from '@/components/Cards'
 
 type CollegesIndexProps = {
   data: {
     nodeByUri: {
       seo: {}
+    }
+    colleges: {
+      seo: {}
+      nodes: [any: any]
     }
     menus: {
       nodes: {}
@@ -22,47 +25,61 @@ type CollegesIndexProps = {
         navigationItems: {}
       }
     }
+    footer: {
+      menuItems: {}
+    }
+    settings: {
+      siteSettings: {
+        announcementBar: {
+          announcementBarText: string
+          showAnnouncementBar: boolean
+        }
+      }
+    }
   }
   loading: boolean
 }
 
 export default function CollegesArchive(props: CollegesIndexProps) {
-  const router = useRouter()
-
   if (props.loading) {
     return <>Loading...</>
   } else {
     const menuItems = props.data?.menu?.menuItems || []
-    const collegesIndex = props.data?.nodeByUri
-    const preFooterContent = props.data?.menus.nodes[0]
-    const { page } = router.query
-    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+    const collegesIndex = props.data?.colleges
+    // const preFooterContent = props.data?.menus.nodes[0]
+    const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
     const utilityNavigation =
       props.data?.menu?.utilityNavigation?.navigationItems
+    const footerMenuItems = props.data?.footer?.menuItems || []
+    const hierarchicalFooterMenuItems =
+      flatListToHierarchical(footerMenuItems as any) || []
+    const settings = props.data?.settings?.siteSettings || []
+    const colleges = props.data?.colleges?.nodes || []
+
     return (
       <Layout
-        menuItems={menuItems}
+        menuItems={hierarchicalMenuItems}
         seo={collegesIndex?.seo}
         utilityNavigation={utilityNavigation}
+        footerNavigation={hierarchicalFooterMenuItems}
+        settings={settings}
       >
-        <div className="flex justify-end border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
-          <div className="wrapper-default-inner-pages w-[70%] md:w-full">
-            <ResourcesTypeHero
-              title="All Resources"
-              breadcrumbPosition="root"
-            />
-            <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
-              <ResourcesSidebar />
-            </div>
-            {currentPage === 1 && <FeaturedResource />}
-            <PaginatedResources currentPage={currentPage} />
-          </div>
-          <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
-            <ResourcesSidebar />
-          </div>
-        </div>
+        <DefaultHero
+          heading="Colleges"
+          description="Optional Paragraph Large description area. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        />
+        <Map></Map>
+        {/* {preFooterContent && <PreFooter preFooterContent={preFooterContent} />} */}
+        <div className="grid grid-cols-3 gap-x-5 gap-y-[10px] bg-grey px-[100px] py-[10px] ">
+          {colleges.map((college, index) => {
+            // console.log(
+            //   parseDMS(
+            //     `${college.collegeDetails.coordinates.lat} ${college.collegeDetails.coordinates.lng}`
+            //   )
 
-        {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+            return <GeneralCard key={index} card={college} />
+          })}
+        </div>
       </Layout>
     )
   }
@@ -74,18 +91,26 @@ CollegesArchive.variables = ({ uri }) => {
 
 CollegesArchive.query = gql`
   ${Header.fragments.entry}
-  query CollegesArchive($uri: String!) {
-    nodeByUri(uri: $uri) {
-      ... on ContentType {
-        label
-        description
-        contentNodes {
-          nodes {
-            databaseId
-            uri
-            ... on NodeWithTitle {
-              title
-            }
+  query CollegesArchive {
+    colleges {
+      nodes {
+        title
+        uri
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        seo {
+          fullHead
+        }
+        collegeDetails {
+          name
+          physicalAddress
+          phoneNumber
+          coordinates {
+            lat
+            lng
           }
         }
       }

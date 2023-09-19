@@ -1528,6 +1528,8 @@ export type College = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node
   __typename?: 'College';
   /** Returns all blocks as a JSON object */
   blocks?: Maybe<Scalars['JSON']['output']>;
+  /** Added to the GraphQL Schema because the ACF Field Group &quot;College&quot; was set to Show in GraphQL. */
+  collegeDetails?: Maybe<College_Collegedetails>;
   /**
    * The id field matches the WP_Post-&gt;ID field.
    * @deprecated Deprecated in favor of the databaseId field
@@ -1687,6 +1689,23 @@ export type CollegeToPreviewConnectionEdge = CollegeConnectionEdge & Edge & OneT
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: College;
+};
+
+/** Field Group */
+export type College_Collegedetails = AcfFieldGroup & {
+  __typename?: 'College_Collegedetails';
+  aboutTheCollege?: Maybe<Scalars['String']['output']>;
+  collegeCode?: Maybe<Scalars['String']['output']>;
+  county?: Maybe<Scalars['String']['output']>;
+  faxNumber?: Maybe<Scalars['String']['output']>;
+  /** The name of the ACF Field Group */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  linkToApply?: Maybe<AcfLink>;
+  linkToWebsite?: Maybe<AcfLink>;
+  mailingAddress?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  physicalAddress?: Maybe<Scalars['String']['output']>;
 };
 
 /** A Comment object */
