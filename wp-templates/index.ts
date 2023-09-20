@@ -18,7 +18,7 @@ const templates = {
   'page-all-resources': ResourcesIndex,
   'single-event': Single,
   'page-events': Events,
-  'archive-colleges': CollegesAchive,
+  'page-colleges': CollegesAchive,
   'single-colleges': SingleCollege,
 }
 

@@ -55,6 +55,7 @@
     "next": "^13.3.0",
     "next-sitemap": "^4.0.7",
     "numeral": "^2.0.6",
+    "parse-dms": "^0.0.5",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "query-string": "^8.1.0",
     "react": "^18.2.0",

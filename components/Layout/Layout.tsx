@@ -2,6 +2,7 @@ import { Header, HeaderVariant } from '../Header'
 import { Footer } from '../Footer'
 import Head from 'next/head'
 import { cn } from 'utils/index'
+import parse from 'html-react-parser'
 
 export type LayoutProps = {
   menuItems?: any
@@ -25,7 +26,7 @@ export function Layout(props: LayoutProps) {
   const utilityNavigation = props?.utilityNavigation || []
   const footerNavigation = props?.footerNavigation || []
   const settings = props?.settings || []
-
+  const fullHead = props?.seo?.fullHead ? parse(props?.seo?.fullHead) : ''
   return (
     <>
       <Head>
@@ -41,6 +42,7 @@ export function Layout(props: LayoutProps) {
           rel="dns-prefetch"
           href={process.env.NEXT_PUBLIC_WORDPRESS_URL}
         ></link>
+        {fullHead}
       </Head>
       <Header
         menuItems={menuItems}
