@@ -46,7 +46,7 @@ const DownloadButton = ({ description }) => {
       <button
         type="submit"
         className={cn(
-          `primary-btn text-emerald flex gap-[11px] bg-navy ${
+          `primary-btn navy ${
             active ? 'active' : 'inactive cursor-not-allowed opacity-[0.75]'
           }`
         )}
@@ -66,7 +66,7 @@ const DownloadButton = ({ description }) => {
 const ArrowButton = () => {
   return (
     <button
-      className="primary-btn bg-navy"
+      className="primary-btn navy"
       type="submit"
       aria-label="Submit form"
     >
@@ -92,7 +92,7 @@ const DefaultButton = ({ loading, form, disclaimer = null }) => {
     <div className="submit-gravity-form flex gap-[40px]">
       <button
         type="submit"
-        className={`primary-btn group flex w-fit items-center justify-center gap-[11px] border-[1.5px] bg-navy text-white`}
+        className={`primary-btn group outline navy`}
         disabled={loading}
         aria-label="Submit form"
       >

@@ -7,7 +7,6 @@ import { Heading } from '../components/Heading'
 import { Paragraph } from '../components/Paragraph'
 import { List } from '../components/List'
 import { Hero } from '../components/Hero'
-import { EventHero } from '../components/Hero/EventHero'
 import Image from '../components/Image'
 import { Gallery } from '../components/Gallery'
 import { Video } from '../components/Video'
@@ -23,11 +22,8 @@ import { CTABanner } from '../components/CTABanner'
 import { GeneralCards } from '../components/GeneralCards'
 import { FeaturesAndBenefits } from '../components/FeaturesAndBenefits'
 import { RelatedResources } from '../components/RelatedResources'
-import { TeamMembers } from '../components/TeamMembers'
 import { ContactBlock } from '../components/ContactBlock'
 import { TestimonialSlider } from '../components/TestimonialSlider'
-import { FeaturedResource } from '../components/FeaturedResource'
-import { ResourceDownload } from '../components/ResourceDownload'
 import { PageHeading } from '../components/PageHeading'
 import { WYSIWYG } from '../components/WYSIWYG'
 import { Form } from '../components/Form'
@@ -52,7 +48,6 @@ const blocks = {
   Paragraph,
   Image,
   Hero,
-  EventHero,
   TextBlock,
   StatsBlock,
   Testimonial,
@@ -61,12 +56,9 @@ const blocks = {
   GeneralCards,
   RelatedResources,
   TextAndImageBlock,
-  TeamMembers,
   ContactBlock,
   FeaturesAndBenefits,
   TestimonialSlider,
-  FeaturedResource,
-  ResourceDownload,
   List,
   Shortcode,
   Video,

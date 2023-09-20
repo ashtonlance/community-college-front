@@ -54,7 +54,6 @@ export const MegaMenu = ({ item, handleActiveItem, activeItem }) => {
       return (
         <ResourcesMenu
           handleActiveItem={handleActiveItem}
-          featuredResource={item.navigationMenu.featuredResource}
           subItems={subItems}
         />
       )

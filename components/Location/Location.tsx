@@ -3,14 +3,18 @@ import Link from 'next/link'
 import LocationIcon from '/assets/icons/location.svg'
 
 export const Location = ({ attributes }) => {
-  const title = attributes.data.title
-  const address = attributes.data.address
-  const map = attributes.data.map
-  const directionsLink = attributes.data.directions_link || ''
-  const mailingAddress = attributes.data.mailing_address || ''
+  const title = attributes.data.title;
+  const address = attributes.data.address;
+  const map = attributes.data.map;
+  const directionsLink = attributes.data.directions_link || '';
+  const mailingAddress = attributes.data.mailing_address || '';
+  const spaceTop = attributes?.data?.component_spacing_top_spacing;
+  const spaceBottom = attributes?.data?.component_spacing_bottom_spacing;
+
+  console.log({attributes})
 
   return (
-    <div className="flex h-fit w-full p-[100px] sm:max-h-fit sm:flex-col">
+    <div className={`module-spacing-bottom-${spaceBottom}  module-spacing-top-${spaceTop} flex h-fit w-full p-[100px] sm:max-h-fit sm:flex-col"`}>
       <div className="flex w-[50%] flex-col md:mx-auto sm:w-full">
         <div className="h5 mb-[27px] flex items-center text-darkGrey">
           <LocationIcon className="mr-[10px] h-[22px] w-[22px] text-gold" />

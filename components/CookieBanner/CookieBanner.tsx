@@ -49,7 +49,7 @@ export const CookieBanner = () => {
           </div>
           <div className="flex items-center">
             <button
-              className="secondary-btn bg-emerald whitespace-nowrap text-white"
+              className="secondary-btn navy"
               onClick={onClick}
             >
               Ok

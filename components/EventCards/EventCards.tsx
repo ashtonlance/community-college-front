@@ -6,7 +6,6 @@ export const EventCards = props => {
     post =>
       post?.blocks?.find(
         postBlock =>
-          postBlock?.name === 'nextword/externalevent' ||
           postBlock?.name === 'nextword/heroevent'
       )
   )

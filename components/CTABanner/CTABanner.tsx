@@ -18,7 +18,7 @@ export const CTABanner = ({ attributes }) => {
     return (
       <FadeIn>
         <div
-          className={`bg-${bgColor} px-[105px] py-[80px] md:p-[60px] module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} relative`}
+          className={`bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} relative`}
         >
           <Image
             src={`/angles/angled-bg_${type}-cta_${bgImageColor}.jpg`}
@@ -50,8 +50,8 @@ export const CTABanner = ({ attributes }) => {
               classes={cn(
                 `  w-fit whitespace-nowrap h-fit ${
                   hasCard
-                    ? 'secondary-btn bg-navy text-white'
-                    : 'primary-btn  bg-white'
+                    ? 'secondary-btn navy'
+                    : 'primary-btn  white'
                 }`
               )}
               linkto={btn_link}
@@ -64,7 +64,7 @@ export const CTABanner = ({ attributes }) => {
     return (
       <FadeIn>
         <div
-          className={`bg-white p-[100px] md:p-[60px] module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} `}
+          className={`bg-white module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
         >
           <div className="relative overflow-hidden rounded-xl px-[105px] py-[80px] md:p-[60px]">
             <Image
@@ -78,7 +78,7 @@ export const CTABanner = ({ attributes }) => {
               <Button
                 content={btn_label}
                 arrow={true}
-                classes="primary-btn bg-white w-fit whitespace-nowrap h-fit"
+                classes="primary-btn white"
                 linkto={btn_link}
               />
             </div>

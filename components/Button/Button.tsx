@@ -33,8 +33,9 @@ export const Button = ({
     const buttonLabel = attributes.data.button_label
     const buttonLink = attributes.data.button_link['url']
     const alignment = attributes.data.button_alignment
-    const buttonColor = attributes.data.button_background || 'green'
+    const buttonColor = attributes.data.button_background || 'navy'
     const target = attributes.data.button_link['target']
+    console.log({attributes})
     return (
       <div>
         <div
@@ -43,7 +44,7 @@ export const Button = ({
         >
           <Link
             href={buttonLink}
-            className={`primary-btn bg-${buttonColor} hover:bg-stone hover:text-emerald border-emerald w-fit items-center justify-center border-[1.5px] text-white ${classes} flex gap-[11px]`}
+            className={`${buttonColor} ${classes}`}
             suppressHydrationWarning
             target={target}
           >

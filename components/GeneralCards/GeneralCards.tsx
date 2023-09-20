@@ -61,7 +61,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     }}
                   />
                   <Link
-                    className="outline-btn mx-auto py-[14px]"
+                    className="secondary-btn outline-btn navy mx-auto py-[14px]"
                     href={attributes.data[`card_${card}_button_url`]}
                   >
                     {attributes.data[`card_${card}_button_label`]}

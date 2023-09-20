@@ -111,7 +111,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
   return (
     <div className={`bg-${background}`}>
       <div
-        className={`mx-auto my-[40px] flex w-[90%] max-w-[1220px] flex-col items-center sm:my-[32px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
+        className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
         <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
           <h5>{heading}</h5>

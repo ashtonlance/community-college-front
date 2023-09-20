@@ -7,12 +7,12 @@ export const StatsBlock = ({ attributes }) => {
   const title = attributes.data.stats_title
   const copy = attributes.data.stats_copy
   const items = attributes.data.stats
-  const marginBottom = attributes.data.component_spacing_bottom_spacing
-  const marginTop = attributes.data.component_spacing_top_spacing
+  const spaceBottom = attributes.data.component_spacing_bottom_spacing
+  const spaceTop = attributes.data.component_spacing_top_spacing
   const splitTitle = title.split('-')
   return (
     <FadeIn>
-      <div className={cn(`bg-navy flex flex-col items-center justify-center gap-y-[50px] p-[80px] pb-[100px] px-[150px] sm:gap-y-[10px] sm:p-[40px] relative module-margin-top-${marginTop} module-margin-bottom-${marginBottom}`)}>
+      <div className={cn(`bg-navy flex flex-col items-center justify-center gap-y-[50px] sm:gap-y-[10px] relative module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`)}>
         <Image
           className="pointer-events-none object-fill object-center"
           src={bg}
