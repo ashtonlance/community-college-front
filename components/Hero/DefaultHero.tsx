@@ -1,6 +1,5 @@
-import { HeroPropsType } from './HomeHero'
+import { HeroPropsType } from './LandingHero'
 import Link from 'next/link'
-import { GuideLine } from '../AnimatedLines/GuideLine'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useRouter } from 'next/router'

@@ -1,9 +1,8 @@
 import { DefaultHero } from './DefaultHero'
-import { HomeHero } from './HomeHero'
 import { LandingHero } from './LandingHero'
 import { ScrollIndicator } from './ScrollIndicator'
 
-export type heroTypeProp = 'home' | 'landing' | 'default'
+export type heroTypeProp = 'landing' | 'default'
 
 type HeroAttributesProps = {
   attributes: {
@@ -32,22 +31,6 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
   const position = attributes.data.background_image_position
 
   switch (heroType) {
-    case 'home':
-      return (
-        <div className="relative">
-          <HomeHero
-            bgColor={bgColor}
-            bgImg={bgImg}
-            subheading={subheading}
-            description={description}
-            heading={heading}
-            ctaLabel={ctaLabel}
-            ctaURL={ctaURL}
-            bgPosition={position}
-          />
-          <ScrollIndicator />
-        </div>
-      )
     case 'landing':
       return (
         <div className="relative">

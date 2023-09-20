@@ -1,7 +1,17 @@
-import { HeroPropsType } from './HomeHero'
 import Link from 'next/link'
-import { GuideLine } from '../AnimatedLines/GuideLine'
 import Image from 'next/image'
+
+
+export type HeroPropsType = {
+  bgColor?: string
+  bgImg?: string
+  subheading?: string
+  description?: string
+  heading: string
+  ctaLabel?: string
+  ctaURL?: string
+  bgPosition?: string
+}
 
 export const LandingHero = ({
   bgColor,
