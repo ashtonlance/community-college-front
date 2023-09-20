@@ -109,7 +109,7 @@
     @apply text-gmt-500;
   }
   .pagination-item {
-    @apply flex cursor-pointer w-[40px] h-[40px] text-[20px] sm:text-[16px] rounded-lg justify-center items-center font-bold leading-[160%] sm:leading-[150%] text-gmt-400 font-sans hover:bg-gmt-200 hover:text-black;
+    @apply flex cursor-pointer w-[40px] h-[40px] text-[20px] sm:text-[16px] rounded-lg justify-center items-center font-bold leading-[160%] sm:leading-[150%] text-darkBeige font-sans hover:bg-grey hover:text-navy;
   }
   .single-page-resource-excerpt p {
     @apply body-large text-gmt-400;

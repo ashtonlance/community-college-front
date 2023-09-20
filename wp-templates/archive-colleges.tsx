@@ -3,15 +3,17 @@ import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { Map } from '@/components/Map'
-import parseDMS from 'parse-dms'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
-import { GeneralCard } from '@/components/Cards'
+import { useRouter } from 'next/router'
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { CTABanner } from '@/components/CTABanner'
 
 type CollegesIndexProps = {
   data: {
     nodeByUri: {
       seo: {}
     }
+    collegeIndex: any
     colleges: {
       seo: {}
       nodes: [any: any]
@@ -40,12 +42,26 @@ type CollegesIndexProps = {
   loading: boolean
 }
 
+function getCoordinates(colleges: any[]) {
+  return colleges.map(college => {
+    const { title: name } = college
+    const { phoneNumber } = college.collegeDetails
+    const {
+      latitude: lat,
+      longitude: lng,
+      streetAddress,
+    } = college.collegeDetails.map
+    return { lat, lng, name, streetAddress, phoneNumber }
+  })
+}
+
 export default function CollegesArchive(props: CollegesIndexProps) {
+  const router = useRouter()
   if (props.loading) {
     return <>Loading...</>
   } else {
     const menuItems = props.data?.menu?.menuItems || []
-    const collegesIndex = props.data?.colleges
+    const collegesIndex = props.data?.collegeIndex?.collegeIndex || []
     // const preFooterContent = props.data?.menus.nodes[0]
     const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
     const utilityNavigation =
@@ -55,6 +71,20 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       flatListToHierarchical(footerMenuItems as any) || []
     const settings = props.data?.settings?.siteSettings || []
     const colleges = props.data?.colleges?.nodes || []
+    const { page } = router.query
+    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+    const coordinates = getCoordinates(colleges)
+    const ctaAttributes = {
+      data: {
+        cta_copy: collegesIndex?.cta?.heading,
+        button_link: collegesIndex?.cta?.link?.url,
+        button_target: collegesIndex?.cta?.link?.target,
+        button_label: collegesIndex?.cta?.link?.title,
+        background_color: 'gold',
+        type: 'fullWidth',
+        hasCard: true,
+      },
+    }
 
     return (
       <Layout
@@ -65,21 +95,15 @@ export default function CollegesArchive(props: CollegesIndexProps) {
         settings={settings}
       >
         <DefaultHero
-          heading="Colleges"
-          description="Optional Paragraph Large description area. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          heading={collegesIndex?.heroTitle}
+          description={collegesIndex?.heroDescription}
         />
-        <Map></Map>
+        <Map coordinates={coordinates} />
         {/* {preFooterContent && <PreFooter preFooterContent={preFooterContent} />} */}
-        <div className="grid grid-cols-3 gap-x-5 gap-y-[10px] bg-grey px-[100px] py-[10px] ">
-          {colleges.map((college, index) => {
-            // console.log(
-            //   parseDMS(
-            //     `${college.collegeDetails.coordinates.lat} ${college.collegeDetails.coordinates.lng}`
-            //   )
-
-            return <GeneralCard key={index} card={college} />
-          })}
+        <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
+          <PaginatedPosts currentPage={currentPage} />
         </div>
+        <CTABanner attributes={ctaAttributes} />
       </Layout>
     )
   }
@@ -92,25 +116,17 @@ CollegesArchive.variables = ({ uri }) => {
 CollegesArchive.query = gql`
   ${Header.fragments.entry}
   query CollegesArchive {
-    colleges {
-      nodes {
-        title
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-        seo {
-          fullHead
-        }
-        collegeDetails {
-          name
-          physicalAddress
-          phoneNumber
-          coordinates {
-            lat
-            lng
+    collegeIndex: page(id: "/what-we-offer/colleges/", idType: URI) {
+      collegeIndex {
+        heroDescription
+        heroTitle
+        cta {
+          fieldGroupName
+          heading
+          link {
+            target
+            title
+            url
           }
         }
       }

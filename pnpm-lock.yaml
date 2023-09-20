@@ -110,9 +110,6 @@ dependencies:
   numeral:
     specifier: ^2.0.6
     version: 2.0.6
-  parse-dms:
-    specifier: ^0.0.5
-    version: 0.0.5
   prettier-plugin-tailwindcss:
     specifier: ^0.5.4
     version: 0.5.4(prettier@3.0.3)
@@ -15230,10 +15227,6 @@ packages:
       pbkdf2: 3.1.2
       safe-buffer: 5.2.1
     dev: true
-
-  /parse-dms@0.0.5:
-    resolution: {integrity: sha512-4mIie3rQi8ovjulOsAuVddenvZJev0E/fv7MLdwvmWITakbaoKNtbmCMff2i10I/nkV6BkW4PXe7ZwhuSHD90g==}
-    dev: false
 
   /parse-filepath@1.0.2:
     resolution: {integrity: sha512-FwdRXKCohSVeXqwtYonZTXtbGJKrn+HNyWDYVcp5yuJlesTwNH4rsmRZ+GrKAPJ5bLpRxESMeS+Rl0VCHRvB2Q==}

@@ -5,6 +5,7 @@ import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
 import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
+
 import { useRouter } from 'next/router'
 
 type TagProps = {
@@ -48,7 +49,7 @@ export default function Tag(props: TagProps) {
             <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
               <ResourcesSidebar selectedTaxonomy={tagSlug} />
             </div>
-            <PaginatedResources tagName={tagSlug} currentPage={currentPage} />
+            <PaginatedPosts tagName={tagSlug} currentPage={currentPage} />
           </div>
           <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar selectedTaxonomy={tagName} />
