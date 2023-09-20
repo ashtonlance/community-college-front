@@ -15,7 +15,7 @@ export const CTABanner = ({ attributes }) => {
     return (
       <FadeIn>
         <div
-          className={`bg-${bgColor} px-[105px] py-[80px] md:p-[60px] module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} relative`}
+          className={`bg-${bgColor} px-[105px] py-[80px] md:p-[60px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} relative`}
         >
           <Image
             src={`/angles/angled-bg_${type}-cta_${bgImageColor}.jpg`}
@@ -41,7 +41,7 @@ export const CTABanner = ({ attributes }) => {
     return (
       <FadeIn>
         <div
-          className={`bg-white p-[100px] md:p-[60px] module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} `}
+          className={`bg-white p-[100px] md:p-[60px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
         >
           <div className="relative overflow-hidden rounded-xl px-[105px] py-[80px] md:p-[60px]">
             <Image

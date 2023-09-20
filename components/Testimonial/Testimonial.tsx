@@ -7,12 +7,15 @@ export const Testimonial = ({ attributes }) => {
   const quote = attributes.data.quote
   const label = attributes.data.label
   const color = attributes.data.background_color
+  console.log({attributes})
+  const spaceTop = attributes.data.component_spacing_top_spacing;
+  const spaceBottom = attributes.data.component_spacing_bottom_spacing;
 
   return (
     <FadeIn>
       <div className={`h-fit w-full`}>
         <div
-          className={`relative mx-auto flex max-w-[1240px] flex-col items-center justify-center  py-[80px] md:px-[100px] sm:p-[40px]`}
+          className={`relative mx-auto flex max-w-[1240px] flex-col items-center justify-center module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
         >
           <div className="bg-blue relative mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center overflow-hidden rounded-xl px-[60px] py-[40px] text-center md:w-full md:p-[40px]">
             <Image

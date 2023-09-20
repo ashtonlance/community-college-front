@@ -1,12 +1,13 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import arrow from '../../assets/icons/arrow-right.svg'
 import Arrow from 'assets/icons/angled-arrow.svg'
 export const LinksBlock = ({ attributes }) => {
-  const linkList = attributes.data.links_lists
+  const linkList = attributes?.data?.links_lists
+  const topSpacing = attributes?.data?.margins_top_spacing;
+  const bottomSpacing = attributes?.data?.margins_bottom_spacing
+
 
   return (
-    <div className="mx-auto my-[40px] flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col">
+    <div className={`mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}>
       {linkList > 0 &&
         [...Array(linkList).keys()].map(val => (
           <div

@@ -144,7 +144,7 @@
   .newsletter-banner h4 {
     @apply text-white;
   }
- 
+
   .resource-single-template p,
   .resource-single-template h2,
   .resource-single-template h3,
@@ -155,6 +155,4 @@
   .arrow-submit-parent {
     @apply absolute top-[21px] right-[20px] w-[24px] h-[11px];
   }
-
-
 }

@@ -3,7 +3,15 @@ import { renderToString } from 'react-dom/server'
 import { Parser } from 'html-to-react'
 
 type WYSIWYGProps = {
-  content: string
+  content: string,
+  attributes: {
+    data:{
+      content: string,
+      background_color: string,
+      component_spacing_bottom_spacing: string,
+      component_spacing_top_spacing: string,
+    }
+  }
 }
 
 export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
@@ -19,7 +27,7 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
   const reactHtml = renderToString(reactElement)
   return (
     <div
-      className={`bg-${bgColor} wysiwyg body-regular px-52 py-20 module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
+      className={`bg-${bgColor} wysiwyg body-regular px-52 py-20 module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
       dangerouslySetInnerHTML={{ __html: reactHtml }}
     />
   )

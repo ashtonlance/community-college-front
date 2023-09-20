@@ -30,10 +30,13 @@ export default function Page(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      {blocks && (
+    <>
+     {blocks && (
         <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
       )}
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+    </>
+
     </Layout>
   )
 }

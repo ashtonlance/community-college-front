@@ -17,7 +17,7 @@ export const ContactBlock = ({ attributes }) => {
   return (
     <div
       className={cn(
-        `flex w-full flex-wrap justify-between bg-${bgColor} module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} overflow-hidden px-[205px] py-[100px] md:px-[100px] md:py-[60px] sm:p-10`
+        `flex w-full flex-wrap justify-between bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden px-[205px] py-[100px] md:px-[100px] md:py-[60px] sm:p-10`
       )}
     >
       <div className="basis-1/3 overflow-hidden rounded-l-xl md:basis-full md:rounded-t-xl md:rounded-bl-none ">

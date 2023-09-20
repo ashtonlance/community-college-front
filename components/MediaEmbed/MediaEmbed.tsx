@@ -16,7 +16,7 @@ export const MediaEmbed = props => {
   return (
     <div
       className={cn(
-        `flex w-full flex-wrap justify-center bg-${bgColor} module-margin-bottom-${bottomSpacing}  module-margin-top-${topSpacing} overflow-hidden px-[205px] py-[100px] md:px-[100px] md:py-[60px] sm:p-10`
+        `flex w-full flex-wrap justify-center bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden`
       )}
     >
       {videoOrImage === 'image' ? (
