@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import arrow from '../../assets/icons/arrow-full-right.svg'
-import Link from 'next/link'
+import Arrow from 'assets/icons/arrow-forward-sharp-reverse.svg'
 
 type PaginationProps = {
   totalItems: number
@@ -17,27 +15,23 @@ export const Pagination = (props: PaginationProps) => {
   const totalPages = Math.ceil(total / pageSize)
 
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="col-span-3 flex w-full items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:pb-10 sm:pt-8">
       <span
-        className={`${currentPage <= 1 && 'inactive-arrow'}`}
+        className={`${
+          currentPage <= 1 && 'inactive-arrow'
+        } flex items-center justify-center rounded-full bg-white p-4`}
         onClick={() => {
           onPageClick(currentPage - 1)
         }}
       >
-        <Image
-          className="rotate-180"
-          alt=""
-          src={arrow}
-          width={24}
-          height={11}
-        />
+        <Arrow className="h-5 w-5 rotate-180 text-darkBeige" />
       </span>
-      <div className="flex">
+      <div className="flex gap-3">
         {Array.from({ length: totalPages }).map((_, i) => (
           <p
             key={i}
             className={`pagination-item ${
-              currentPage === i + 1 && 'bg-gmt-200 text-black'
+              currentPage === i + 1 && 'bg-white text-navy'
             }`}
             onClick={() => {
               onPageClick(i + 1)
@@ -49,12 +43,14 @@ export const Pagination = (props: PaginationProps) => {
       </div>
 
       <span
-        className={`${currentPage >= totalPages && 'inactive-arrow'}`}
+        className={`${
+          currentPage >= totalPages && 'inactive-arrow'
+        } flex items-center justify-center rounded-full bg-white p-4`}
         onClick={() => {
           onPageClick(currentPage + 1)
         }}
       >
-        <Image alt="" src={arrow} width={24} height={11} />
+        <Arrow className="h-5 w-5 text-darkBeige" />
       </span>
     </div>
   )

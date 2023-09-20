@@ -7,7 +7,7 @@ const PAGE_SIZE = 3
 
 const GET_PAGINATED_RESOURCES = gql`
   query GetPaginatedPosts($offset: Int!, $size: Int = ${PAGE_SIZE}) {
-    colleges(where: {offsetPagination: { offset: $offset, size: $size } }) {
+    colleges(where: {offsetPagination: {offset: $offset, size: $size}, orderby: {field: DATE, order: ASC}}) {
       nodes {
         title
         uri

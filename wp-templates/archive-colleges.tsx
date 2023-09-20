@@ -4,15 +4,16 @@ import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { Map } from '@/components/Map'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
-import { GeneralCard } from '@/components/Cards'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { CTABanner } from '@/components/CTABanner'
 
 type CollegesIndexProps = {
   data: {
     nodeByUri: {
       seo: {}
     }
+    collegeIndex: any
     colleges: {
       seo: {}
       nodes: [any: any]
@@ -60,7 +61,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     return <>Loading...</>
   } else {
     const menuItems = props.data?.menu?.menuItems || []
-    const collegesIndex = props.data?.colleges
+    const collegesIndex = props.data?.collegeIndex?.collegeIndex || []
     // const preFooterContent = props.data?.menus.nodes[0]
     const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
     const utilityNavigation =
@@ -72,8 +73,18 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     const colleges = props.data?.colleges?.nodes || []
     const { page } = router.query
     const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
     const coordinates = getCoordinates(colleges)
+    const ctaAttributes = {
+      data: {
+        cta_copy: collegesIndex?.cta?.heading,
+        button_link: collegesIndex?.cta?.link?.url,
+        button_target: collegesIndex?.cta?.link?.target,
+        button_label: collegesIndex?.cta?.link?.title,
+        background_color: 'gold',
+        type: 'fullWidth',
+        hasCard: true,
+      },
+    }
 
     return (
       <Layout
@@ -84,22 +95,15 @@ export default function CollegesArchive(props: CollegesIndexProps) {
         settings={settings}
       >
         <DefaultHero
-          heading="Colleges"
-          description="Optional Paragraph Large description area. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          heading={collegesIndex?.heroTitle}
+          description={collegesIndex?.heroDescription}
         />
         <Map coordinates={coordinates} />
         {/* {preFooterContent && <PreFooter preFooterContent={preFooterContent} />} */}
         <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
-          {/* {colleges.map((college, index) => {
-            // console.log(
-            //   parseDMS(
-            //     `${college.collegeDetails.coordinates.lat} ${college.collegeDetails.coordinates.lng}`
-            //   )
-
-            return <GeneralCard key={index} card={college} />
-          })} */}
           <PaginatedPosts currentPage={currentPage} />
         </div>
+        <CTABanner attributes={ctaAttributes} />
       </Layout>
     )
   }
@@ -112,30 +116,17 @@ CollegesArchive.variables = ({ uri }) => {
 CollegesArchive.query = gql`
   ${Header.fragments.entry}
   query CollegesArchive {
-    colleges(where: { orderby: { field: TITLE, order: ASC } }) {
-      nodes {
-        title
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-        seo {
-          fullHead
-        }
-        collegeDetails {
-          name
-          phoneNumber
-          map {
-            city
-            latitude
-            longitude
-            postCode
-            stateShort
-            streetName
-            streetNumber
-            streetAddress
+    collegeIndex: page(id: "/what-we-offer/colleges/", idType: URI) {
+      collegeIndex {
+        heroDescription
+        heroTitle
+        cta {
+          fieldGroupName
+          heading
+          link {
+            target
+            title
+            url
           }
         }
       }
