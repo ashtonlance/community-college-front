@@ -4,8 +4,7 @@ import { ResourceTopicHero } from 'components/ResourcesHero/ResourcesTopicHero'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
-
+import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { useRouter } from 'next/router'
 
 type TagProps = {

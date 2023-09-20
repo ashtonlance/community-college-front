@@ -4,7 +4,7 @@ import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
+import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { useRouter } from 'next/router'
 
 type CategoryProps = {
@@ -48,7 +48,8 @@ export default function Category(props: CategoryProps) {
             <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
               <ResourcesSidebar selectedTaxonomy={categoryName} />
             </div>
-            <PaginatedResources
+
+            <PaginatedPosts
               categoryName={categoryName}
               currentPage={currentPage}
             />
