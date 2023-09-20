@@ -5,7 +5,6 @@ import arrowleft from '../../../assets/icons/arrow-left.svg'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { AboutMenu } from '../MegaMenu/AboutMenu'
-import { TwoColumnMenu } from '../MegaMenu/TwoColumnMenu'
 import { ResourcesMenu } from '../MegaMenu/ResourcesMenu'
 import { Modal } from 'components/Modal'
 import { Login } from 'components/Modal/Login'
@@ -96,7 +95,6 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
             <ResourcesMenu
               classes="pt-[32px] sm:pt-0"
               subItems={activeMenu.navigationMenu.items}
-              featuredResource={activeMenu.navigationMenu.featuredResource}
             />
           </div>
         )

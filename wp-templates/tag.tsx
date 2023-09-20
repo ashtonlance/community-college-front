@@ -2,11 +2,9 @@ import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { ResourceTopicHero } from 'components/ResourcesHero/ResourcesTopicHero'
 import { PreFooter } from 'components/PreFooter'
-import { GravityForm } from 'components/GravityForm/GravityForm'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
 import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
-import { FeaturedResource } from 'components/FeaturedResource'
 import { useRouter } from 'next/router'
 
 type TagProps = {
