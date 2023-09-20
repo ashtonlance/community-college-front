@@ -16,7 +16,7 @@ const containerStyle = {
 const MapInternal = GoogleMap as any
 
 export const Map = ({ coordinates = [] }) => {
-  console.log(coordinates, 'coordinates')
+  // console.log(coordinates, 'coordinates')
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',

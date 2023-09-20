@@ -19,7 +19,7 @@ export const Pagination = (props: PaginationProps) => {
       <span
         className={`${
           currentPage <= 1 && 'inactive-arrow'
-        } flex items-center justify-center rounded-full bg-white p-4`}
+        } flex cursor-pointer items-center justify-center rounded-full bg-white p-4`}
         onClick={() => {
           onPageClick(currentPage - 1)
         }}
@@ -45,7 +45,7 @@ export const Pagination = (props: PaginationProps) => {
       <span
         className={`${
           currentPage >= totalPages && 'inactive-arrow'
-        } flex items-center justify-center rounded-full bg-white p-4`}
+        } flex cursor-pointer items-center justify-center rounded-full bg-white p-4`}
         onClick={() => {
           onPageClick(currentPage + 1)
         }}

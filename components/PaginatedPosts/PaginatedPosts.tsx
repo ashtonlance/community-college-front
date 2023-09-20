@@ -47,6 +47,7 @@ type PaginatedPostsProps = {
   currentPage: number
   categoryName?: string
   tagName?: string
+  colleges: any[]
 }
 
 export const PaginatedPosts = (props: PaginatedPostsProps) => {
@@ -61,8 +62,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   })
 
   const itemsTotal = data?.colleges?.pageInfo?.offsetPagination.total
-  const items = data?.colleges?.nodes
-
+  // const items = data?.colleges?.nodes
+  const items = props.colleges.slice(offset, offset + PAGE_SIZE)
+  console.log(items, 'items')
   if (loading) {
     return
   }
@@ -90,7 +92,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {items?.length > 0 && (
         <Pagination
           currentPage={props.currentPage}
-          totalItems={itemsTotal}
+          totalItems={props.colleges.length}
           pageSize={PAGE_SIZE}
           onPageClick={handlePageClick}
         />
