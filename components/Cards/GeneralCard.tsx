@@ -58,7 +58,7 @@ export const GeneralCard: React.FC<GeneralCardProps> = ({ card }) => {
           </div>
           <Link
             className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
-            href={card?.uri}
+            href={card?.uri || '/'}
           >
             Learn More
             <Arrow className="text-gold transition-colors duration-100 group-hover:text-navy" />

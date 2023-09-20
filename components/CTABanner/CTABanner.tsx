@@ -12,8 +12,8 @@ export const CTABanner = ({ attributes }) => {
   const bgColor = attributes.data.background_color || 'lightBlue'
   const type = attributes.data.type === 'fullWidth' ? 'full-width' : 'inset'
   const bgImageColor = bgColor === 'lightBlue' ? 'blue' : 'orange'
-  const hasCard = attributes.data.hasCard || false
-  console.log(type)
+  const hasCard = attributes?.data?.hasCard || false
+
   if (type === 'full-width') {
     return (
       <FadeIn>

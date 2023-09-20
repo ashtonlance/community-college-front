@@ -168,19 +168,23 @@
   }
 
   .gfield {
-    @apply border-gmt-400 text-[14px] rounded-lg mb-[20px];
+    @apply  text-[14px] rounded-lg mb-[20px];
   }
   .gfield input,
-  .gfield textarea {
-    @apply py-[14px] px-[20px] border-[#51525533] border-2 rounded-lg text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue;
+  .gfield textarea,
+  input,
+   {
+    @apply py-[14px] px-[20px] border-[#51525533] border-2 text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
   }
 
-  .gfield select {
-    @apply border-[#51525533] active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue;
+  .gfield select,
+  select {
+    @apply border-[#51525533] active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
   }
 
   .gfield legend,
-  .gfield label:not(.p-label) {
+  .gfield label:not(.p-label),
+  label {
     @apply body-large font-bold text-darkGrey mb-[10px];
   }
 
@@ -206,5 +210,8 @@
   }
   .arrow-submit-parent {
     @apply absolute top-[21px] right-[20px] w-[24px] h-[11px];
+  }
+  .text-input {
+    @apply flex-1 rounded-[5px] border-2 border-[#51525533] px-[20px] py-[14px] text-navy placeholder:text-darkBeige focus-within:ring-transparent focus:border-lightBlue focus:ring-transparent focus-visible:outline-transparent active:outline-transparent active:placeholder:text-navy;
   }
 }
