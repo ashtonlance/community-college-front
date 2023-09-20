@@ -46,13 +46,13 @@ type CollegesIndexProps = {
 
 const getCoordinates = (colleges: any[]) =>
   colleges.map(college => {
-    const { title: name, featuredImage } = college
-    const { phoneNumber } = college.collegeDetails
+    const { title: name, featuredImage } = college || {}
+    const { phoneNumber } = college?.collegeDetails || {}
     const {
       latitude: lat,
       longitude: lng,
       streetAddress,
-    } = college.collegeDetails.map
+    } = college?.collegeDetails?.map || {}
     return { featuredImage, lat, lng, name, streetAddress, phoneNumber }
   })
 
