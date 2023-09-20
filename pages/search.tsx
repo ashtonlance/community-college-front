@@ -6,7 +6,7 @@ import { Header } from 'components/Header'
 import { GravityForm } from 'components/GravityForm/GravityForm'
 import Image from 'next/image'
 import separator from '../assets/imgs/separator.svg'
-import { ResourceCard } from 'components/PaginatedResources/ResourceCard'
+import { ResourceCard } from '@/components/PaginatedPosts/PostCard'
 import { Pagination } from 'components/Pagination'
 
 const PAGE_SIZE = 3

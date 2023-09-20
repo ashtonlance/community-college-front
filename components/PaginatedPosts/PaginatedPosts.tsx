@@ -1,27 +1,36 @@
 import { gql, useQuery } from '@apollo/client'
-import { ResourceCard } from './ResourceCard'
+import { ResourceCard } from './PostCard'
 import { Pagination } from 'components/Pagination'
 import { useRouter } from 'next/router'
+import { GeneralCard } from '../Cards'
 const PAGE_SIZE = 3
 
 const GET_PAGINATED_RESOURCES = gql`
-  query GetPaginatedResources($offset: Int!, $category: String, $tag: String, $size: Int = ${PAGE_SIZE}) {
-    resources(where: {categoryName: $category, tag: $tag , offsetPagination: { offset: $offset, size: $size } }) {
+  query GetPaginatedPosts($offset: Int!, $size: Int = ${PAGE_SIZE}) {
+    colleges(where: {offsetPagination: { offset: $offset, size: $size } }) {
       nodes {
-        categories {
-          nodes {
-            id
-            name
-          }
-        }
-        id
-        date
-        excerpt
-        link
         title
+        uri
         featuredImage {
           node {
             sourceUrl
+          }
+        }
+        seo {
+          fullHead
+        }
+        collegeDetails {
+          name
+          phoneNumber
+          map {
+            city
+            latitude
+            longitude
+            postCode
+            stateShort
+            streetName
+            streetNumber
+            streetAddress
           }
         }
       }
@@ -34,13 +43,13 @@ const GET_PAGINATED_RESOURCES = gql`
   }
 `
 
-type PaginatedResourcesProps = {
+type PaginatedPostsProps = {
   currentPage: number
   categoryName?: string
   tagName?: string
 }
 
-export const PaginatedResources = (props: PaginatedResourcesProps) => {
+export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const router = useRouter()
 
   const offset = (props.currentPage - 1) * PAGE_SIZE
@@ -51,8 +60,8 @@ export const PaginatedResources = (props: PaginatedResourcesProps) => {
     variables: { offset, category, tag },
   })
 
-  const itemsTotal = data?.resources?.pageInfo?.offsetPagination.total
-  const items = data?.resources?.nodes
+  const itemsTotal = data?.colleges?.pageInfo?.offsetPagination.total
+  const items = data?.colleges?.nodes
 
   if (loading) {
     return
@@ -69,8 +78,16 @@ export const PaginatedResources = (props: PaginatedResourcesProps) => {
 
   return (
     <>
-      {items?.map(item => <ResourceCard key={item.id} resource={item} />)}
-      {items.length > 0 && (
+      {/* {items?.map(item => <ResourceCard key={item.id} resource={item} />)} */}
+      {items.map((item, index) => {
+        // console.log(
+        //   parseDMS(
+        //     `${college.collegeDetails.coordinates.lat} ${college.collegeDetails.coordinates.lng}`
+        //   )
+
+        return <GeneralCard key={index} card={item} />
+      })}
+      {items?.length > 0 && (
         <Pagination
           currentPage={props.currentPage}
           totalItems={itemsTotal}

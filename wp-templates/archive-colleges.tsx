@@ -3,9 +3,10 @@ import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { Map } from '@/components/Map'
-import parseDMS from 'parse-dms'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { GeneralCard } from '@/components/Cards'
+import { useRouter } from 'next/router'
+import { PaginatedPosts } from '@/components/PaginatedPosts'
 
 type CollegesIndexProps = {
   data: {
@@ -40,7 +41,21 @@ type CollegesIndexProps = {
   loading: boolean
 }
 
+function getCoordinates(colleges: any[]) {
+  return colleges.map(college => {
+    const { title: name } = college
+    const { phoneNumber } = college.collegeDetails
+    const {
+      latitude: lat,
+      longitude: lng,
+      streetAddress,
+    } = college.collegeDetails.map
+    return { lat, lng, name, streetAddress, phoneNumber }
+  })
+}
+
 export default function CollegesArchive(props: CollegesIndexProps) {
+  const router = useRouter()
   if (props.loading) {
     return <>Loading...</>
   } else {
@@ -55,6 +70,10 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       flatListToHierarchical(footerMenuItems as any) || []
     const settings = props.data?.settings?.siteSettings || []
     const colleges = props.data?.colleges?.nodes || []
+    const { page } = router.query
+    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+
+    const coordinates = getCoordinates(colleges)
 
     return (
       <Layout
@@ -68,17 +87,18 @@ export default function CollegesArchive(props: CollegesIndexProps) {
           heading="Colleges"
           description="Optional Paragraph Large description area. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         />
-        <Map></Map>
+        <Map coordinates={coordinates} />
         {/* {preFooterContent && <PreFooter preFooterContent={preFooterContent} />} */}
-        <div className="grid grid-cols-3 gap-x-5 gap-y-[10px] bg-grey px-[100px] py-[10px] ">
-          {colleges.map((college, index) => {
+        <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
+          {/* {colleges.map((college, index) => {
             // console.log(
             //   parseDMS(
             //     `${college.collegeDetails.coordinates.lat} ${college.collegeDetails.coordinates.lng}`
             //   )
 
             return <GeneralCard key={index} card={college} />
-          })}
+          })} */}
+          <PaginatedPosts currentPage={currentPage} />
         </div>
       </Layout>
     )
@@ -92,7 +112,7 @@ CollegesArchive.variables = ({ uri }) => {
 CollegesArchive.query = gql`
   ${Header.fragments.entry}
   query CollegesArchive {
-    colleges {
+    colleges(where: { orderby: { field: TITLE, order: ASC } }) {
       nodes {
         title
         uri
@@ -106,11 +126,16 @@ CollegesArchive.query = gql`
         }
         collegeDetails {
           name
-          physicalAddress
           phoneNumber
-          coordinates {
-            lat
-            lng
+          map {
+            city
+            latitude
+            longitude
+            postCode
+            stateShort
+            streetName
+            streetNumber
+            streetAddress
           }
         }
       }

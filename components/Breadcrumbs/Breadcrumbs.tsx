@@ -1,16 +1,14 @@
-import { ReactNode } from 'react'
 import Link from 'next/link'
-// defining the Props
+
 export type CrumbItem = {
-  title: string // e.g., Python
-  href: string // e.g., /development/programming-languages/python
+  title: string
+  href: string
 }
 export type BreadcrumbsProps = {
   items: CrumbItem[]
 }
 
 export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
-  console.log(items)
   return (
     <div
       aria-label="Breadcrumbs"
@@ -20,7 +18,7 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
         const isLastItem = i === items.length - 1
         if (!isLastItem) {
           return (
-            <>
+            <span key={i}>
               <Link
                 href={crumb.href}
                 key={i}
@@ -30,7 +28,7 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
               </Link>
               {/* separator */}
               <span className="font-bold text-beige"> / </span>
-            </>
+            </span>
           )
         } else {
           return (

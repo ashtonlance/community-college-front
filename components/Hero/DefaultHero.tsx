@@ -44,12 +44,11 @@ export const DefaultHero = ({
 
   // Call the function to generate the breadcrumbs list
   const breadcrumbs = generateBreadcrumbs()
-  console.log(breadcrumbs)
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center bg-${bgColor}`}
     >
-      <div className="wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center md:w-full md:pb-0">
+      <div className="wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center pb-[80px] md:w-full md:pb-0">
         {subheading && (
           <div className="mb-[32px] flex items-center gap-[15px]">
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">

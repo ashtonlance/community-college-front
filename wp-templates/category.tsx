@@ -4,7 +4,7 @@ import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
+import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { FeaturedResourceByCategory } from 'components/FeaturedResource'
 import { useRouter } from 'next/router'
 
@@ -52,7 +52,7 @@ export default function Category(props: CategoryProps) {
             {currentPage === 1 && (
               <FeaturedResourceByCategory categoryName={categoryName} />
             )}
-            <PaginatedResources
+            <PaginatedPosts
               categoryName={categoryName}
               currentPage={currentPage}
             />

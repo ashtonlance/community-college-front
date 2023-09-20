@@ -4,7 +4,7 @@ import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedResources } from 'components/PaginatedResources/PaginatedResources'
+import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { FeaturedResource } from 'components/FeaturedResource'
 import { useRouter } from 'next/router'
 
@@ -47,7 +47,7 @@ export default function ResourcesIndex(props: ResourceIndexProps) {
               <ResourcesSidebar />
             </div>
             {currentPage === 1 && <FeaturedResource />}
-            <PaginatedResources currentPage={currentPage} />
+            <PaginatedPosts currentPage={currentPage} />
           </div>
           <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar />
