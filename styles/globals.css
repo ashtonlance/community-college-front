@@ -64,16 +64,68 @@
     @apply cursor-pointer text-[20px] font-semibold tracking-[-0.02em] leading-[110%] text-white font-sans hover:text-grey;
   }
   .primary-btn {
-    @apply border-none text-navy cursor-pointer text-[20px] rounded-lg hover:border-gold hover:bg-gold hover:text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.06em] font-sans py-[18px] px-[24px] sm:py-[16px] sm:px-[22px];
+    @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-extrabold leading-[100%] tracking-[0.36px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
+  }
+  .primary-btn.navy {
+    @apply bg-navy text-white hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.grey {
+    @apply bg-darkGrey text-white hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.white {
+    @apply bg-white text-navy hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.gold {
+    @apply bg-gold text-navy  hover:bg-white hover:text-navy;
+  }
+  .primary-btn.outline-btn{
+    @apply border-2 border-solid bg-transparent;
+  }
+  .primary-btn.outline-btn.gold {
+    @apply  border-gold text-gold hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.outline-btn.white {
+    @apply  border-white text-white hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.outline-btn.grey {
+    @apply  border-darkGrey text-darkGrey hover:bg-gold hover:text-navy;
+  }
+  .primary-btn.outline-btn.navy {
+    @apply  border-navy text-navy hover:bg-gold hover:text-navy;
   }
   .secondary-btn {
-    @apply border-none cursor-pointer text-base rounded-lg hover:bg-gold text-navy sm:text-[14px] font-extrabold leading-[100%] tracking-[0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
+    @apply w-fit border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-extrabold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
-  .filled-btn {
-    @apply w-fit primary-btn bg-black text-white md:ml-[20px] sm:hidden border-none;
+  .secondary-btn.navy{
+    @apply bg-navy text-white hover:bg-white hover:text-navy;
   }
-  .outline-btn {
-    @apply w-fit bg-white secondary-btn border-[2px] border-solid border-navy text-navy hover:bg-gold hover:border-gold;
+
+  .secondary-btn.gold{
+    @apply bg-gold text-navy hover:bg-white hover:text-navy;
+  }
+
+  .secondary-btn.white{
+    @apply bg-white text-navy  hover:bg-navy hover:text-white;
+
+  }
+  .secondary-btn.grey{
+    @apply bg-darkGrey text-white  hover:bg-white hover:text-navy;
+  }
+
+  .secondary-btn.outline-btn{
+    @apply border-2 border-solid bg-transparent;
+  }
+  .secondary-btn.outline-btn.gold {
+    @apply  border-gold text-gold hover:bg-navy hover:border-navy;;
+  }
+  .secondary-btn.outline-btn.white {
+    @apply  border-white text-white hover:bg-gold hover:border-gold;
+  }
+  .secondary-btn.outline-btn.grey {
+    @apply  border-darkGrey text-darkGrey hover:bg-gold hover:border-gold;
+  }
+  .secondary-btn.outline-btn.navy {
+    @apply  border-navy text-navy hover:bg-gold hover:border-gold;
   }
   .tag {
     @apply capitalize text-[12px] w-fit rounded-lg sm:text-[11px] font-bold leading-[140%] font-sans py-[6px] px-[12px] sm:py-[6px] sm:px-[10px];

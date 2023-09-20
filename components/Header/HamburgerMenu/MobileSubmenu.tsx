@@ -157,7 +157,7 @@ export const MobileSubmenu = ({ items }) => {
             <Button
               content="work with us"
               arrow={true}
-              classes="hidden primary-btn bg-white text-black w-full justify-center sm:flex mt-[40px]"
+              classes="hidden primary-btn white mt-[40px]"
             />
           </>
         )}

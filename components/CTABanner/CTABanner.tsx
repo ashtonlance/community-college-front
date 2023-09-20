@@ -50,8 +50,8 @@ export const CTABanner = ({ attributes }) => {
               classes={cn(
                 `  w-fit whitespace-nowrap h-fit ${
                   hasCard
-                    ? 'secondary-btn bg-navy text-white'
-                    : 'primary-btn  bg-white'
+                    ? 'secondary-btn navy'
+                    : 'primary-btn  white'
                 }`
               )}
               linkto={btn_link}
@@ -78,7 +78,7 @@ export const CTABanner = ({ attributes }) => {
               <Button
                 content={btn_label}
                 arrow={true}
-                classes="primary-btn bg-white w-fit whitespace-nowrap h-fit"
+                classes="primary-btn white"
                 linkto={btn_link}
               />
             </div>

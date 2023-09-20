@@ -5,7 +5,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
     classes: {
-      options: ['primary-btn', 'secondary-btn', 'filled-btn'],
+      options: ['primary-btn', 'secondary-btn'], //removing filled button from here because this is the default, if you want outlined you should add the class 'outline' and pass a color
       control: { type: 'radio' },
     },
     content: {
