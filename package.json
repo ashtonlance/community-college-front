@@ -46,7 +46,7 @@
     "embla-carousel-react": "^7.1.0",
     "encoding": "^0.1.13",
     "framer-motion": "^10.13.1",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "html-entities": "^2.4.0",
     "html-react-parser": "^3.0.15",
     "html-to-react": "^1.6.0",
