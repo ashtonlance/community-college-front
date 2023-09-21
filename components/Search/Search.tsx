@@ -100,7 +100,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
           defaultValue={searchedTerm}
         />
         <Link
-          className="primary-btn flex bg-white text-black"
+          className="primary-btn flex white text-black"
           href={{
             pathname: '/search',
             query: { searchedTerm },

@@ -32,8 +32,10 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
 
   switch (heroType) {
     case 'landing':
+      const emptyBg = !bgImg && (!bgColor || bgColor=='grey');
+
       return (
-        <div className="relative">
+        <div className="relative landing-hero-wrapper">
           <LandingHero
             bgColor={bgColor}
             bgImg={bgImg}
@@ -43,14 +45,14 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
             ctaLabel={ctaLabel}
             ctaURL={ctaURL}
             bgPosition={position}
+            emptyBg={emptyBg}
           />
-          <ScrollIndicator />
+          <ScrollIndicator emptyBg={emptyBg}/>
         </div>
       )
     case 'default':
       return (
         <DefaultHero
-          bgColor={bgColor}
           bgImg={bgImg}
           subheading={subheading}
           description={description}

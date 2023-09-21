@@ -60,7 +60,7 @@ export default function Custom404() {
         <h1>404</h1>
         <h2>This page could not be found.</h2>
         <Link
-          className="primary-btn border-[1.5px] border-solid border-black"
+          className="primary-btn outline grey"
           href="/"
         >
           Return to the homepage
