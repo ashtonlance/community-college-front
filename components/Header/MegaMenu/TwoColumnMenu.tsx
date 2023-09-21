@@ -43,7 +43,7 @@ export const TwoColumnMenu = ({
         />
         <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="border-r-solid flex max-h-[425px] flex-1 flex-col flex-wrap justify-around gap-y-6 border-r-[1.5px] border-r-lightBlue md:border-0 md:text-left">
-            {parentItem ? (
+            {/* {parentItem ? (
               <div className="flex flex-col pr-[40px]" key={parentItem.label}>
                 <Link
                   className="links-sub-nav text-white hover:text-lightBlue"
@@ -52,7 +52,7 @@ export const TwoColumnMenu = ({
                   {`${parentItem.label} Overview`}
                 </Link>
               </div>
-            ) : null}
+            ) : null} */}
             {subItems?.map(subItem => {
               const secondaryLinks = subItem?.children?.length > 0
               return (
