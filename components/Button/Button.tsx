@@ -35,7 +35,6 @@ export const Button = ({
     const alignment = attributes.data.button_alignment
     const buttonColor = attributes.data.button_background || 'navy'
     const target = attributes.data.button_link['target']
-    console.log({attributes})
     return (
       <div>
         <div

@@ -1,12 +1,10 @@
-import { HeroPropsType } from './HomeHero'
+import { HeroPropsType } from './LandingHero'
 import Link from 'next/link'
-import { GuideLine } from '../AnimatedLines/GuideLine'
 import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useRouter } from 'next/router'
 import { unslugify } from 'utils/unslugify'
 export const DefaultHero = ({
-  bgColor,
   bgImg,
   subheading,
   description,
@@ -46,7 +44,7 @@ export const DefaultHero = ({
   const breadcrumbs = generateBreadcrumbs()
   return (
     <div
-      className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center bg-${bgColor}`}
+      className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
     >
       <div className="wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center pb-[80px] md:w-full md:pb-0">
         {subheading && (
@@ -69,7 +67,7 @@ export const DefaultHero = ({
         {ctaURL && ctaLabel && (
           <Link
             href={ctaURL}
-            className="primary-btn flex w-fit bg-white text-navy"
+            className="primary-btn navy"
           >
             {ctaLabel}
           </Link>

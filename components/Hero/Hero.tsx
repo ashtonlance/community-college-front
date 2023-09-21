@@ -1,9 +1,8 @@
 import { DefaultHero } from './DefaultHero'
-import { HomeHero } from './HomeHero'
 import { LandingHero } from './LandingHero'
 import { ScrollIndicator } from './ScrollIndicator'
 
-export type heroTypeProp = 'home' | 'landing' | 'default'
+export type heroTypeProp = 'landing' | 'default'
 
 type HeroAttributesProps = {
   attributes: {
@@ -32,25 +31,11 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
   const position = attributes.data.background_image_position
 
   switch (heroType) {
-    case 'home':
-      return (
-        <div className="relative">
-          <HomeHero
-            bgColor={bgColor}
-            bgImg={bgImg}
-            subheading={subheading}
-            description={description}
-            heading={heading}
-            ctaLabel={ctaLabel}
-            ctaURL={ctaURL}
-            bgPosition={position}
-          />
-          <ScrollIndicator />
-        </div>
-      )
     case 'landing':
+      const emptyBg = !bgImg && (!bgColor || bgColor=='grey');
+
       return (
-        <div className="relative">
+        <div className="relative landing-hero-wrapper">
           <LandingHero
             bgColor={bgColor}
             bgImg={bgImg}
@@ -60,14 +45,14 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
             ctaLabel={ctaLabel}
             ctaURL={ctaURL}
             bgPosition={position}
+            emptyBg={emptyBg}
           />
-          <ScrollIndicator />
+          <ScrollIndicator emptyBg={emptyBg}/>
         </div>
       )
     case 'default':
       return (
         <DefaultHero
-          bgColor={bgColor}
           bgImg={bgImg}
           subheading={subheading}
           description={description}

@@ -72,7 +72,7 @@ export const Card = ({
         </span>
         <Link
           href={btnLink || ''}
-          className="primary-btn bg-gmt-500 text-white"
+          className="primary-btn grey"
         >
           {btnText}
         </Link>

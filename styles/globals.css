@@ -12,9 +12,8 @@
   h1, .h1 {
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
-  .h1-home {
-    @apply font-serif text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-white antialiased;
-  }
+  .landing-hero-headline {
+    @apply font-serif font-normal text-[88px] md:text-[72px] sm:text-[48px] leading-[110%] tracking-[-1.76px] md:tracking-[-1.44px]  sm:tracking-[-0.48px]  text-white antialiased;  }
   h2, .h2 {
     @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] text-navy font-serif antialiased;
   }
@@ -40,7 +39,7 @@
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
   .body-large {
-    @apply text-[18px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-navy font-sans;
+    @apply text-[18px] sm:text-[16px] font-normal leading-[160%] sm:leading-[150%] text-navy font-sans;
   }
   .body-regular {
     @apply text-[16px] sm:text-[14px] font-medium leading-[150%] sm:leading-[140%] text-navy font-sans;
@@ -94,7 +93,7 @@
     @apply  border-navy text-navy hover:bg-gold hover:text-navy;
   }
   .secondary-btn {
-    @apply w-fit border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-extrabold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
+    @apply w-fit transition-colors border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-extrabold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
   .secondary-btn.navy{
     @apply bg-navy text-white hover:bg-white hover:text-navy;

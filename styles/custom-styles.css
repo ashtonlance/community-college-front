@@ -240,3 +240,10 @@ table td {
 .module-spacing-top-large {
   @apply pt-[100px] md:pb-[80px] sm:pb-[40px];
 }
+
+.landing-hero-headline, .landing-hero-text p {
+  text-shadow: 0px 0px 60px rgba(0, 0, 0, 1);
+}
+.img-landing-hero{
+  background: radial-gradient(at right center, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.3));
+}
