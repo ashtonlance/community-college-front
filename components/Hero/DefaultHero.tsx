@@ -39,7 +39,7 @@ export const DefaultHero = ({
     })
 
     // Add in a default "Home" crumb for the top-level
-    return [{ href: '/', title: 'Students' }, ...crumblist]
+    return [...crumblist]
   }
 
   // Call the function to generate the breadcrumbs list
