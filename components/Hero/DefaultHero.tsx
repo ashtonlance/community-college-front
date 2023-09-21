@@ -41,6 +41,8 @@ export const DefaultHero = ({
     return [{ href: '/', title: 'Students' }, ...crumblist]
   }
 
+  console.log({bgImg})
+
   // Call the function to generate the breadcrumbs list
   const breadcrumbs = generateBreadcrumbs()
   return (
@@ -77,6 +79,7 @@ export const DefaultHero = ({
       {bgImg ? (
         <div className="wrapper-default-inner-pages relative flex min-h-[400px] w-[40%] flex-col items-baseline justify-center bg-cover pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
           <Image
+          unoptimized={true}
             src={bgImg}
             alt=""
             fill

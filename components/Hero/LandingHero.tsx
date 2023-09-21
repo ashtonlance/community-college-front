@@ -30,6 +30,7 @@ export const LandingHero = ({
       {bgImg && (
         <>
           <Image
+            unoptimized={true}
             src={bgImg}
             alt=""
             fill
