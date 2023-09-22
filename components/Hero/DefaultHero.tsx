@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useRouter } from 'next/router'
 import { unslugify } from 'utils/unslugify'
+import bg from '../../assets/imgs/angled-bg-defaultHero.png'
+
 export const DefaultHero = ({
   bgImg,
   subheading,
@@ -45,8 +47,14 @@ export const DefaultHero = ({
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
+
     >
-      <div className="wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center pb-[80px] md:w-full md:pb-0">
+      <div
+      style={{
+        backgroundImage: `url(${bg.src})`,
+      }}
+      className="wrapper-default-inner-pages bg-cover flex w-[60%]
+      flex-col items-baseline justify-center pb-[80px] md:w-full md:pb-0">
         {subheading && (
           <div className="mb-[32px] flex items-center gap-[15px]">
             <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
@@ -56,10 +64,10 @@ export const DefaultHero = ({
         )}
 
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="mb-[32px] text-navy">{heading}</h1>
+        <h1 className="default-hero-headline">{heading}</h1>
 
         {description && bgImg && (
-          <p className="body-large mb-[60px] text-navy md:mb-[20px]">
+          <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">
             {description}
           </p>
         )}
@@ -67,14 +75,16 @@ export const DefaultHero = ({
         {ctaURL && ctaLabel && (
           <Link
             href={ctaURL}
-            className="primary-btn navy"
+            className="secondary-btn navy"
           >
             {ctaLabel}
           </Link>
         )}
       </div>
       {bgImg ? (
-        <div className="wrapper-default-inner-pages relative flex min-h-[400px] w-[40%] flex-col items-baseline justify-center bg-cover pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
+        <div className="wrapper-default-inner-pages relative flex min-h-[400px]
+         w-[40%] flex-col items-baseline justify-center bg-cover pl-0 md:w-full md:pl-[60px]
+         md:pt-0 sm:pl-[40px] rounded-bl-[12px]">
           <Image
             src={bgImg}
             alt=""
@@ -85,7 +95,9 @@ export const DefaultHero = ({
         </div>
       ) : (
         description && (
-          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
+          <div  style={{
+            backgroundImage: `url(${bg.src})`,
+          }} className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
             <p className="body-large text-darkGrey md:mb-[20px]">
               {description}
             </p>

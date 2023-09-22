@@ -12,6 +12,9 @@
   h1, .h1 {
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
+  .default-hero-headline{
+    @apply font-serif font-normal text-[48px] sm:text-[42px] leading-[110%] tracking-[-0.48px] sm:tracking-[-0.42px]  text-navy antialiased mb-[32px] md:mb-[24px];
+  }
   .landing-hero-headline {
     @apply font-serif font-normal text-[88px] md:text-[72px] sm:text-[48px] leading-[110%] tracking-[-1.76px] md:tracking-[-1.44px]  sm:tracking-[-0.48px]  text-white antialiased;  }
   h2, .h2 {
@@ -93,7 +96,7 @@
     @apply  border-navy text-navy hover:bg-gold hover:text-navy;
   }
   .secondary-btn {
-    @apply w-fit transition-colors border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-extrabold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
+    @apply w-fit transition-colors border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-bold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
   .secondary-btn.navy{
     @apply bg-navy text-white hover:bg-white hover:text-navy;
