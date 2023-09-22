@@ -14,6 +14,22 @@ const NOT_FOUND = gql`
           ...NavigationMenuFragment
         }
       }
+    }
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
+      }
+    }
+    settings {
+      siteSettings {
+        announcementBar {
+          announcementBarText
+          showAnnouncementBar
+        }
+      }
+
       utilityNavigation {
         navigationItems {
           navItem {
@@ -21,13 +37,6 @@ const NOT_FOUND = gql`
             url
             target
           }
-        }
-      }
-    }
-    footer: menu(id: "Footer", idType: NAME) {
-      menuItems(first: 200) {
-        nodes {
-          ...NavigationMenuFragment
         }
       }
     }
@@ -45,7 +54,7 @@ export default function Custom404() {
   }
 
   const menuItems = data?.menu?.menuItems || []
-  const utilityNavigation = data?.menu?.utilityNavigation?.navigationItems
+  const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const footerMenuItems = data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =

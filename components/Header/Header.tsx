@@ -33,11 +33,12 @@ const Logo = ({ scrolled }) => {
   )
 }
 
-const UtilityItem = ({ item }) => {
+const UtilityItem = ({ item, onClick }) => {
   const router = useRouter()
 
   return (
     <Link
+      onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
       className={cn(`utility-item-btn ${
         isCurrentPage(item?.navItem?.url, router.asPath) || item.navItem.title === 'Students'
@@ -102,7 +103,9 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
   const [hamburgerMenuOpened, setHamburgerMenuOpen] = useState(false)
   const scrollPosition = useScrollPosition()
   const announcementBar = props.announcementBar
-  const [getCookie] = useCookies(['ncccs-announcement-bar'])
+  const [cookies, setCookie, updateCookie] = useCookies([
+    'ncccs-preferred-landing-page',
+  ])
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null
@@ -110,6 +113,25 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
   }
   const displayTransparentMode = false
   const transparentScrolledMode = scrollPosition > 0 && activeItem === ''
+
+  const handleUtilityNavigationClick = (e, item) => {
+    if (item?.navItem?.url === '/employers/') {
+      console.log(item)
+      setCookie('ncccs-preferred-landing-page', 'employers', {
+        path: '/',
+      })
+    } else if (item?.navItem?.url === '/system-office/') {
+      setCookie('ncccs-preferred-landing-page', 'system-office', {
+        path: '/',
+      })
+    } else if (item?.navItem?.url === '/') {
+      setCookie('ncccs-preferred-landing-page', 'students', { path: '/' })
+    } else if (item?.navItem?.url === '/college-faculty-staff/') {
+      setCookie('ncccs-preferred-landing-page', 'college-faculty-staff', {
+        path: '/',
+      })
+    }
+  }
 
   return (
     <div
@@ -134,14 +156,22 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
                 {utilityNavigation
                   .slice(0, 4)
                   ?.map(item => (
-                    <UtilityItem key={item?.navItem?.title} item={item} />
+                    <UtilityItem
+                      onClick={e => handleUtilityNavigationClick(e, item)}
+                      key={item?.navItem?.title}
+                      item={item}
+                    />
                   ))}
               </div>
               <div className="flex items-center justify-center md:hidden h-full">
                 {utilityNavigation
                   .slice(4)
                   ?.map(item => (
-                    <UtilityItem key={item?.navItem?.title} item={item} />
+                    <UtilityItem
+                      onClick={e => handleUtilityNavigationClick(e, item)}
+                      key={item?.navItem?.title}
+                      item={item}
+                    />
                   ))}
               </div>
             </>

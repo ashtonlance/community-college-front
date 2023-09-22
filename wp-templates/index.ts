@@ -8,6 +8,9 @@ import Category from './category'
 import Tag from './tag'
 import CollegesAchive from './archive-colleges'
 import SingleCollege from './single-college'
+import FacultyAndStaffPage from './page-college-faculty-staff'
+import EmployersPage from './page-employers'
+import SystemOfficePage from './page-system-office'
 
 const templates = {
   'front-page': FrontPage,
@@ -20,6 +23,9 @@ const templates = {
   'page-events': Events,
   'page-colleges': CollegesAchive,
   'single-colleges': SingleCollege,
+  'page-college-faculty-staff': FacultyAndStaffPage,
+  'page-employers': EmployersPage,
+  'page-system-office': SystemOfficePage,
 }
 
 export default templates

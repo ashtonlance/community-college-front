@@ -25,9 +25,6 @@ type CollegesIndexProps = {
     }
     menu: {
       menuItems: {}
-      utilityNavigation: {
-        navigationItems: {}
-      }
     }
     footer: {
       menuItems: {}
@@ -38,6 +35,10 @@ type CollegesIndexProps = {
           announcementBarText: string
           showAnnouncementBar: boolean
         }
+      }
+
+      utilityNavigation: {
+        navigationItems: {}
       }
     }
   }
@@ -62,7 +63,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const menuItems = data?.menu?.menuItems || []
   const collegesIndex = data?.collegeIndex?.collegeIndex || []
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const utilityNavigation = data?.menu?.utilityNavigation?.navigationItems
+  const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const footerMenuItems = data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
@@ -260,15 +261,6 @@ CollegesArchive.query = gql`
           ...NavigationMenuFragment
         }
       }
-      utilityNavigation {
-        navigationItems {
-          navItem {
-            title
-            url
-            target
-          }
-        }
-      }
     }
     footer: menu(id: "Footer", idType: NAME) {
       menuItems(first: 200) {
@@ -283,6 +275,16 @@ CollegesArchive.query = gql`
           announcementBarText
           showAnnouncementBar
           announcementBarLink
+        }
+      }
+
+      utilityNavigation {
+        navigationItems {
+          navItem {
+            title
+            url
+            target
+          }
         }
       }
     }

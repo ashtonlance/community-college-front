@@ -3,50 +3,53 @@ import { Header } from 'components/Header'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
-import { EventCards } from 'components/EventCards'
-import { getHeroType } from '../utils/heroBlockHelper'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-export default function PageEvents(props) {
+
+export default function EmployersPage(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
-  const events = props.data?.events
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-
+  const footerMenuItems = props.data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
+  const settings = props.data?.settings?.siteSettings || []
+  console.log(props, 'props')
   if (props.loading) {
     return <>Loading...</>
   }
 
-  const heroType = getHeroType(blocks)
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
-      headerVariant={heroType === 'default' ? 'default' : 'transparent'}
+      headerVariant={'default'}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
+      settings={settings}
     >
-      {blocks && (
-        <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
-      )}
-      {events && <EventCards events={events} />}
-      {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      <>
+        {blocks && (
+          <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
+        )}
+        {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      </>
     </Layout>
   )
 }
 
-PageEvents.variables = ({ databaseId }, ctx) => {
+EmployersPage.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-PageEvents.query = gql`
+EmployersPage.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
@@ -61,18 +64,21 @@ PageEvents.query = gql`
         }
       }
     }
-    menu(id: "students", idType: SLUG) {
+    menu(id: "Employers", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
+
     settings {
       siteSettings {
         announcementBar {
@@ -91,10 +97,5 @@ PageEvents.query = gql`
         }
       }
     }
-    # events {
-    #   nodes {
-    #     blocks
-    #   }
-    # }
   }
 `

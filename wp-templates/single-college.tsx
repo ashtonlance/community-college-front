@@ -10,7 +10,8 @@ export default function SingleCollege(props) {
   const pageData = props.data?.college
   // const preFooterContent = props.data?.menus.nodes[0]
   const blocks = pageData && [...pageData.blocks]
-  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const utilityNavigation =
+    props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const footerMenuItems = props?.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
@@ -68,15 +69,6 @@ SingleCollege.query = gql`
           ...NavigationMenuFragment
         }
       }
-      utilityNavigation {
-        navigationItems {
-          navItem {
-            title
-            url
-            target
-          }
-        }
-      }
     }
     footer: menu(id: "Footer", idType: NAME) {
       menuItems(first: 200) {
@@ -91,6 +83,16 @@ SingleCollege.query = gql`
           announcementBarText
           showAnnouncementBar
           announcementBarLink
+        }
+      }
+
+      utilityNavigation {
+        navigationItems {
+          navItem {
+            title
+            url
+            target
+          }
         }
       }
     }
