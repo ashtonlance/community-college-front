@@ -30,13 +30,12 @@ export default function Page(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-    <>
-     {blocks && (
-        <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
-      )}
-      {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
-    </>
-
+      <>
+        {blocks && (
+          <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
+        )}
+        {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      </>
     </Layout>
   )
 }
@@ -64,7 +63,7 @@ Page.query = gql`
         }
       }
     }
-    menu(id: "primary", idType: SLUG) {
+    menu(id: "students", idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

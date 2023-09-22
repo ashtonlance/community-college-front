@@ -8,7 +8,7 @@ import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 const NOT_FOUND = gql`
   ${Header.fragments.entry}
   query NotFound {
-    menu(id: "primary", idType: SLUG) {
+    menu(id: "students", idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
@@ -59,10 +59,7 @@ export default function Custom404() {
       <div className="flex h-screen flex-col items-center justify-center gap-[20px]">
         <h1>404</h1>
         <h2>This page could not be found.</h2>
-        <Link
-          className="primary-btn outline grey"
-          href="/"
-        >
+        <Link className="primary-btn grey outline" href="/">
           Return to the homepage
         </Link>
       </div>

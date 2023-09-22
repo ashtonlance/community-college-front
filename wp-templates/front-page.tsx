@@ -51,7 +51,7 @@ FrontPage.query = gql`
         }
       }
     }
-    menu(id: "primary", idType: SLUG) {
+    menu(id: "students", idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
