@@ -110,6 +110,7 @@
     "*.js,ts,tsx,jsx": "npm run lint",
     "*.{js,jsx,ts,tsx,css,html}": "npm run format"
   },
+  "resolutions": { "@types/react": "^18.2.0" },
   "readme": "ERROR: No README data found!",
   "_id": "nextword@0.1.0"
 }
