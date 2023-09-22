@@ -66,6 +66,7 @@
     "react-lite-youtube-embed": "^2.3.52",
     "react-loader-spinner": "^5.3.4",
     "react-multi-select-component": "^4.3.4",
+    "react-player": "^2.13.0",
     "react-select": "^5.7.2",
     "react-share": "^4.4.1",
     "tailwind-merge": "^1.14.0"
@@ -110,6 +111,7 @@
     "*.js,ts,tsx,jsx": "npm run lint",
     "*.{js,jsx,ts,tsx,css,html}": "npm run format"
   },
+  "resolutions": { "@types/react": "^18.2.0" },
   "readme": "ERROR: No README data found!",
   "_id": "nextword@0.1.0"
 }

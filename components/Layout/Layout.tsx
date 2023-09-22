@@ -53,7 +53,7 @@ export function Layout(props: LayoutProps) {
         announcementBarText={settings?.announcementBar?.announcementBarText}
       />
       <main
-        className={cn(`flex min-h-screen flex-col ${
+        className={cn(`flex min-h-screen flex-col announcement-bar-${settings?.announcementBar?.showAnnouncementBar} ${
           variant === 'default'
             ? 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
             : null
