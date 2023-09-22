@@ -12,7 +12,8 @@ export default function PageEvents(props) {
   const preFooterContent = props.data?.menus.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const events = props.data?.events
-  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const utilityNavigation =
+    props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
 
   if (props.loading) {
@@ -66,6 +67,20 @@ PageEvents.query = gql`
           ...NavigationMenuFragment
         }
       }
+    }
+    menus(where: { slug: "footer" }) {
+      nodes {
+        ...PreFooterFragment
+      }
+    }
+    settings {
+      siteSettings {
+        announcementBar {
+          announcementBarText
+          showAnnouncementBar
+        }
+      }
+
       utilityNavigation {
         navigationItems {
           navItem {
@@ -74,11 +89,6 @@ PageEvents.query = gql`
             target
           }
         }
-      }
-    }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
       }
     }
     # events {

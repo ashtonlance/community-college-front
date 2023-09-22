@@ -5,51 +5,53 @@ import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
-export default function SingleCollege(props) {
+export default function FacultyAndStaffPage(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.college
-  // const preFooterContent = props.data?.menus.nodes[0]
+  const pageData = props.data?.page
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const footerMenuItems = props?.data?.footer?.menuItems || []
+  const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-
+  console.log(props, 'props')
   if (props.loading) {
     return <>Loading...</>
   }
+
   return (
     <Layout
-      pageClassName="college-single-page"
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
+      headerVariant={'default'}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      <h1 className="mt-28">{pageData.title}</h1>
-      {blocks && (
-        <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
-      )}
-      {/* {preFooterContent && <PreFooter preFooterContent={preFooterContent} />} */}
+      <>
+        {blocks && (
+          <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
+        )}
+        {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      </>
     </Layout>
   )
 }
 
-SingleCollege.variables = ({ databaseId }, ctx) => {
+FacultyAndStaffPage.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-SingleCollege.query = gql`
+FacultyAndStaffPage.query = gql`
   ${Header.fragments.entry}
-  query GetCollege($databaseId: ID!) {
-    college(id: $databaseId, idType: DATABASE_ID) {
+  query Page($databaseId: ID!, $asPreview: Boolean = false) {
+    page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
       title
       blocks
@@ -62,8 +64,7 @@ SingleCollege.query = gql`
         }
       }
     }
-
-    menu(id: "students", idType: SLUG) {
+    menu(id: "College Faculty and Staff", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
@@ -77,6 +78,7 @@ SingleCollege.query = gql`
         }
       }
     }
+
     settings {
       siteSettings {
         announcementBar {

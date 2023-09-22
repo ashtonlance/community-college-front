@@ -8,6 +8,7 @@ import Category from './category'
 import Tag from './tag'
 import CollegesAchive from './archive-colleges'
 import SingleCollege from './single-college'
+import FacultyAndStaffPage from './page-college-faculty-staff'
 
 const templates = {
   'front-page': FrontPage,
@@ -20,6 +21,7 @@ const templates = {
   'page-events': Events,
   'page-colleges': CollegesAchive,
   'single-colleges': SingleCollege,
+  'page-college-faculty-staff': FacultyAndStaffPage,
 }
 
 export default templates

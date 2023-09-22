@@ -15,7 +15,8 @@ export default function FrontPage(props: FrontPageProps) {
   const homePageData = props.data?.nodeByUri as Page
   const preFooterContent = props.data?.menus?.nodes[0] || []
   const blocks = homePageData && [...homePageData?.blocks]
-  const utilityNavigation = props.data?.menu?.utilityNavigation?.navigationItems
+  const utilityNavigation =
+    props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
@@ -57,6 +58,23 @@ FrontPage.query = gql`
           ...NavigationMenuFragment
         }
       }
+    }
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
+      }
+    }
+
+    settings {
+      siteSettings {
+        announcementBar {
+          announcementBarText
+          showAnnouncementBar
+        }
+      }
+
       utilityNavigation {
         navigationItems {
           navItem {
@@ -64,13 +82,6 @@ FrontPage.query = gql`
             url
             target
           }
-        }
-      }
-    }
-    footer: menu(id: "Footer", idType: NAME) {
-      menuItems(first: 200) {
-        nodes {
-          ...NavigationMenuFragment
         }
       }
     }

@@ -10,7 +10,6 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    legacyBrowsers: false,
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
