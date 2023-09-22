@@ -74,6 +74,7 @@ FrontPage.query = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
 

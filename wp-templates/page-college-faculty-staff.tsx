@@ -84,6 +84,7 @@ FacultyAndStaffPage.query = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
 

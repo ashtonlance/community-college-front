@@ -78,6 +78,7 @@ PageEvents.query = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
 
