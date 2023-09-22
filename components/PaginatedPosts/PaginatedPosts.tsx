@@ -15,7 +15,6 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
 
   const offset = (props.currentPage - 1) * PAGE_SIZE
   const items = props.colleges.slice(offset, offset + PAGE_SIZE)
-  console.log(items, 'items')
 
   const handlePageClick = (page: number) => {
     router.push(`${router.asPath?.split('?')?.[0]}?page=${page}`, null, {
