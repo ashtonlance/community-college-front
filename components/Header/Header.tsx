@@ -5,7 +5,7 @@ import LogoTall from 'assets/imgs/site-logo.svg'
 import LogoShort from 'assets/imgs/ncccs-short.svg'
 import { Search } from 'components/Search'
 import { NavigationItem } from './NavigationItem'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { HamburgerMenu } from './HamburgerMenu'
 import useScrollPosition from 'utils/hooks/useScrollPosition'
 import dynamic from 'next/dynamic'
@@ -92,7 +92,7 @@ export type HeaderProps = {
   }
 }
 
-export const Header = (props: HeaderProps) => {
+export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDivElement>) => {
   const menuItems = props.menuItems
   const variant = props.variant ?? 'default'
   const utilityNavigation = props.utilityNavigation
@@ -102,7 +102,6 @@ export const Header = (props: HeaderProps) => {
   const scrollPosition = useScrollPosition()
   const announcementBar = props.announcementBar
   const [getCookie] = useCookies(['ncccs-announcement-bar'])
-  console.log({props})
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null
@@ -113,6 +112,7 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <div
+      ref={ref}
       id="topbar"
       className={cn(
         `${
@@ -181,7 +181,7 @@ export const Header = (props: HeaderProps) => {
       </div>
     </div>
   )
-}
+})
 
 Header.displayName = 'Menu'
 Header.fragments = {
