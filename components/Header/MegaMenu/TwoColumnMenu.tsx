@@ -30,7 +30,7 @@ export const TwoColumnMenu = ({
     <div className="fixed left-0 top-[155px] w-full">
       <div
         // onMouseLeave={() => handleActiveItem('')}
-        className={cn(`mega-menu z-10 md:top-0 ${classes}`)}
+        className={cn(`mega-menu z-30 md:top-0 ${classes}`)}
         ref={ref}
       >
         <Image
@@ -43,16 +43,6 @@ export const TwoColumnMenu = ({
         />
         <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="border-r-solid flex max-h-[425px] flex-1 flex-col flex-wrap justify-around gap-y-6 border-r-[1.5px] border-r-lightBlue md:border-0 md:text-left">
-            {/* {parentItem ? (
-              <div className="flex flex-col pr-[40px]" key={parentItem.label}>
-                <Link
-                  className="links-sub-nav text-white hover:text-lightBlue"
-                  href={parentItem?.url || ''}
-                >
-                  {`${parentItem.label} Overview`}
-                </Link>
-              </div>
-            ) : null} */}
             {subItems?.map(subItem => {
               const secondaryLinks = subItem?.children?.length > 0
               return (
@@ -60,8 +50,8 @@ export const TwoColumnMenu = ({
                   <Link
                     className={cn(
                       `links-sub-nav ${
-                        secondaryLinks ? 'mb-[14px]' : null
-                      } text-white hover:text-lightBlue`
+                        secondaryLinks ? 'mb-[14px] md:mb-[10px] sm:mb-[8px]' : null
+                      }`
                     )}
                     href={subItem?.url || ''}
                   >
@@ -72,7 +62,7 @@ export const TwoColumnMenu = ({
                     {secondaryLinks &&
                       subItem?.children?.map((child: any) => (
                         <Link
-                          className="mb-1 text-sm leading-relaxed text-lightBlue hover:text-white"
+                          className="links-child-nav"
                           href={child?.url || ''}
                           key={child.label}
                         >
@@ -85,13 +75,13 @@ export const TwoColumnMenu = ({
             })}
           </div>
 
-          <div className="flex w-[35%] flex-col gap-8 pl-[80px] text-center md:hidden">
+          <div className="flex w-[35%] flex-col justify-center items-center gap-8 pl-[80px] text-center md:hidden">
             <span className="h3 text-white">
               Need help finding the right program?
             </span>
             <Link
               href="/programs"
-              className="secondary-btn mx-auto max-w-xs hover:bg-white"
+              className="secondary-btn gold"
             >
               Use Our Program Finder
             </Link>
