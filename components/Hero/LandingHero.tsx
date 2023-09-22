@@ -32,7 +32,6 @@ export const LandingHero = ({
   videoType
 }: HeroPropsType) => {
 
-
   return (
     <div
       className={cn(
@@ -55,10 +54,10 @@ export const LandingHero = ({
           priority
         />
       )}
-      <div className="absolute bottom-0 left-0 right-0 top-0 w-full">
+      <div className="absolute bottom-0 left-0 right-0 top-0 w-full img-landing-hero" >
         <Image
           unoptimized={true}
-          src={angles}
+          src={angles.src}
           alt=""
           fill
           className={`img-landing-hero z-10 object-fill`}
