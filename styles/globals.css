@@ -41,6 +41,9 @@
   .announcement-bar-content{
     @apply text-center text-[16px] md:text-[14px] basis-full  text-navy font-sans font-bold leading-[150%] md:leading-[140%] py-[16px] px-[40px] md:px-[32px] sm:py-[12px] sm:px-[24px];
   }
+  .utility-item-btn{
+    @apply text-[14px] sm:text-[12px] font-bold capitalize leading-[110%] flex h-full items-center justify-center px-[20px] md:px-[16px] sm:px-[14px] py-[15px] md:py-[11px] sm:py-[9px] font-condensed text-white hover:bg-lightBlue hover:text-navy md:w-full mdsm:w-fit
+  }
   .home-h1 {
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
@@ -54,7 +57,7 @@
     @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-navy font-sans;
   }
   .main-nav {
-    @apply cursor-pointer p-4 pb-0 rounded-lg text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
+    @apply cursor-pointer p-4 pb-0 rounded-lg text-[18px] sm:text-[15px] font-bold tracking-[-0.18px] leading-[110%] text-navy font-condensed ;
   }
   .links-mobile-nav {
     @apply cursor-pointer py-[20px] text-[28px] font-bold tracking-[-0.02em] leading-[110%] font-sans;

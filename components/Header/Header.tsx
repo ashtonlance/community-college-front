@@ -35,11 +35,12 @@ const Logo = ({ scrolled }) => {
 
 const UtilityItem = ({ item }) => {
   const router = useRouter()
+
   return (
     <Link
       key={item?.navItem?.title}
-      className={cn(`flex h-full items-center justify-center px-[20px] py-[15px] font-condensed text-white hover:bg-lightBlue hover:text-navy ${
-        isCurrentPage(item?.navItem?.url, router.asPath)
+      className={cn(`utility-item-btn ${
+        isCurrentPage(item?.navItem?.url, router.asPath) || item.navItem.title === 'Students'
           ? 'bg-gold text-navy'
           : ''
       }
@@ -129,14 +130,14 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
         <div className="flex w-full items-center justify-between">
           {utilityNavigation && (
             <>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center md:w-full md:justify-between h-full">
                 {utilityNavigation
                   .slice(0, 4)
                   ?.map(item => (
                     <UtilityItem key={item?.navItem?.title} item={item} />
                   ))}
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center md:hidden h-full">
                 {utilityNavigation
                   .slice(4)
                   ?.map(item => (
@@ -146,7 +147,7 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
             </>
           )}
         </div>
-        <span className="search-wrapper-icon flex items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:h-[50px] md:w-[50px] md:justify-center md:p-0">
+        <span className="search-wrapper-icon flex items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:hidden md:h-[50px] md:w-[50px] md:justify-center md:p-0">
           <Search
             transparentMode={displayTransparentMode}
             searchOpened={setSearchOpened}
@@ -159,7 +160,7 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
             transparentScrolledMode
               ? 'px-[32px] py-[16px] md:px-[24px] md:py-[20px] '
               : 'px-[32px] py-[24px] md:p-[24px] md:pl-[40px]'
-          } transition-padding mx-auto flex h-fit w-full max-w-[1700px] items-center justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
+          } relative transition-padding mx-auto flex h-fit w-full max-w-[1700px] items-center justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
         )}
       >
         <Logo scrolled={transparentScrolledMode} />
@@ -170,7 +171,7 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
           updateActiveItem={handleActiveItem}
         />
 
-        <div className="hamburguer-wrapper hidden h-[50px] w-[50px] items-center justify-center rounded-[3px] hover:bg-gmt-200 md:flex">
+        <div className="hamburguer-wrapper hidden h-[50px] w-[50px] py-[22px] px-[31px] items-center justify-center rounded-[3px] hover:bg-gmt-200 md:flex md:right-[110px] sm:right-[90px] relative">
           <HamburgerMenu
             menuItems={menuItems}
             bgTransparent={displayTransparentMode}
@@ -178,6 +179,12 @@ export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDi
             toggleHamburgerMenu={setHamburgerMenuOpen}
           />
         </div>
+        <span className="search-wrapper-icon hidden items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:flex md:w-[110px] md:absolute md:right-0 h-[100%]">
+          <Search
+            transparentMode={displayTransparentMode}
+            searchOpened={setSearchOpened}
+          />
+        </span>
       </div>
     </div>
   )
