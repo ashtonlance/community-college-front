@@ -3,18 +3,13 @@ import { Header } from 'components/Header'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
-import { Page, RootQuery } from 'generated/graphql'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
-type FrontPageProps = {
-  data: Pick<RootQuery, 'nodeByUri' | 'menu' | 'menus' | any>
-}
-
-export default function FrontPage(props: FrontPageProps) {
+export default function SystemOfficePage(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const homePageData = props.data?.nodeByUri as Page
-  const preFooterContent = props.data?.menus?.nodes[0] || []
-  const blocks = homePageData && [...homePageData?.blocks]
+  const pageData = props.data?.page
+  const preFooterContent = props.data?.menus?.nodes[0]
+  const blocks = pageData && [...pageData.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
@@ -22,39 +17,54 @@ export default function FrontPage(props: FrontPageProps) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  console.log(props, 'props')
+  if (props.loading) {
+    return <>Loading...</>
+  }
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
-      seo={homePageData?.seo}
+      seo={pageData?.seo}
+      headerVariant={'default'}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      {blocks && <WordPressBlocksViewer blocks={blocks} />}
-      {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      <>
+        {blocks && (
+          <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
+        )}
+        {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
+      </>
     </Layout>
   )
 }
 
-FrontPage.query = gql`
+SystemOfficePage.variables = ({ databaseId }, ctx) => {
+  return {
+    databaseId,
+    asPreview: ctx?.asPreview,
+  }
+}
+
+SystemOfficePage.query = gql`
   ${Header.fragments.entry}
-  query HomePage {
-    nodeByUri(uri: "/") {
-      ... on Page {
-        id
+  query Page($databaseId: ID!, $asPreview: Boolean = false) {
+    page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
+      id
+      title
+      blocks
+      seo {
+        metaDesc
+        canonical
         title
-        blocks
-        seo {
-          metaDesc
-          canonical
-          title
-          schema {
-            raw
-          }
+        schema {
+          raw
         }
       }
     }
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
