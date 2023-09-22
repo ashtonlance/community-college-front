@@ -38,6 +38,9 @@
 }
 
 @layer components {
+  .announcement-bar-content{
+    @apply text-center text-[16px] md:text-[14px] basis-full  text-navy font-sans font-bold leading-[150%] md:leading-[140%] py-[16px] px-[40px] md:px-[32px] sm:py-[12px] sm:px-[24px];
+  }
   .home-h1 {
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }

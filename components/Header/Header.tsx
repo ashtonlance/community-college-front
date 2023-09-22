@@ -16,16 +16,6 @@ import { cn } from 'utils'
 import { isCurrentPage } from './NavigationItem'
 import { AnnouncementBar } from 'components/AnnouncementBar'
 import { useCookies } from 'react-cookie'
-// const Modal = dynamic(
-//   async () => {
-//     const { Modal } = await import('components/Modal')
-//     return { default: Modal }
-//   },
-//   {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>,
-//   }
-// )
 
 const Logo = ({ scrolled }) => {
   const NCCCSLogo = scrolled ? LogoShort : LogoTall
@@ -95,8 +85,11 @@ export type HeaderProps = {
   variant?: HeaderVariant
   form: any
   utilityNavigation: any
-  showAnnouncementBar?: string
-  announcementBarText?: string
+  announcementBar?: {
+    announcementBarText?:string,
+    announcementBarLink?:string,
+    showAnnouncementBar?:string,
+  }
 }
 
 export const Header = (props: HeaderProps) => {
@@ -107,9 +100,9 @@ export const Header = (props: HeaderProps) => {
   const [searchOpened, setSearchOpened] = useState(false)
   const [hamburgerMenuOpened, setHamburgerMenuOpen] = useState(false)
   const scrollPosition = useScrollPosition()
-  const showAnnouncementBar = props.showAnnouncementBar ?? false
-  const announcementBarText = props.announcementBarText ?? ''
+  const announcementBar = props.announcementBar
   const [getCookie] = useCookies(['ncccs-announcement-bar'])
+  console.log({props})
 
   const handleActiveItem = (e, id) => {
     typeof e === 'object' ? e.preventDefault() : null
@@ -129,8 +122,8 @@ export const Header = (props: HeaderProps) => {
         } transition-background border-b-2 border-solid border-grey duration-200`
       )}
     >
-      {showAnnouncementBar === '1' ? (
-        <AnnouncementBar announcementBarText={announcementBarText} />
+      {announcementBar.showAnnouncementBar === '1' ? (
+        <AnnouncementBar announcementBar={announcementBar} />
       ) : null}
       <div className="flex w-full justify-between bg-navy">
         <div className="flex w-full items-center justify-between">
@@ -200,25 +193,6 @@ Header.fragments = {
       description
       label
       url
-      # navigationMenu {
-      #   fieldGroupName
-      #   items {
-      #     description
-      #     fieldGroupName
-      #     title
-      #     url {
-      #       target
-      #       title
-      #       url
-      #     }
-      #     resourcesLinks {
-      #       label
-      #       pageLink {
-      #         url
-      #       }
-      #     }
-      #   }
-      # }
     }
   `,
 }

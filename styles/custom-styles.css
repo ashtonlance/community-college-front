@@ -247,6 +247,6 @@ table td {
 .img-landing-hero{
   background: radial-gradient(at right center, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.3));
 }
-.announcement-bar-1 .landing-hero-wrapper{
+.show-announcement-bar .landing-hero-wrapper{
 	margin-top: 57px;
 }

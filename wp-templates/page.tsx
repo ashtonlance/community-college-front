@@ -92,6 +92,7 @@ Page.query = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
     }

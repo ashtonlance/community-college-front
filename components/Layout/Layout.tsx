@@ -27,6 +27,9 @@ export function Layout(props: LayoutProps) {
   const footerNavigation = props?.footerNavigation || []
   const settings = props?.settings || []
   const fullHead = props?.seo?.fullHead ? parse(props?.seo?.fullHead) : ''
+  const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar;
+
+  console.log(settings)
   return (
     <>
       <Head>
@@ -49,11 +52,10 @@ export function Layout(props: LayoutProps) {
         utilityNavigation={utilityNavigation}
         form={props.form}
         variant={variant}
-        showAnnouncementBar={settings?.announcementBar?.showAnnouncementBar}
-        announcementBarText={settings?.announcementBar?.announcementBarText}
+        announcementBar={settings?.announcementBar}
       />
       <main
-        className={cn(`flex min-h-screen flex-col announcement-bar-${settings?.announcementBar?.showAnnouncementBar} ${
+        className={cn(`flex min-h-screen flex-col ${hasAnnouncementBar === '1' ? 'show-announcement-bar' : 'hide-announcement-bar' } ${
           variant === 'default'
             ? 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
             : null
