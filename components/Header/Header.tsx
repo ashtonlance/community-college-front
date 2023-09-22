@@ -122,7 +122,7 @@ export const Header = (props: HeaderProps) => {
         } transition-background border-b-2 border-solid border-grey duration-200`
       )}
     >
-      {announcementBar.showAnnouncementBar === '1' ? (
+      {announcementBar?.showAnnouncementBar === '1' ? (
         <AnnouncementBar announcementBar={announcementBar} />
       ) : null}
       <div className="flex w-full justify-between bg-navy">
