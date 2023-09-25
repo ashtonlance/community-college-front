@@ -22,7 +22,7 @@ export const FeaturesAndBenefits = ({
   const bgColorModule = attributes.data.background_color
   const marginBottom = attributes.data.component_spacing_bottom_spacing
   const marginTop = attributes.data.component_spacing_top_spacing
-  const bgColorCard = bgColorModule == 'light' ? 'bg-white' : 'bg-grey'
+  const bgColorCard = bgColorModule == 'white' ? 'bg-white' : 'bg-grey'
 
   return (
     <div

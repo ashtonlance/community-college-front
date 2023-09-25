@@ -4,9 +4,12 @@ import Autoplay from 'embla-carousel-autoplay'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { FadeIn } from 'components/FadeIn'
 import Image from 'next/image'
+import bgWhite from "../../assets/imgs/bg-slider-white.jpeg"
+import bgGrey from "../../assets/imgs/bg-slider-grey.jpeg"
+
 
 export type MarginSizesType = 'none' | 'medium' | 'large'
-export type BackgroundColorType = 'white' | 'light' | 'dark'
+export type BackgroundColorType = 'white' | 'grey'
 
 type TestimonialSliderProps = {
   attributes: {
@@ -20,11 +23,11 @@ type TestimonialSliderProps = {
 }
 
 export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
+
   const slides = attributes.data.slide
   const bgColorCard = attributes.data.background_color
   const marginBottom = attributes.data.component_spacing_bottom_spacing || null
   const marginTop = attributes.data.component_spacing_top_spacing || null
-  const bgColorFullModule = bgColorCard == 'white' ? 'bg-grey' : 'bg-white'
 
   const autoplay = useRef(
     Autoplay(
@@ -61,7 +64,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
       key={`slide${val}`}
       className={`flex flex-shrink-0 flex-grow-0 basis-full flex-col items-center justify-center overflow-hidden`}
     >
-      <Quote className="mb-[40px] h-7 w-7 text-gold" />
+      <Quote className="mb-[40px] text-gold" />
       <p className="h4 mb-10">{attributes.data[`slide_${val}_quote`]}</p>
       <div className="mb-[10px] flex flex-wrap items-center justify-center gap-2">
         <p className="body-regular font-bold text-darkGrey sm:mb-0">
@@ -87,17 +90,18 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
 
   return (
     <FadeIn>
+      <div className={`w-full p-[100px] md:p-[60px] sm:p-[40px] ${bgColorCard == 'grey' ? "bg-grey" : "bg-white"}`}>
       <div
-        className={`w-full py-[100px] md:p-[60px] sm:p-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} relative`}
+        className={`module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} relative ${bgColorCard == 'grey' ? "bg-grey" : "bg-white"}`}
       >
         <Image
-          src={`/angles/angled-bg_${bgColorCard}-btm.jpg`}
+          src={`${bgColorCard == 'grey' ? bgWhite.src : bgGrey.src}`}
           fill
           alt="background"
-          className="object-fill"
+          className="object-fill rounded-[12px]"
         />
         <div
-          className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center p-[80px] text-center md:w-full md:px-[32px] sm:p-[40px] ${bgColorFullModule}`}
+          className={`${bgColorCard == 'grey' ? "bg-white" : "bg-grey"} mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center p-[80px] text-center md:w-full md:px-[32px] sm:p-[40px]`}
         >
           <div className="max-w-full overflow-hidden" ref={emblaRef}>
             <div className="flex w-full gap-[20px]">
@@ -118,6 +122,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </FadeIn>
   )
