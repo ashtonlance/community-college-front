@@ -183,7 +183,7 @@
   }
   .gfield input,
   .gfield textarea,
-  input,
+  input
    {
     @apply py-[14px] px-[20px] border-[#51525533] border-2 text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
   }
@@ -224,5 +224,8 @@
   }
   .text-input {
     @apply flex-1 rounded-[5px] border-2 border-[#51525533] px-[20px] py-[14px] text-navy placeholder:text-darkBeige focus-within:ring-transparent focus:border-lightBlue focus:ring-transparent focus-visible:outline-transparent active:outline-transparent active:placeholder:text-navy;
+  }
+  .footer-links-headline{
+    @apply text-[18px] md:text-[16px] sm:text-[13px] font-bold leading-[110%] tracking-[-0.18px] md:tracking-[-0.16px] sm:tracking-[-0.12px] capitalize mb-[20px] md:mb-[12px] sm:mb-[8px] font-condensed	text-white hover:text-lightBlue md:text-center
   }
 }
