@@ -41,7 +41,7 @@ const UtilityItem = ({ item, onClick }) => {
       onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
       className={cn(`utility-item-btn ${
-        isCurrentPage(item?.navItem?.url, router.asPath) || item.navItem.title === 'Students'
+        item.navItem.title === 'Students'
           ? 'bg-gold text-navy'
           : ''
       }
