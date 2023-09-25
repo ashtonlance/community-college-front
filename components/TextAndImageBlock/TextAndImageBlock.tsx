@@ -23,7 +23,7 @@ export const TextAndImageBlock = ({ attributes }) => {
         } md:h-fit md:flex-col md:gap-[60px]`}
       >
         <Image
-          className="w-[50%] self-center rounded-xl md:w-full"
+          className="w-[50%] self-center rounded-[12px] md:w-full"
           src={img}
           alt=""
           width={620}

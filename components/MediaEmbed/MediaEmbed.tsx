@@ -16,18 +16,19 @@ export const MediaEmbed = props => {
   return (
     <div
       className={cn(
-        `flex w-full flex-wrap justify-center bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden`
+        `flex w-full media-embed-module flex-wrap justify-center bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden`
       )}
     >
       {videoOrImage === 'image' ? (
         <Image
+          className='rounded-[12px]'
           src={image.url}
           width={image.width}
           height={image.height}
           alt={image.alt}
         />
       ) : (
-        <div className="w-full">
+        <div className="w-full rounded-[12px]">
           <LiteYouTubeEmbed
             id={id}
             title={'video'}
