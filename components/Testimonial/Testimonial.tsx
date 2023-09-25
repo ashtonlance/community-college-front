@@ -2,15 +2,14 @@ import { FadeIn } from 'components/FadeIn'
 import Image from 'next/image'
 import bgTestimonial from '../../assets/imgs/angled-blue-testimonial.png'
 
-
 export const Testimonial = ({ attributes }) => {
   const business = attributes.data.business_name
   const person = attributes.data.persons_name
   const quote = attributes.data.quote
   const label = attributes.data.label
   const color = attributes.data.background_color
-  const spaceTop = attributes.data.component_spacing_top_spacing;
-  const spaceBottom = attributes.data.component_spacing_bottom_spacing;
+  const spaceTop = attributes.data.component_spacing_top_spacing
+  const spaceBottom = attributes.data.component_spacing_bottom_spacing
 
   return (
     <FadeIn>
@@ -18,7 +17,7 @@ export const Testimonial = ({ attributes }) => {
         <div
           className={`relative mx-auto flex max-w-[1240px] flex-col items-center justify-center module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
         >
-          <div className="border-solid border-2 border-lightBlue bg-white relative mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center overflow-hidden rounded-xl px-[60px] py-[40px] text-center md:w-full md:p-[40px]">
+          <div className="relative mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-solid border-lightBlue bg-white px-[60px] py-[40px] text-center md:w-full md:p-[40px]">
             <Image
               src={bgTestimonial.src}
               fill

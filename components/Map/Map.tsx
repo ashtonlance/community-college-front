@@ -7,15 +7,9 @@ import {
 import { useState, memo, useCallback, useMemo } from 'react'
 import { FadeIn } from '@/components/FadeIn'
 
-const containerStyle = {
-  width: '100%',
-  height: '450px',
-  borderRadius: '12px',
-}
-
 const MapInternal = GoogleMap as any
 
-export const Map = ({ coordinates = [] }) => {
+export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
   // console.log(coordinates, 'coordinates')
 
   const { isLoaded } = useJsApiLoader({
@@ -56,13 +50,19 @@ export const Map = ({ coordinates = [] }) => {
     setActiveMarker(marker)
   }
 
+  const containerStyle = {
+    width: '100%',
+    height: !isEmbed ? '450px' : '250px',
+    borderRadius: '12px',
+  }
+
   return isLoaded ? (
     <FadeIn>
-      <div className="w-full px-[100px] pb-[60px]">
+      <div className={`w-full ${!isEmbed ? 'px-[100px] pb-[60px]' : null}`}>
         <MapInternal
           mapContainerStyle={containerStyle}
-          center={mapCenter}
-          zoom={7}
+          center={!isEmbed ? mapCenter : coordinates[0]}
+          zoom={zoom}
           onLoad={onLoad}
           onUnmount={onUnmount}
           options={mapOptions}

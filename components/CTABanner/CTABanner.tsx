@@ -16,7 +16,7 @@ export const CTABanner = ({ attributes }) => {
     return (
       <FadeIn>
         <div
-          className={`bg-${bgColor} relative py-[80px] px-[105px] md:px-[100px] md:py-[60px] sm:p-[40px]`}
+          className={`bg-${bgColor} relative px-[105px] py-[80px] md:px-[100px] md:py-[60px] sm:p-[40px]`}
         >
           <Image
             src={`/angles/angled-bg_${type}-cta_${bgImageColor}.jpg`}
@@ -36,7 +36,7 @@ export const CTABanner = ({ attributes }) => {
             <span
               className={cn(
                 `text-navy md:mb-[40px] md:text-center ${
-                  hasCard ? 'h3 mb-8 text-center' : 'h2'
+                  hasCard ? 'h3 mb-8 w-full text-center' : 'h2'
                 }`
               )}
             >
@@ -47,9 +47,7 @@ export const CTABanner = ({ attributes }) => {
               arrow={hasCard ? false : true}
               classes={cn(
                 `  w-fit whitespace-nowrap h-fit ${
-                  hasCard
-                    ? 'secondary-btn navy'
-                    : 'primary-btn  white'
+                  hasCard ? 'secondary-btn navy' : 'primary-btn  white'
                 }`
               )}
               linkto={btn_link}
@@ -61,9 +59,7 @@ export const CTABanner = ({ attributes }) => {
   } else {
     return (
       <FadeIn>
-        <div
-          className={`bg-white py-[60px] px-[105px] sm:p-[40px]`}
-        >
+        <div className={`bg-white px-[105px] py-[60px] sm:p-[40px]`}>
           <div className="relative overflow-hidden rounded-xl px-[105px] py-[80px] md:p-[60px]">
             <Image
               src={`/angles/angled-bg_${type}-cta_${bgImageColor}.jpg`}

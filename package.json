@@ -29,6 +29,7 @@
     "@formspree/react": "^2.4.1",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@next/bundle-analyzer": "^13.4.12",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@react-google-maps/api": "^2.19.2",
     "@simplefocus/prettier-config": "^1.0.3",
     "@storybook/addon-console": "^2.0.0",
@@ -111,7 +112,9 @@
     "*.js,ts,tsx,jsx": "npm run lint",
     "*.{js,jsx,ts,tsx,css,html}": "npm run format"
   },
-  "resolutions": { "@types/react": "^18.2.0" },
+  "resolutions": {
+    "@types/react": "^18.2.0"
+  },
   "readme": "ERROR: No README data found!",
   "_id": "nextword@0.1.0"
 }

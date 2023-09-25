@@ -108,7 +108,7 @@
     @apply w-fit transition-colors border-none cursor-pointer text-base rounded-lg sm:text-[14px] font-bold leading-[100%] capitalize text-center flex justify-center items-center gap-[6px] tracking-[-0.16px] font-sans py-[12px] px-[20px] sm:py-[10px] sm:px-[18px];
   }
   .secondary-btn.navy{
-    @apply bg-navy text-white hover:bg-white hover:text-navy;
+    @apply bg-navy text-white hover:bg-gold hover:text-navy;
   }
 
   .secondary-btn.gold{

@@ -10,7 +10,7 @@ module.exports = {
     screens: {
       lg: { max: '1400px' },
       md: { max: '1080px' },
-      mdsm: {max: '728px'},
+      mdsm: { max: '728px' },
       sm: { max: '640px' },
     },
     extend: {
@@ -51,6 +51,20 @@ module.exports = {
           'century-old-style-std',
           'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;',
         ],
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },

@@ -16,6 +16,10 @@ export type HeroPropsType = {
   emptyBg?: boolean
   bgVideo?: string
   videoType?: string
+  phone?: string
+  email?: string
+  link?: string
+  isCollegeSingle?: boolean
 }
 
 export const LandingHero = ({
@@ -29,9 +33,8 @@ export const LandingHero = ({
   bgVideo,
   bgPosition,
   emptyBg,
-  videoType
+  videoType,
 }: HeroPropsType) => {
-
   return (
     <div
       className={cn(
@@ -41,8 +44,10 @@ export const LandingHero = ({
       )}
       suppressHydrationWarning
     >
-      {bgVideo && videoType==='url' && ( <BackgroundVideoURL url={bgVideo} />)}
-      {bgVideo && videoType==='file' && ( <BackgroundVideoFile databaseId={bgVideo} />)}
+      {bgVideo && videoType === 'url' && <BackgroundVideoURL url={bgVideo} />}
+      {bgVideo && videoType === 'file' && (
+        <BackgroundVideoFile databaseId={bgVideo} />
+      )}
 
       {bgImg && !bgVideo && (
         <Image
@@ -54,7 +59,7 @@ export const LandingHero = ({
           priority
         />
       )}
-      <div className="absolute bottom-0 left-0 right-0 top-0 w-full img-landing-hero" >
+      <div className="img-landing-hero absolute bottom-0 left-0 right-0 top-0 w-full">
         <Image
           unoptimized={true}
           src={angles.src}
