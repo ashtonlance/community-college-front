@@ -8,6 +8,10 @@ import {
 export const AccordionDisplay = props => {
   console.log(props, 'props')
   const items = props?.attributes?.data?.accordion
+  const color = props?.attributes?.data?.background_color || 'grey'
+  const spaceTop = props?.attributes?.data?.margins_top_spacing || 'medium'
+  const spaceBottom =
+    props?.attributes?.data?.margins_bottom_spacing || 'medium'
   const accordionItems = []
   for (let i = 0; i < items; i++) {
     accordionItems.push(
@@ -22,8 +26,10 @@ export const AccordionDisplay = props => {
     )
   }
   return (
-    <div className="bg-grey">
-      <div className="px-52 pb-[100px]">
+    <div className={`bg-${color}`}>
+      <div
+        className={`px-52 pb-[100px] module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
+      >
         <Accordion type="single" collapsible>
           {accordionItems}
         </Accordion>
