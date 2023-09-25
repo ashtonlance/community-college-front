@@ -15,7 +15,7 @@ export const ScrollIndicator = ({emptyBg}:{emptyBg:boolean}) => {
   const ref = useRef(null)
 
   return (
-    <span className="absolute bottom-[93px] md:bottom-[90px] right-[90px] flex items-center justify-center sm:hidden z-20">
+    <span className="absolute bottom-[93px] md:bottom-[90px] right-[90px] flex items-center justify-center sm:hidden z-[3]">
       <svg
         width="17"
         height="144"

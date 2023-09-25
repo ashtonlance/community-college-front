@@ -27,6 +27,7 @@ const NOT_FOUND = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
 

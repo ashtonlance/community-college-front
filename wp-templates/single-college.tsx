@@ -82,6 +82,7 @@ SingleCollege.query = gql`
         announcementBar {
           announcementBarText
           showAnnouncementBar
+          announcementBarLink
         }
       }
 

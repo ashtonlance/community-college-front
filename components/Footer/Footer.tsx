@@ -31,82 +31,83 @@ export const Footer = ({ menuItems, footerNavigation }) => {
   )
 
   return (
-    <div className="relative flex items-start justify-between px-[100px] py-[80px] text-white md:flex-col md:p-[60px] sm:p-[40px]">
-      <Image
-        className="pointer-events-none -z-10 bg-navy object-fill object-center"
-        src={bg}
-        alt=""
-        fill
-        quality={80}
-        loading="eager"
-        priority
-      />
-      <div className="max-w-[200px] md:flex md:w-full md:max-w-full md:justify-between sm:flex-col">
-        <Logo className="mb-6" />
-        <div className="md:w-[40%] sm:w-full">
-          <address className="mb-[15px] max-w-[200px] text-[14px] font-bold not-italic leading-[110%] tracking-[-0.01em] text-white">
-            200 West Jones Street Raleigh, North Carolina 27603
-          </address>
-          <p className="mb-[20px] text-[14px] font-bold leading-[110%] tracking-[-0.01em] text-white hover:text-lightBlue">
-            <a href="tel:(919) 807-7100">(919) 807-7100</a>
-          </p>
-          <div className="flex gap-x-5">
-            <Link href="/">
-              <Facebook
-                alt=""
-                className="h-5 w-5 text-gold hover:text-lightBlue sm:mb-[32px]"
-              />
-            </Link>
-            <Link href="/">
-              <Twitter
-                alt=""
-                className="h-5 w-5 text-gold hover:text-lightBlue sm:mb-[32px]"
-              />
-            </Link>
-            <Link href="/">
-              <Youtube
-                alt=""
-                className="h-5 w-5 text-gold hover:text-lightBlue sm:mb-[32px]"
-              />
-            </Link>
-            <Link href="/">
-              <Linkedin
-                alt=""
-                className="h-5 w-5 text-gold hover:text-lightBlue sm:mb-[32px]"
-              />
-            </Link>
-            <Link href="/">
-              <Instagram
-                alt=""
-                className="h-5 w-5 text-gold hover:text-lightBlue sm:mb-[32px]"
-              />
-            </Link>
+    <div className="relative grid grid-cols-12 grid-rows-auto md:gap-y-[40px] sm:gap-y-0 px-[100px] py-[80px] text-white md:p-[60px] sm:py-[48px] sm:px-[32px]">
+      <div className='col-start-1 col-end-3 md:col-span-12 sm:mb-[25px]'>
+        <Image
+          className="pointer-events-none -z-10 bg-navy object-fill object-center"
+          src={bg}
+          alt=""
+          fill
+          quality={80}
+          loading="eager"
+          priority
+        />
+        <div className="max-w-[200px] md:flex md:w-full md:max-w-full md:justify-between sm:flex-col">
+          <div className="mb-6 md:w-[40%] sm:w-full"><Logo className="mx-auto"/></div>
+          <div className="md:w-[40%] sm:w-full md:text-center md:flex md:flex-col md:justify-center md:items-center">
+            <address className="mb-[15px] max-w-[200px] text-[14px] font-normal not-italic leading-[140%] text-white">
+              200 West Jones Street Raleigh, North Carolina 27603
+            </address>
+            <p className="mb-[20px] text-[14px] font-normal leading-[140%] text-white hover:text-lightBlue">
+              <a href="tel:(919) 807-7100">(919) 807-7100</a>
+            </p>
+            <div className="flex gap-x-5 justify-center">
+              <Link href="/">
+                <Facebook
+                  alt=""
+                  className="h-5 w-5 text-gold hover:text-lightBlue"
+                />
+              </Link>
+              <Link href="/">
+                <Twitter
+                  alt=""
+                  className="h-5 w-5 text-gold hover:text-lightBlue"
+                />
+              </Link>
+              <Link href="/">
+                <Youtube
+                  alt=""
+                  className="h-5 w-5 text-gold hover:text-lightBlue"
+                />
+              </Link>
+              <Link href="/">
+                <Linkedin
+                  alt=""
+                  className="h-5 w-5 text-gold hover:text-lightBlue"
+                />
+              </Link>
+              <Link href="/">
+                <Instagram
+                  alt=""
+                  className="h-5 w-5 text-gold hover:text-lightBlue"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex w-3/4 flex-wrap justify-between md:w-full md:justify-around">
         <Menu
-          classlist="order-1 w-[20%] md:w-1/3"
+          classlist="order-1 md:mt-0 sm:mb-[12px] col-start-4 col-end-6 md:col-start-1 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
           subItems={studentMenu}
           label={studentMenu[0]?.label}
         />
         <Menu
-          classlist="order-1 w-[20%] md:w-1/3"
+          classlist="order-1 md:mt-0 sm:mb-[12px] col-start-6 col-end-8 md:col-start-5 md:col-span-4 sm:col-start-1 sm:col-span-12 footer-links-headline"
           subItems={facultyAndStaffMenu}
           label={facultyAndStaffMenu[0]?.label}
         />
         <Menu
-          classlist="order-1 w-[20%] md:w-1/3"
+          classlist="order-1 md:mt-0 sm:mb-[12px] col-start-8 col-end-10 md:col-start-10 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
           subItems={employerMenu}
           label={employerMenu[0]?.label}
         />
         <Menu
-          classlist="order-1 w-[20%] md:w-1/3"
+          classlist="order-1 md:mt-0 sm:mb-[12px] col-start-10 col-end-12 md:col-start-2 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
           subItems={systemOfficeMenu}
           label={systemOfficeMenu[0]?.label}
         />
-        <div className="order-2 w-[10%] md:w-1/3">
-          <div className="flex flex-col gap-y-5">
+        <div className="order-2 sm:mb-[12px] col-start-12 md:col-start-9 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline">
+          <div className="flex flex-col gap-y-5 md:gap-y-3 sm:gap-y-2">
             {utilityMenu[0]?.children?.map(item => {
               return (
                 <Link
@@ -120,7 +121,6 @@ export const Footer = ({ menuItems, footerNavigation }) => {
             })}
           </div>
         </div>
-      </div>
     </div>
   )
 }

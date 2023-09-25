@@ -21,7 +21,7 @@
     @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] text-navy font-serif antialiased;
   }
   h3, .h3 {
-    @apply text-[38px] sm:text-[28px] leading-[110%] tracking-[-0.38px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
+    @apply text-[34px] sm:text-[28px] font-normal leading-[120%] tracking-[-0.34px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
   }
   h4, .h4 {
     @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] text-navy font-condensed antialiased;
@@ -38,6 +38,12 @@
 }
 
 @layer components {
+  .announcement-bar-content{
+    @apply text-center text-[16px] md:text-[14px] basis-full  text-navy font-sans font-bold leading-[150%] md:leading-[140%] py-[16px] px-[40px] md:px-[32px] sm:py-[12px] sm:px-[24px];
+  }
+  .utility-item-btn{
+    @apply text-[14px] sm:text-[12px] font-bold capitalize leading-[110%] flex h-full items-center justify-center px-[20px] md:px-[16px] sm:px-[14px] py-[15px] md:py-[11px] sm:py-[9px] font-condensed text-white hover:bg-lightBlue hover:text-navy md:w-full mdsm:w-fit
+  }
   .home-h1 {
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
@@ -51,7 +57,7 @@
     @apply text-[12px] sm:text-[11px] font-medium leading-[140%] text-navy font-sans;
   }
   .main-nav {
-    @apply cursor-pointer p-4 pb-0 rounded-lg text-[16px] sm:text-[15px] font-bold tracking-[-0.01em] leading-[110%] text-navy font-sans ;
+    @apply cursor-pointer p-4 pb-0 rounded-lg text-[18px] sm:text-[15px] font-bold tracking-[-0.18px] leading-[110%] text-navy font-condensed ;
   }
   .links-mobile-nav {
     @apply cursor-pointer py-[20px] text-[28px] font-bold tracking-[-0.02em] leading-[110%] font-sans;
@@ -63,7 +69,10 @@
     @apply cursor-pointer text-[16px] sm:text-[15px] font-semibold tracking-[-0.01em] leading-[110%] text-black font-sans;
   }
   .links-sub-nav {
-    @apply cursor-pointer text-[20px] font-semibold tracking-[-0.02em] leading-[110%] text-white font-sans hover:text-grey;
+    @apply cursor-pointer text-[22px] font-bold tracking-[-0.22px] leading-[110%] font-condensed text-white hover:text-lightBlue;
+  }
+  .links-child-nav{
+    @apply font-sans text-[14px] font-normal leading-[140%] text-lightBlue hover:text-white
   }
   .primary-btn {
     @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-extrabold leading-[100%] tracking-[0.36px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
@@ -174,7 +183,7 @@
   }
   .gfield input,
   .gfield textarea,
-  input,
+  input
    {
     @apply py-[14px] px-[20px] border-[#51525533] border-2 text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
   }
@@ -215,5 +224,8 @@
   }
   .text-input {
     @apply flex-1 rounded-[5px] border-2 border-[#51525533] px-[20px] py-[14px] text-navy placeholder:text-darkBeige focus-within:ring-transparent focus:border-lightBlue focus:ring-transparent focus-visible:outline-transparent active:outline-transparent active:placeholder:text-navy;
+  }
+  .footer-links-headline{
+    @apply text-[18px] md:text-[16px] sm:text-[13px] font-bold leading-[110%] tracking-[-0.18px] md:tracking-[-0.16px] sm:tracking-[-0.12px] capitalize mb-[20px] md:mb-[12px] sm:mb-[8px] font-condensed	text-white hover:text-lightBlue md:text-center
   }
 }

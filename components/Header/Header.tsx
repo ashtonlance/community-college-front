@@ -5,7 +5,7 @@ import LogoTall from 'assets/imgs/site-logo.svg'
 import LogoShort from 'assets/imgs/ncccs-short.svg'
 import { Search } from 'components/Search'
 import { NavigationItem } from './NavigationItem'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { HamburgerMenu } from './HamburgerMenu'
 import useScrollPosition from 'utils/hooks/useScrollPosition'
 import dynamic from 'next/dynamic'
@@ -16,16 +16,6 @@ import { cn } from 'utils'
 import { isCurrentPage } from './NavigationItem'
 import { AnnouncementBar } from 'components/AnnouncementBar'
 import { useCookies } from 'react-cookie'
-// const Modal = dynamic(
-//   async () => {
-//     const { Modal } = await import('components/Modal')
-//     return { default: Modal }
-//   },
-//   {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>,
-//   }
-// )
 
 const Logo = ({ scrolled }) => {
   const NCCCSLogo = scrolled ? LogoShort : LogoTall
@@ -45,12 +35,13 @@ const Logo = ({ scrolled }) => {
 
 const UtilityItem = ({ item, onClick }) => {
   const router = useRouter()
+
   return (
     <Link
       onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
-      className={cn(`flex h-full items-center justify-center px-[20px] py-[15px] font-condensed text-white hover:bg-lightBlue hover:text-navy ${
-        isCurrentPage(item?.navItem?.url, router.asPath)
+      className={cn(`utility-item-btn ${
+        item.navItem.title === 'Students'
           ? 'bg-gold text-navy'
           : ''
       }
@@ -96,11 +87,14 @@ export type HeaderProps = {
   variant?: HeaderVariant
   form: any
   utilityNavigation: any
-  showAnnouncementBar?: string
-  announcementBarText?: string
+  announcementBar?: {
+    announcementBarText?:string,
+    announcementBarLink?:string,
+    showAnnouncementBar?:string,
+  }
 }
 
-export const Header = (props: HeaderProps) => {
+export const Header = forwardRef((props: HeaderProps, ref:React.RefObject<HTMLDivElement>) => {
   const menuItems = props.menuItems
   const variant = props.variant ?? 'default'
   const utilityNavigation = props.utilityNavigation
@@ -108,8 +102,7 @@ export const Header = (props: HeaderProps) => {
   const [searchOpened, setSearchOpened] = useState(false)
   const [hamburgerMenuOpened, setHamburgerMenuOpen] = useState(false)
   const scrollPosition = useScrollPosition()
-  const showAnnouncementBar = props.showAnnouncementBar ?? false
-  const announcementBarText = props.announcementBarText ?? ''
+  const announcementBar = props.announcementBar
   const [cookies, setCookie, updateCookie] = useCookies([
     'ncccs-preferred-landing-page',
   ])
@@ -142,6 +135,7 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <div
+      ref={ref}
       id="topbar"
       className={cn(
         `${
@@ -151,14 +145,14 @@ export const Header = (props: HeaderProps) => {
         } transition-background border-b-2 border-solid border-grey duration-200`
       )}
     >
-      {showAnnouncementBar === '1' ? (
-        <AnnouncementBar announcementBarText={announcementBarText} />
+      {announcementBar?.showAnnouncementBar === '1' ? (
+        <AnnouncementBar announcementBar={announcementBar} />
       ) : null}
       <div className="flex w-full justify-between bg-navy">
         <div className="flex w-full items-center justify-between">
           {utilityNavigation && (
             <>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center md:w-full md:justify-between h-full">
                 {utilityNavigation
                   .slice(0, 4)
                   ?.map(item => (
@@ -169,7 +163,7 @@ export const Header = (props: HeaderProps) => {
                     />
                   ))}
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center md:hidden h-full">
                 {utilityNavigation
                   .slice(4)
                   ?.map(item => (
@@ -183,7 +177,7 @@ export const Header = (props: HeaderProps) => {
             </>
           )}
         </div>
-        <span className="search-wrapper-icon flex items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:h-[50px] md:w-[50px] md:justify-center md:p-0">
+        <span className="search-wrapper-icon flex items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:hidden md:h-[50px] md:w-[50px] md:justify-center md:p-0">
           <Search
             transparentMode={displayTransparentMode}
             searchOpened={setSearchOpened}
@@ -196,7 +190,7 @@ export const Header = (props: HeaderProps) => {
             transparentScrolledMode
               ? 'px-[32px] py-[16px] md:px-[24px] md:py-[20px] '
               : 'px-[32px] py-[24px] md:p-[24px] md:pl-[40px]'
-          } transition-padding mx-auto flex h-fit w-full max-w-[1700px] items-center justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
+          } relative transition-padding mx-auto flex h-fit w-full max-w-[1700px] items-center justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
         )}
       >
         <Logo scrolled={transparentScrolledMode} />
@@ -207,7 +201,7 @@ export const Header = (props: HeaderProps) => {
           updateActiveItem={handleActiveItem}
         />
 
-        <div className="hamburguer-wrapper hidden h-[50px] w-[50px] items-center justify-center rounded-[3px] hover:bg-gmt-200 md:flex">
+        <div className="hamburguer-wrapper hidden h-[50px] w-[50px] py-[22px] px-[31px] items-center justify-center rounded-[3px] hover:bg-gmt-200 md:flex md:right-[110px] sm:right-[90px] relative">
           <HamburgerMenu
             menuItems={menuItems}
             bgTransparent={displayTransparentMode}
@@ -215,10 +209,16 @@ export const Header = (props: HeaderProps) => {
             toggleHamburgerMenu={setHamburgerMenuOpen}
           />
         </div>
+        <span className="search-wrapper-icon hidden items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:flex md:w-[110px] md:absolute md:right-0 h-[100%]">
+          <Search
+            transparentMode={displayTransparentMode}
+            searchOpened={setSearchOpened}
+          />
+        </span>
       </div>
     </div>
   )
-}
+})
 
 Header.displayName = 'Menu'
 Header.fragments = {
@@ -230,25 +230,6 @@ Header.fragments = {
       description
       label
       url
-      # navigationMenu {
-      #   fieldGroupName
-      #   items {
-      #     description
-      #     fieldGroupName
-      #     title
-      #     url {
-      #       target
-      #       title
-      #       url
-      #     }
-      #     resourcesLinks {
-      #       label
-      #       pageLink {
-      #         url
-      #       }
-      #     }
-      #   }
-      # }
     }
   `,
 }

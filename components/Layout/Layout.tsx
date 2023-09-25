@@ -3,6 +3,8 @@ import { Footer } from '../Footer'
 import Head from 'next/head'
 import { cn } from 'utils/index'
 import parse from 'html-react-parser'
+import { useEffect, useState } from 'react'
+import React from 'react'
 
 export type LayoutProps = {
   menuItems?: any
@@ -27,6 +29,15 @@ export function Layout(props: LayoutProps) {
   const footerNavigation = props?.footerNavigation || []
   const settings = props?.settings || []
   const fullHead = props?.seo?.fullHead ? parse(props?.seo?.fullHead) : ''
+  const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar
+  const [navigationHeight, setNavigationHeight] = useState(undefined)
+  const navigation = React.createRef<HTMLDivElement>()
+
+  // get header size dynamically to move main content below
+  useEffect(() => {
+    setNavigationHeight(navigation?.current?.offsetHeight)
+  }, [navigation])
+
   return (
     <>
       <Head>
@@ -45,18 +56,22 @@ export function Layout(props: LayoutProps) {
         {fullHead}
       </Head>
       <Header
+        ref={navigation}
         menuItems={menuItems}
         utilityNavigation={utilityNavigation}
         form={props.form}
         variant={variant}
-        showAnnouncementBar={settings?.announcementBar?.showAnnouncementBar}
-        announcementBarText={settings?.announcementBar?.announcementBarText}
+        announcementBar={settings?.announcementBar}
       />
+
       <main
-        className={cn(`flex min-h-screen flex-col announcement-bar-${settings?.announcementBar?.showAnnouncementBar} ${
-          variant === 'default'
-            ? 'mt-[152px] lg:mt-[130px] md:mt-[115px]'
-            : null
+      style={{
+        marginTop: `${navigationHeight}px`
+      }}
+        className={cn(`flex min-h-screen flex-col ${
+          hasAnnouncementBar === '1'
+            ? 'show-announcement-bar'
+            : 'hide-announcement-bar'
         }
         `)}
       >
