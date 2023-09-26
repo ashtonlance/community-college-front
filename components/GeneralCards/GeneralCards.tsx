@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import separator from '../../assets/imgs/separator.svg'
 import {
   BackgroundColorType,
   MarginSizesType,
@@ -23,14 +22,17 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
   const backgroundColor = attributes.data.background_color
   const top = attributes.data.module_margin_top_spacing
   const bottom = attributes.data.module_margin_bottom_spacing
+  const cardColor = backgroundColor === 'white' ? 'bg-grey' : 'bg-white';
+
+  console.log({attributes})
 
   return (
     <div
       className={cn(
-        `module-color-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
+        `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
       )}
     >
-      <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-[20px] md:flex-col md:items-center md:px-[60px] sm:px-[40px]">
+      <div className="px-[100px] md:px-[60x] sm:px-[40px] flex flex-wrap justify-between gap-[20px] md:flex-col md:items-center">
         {cards > 0 &&
           [...Array(cards).keys()].map(card => {
             return (
@@ -39,9 +41,8 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                 className={cn(
                   `${cards == 1 && 'grow'} ${
                     cards == 2 && 'w-[calc(50%-10px)]'
-                  } ${cards > 2 && 'w-[calc(33%-10px)]'} module-color-${
-                    attributes.data[`card_${card}_card_background`]
-                  } overflow-hidden rounded-xl text-center md:w-full sm:p-[32px]`
+                  } ${cards > 2 && 'w-[calc(33%-10px)]'} ${cardColor}
+                  overflow-hidden rounded-xl text-center md:w-full sm:p-[32px]`
                 )}
               >
                 {attributes.data[`card_${card}_image`].url ? (
@@ -50,6 +51,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     alt=""
                     width={400}
                     height={200}
+                    className='w-full h-[200px] object-cover'
                   />
                 ) : null}
                 <div className="flex flex-col px-10 py-[50px]">
