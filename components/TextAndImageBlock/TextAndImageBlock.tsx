@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { getHeadingTag } from '../../utils/headingType'
 import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
+import { BackgroundVideoURL } from '../Hero/BackgroundVideo'
+
 
 const GET_MEDIA_FILE = gql`
   query GetMediaURLFromID($mediaID: ID!) {
@@ -47,10 +49,10 @@ export const TextAndImageBlock = ({ attributes }) => {
           imgPosition.includes('right') && 'flex-row-reverse'
         } md:h-fit md:flex-col md:gap-[60px]`}
       >
-        {data?.mediaItem?.link ? (
-          <video className='w-[50%] md:w-full' controls>
-            <source src={data?.mediaItem?.link} ></source>
-          </video>
+        {data?.mediaItem?.link && !data?.mediaItem?.sourceUrl ? (
+          <div className='w-[50%] relative'>
+          <BackgroundVideoURL url={data?.mediaItem?.link} />
+          </div>
         ) : (
           data?.mediaItem?.sourceUrl && (
             <Image
