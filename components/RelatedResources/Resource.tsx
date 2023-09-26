@@ -7,20 +7,122 @@ import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 
 const GET_POST = gql`
   query GetPost($resourceId: ID!) {
-    post(id: $resourceId, idType: DATABASE_ID) {
+    contentNode(id: $resourceId, idType: DATABASE_ID) {
       id
       date
       link
-      title
-      categories {
-        nodes {
-          name
+      contentTypeName
+      ... on ApprenticeshipOpportunity {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
         }
       }
-      featuredImage {
-        node {
-          slug
-          sourceUrl
+      ... on DataDashboard {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on BoardMeeting {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on Event {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on BoardMember {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on Staff {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on NumberedMemo {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on AnnualReport {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on Program {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on ProgramArea {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on College {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
+      ... on News {
+        id
+        title
+        newsCategories {
+          nodes {
+            name
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+          }
         }
       }
     }
@@ -51,11 +153,12 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
       className={`flex w-full ${backgroundColor} overflow-hidden rounded-xl`}
     >
       {imgUrl ? (
-        <Image src={imgUrl} alt={title} height={191} width={210} />
+        <Image                   unoptimized={true}
+        src={imgUrl} alt={title} height={191} width={210} />
       ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
         <div className="flex items-center justify-center gap-[10px] text-darkGrey">
-          <p className="body-regular font-bold text-darkGrey">{category}</p>•
+          <p className="body-regular font-bold text-darkGrey capitalize">{category}</p>•
           <p className="body-regular font-bold text-darkGrey">{date}</p>
         </div>
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>
@@ -76,13 +179,19 @@ export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
   const { loading, error, data } = useQuery(GET_POST, {
     variables: { resourceId },
   })
+  if(loading){
+    return;
+  }
+  if(error){
+    console.log(error)
+  }
 
-  const imgUrl = data?.post?.featuredImage?.node?.sourceUrl || ''
-  const category = data?.post?.categories?.nodes?.[0]?.name || 'Resource'
-  const date = formatDate(data?.post?.date)
+  const imgUrl = data?.contentNode?.featuredImage?.node?.sourceUrl || ''
+  const category = data?.contentNode?.contentTypeName
+  const date = formatDate(data?.contentNode?.date)
 
-  const title = data?.post?.title
-  const postUrl = data?.post?.link || ''
+  const title = data?.contentNode?.title
+  const postUrl = data?.contentNode?.link || ''
   const readMoreLabel = getLabelFromCategory(category)
 
   return (

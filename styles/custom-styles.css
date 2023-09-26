@@ -60,21 +60,6 @@ table td {
   flex: 0 0 100%;
   min-width: 0;
 }
-
-.module-color-white {
-  background-color: #fff;
-}
-.module-color-light {
-  background-color: #F5F5F5;
-}
-.module-color-dark {
-  background-color: #ccc;
-}
-.module-color-dark a {
-  background-color: #555;
-  color: white;
-}
-
 .module-spacing-bottom-none + .module-spacing-top-none {
   padding-top: 20px;
 }
