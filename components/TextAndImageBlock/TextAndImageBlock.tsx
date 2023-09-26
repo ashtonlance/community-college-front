@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { getHeadingTag } from '../../utils/headingType'
 import { gql, useQuery } from '@apollo/client'
+import Link from 'next/link'
 
 const GET_MEDIA_FILE = gql`
   query GetMediaURLFromID($mediaID: ID!) {
@@ -18,11 +19,13 @@ export const TextAndImageBlock = ({ attributes }) => {
   const headingSize = attributes.data.heading_size
   const heading = getHeadingTag(headingSize, headingContent)
   const text = attributes.data.body_copy
-  let isVideo
   const imgPosition = attributes.data.image_position
   const bottomSpacing = attributes.data.component_spacing_bottom_spacing
   const topSpacing = attributes.data.component_spacing_top_spacing
   const mediaID = attributes.data.media
+  const linkTitle = attributes?.data?.link?.title
+  const linkUrl = attributes?.data?.link?.url
+  const bgColor = attributes?.data?.background_color
 
   const { loading, error, data } = useQuery(GET_MEDIA_FILE, {
     variables: { mediaID },
@@ -34,25 +37,18 @@ export const TextAndImageBlock = ({ attributes }) => {
   if (error) {
     console.log({ error })
   }
-  if (data?.mediaItem?.sourceUrl) {
-    isVideo = data?.mediaItem?.link && !data?.mediaItem?.sourceUrl
-  }
-
-  console.log(data?.mediaItem?.link)
-  console.log(data?.mediaItem?.sourceUrl)
-  console.log(isVideo)
 
   return (
     <div
-      className={`px-[100px] md:px-[60px] sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
+      className={`px-[100px] md:px-[60px] bg-${bgColor} sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
-        className={`mx-auto my-[40px] flex h-[550px] w-full max-w-[1220px] gap-[80px] ${
+        className={`mx-auto flex w-full max-w-[1220px] gap-[80px] ${
           imgPosition.includes('right') && 'flex-row-reverse'
         } md:h-fit md:flex-col md:gap-[60px]`}
       >
         {data?.mediaItem?.link ? (
-          <video className='w-[50%]' controls>
+          <video className='w-[50%] md:w-full' controls>
             <source src={data?.mediaItem?.link} ></source>
           </video>
         ) : (
@@ -75,6 +71,7 @@ export const TextAndImageBlock = ({ attributes }) => {
             className="body-regular whitespace-pre-wrap text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
           />
+          <Link target='_blank' className='secondary-btn outline-btn navy mt-[40px]' href={linkUrl}>{linkTitle}</Link>
         </div>
       </div>
     </div>
