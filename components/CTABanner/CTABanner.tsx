@@ -30,7 +30,7 @@ export const CTABanner = ({ attributes }) => {
                 hasCard
                   ? 'flex-wrap justify-center rounded-xl bg-white px-[105px] py-[60px] md:p-[60px]'
                   : 'justify-between'
-              }}`
+              }`
             )}
           >
             <span
@@ -56,23 +56,20 @@ export const CTABanner = ({ attributes }) => {
         </div>
       </FadeIn>
     )
-  } else {
+  } else if (type === 'inset') {
     return (
       <FadeIn>
-        <div className={`bg-white px-[105px] py-[60px] sm:p-[40px]`}>
-          <div className="relative overflow-hidden rounded-xl px-[105px] py-[80px] md:p-[60px]">
-            <Image
-              src={`/angles/angled-bg_${type}-cta_${bgImageColor}.jpg`}
-              alt=""
-              fill
-              className="object-fill"
-            />
-            <div className="relative z-10 mx-auto flex max-w-[1030px] items-center justify-between md:flex-col">
-              <span className={`h3  md:mb-[40px] md:text-center`}>{copy}</span>
+        <div className={`px-[105px] py-[60px] sm:p-[40px]`}
+        style={{backgroundImage: `url(/angles/angled-bg_${type}-cta_${bgImageColor}.jpg)`, backgroundSize: 'cover'}}
+        >
+
+          <div className="relative overflow-hidden rounded-xl bg-white px-[105px] py-[60px] md:p-[60px] sm:p-[40px]">
+            <div className="relative z-10 mx-auto flex flex-col max-w-[1030px] items-center justify-between md:flex-col">
+              <h3 className={`h3 md:mb-[32px] sm:text-[28px] md:text-center`}>{copy}</h3>
               <Button
                 content={btn_label}
                 arrow={true}
-                classes="primary-btn white"
+                classes={`${type==='inset' ? 'secondary-btn navy' : 'primary-btn white'}`}
                 linkto={btn_link}
               />
             </div>
