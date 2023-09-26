@@ -22,11 +22,11 @@ export const FeaturesAndBenefits = ({
   const bgColorModule = attributes.data.background_color
   const marginBottom = attributes.data.component_spacing_bottom_spacing
   const marginTop = attributes.data.component_spacing_top_spacing
-  const bgColorCard = bgColorModule == 'white' ? 'bg-white' : 'bg-grey'
+  const bgColorCard = bgColorModule == 'white' ? 'bg-grey' : 'bg-white'
 
   return (
     <div
-      className={`features-and-benefits px-[100px] md:px-[60px] sm:mx-auto sm:w-full sm:px-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} module-color-${bgColorModule}`}
+      className={`features-and-benefits px-[100px] md:px-[60px] sm:mx-auto sm:w-full sm:px-[40px] module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} bg-${bgColorModule}`}
     >
       <div className="mx-auto flex max-w-[1220px] flex-wrap justify-between gap-[15px] md:flex-col md:items-center">
         {cards > 0 &&

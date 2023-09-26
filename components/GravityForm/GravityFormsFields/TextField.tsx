@@ -29,7 +29,6 @@ export default function TextField({ field, fieldErrors }) {
     placeholder,
     visibility,
   } = field
-  console.log(field)
   const htmlId = `field_${formId}_${id}`
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
   const value = fieldValue?.value || DEFAULT_VALUE

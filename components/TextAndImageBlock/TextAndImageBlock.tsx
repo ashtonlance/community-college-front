@@ -55,14 +55,10 @@ export const TextAndImageBlock = ({ attributes }) => {
           </div>
         ) : (
           data?.mediaItem?.sourceUrl && (
-            <Image
-              unoptimized={true}
-              className="w-[50%] self-center rounded-[12px] md:w-full"
-              src={data?.mediaItem?.sourceUrl}
-              alt=""
-              width={620}
-              height={441}
-            />
+            <div className="w-[50%] self-center rounded-[12px] md:w-full h-[520px] bg-cover"
+            style={{backgroundImage:`url(${data?.mediaItem?.sourceUrl})`}}
+            >
+            </div>
           )
         )}
 

@@ -24,8 +24,6 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
   const bottom = attributes.data.module_margin_bottom_spacing
   const cardColor = backgroundColor === 'white' ? 'bg-grey' : 'bg-white';
 
-  console.log({attributes})
-
   return (
     <div
       className={cn(
