@@ -11,6 +11,7 @@ import SingleCollege from './single-college'
 import FacultyAndStaffPage from './page-college-faculty-staff'
 import EmployersPage from './page-employers'
 import SystemOfficePage from './page-system-office'
+import ProgramsArchive from './archive-programs'
 
 const templates = {
   'front-page': FrontPage,
@@ -26,6 +27,7 @@ const templates = {
   'page-college-faculty-staff': FacultyAndStaffPage,
   'page-employers': EmployersPage,
   'page-system-office': SystemOfficePage,
+  'page-programs': ProgramsArchive,
 }
 
 export default templates

@@ -51,11 +51,13 @@ export const DefaultHero = ({
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
     >
       <div
-        style={{
-          backgroundImage: `url(${bg.src})`,
-        }}
         className="wrapper-default-inner-pages flex w-[60%] flex-col
       items-baseline justify-center bg-cover pb-[80px] md:w-full md:pb-0"
       >
@@ -124,12 +126,7 @@ export const DefaultHero = ({
         </div>
       ) : (
         description && (
-          <div
-            style={{
-              backgroundImage: `url(${bg.src})`,
-            }}
-            className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]"
-          >
+          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
             <p className="body-large text-darkGrey md:mb-[20px]">
               {description}
             </p>
