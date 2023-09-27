@@ -57,7 +57,9 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
 
   return isLoaded ? (
     <FadeIn>
-      <div className={`w-full ${!isEmbed ? 'px-[100px] pb-[60px]' : null}`}>
+      <div
+        className={`w-full bg-grey ${!isEmbed ? 'px-[100px] pb-[60px]' : null}`}
+      >
         <MapInternal
           mapContainerStyle={containerStyle}
           center={!isEmbed ? mapCenter : coordinates[0]}
