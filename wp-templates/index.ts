@@ -13,6 +13,7 @@ import EmployersPage from './page-employers'
 import SystemOfficePage from './page-system-office'
 import ProgramsArchive from './archive-programs'
 import NumberedMemosPage from './page-numbered-memos'
+import SingleProgramArea from './single-program-areas'
 
 const templates = {
   'front-page': FrontPage,
@@ -29,7 +30,8 @@ const templates = {
   'page-employers': EmployersPage,
   'page-system-office': SystemOfficePage,
   'page-programs': ProgramsArchive,
-  'page-numbered-memos' : NumberedMemosPage,
+  'page-numbered-memos': NumberedMemosPage,
+  'single-program-areas': SingleProgramArea,
 }
 
 export default templates

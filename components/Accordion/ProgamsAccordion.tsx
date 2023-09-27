@@ -45,7 +45,6 @@ type ProgramsAccordionProps = {
 export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
   organizedPrograms,
 }) => {
-  console.log(organizedPrograms)
   const accordionItems = organizedPrograms
     ? Object.entries(organizedPrograms).map(([programArea, data], i) => {
         return (
@@ -62,17 +61,19 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
               </Link>
             </ProgramsAccordionTrigger>
             <ProgramsAccordionContent>
-              {data.programs.map(program => {
-                return (
-                  <div
-                    className="grid w-full grid-cols-5 gap-5 pl-[4px] md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]"
-                    key={program.uri}
-                  >
+              <div className="grid w-full grid-cols-5 gap-5 px-[4px] md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
+                {data.programs.map(program => {
+                  return (
                     <div
                       className="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-white p-5 hover:outline hover:outline-2 hover:outline-lightBlue"
                       key={program.uri}
                     >
-                      <Link href={program.uri}>{program.title}</Link>
+                      <Link
+                        className="font-condensed text-xl font-bold text-navy"
+                        href={program.uri}
+                      >
+                        {program.title}
+                      </Link>
                       {(program.program.degreeTypes?.includes(
                         'continuingEducation'
                       ) ||
@@ -88,9 +89,9 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                         </div>
                       )}
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+              </div>
             </ProgramsAccordionContent>
           </ProgramsAccordionItem>
         )

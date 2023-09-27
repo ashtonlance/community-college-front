@@ -1,10 +1,8 @@
 import { CTABanner } from '@/components/CTABanner'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useRouter } from 'next/router'
 import { useMemo, useState, useEffect } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
@@ -77,7 +75,9 @@ const capitalize = s =>
     return str.toUpperCase()
   })
 
-const organizeProgramsByTaggedAreas = (programs: Program[]) => {
+const organizeProgramsByTaggedAreas = (
+  programs: Program[]
+): { [key: string]: { programs: Program[]; uri: string } } => {
   const organizedPrograms: {
     [key: string]: { programs: Program[]; uri: string }
   } = {}
@@ -94,11 +94,21 @@ const organizeProgramsByTaggedAreas = (programs: Program[]) => {
     })
   })
 
-  return organizedPrograms
+  // Sort the keys
+  const sortedKeys = Object.keys(organizedPrograms).sort()
+
+  // Create a new object with the keys in alphabetical order
+  const sortedPrograms: {
+    [key: string]: { programs: Program[]; uri: string }
+  } = {}
+  sortedKeys.forEach(key => {
+    sortedPrograms[key] = organizedPrograms[key]
+  })
+
+  return sortedPrograms
 }
 
 export default function ProgramsArchive(props: ProgramsIndexProps) {
-  const router = useRouter()
   const { data, loading } = props
   const menuItems = data?.menu?.menuItems || []
   const programsIndex = data?.programIndex?.programsIndex || []
@@ -114,12 +124,19 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   )
 
   const degreeTypes = useMemo(() => {
-    return programs.reduce((acc: string[], program: Program) => {
-      if (program.program && program.program.degreeTypes) {
-        return [...acc, ...program.program.degreeTypes]
-      }
-      return acc
-    }, [])
+    const degreeTypesSet = new Set(
+      programs.reduce((acc: string[], program: Program) => {
+        if (program.program && program.program.degreeTypes) {
+          return [...acc, ...program.program.degreeTypes]
+        }
+        return acc
+      }, [])
+    )
+
+    // Convert the Set back to an array and sort it
+    const sortedDegreeTypes = Array.from(degreeTypesSet).sort()
+
+    return sortedDegreeTypes
   }, [programs])
 
   const [filters, setFilters] = useState({
@@ -128,7 +145,6 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   })
   const debouncedFilters = useDebounce(filters, 500)
   const organizedPrograms = organizeProgramsByTaggedAreas(programs)
-
   const [filteredPrograms, setFilteredPrograms] = useState(organizedPrograms)
 
   const filterPrograms = () => {
@@ -195,9 +211,9 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
           onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
         >
           <option value="">Degree Type</option>
-          {degreeTypes.map(type =>
+          {degreeTypes.map((type, i) =>
             type !== null ? (
-              <option key={type} value={type}>
+              <option key={i} value={type}>
                 {capitalize(type)}
               </option>
             ) : null
@@ -252,7 +268,7 @@ ProgramsArchive.query = gql`
       }
     }
 
-    programs(where: { orderby: { field: TITLE, order: ASC } }) {
+    programs(first: 500, where: { orderby: { field: TITLE, order: ASC } }) {
       nodes {
         title
         uri
@@ -261,9 +277,6 @@ ProgramsArchive.query = gql`
             sourceUrl
           }
         }
-        seo {
-          fullHead
-        }
         taggedProgramAreas {
           nodes {
             uri
@@ -271,7 +284,6 @@ ProgramsArchive.query = gql`
           }
         }
         program {
-          about
           degreeTypes
           title
         }
