@@ -89,13 +89,19 @@ const ProgramsAccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'h3 group flex w-full flex-1 items-center justify-between transition-all [&[data-state=open]>div>svg>rect]:rotate-180',
+        `h3 group flex w-full flex-1 items-center justify-between transition-all [&[data-state=open]>div>svg>rect]:rotate-180 ${
+          props.disabled ? 'cursor-not-allowed text-darkBeige' : null
+        }`,
         className
       )}
       {...props}
     >
       {children}
-      <div className="flex flex-col items-center justify-center rounded-full bg-white p-3 group-hover:bg-lightBlue">
+      <div
+        className={`flex flex-col items-center justify-center rounded-full bg-white p-3 hover:bg-lightBlue ${
+          props.disabled ? 'group-hover:bg-white' : null
+        }`}
+      >
         <svg
           className="shrink-0 fill-navy"
           width="16"

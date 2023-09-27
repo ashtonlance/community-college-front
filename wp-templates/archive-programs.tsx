@@ -48,6 +48,7 @@ type ProgramsIndexProps = {
 type TaggedArea = {
   slug: string
   name: string
+  uri: string
 }
 
 type Program = {
@@ -64,11 +65,21 @@ type Program = {
   taggedProgramAreas: {
     nodes: TaggedArea[]
   }
+  program: {
+    about: string
+    degreeTypes: string[]
+    title: string
+  }
 }
+
+const capitalize = s =>
+  s.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+    return str.toUpperCase()
+  })
 
 const organizeProgramsByTaggedAreas = (programs: Program[]) => {
   const organizedPrograms: {
-    [key: string]: { programs: Program[]; slug: string }
+    [key: string]: { programs: Program[]; uri: string }
   } = {}
 
   programs.forEach(program => {
@@ -76,7 +87,7 @@ const organizeProgramsByTaggedAreas = (programs: Program[]) => {
       if (!organizedPrograms[taggedArea.name]) {
         organizedPrograms[taggedArea.name] = {
           programs: [],
-          slug: taggedArea.slug,
+          uri: taggedArea.uri,
         }
       }
       organizedPrograms[taggedArea.name].programs.push(program)
@@ -87,7 +98,6 @@ const organizeProgramsByTaggedAreas = (programs: Program[]) => {
 }
 
 export default function ProgramsArchive(props: ProgramsIndexProps) {
-  // console.log(props, 'props')
   const router = useRouter()
   const { data, loading } = props
   const menuItems = data?.menu?.menuItems || []
@@ -103,6 +113,15 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
     [data?.programs?.nodes]
   )
 
+  const degreeTypes = useMemo(() => {
+    return programs.reduce((acc: string[], program: Program) => {
+      if (program.program && program.program.degreeTypes) {
+        return [...acc, ...program.program.degreeTypes]
+      }
+      return acc
+    }, [])
+  }, [programs])
+
   const [filters, setFilters] = useState({
     degreeType: '',
     keyword: '',
@@ -115,32 +134,25 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const filterPrograms = () => {
     let result = organizedPrograms
 
-    // if (debouncedFilters.zipCode) {
-    //   result = result.filter(
-    //     college =>
-    //       college.collegeDetails.map.postCode === debouncedFilters.zipCode
-    //   )
-    // }
+    if (debouncedFilters.degreeType) {
+      Object.keys(result).forEach(key => {
+        result[key].programs = result[key].programs.filter(
+          program =>
+            program.program.degreeTypes &&
+            program.program.degreeTypes.includes(debouncedFilters.degreeType)
+        )
+      })
+    }
 
-    // if (debouncedFilters.county) {
-    //   result = result.filter(
-    //     college => college.collegeDetails.county === debouncedFilters.county
-    //   )
-    // }
-
-    // if (debouncedFilters.keyword) {
-    //   result = result.filter(college =>
-    //     college.title
-    //       .toLowerCase()
-    //       .includes(debouncedFilters.keyword.toLowerCase())
-    //   )
-    // }
-
-    // if (debouncedFilters?.orderBy?.order === 'DESC') {
-    //   result = result.sort((a, b) => b.title.localeCompare(a.title))
-    // } else {
-    //   result = result.sort((a, b) => a.title.localeCompare(b.title))
-    // }
+    if (debouncedFilters.keyword) {
+      Object.keys(result).forEach(key => {
+        result[key].programs = result[key].programs.filter(program =>
+          program.title
+            .toLowerCase()
+            .includes(debouncedFilters.keyword.toLowerCase())
+        )
+      })
+    }
 
     setFilteredPrograms(result)
   }
@@ -180,16 +192,16 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       <div className="flex justify-center gap-x-[15px] bg-grey px-[205px] py-10">
         <select
           className="flex-1 text-darkBeige"
-          onChange={e => setFilters({ ...filters, county: e.target.value })}
+          onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
         >
           <option value="">Degree Type</option>
-          {/* {counties.map(county =>
-            county !== null ? (
-              <option key={county} value={county}>
-                {county}
+          {degreeTypes.map(type =>
+            type !== null ? (
+              <option key={type} value={type}>
+                {capitalize(type)}
               </option>
             ) : null
-          )} */}
+          )}
         </select>
         <input
           className="text-input"
@@ -197,6 +209,17 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
           placeholder="Search by keyword"
           onChange={e => setFilters({ ...filters, keyword: e.target.value })}
         />
+      </div>
+      <div className="flex items-center justify-center bg-grey">
+        <div>
+          <span className="rounded-lg bg-white p-[6px] text-xs font-extrabold text-darkGrey">
+            WCE
+          </span>{' '}
+          ={' '}
+          <span className="text-sm text-darkBeige">
+            Workforce Continuing Education
+          </span>
+        </div>
       </div>
       <div className="gap-5 bg-grey px-[100px] py-[10px] ">
         <ProgramsAccordion organizedPrograms={filteredPrograms} />
@@ -243,9 +266,14 @@ ProgramsArchive.query = gql`
         }
         taggedProgramAreas {
           nodes {
-            slug
+            uri
             name
           }
+        }
+        program {
+          about
+          degreeTypes
+          title
         }
       }
     }
