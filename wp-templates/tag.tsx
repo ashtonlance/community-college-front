@@ -48,7 +48,7 @@ export default function Tag(props: TagProps) {
             <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
               <ResourcesSidebar selectedTaxonomy={tagSlug} />
             </div>
-            <PaginatedPosts tagName={tagSlug} currentPage={currentPage} />
+            {/* <PaginatedPosts tagName={tagSlug} currentPage={currentPage} /> */}
           </div>
           <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar selectedTaxonomy={tagName} />

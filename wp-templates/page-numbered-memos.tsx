@@ -3,24 +3,106 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
+import { PostFilterNumberedMemos } from '@/components/PostFilter'
+import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useDebounce } from '@uidotdev/usehooks'
+import { useRouter } from 'next/router'
+import { PaginatedPosts } from '@/components/PaginatedPosts'
 
-export default function NumberedMemosPage(props) {
-  const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.page
-  const preFooterContent = props.data?.menus?.nodes[0]
+export default function NumberedMemosPage({ data, loading, error }) {
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+
+  const menuItems = data?.menu?.menuItems || []
+  const pageData = data?.page
+  const preFooterContent = data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
-  const utilityNavigation =
-    props.data?.settings?.utilityNavigation?.navigationItems
+  const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const footerMenuItems = props.data?.footer?.menuItems || []
+  const footerMenuItems = data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
-  const settings = props.data?.settings?.siteSettings || []
-  if (props.loading) {
+  const settings = data?.settings?.siteSettings || []
+
+  const numberedMemos = useMemo(
+    () => data?.numberedMemos?.nodes || [],
+    [data?.numberedMemos?.nodes]
+  )
+
+  const [filters, setFilters] = useState({
+    category: '',
+    year: '',
+    keyword: '',
+    orderBy: { field: 'DATE', order: 'ASC' },
+  })
+
+  const categories = useMemo(
+    () => [
+      ...new Set(
+        numberedMemos.flatMap(memo =>
+          memo.numberedMemoCategories.nodes.map(category => category.name)
+        )
+      ),
+    ],
+    [numberedMemos]
+  )
+
+  const years = useMemo(
+    () => [
+      ...new Set(numberedMemos.map(memo => new Date(memo.date).getFullYear())),
+    ],
+    [numberedMemos]
+  )
+
+  const debouncedFilters = useDebounce(filters, 500)
+  const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
+
+  const filterNumberedMemos = useCallback(() => {
+    let result = numberedMemos
+
+    if (debouncedFilters.category) {
+      result = result.filter(memo =>
+        memo.numberedMemoCategories.nodes.name
+          .toLowerCase()
+          .includes(debouncedFilters.category.toLowerCase())
+      )
+    }
+
+    if (debouncedFilters.year) {
+      result = result.filter(memo => memo.date.includes(debouncedFilters.year))
+    }
+
+    if (debouncedFilters.keyword) {
+      result = result.filter(memo =>
+        memo.title
+          .toLowerCase()
+          .includes(debouncedFilters.keyword.toLowerCase())
+      )
+    }
+
+    if (debouncedFilters.orderBy.order === 'DESC') {
+      result = result.sort((a, b) => b.date.localeCompare(a.date))
+    } else {
+      result = result.sort((a, b) => a.date.localeCompare(b.date))
+    }
+
+    setFilteredMemos(result)
+  }, [
+    debouncedFilters.category,
+    debouncedFilters.keyword,
+    debouncedFilters.orderBy.order,
+    debouncedFilters.year,
+    numberedMemos,
+  ])
+
+  useEffect(() => {
+    filterNumberedMemos()
+  }, [debouncedFilters, filterNumberedMemos])
+
+  if (loading) {
     return <>Loading...</>
   }
-  console.log({props})
 
   return (
     <Layout
@@ -31,32 +113,41 @@ export default function NumberedMemosPage(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      <div className='bg-grey h-full'>
+      <div className="h-full bg-grey">
         {blocks && (
           <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
         )}
-        Filter here
-        list of posts filtered here
-        pagination here
-        <PostFilter />
+        <PostFilterNumberedMemos
+          filters={filters}
+          setFilters={setFilters}
+          categories={categories}
+          years={years}
+        />
+        <div className="index-page-wrapper bg-grey">
+          <PaginatedPosts
+            currentPage={currentPage}
+            postType="numberedMemo"
+            posts={filteredMemos}
+          />
+        </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
       </div>
     </Layout>
   )
 }
 
-NumberedMemosPage.variables = ({ databaseId }, ctx) => {
-  return {
-    databaseId,
-    asPreview: ctx?.asPreview,
-  }
+NumberedMemosPage.variables = ({ uri }) => {
+  return { uri }
 }
 
 NumberedMemosPage.query = gql`
-  query Page($databaseId: ID!, $asPreview: Boolean = false) {
-    page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
+  query numberedMemos($uri: ID!) {
+    page(id: $uri, idType: URI) {
       id
+      slug
+      status
       title
+      link
       blocks
       seo {
         metaDesc
@@ -67,6 +158,21 @@ NumberedMemosPage.query = gql`
         }
       }
     }
+
+    numberedMemos(where: { orderby: { field: DATE, order: ASC } }) {
+      nodes {
+        numberedMemoCategories {
+          nodes {
+            name
+          }
+        }
+        numberedMemoId
+        date
+        title
+        uri
+      }
+    }
+
     menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {

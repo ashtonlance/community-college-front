@@ -45,7 +45,7 @@ export default function ResourcesIndex(props: ResourceIndexProps) {
             <div className="top-[-1.5px] mx-[-100px] mb-[60px] hidden md:block">
               <ResourcesSidebar />
             </div>
-            <PaginatedPosts currentPage={currentPage} />
+            {/* <PaginatedPosts currentPage={currentPage} /> */}
           </div>
           <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar />

@@ -235,3 +235,6 @@ table td {
 .media-embed-module .yt-lite {
 	border-radius: 12px;
 }
+.index-page-wrapper .pagination{
+  @apply col-span-12;
+}

@@ -195,7 +195,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
         </select>
       </div>
       <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
-        <PaginatedPosts currentPage={currentPage} colleges={filteredColleges} />
+        <PaginatedPosts currentPage={currentPage} postType="colleges" posts={filteredColleges} />
       </div>
       <CTABanner attributes={ctaAttributes} />
     </Layout>
