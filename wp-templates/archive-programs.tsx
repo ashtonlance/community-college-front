@@ -189,7 +189,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
         heading={programsIndex?.heroTitle}
         description={programsIndex?.heroDescription}
       />
-      <div className="flex justify-center gap-x-[15px] bg-grey px-[205px] py-10">
+      <div className="flex flex-wrap justify-center gap-x-[15px] bg-grey px-[205px] py-10 md:px-[60px] sm:px-10">
         <select
           className="flex-1 text-darkBeige"
           onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
@@ -221,7 +221,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
           </span>
         </div>
       </div>
-      <div className="gap-5 bg-grey px-[100px] py-[10px] ">
+      <div className="gap-5 bg-grey px-[100px] py-[10px] md:px-[60px] sm:px-10 ">
         <ProgramsAccordion organizedPrograms={filteredPrograms} />
       </div>
       <CTABanner attributes={ctaAttributes} />

@@ -53,7 +53,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
             <ProgramsAccordionTrigger disabled={!data?.programs?.length}>
               <Link
                 href={data?.uri || ''}
-                className={`flex items-center gap-x-3 hover:text-darkBeige`}
+                className={`flex items-center gap-x-3 text-left hover:text-darkBeige md:mr-4`}
               >
                 {programArea}
                 <span className="h5 text-darkBeige">
@@ -65,7 +65,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
               {data.programs.map(program => {
                 return (
                   <div
-                    className="grid w-full grid-cols-5 pl-[4px]"
+                    className="grid w-full grid-cols-5 gap-5 pl-[4px] md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]"
                     key={program.uri}
                   >
                     <div

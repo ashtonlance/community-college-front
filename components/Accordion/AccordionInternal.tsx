@@ -33,7 +33,7 @@ const ProgramsAccordionItem = React.forwardRef<
   // @ts-ignore
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn('mb-5 bg-grey px-8 py-5', className)}
+    className={cn('mb-5 bg-grey px-8 py-5 md:px-0', className)}
     {...props}
   />
 ))
