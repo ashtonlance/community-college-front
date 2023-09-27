@@ -228,4 +228,5 @@
   .footer-links-headline{
     @apply text-[18px] md:text-[16px] sm:text-[13px] font-bold leading-[110%] tracking-[-0.18px] md:tracking-[-0.16px] sm:tracking-[-0.12px] capitalize mb-[20px] md:mb-[12px] sm:mb-[8px] font-condensed	text-white hover:text-lightBlue md:text-center
   }
+
 }
