@@ -49,10 +49,10 @@ export default function Category(props: CategoryProps) {
               <ResourcesSidebar selectedTaxonomy={categoryName} />
             </div>
 
-            <PaginatedPosts
+            {/* <PaginatedPosts
               categoryName={categoryName}
               currentPage={currentPage}
-            />
+            /> */}
           </div>
           <div className="relative right-0 top-[-1.5px] w-[30%] max-w-[600px] md:hidden">
             <ResourcesSidebar selectedTaxonomy={categoryName} />

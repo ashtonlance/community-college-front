@@ -12,6 +12,7 @@ import FacultyAndStaffPage from './page-college-faculty-staff'
 import EmployersPage from './page-employers'
 import SystemOfficePage from './page-system-office'
 import ProgramsArchive from './archive-programs'
+import NumberedMemosPage from './page-numbered-memos'
 
 const templates = {
   'front-page': FrontPage,
@@ -28,6 +29,7 @@ const templates = {
   'page-employers': EmployersPage,
   'page-system-office': SystemOfficePage,
   'page-programs': ProgramsArchive,
+  'page-numbered-memos' : NumberedMemosPage,
 }
 
 export default templates
