@@ -50,7 +50,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
   const years = useMemo(
     () => [
-      ...new Set(numberedMemos.map(memo => new Date(memo.date).getFullYear())),
+      ...new Set(numberedMemos.map(memo => memo.numberedMemo?.date?.split('/')[2])),
     ],
     [numberedMemos]
   )
@@ -70,21 +70,21 @@ export default function NumberedMemosPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.year) {
-      result = result.filter(memo => memo.date.includes(debouncedFilters.year))
+      result = result.filter(memo => memo.numberedMemo.date.includes(debouncedFilters.year))
     }
 
     if (debouncedFilters.keyword) {
       result = result.filter(memo =>
-        memo.title
+        memo.numberedMemo.subject
           .toLowerCase()
           .includes(debouncedFilters.keyword.toLowerCase())
       )
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort((a, b) => b.date.localeCompare(a.date))
+      result = result.sort((a, b) => b.numberedMemo?.date?.localeCompare(a.numberedMemo?.date))
     } else {
-      result = result.sort((a, b) => a.date.localeCompare(b.date))
+      result = result.sort((a, b) => a.numberedMemo?.date?.localeCompare(b.numberedMem?.date))
     }
 
     setFilteredMemos(result)
@@ -161,14 +161,20 @@ NumberedMemosPage.query = gql`
 
     numberedMemos(where: { orderby: { field: DATE, order: ASC } }) {
       nodes {
+        numberedMemo {
+          body
+          date
+          memoFrom
+          number
+          subject
+          memoTo
+        }
         numberedMemoCategories {
           nodes {
             name
           }
         }
         numberedMemoId
-        date
-        title
         uri
       }
     }

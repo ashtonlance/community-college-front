@@ -75,6 +75,7 @@ const capitalize = s =>
     return str.toUpperCase()
   })
 
+
 const organizeProgramsByTaggedAreas = (
   programs: Program[]
 ): { [key: string]: { programs: Program[]; uri: string } } => {
@@ -211,6 +212,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
           onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
         >
           <option value="">Degree Type</option>
+
           {degreeTypes.map((type, i) =>
             type !== null ? (
               <option key={i} value={type}>
