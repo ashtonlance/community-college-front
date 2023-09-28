@@ -54,7 +54,7 @@ export default function SingleNumberedMemo(props) {
             backgroundPosition: 'center',
             backgroundSize: 'cover',
           }}
-          className="flex justify-between px-52 py-20 md:px-[100px] md:py-[60px]"
+          className="flex md:flex-col md:gap-y-[32px] sm:gap-y-[24px] justify-between px-52 py-20 md:px-[100px] md:py-[60px] sm:p-[40px]"
         >
           <ResourceTags nodes={tags} />
           <SharePost postUrl={pageData?.link} />
