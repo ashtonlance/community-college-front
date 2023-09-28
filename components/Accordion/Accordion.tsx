@@ -6,7 +6,6 @@ import {
 } from './AccordionInternal'
 
 export const AccordionDisplay = props => {
-  console.log(props, 'props')
   const items = props?.attributes?.data?.accordion
   const color = props?.attributes?.data?.background_color || 'grey'
   const spaceTop = props?.attributes?.data?.margins_top_spacing || 'medium'

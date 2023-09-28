@@ -17,7 +17,7 @@ export const ResourceTags = (props: ResourceTagsProps) => {
         <Link
           key={tag.name}
           href={tag.link}
-          className="tag border-[1.5px] border-gmt-500 text-gmt-500"
+          className="tag border-[1.5px] border-navy text-navy hover:bg-navy hover:text-white transition-colors"
         >
           {tag.name}
         </Link>

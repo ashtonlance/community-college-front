@@ -13,6 +13,7 @@ import EmployersPage from './page-employers'
 import SystemOfficePage from './page-system-office'
 import ProgramsArchive from './archive-programs'
 import NumberedMemosPage from './page-numbered-memos'
+import SingleNumberedMemo from './single-numbered-memo'
 import SingleProgramArea from './single-program-areas'
 import SingleProgram from './single-program'
 
@@ -34,6 +35,7 @@ const templates = {
   'page-numbered-memos': NumberedMemosPage,
   'single-program-areas': SingleProgramArea,
   'single-programs': SingleProgram,
+  'single-numbered-memos': SingleNumberedMemo,
 }
 
 export default templates

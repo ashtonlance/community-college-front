@@ -1,11 +1,11 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import linkedinGray from '../../assets/icons/linkedinGray.svg'
-import twitter from '../../assets/icons/twitter.svg'
-import fb from '../../assets/icons/fb.svg'
-import copy_link from '../../assets/icons/copy_link.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useState } from 'react'
+import copy from 'assets/icons/copy.png'
+import twitter from 'assets/icons/twitter.png'
+import facebook from 'assets/icons/fb.png'
+import li from 'assets/icons/li.png'
+
 
 import {
   TwitterShareButton,
@@ -22,14 +22,14 @@ export default function SharePost(props: SharePostProps) {
 
   return (
     <div className="flex items-center gap-[20px]">
-      <small className="body-small font-bold text-gmt-400">
+      <small className="body-small font-bold text-navy">
         Share this page:
       </small>
 
       <CopyToClipboard text={props.postUrl} onCopy={() => setCopied(true)}>
         <Image
           alt=""
-          src={copy_link}
+          src={copy}
           width={24}
           height={24}
           className="cursor-pointer"
@@ -37,7 +37,7 @@ export default function SharePost(props: SharePostProps) {
       </CopyToClipboard>
 
       <FacebookShareButton url={props.postUrl}>
-        <Image alt="" src={fb} width={24} height={24} className="" />
+        <Image alt="" src={facebook} width={24} height={24} className="" />
       </FacebookShareButton>
 
       <TwitterShareButton url={props.postUrl}>
@@ -45,7 +45,7 @@ export default function SharePost(props: SharePostProps) {
       </TwitterShareButton>
 
       <LinkedinShareButton url={props.postUrl}>
-        <Image alt="" src={linkedinGray} width={24} height={24} className="" />
+        <Image alt="" src={li} width={24} height={24} className="" />
       </LinkedinShareButton>
     </div>
   )
