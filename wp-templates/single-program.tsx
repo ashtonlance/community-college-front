@@ -121,7 +121,6 @@ export default function SingleProgram(props) {
 
 SingleProgram.variables = (seedQuery, ctx) => {
   const { databaseId, slug } = seedQuery
-  console.log(seedQuery, 'seedQuery')
   return {
     databaseId,
     slug,
@@ -131,7 +130,7 @@ SingleProgram.variables = (seedQuery, ctx) => {
 
 SingleProgram.query = gql`
   ${Header.fragments.entry}
-  query GetProgram($databaseId: ID!, $slug: [String]) {
+  query GetProgram($databaseId: ID!) {
     program(id: $databaseId, idType: DATABASE_ID) {
       id
       title
@@ -160,23 +159,6 @@ SingleProgram.query = gql`
         nodes {
           slug
           id
-        }
-      }
-    }
-
-    relatedPrograms: programs(
-      where: {
-        orderby: { field: TITLE, order: ASC }
-        taxQuery: {
-          taxArray: { taxonomy: TAGGEDPROGRAMAREA, terms: $slug, field: SLUG }
-        }
-      }
-    ) {
-      nodes {
-        title
-        uri
-        program {
-          degreeTypes
         }
       }
     }

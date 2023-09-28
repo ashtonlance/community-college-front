@@ -2,7 +2,7 @@ import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
 import { GeneralCard } from '@/components/Cards'
 import { NumberedMemos, NumberedMemosHeading } from '../Cards/NumberedMemos'
-const PAGE_SIZE = 3
+const PAGE_SIZE = 9
 
 type PostType = 'numberedMemo' | 'colleges'
 

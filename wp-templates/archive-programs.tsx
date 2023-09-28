@@ -7,6 +7,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
 import { ProgramsAccordion } from '@/components/Accordion/ProgamsAccordion'
+import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
 
 type ProgramsIndexProps = {
   data: {
@@ -68,45 +69,6 @@ type Program = {
     degreeTypes: string[]
     title: string
   }
-}
-
-const capitalize = s =>
-  s.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
-    return str.toUpperCase()
-  })
-
-
-const organizeProgramsByTaggedAreas = (
-  programs: Program[]
-): { [key: string]: { programs: Program[]; uri: string } } => {
-  const organizedPrograms: {
-    [key: string]: { programs: Program[]; uri: string }
-  } = {}
-
-  programs.forEach(program => {
-    program.taggedProgramAreas.nodes.forEach((taggedArea: TaggedArea) => {
-      if (!organizedPrograms[taggedArea.name]) {
-        organizedPrograms[taggedArea.name] = {
-          programs: [],
-          uri: taggedArea.uri,
-        }
-      }
-      organizedPrograms[taggedArea.name].programs.push(program)
-    })
-  })
-
-  // Sort the keys
-  const sortedKeys = Object.keys(organizedPrograms).sort()
-
-  // Create a new object with the keys in alphabetical order
-  const sortedPrograms: {
-    [key: string]: { programs: Program[]; uri: string }
-  } = {}
-  sortedKeys.forEach(key => {
-    sortedPrograms[key] = organizedPrograms[key]
-  })
-
-  return sortedPrograms
 }
 
 export default function ProgramsArchive(props: ProgramsIndexProps) {

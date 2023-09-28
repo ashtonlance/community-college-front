@@ -32,7 +32,7 @@ export const GeneralCard: React.FC<GeneralCardProps> = ({ card }) => {
             {card?.collegeDetails?.map ? (
               <>
                 <Location className="mr-2 mt-[2px] h-[18px] w-[18px] text-gold" />
-                <address className="body-regular max-w-[19ch] whitespace-pre-wrap not-italic leading-[140%] text-darkGrey">
+                <address className="body-regular max-w-[19ch] not-italic leading-[140%] text-darkGrey">
                   <div className="w-full">
                     {card?.collegeDetails?.map?.streetNumber}{' '}
                     {card?.collegeDetails?.map?.streetName}
