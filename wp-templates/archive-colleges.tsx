@@ -72,6 +72,8 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     () => data?.colleges?.nodes || [],
     [data?.colleges?.nodes]
   )
+  console.log(colleges, 'colleges')
+
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
   const counties = useMemo(
@@ -195,7 +197,11 @@ export default function CollegesArchive(props: CollegesIndexProps) {
         </select>
       </div>
       <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
-        <PaginatedPosts currentPage={currentPage} postType="colleges" posts={filteredColleges} />
+        <PaginatedPosts
+          currentPage={currentPage}
+          postType="colleges"
+          posts={filteredColleges}
+        />
       </div>
       <CTABanner attributes={ctaAttributes} />
     </Layout>
@@ -225,7 +231,7 @@ CollegesArchive.query = gql`
       }
     }
 
-    colleges(where: { orderby: { field: TITLE, order: ASC } }) {
+    colleges(where: { orderby: { field: TITLE, order: ASC } }, first: 60) {
       nodes {
         title
         uri

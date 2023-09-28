@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import ArrowRight from '../../assets/icons/arrow-right.svg'
+import ArrowRight from '../../assets/icons/arrow-forward-sharp-reverse.svg'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
@@ -57,13 +56,18 @@ export const Button = ({
     return (
       <Link
         href={linkto}
-        className={`button flex w-fit items-center justify-center gap-[11px] ${classes}`}
+        className={`button flex w-fit items-center justify-center gap-[11px] ${classes} group`}
         ref={ref}
         suppressHydrationWarning
         target={target}
       >
         {content}
-        {arrow && <ArrowRight alt="" width={9} height={9} />}
+        {arrow && (
+          <ArrowRight
+            className="h-5 w-5 text-gold group-hover:text-navy"
+            alt=""
+          />
+        )}
       </Link>
     )
   } else {
