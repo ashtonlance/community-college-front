@@ -14,6 +14,7 @@ import SystemOfficePage from './page-system-office'
 import ProgramsArchive from './archive-programs'
 import NumberedMemosPage from './page-numbered-memos'
 import SingleProgramArea from './single-program-areas'
+import SingleProgram from './single-program'
 
 const templates = {
   'front-page': FrontPage,
@@ -32,6 +33,7 @@ const templates = {
   'page-programs': ProgramsArchive,
   'page-numbered-memos': NumberedMemosPage,
   'single-program-areas': SingleProgramArea,
+  'single-programs': SingleProgram,
 }
 
 export default templates
