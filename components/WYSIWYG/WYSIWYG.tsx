@@ -3,13 +3,13 @@ import { renderToString } from 'react-dom/server'
 import { Parser } from 'html-to-react'
 
 type WYSIWYGProps = {
-  content: string,
-  attributes: {
-    data:{
-      content: string,
-      background_color: string,
-      component_spacing_bottom_spacing: string,
-      component_spacing_top_spacing: string,
+  content?: string,
+  attributes?: {
+    data?:{
+      content?: string,
+      background_color?: string,
+      component_spacing_bottom_spacing?: string,
+      component_spacing_top_spacing?: string,
     }
   }
 }
