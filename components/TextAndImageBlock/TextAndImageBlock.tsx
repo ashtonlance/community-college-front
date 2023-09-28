@@ -4,7 +4,6 @@ import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { BackgroundVideoURL } from '../Hero/BackgroundVideo'
 
-
 const GET_MEDIA_FILE = gql`
   query GetMediaURLFromID($mediaID: ID!) {
     mediaItem(id: $mediaID, idType: DATABASE_ID) {
@@ -50,15 +49,15 @@ export const TextAndImageBlock = ({ attributes }) => {
         } md:h-fit md:flex-col md:gap-[60px]`}
       >
         {data?.mediaItem?.link && !data?.mediaItem?.sourceUrl ? (
-          <div className='w-[50%] relative'>
-          <BackgroundVideoURL url={data?.mediaItem?.link} />
+          <div className="relative w-[50%]">
+            <BackgroundVideoURL url={data?.mediaItem?.link} />
           </div>
         ) : (
           data?.mediaItem?.sourceUrl && (
-            <div className="w-[50%] self-center rounded-[12px] md:w-full h-[520px] bg-cover"
-            style={{backgroundImage:`url(${data?.mediaItem?.sourceUrl})`}}
-            >
-            </div>
+            <div
+              className="h-[520px] w-[50%] self-center rounded-[12px] bg-cover md:w-full"
+              style={{ backgroundImage: `url(${data?.mediaItem?.sourceUrl})` }}
+            ></div>
           )
         )}
 
@@ -69,7 +68,13 @@ export const TextAndImageBlock = ({ attributes }) => {
             className="body-regular whitespace-pre-wrap text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
           />
-          <Link target='_blank' className='secondary-btn outline-btn navy mt-[40px]' href={linkUrl}>{linkTitle}</Link>
+          <Link
+            target="_blank"
+            className="secondary-btn outline-btn navy mt-[40px]"
+            href={linkUrl ?? ''}
+          >
+            {linkTitle}
+          </Link>
         </div>
       </div>
     </div>
