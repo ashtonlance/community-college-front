@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Arrow from 'assets/icons/arrow-forward-sharp.svg'
-import { formatDate } from 'utils/dates'
 
 export const NumberedMemosHeading = () => {
   return (
@@ -15,7 +14,7 @@ export const NumberedMemosHeading = () => {
 }
 
 export const NumberedMemos = ({ card }) => {
-  const date = card.numberedMemo.date;
+  const date = card.numberedMemo?.date;
 
   return (
     <div className="col-span-12 col-start-1 grid grid-flow-row grid-cols-12 md:grid-cols-6 mdsm:grid-cols-4 items-center gap-[20px] rounded-[12px] bg-white px-[24px] py-[20px] md:px-[20px] md:py-[14px] mdsm:p-[20px]">

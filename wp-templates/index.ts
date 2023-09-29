@@ -38,8 +38,9 @@ const templates = {
   'single-program-areas': SingleProgramArea,
   'single-programs': SingleProgram,
   'single-numbered-memos': SingleNumberedMemo,
-  'page-staff-directory': StaffIndexPage
+  'page-staff-directory': StaffIndexPage,
   'page-program-finder': ProgramFinder,
+
 }
 
 export default templates

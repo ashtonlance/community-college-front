@@ -1,4 +1,4 @@
-export const PostFilterNumberedMemos = ({
+export const PostFilter = ({
   filters,
   setFilters,
   filtersToGenerateDropdown,
@@ -42,9 +42,9 @@ export const PostFilterNumberedMemos = ({
                 })
               }
             >
-              <option value="ASC">Order by</option>
-              <option value="ASC">Date Ascending</option>
-              <option value="DESC">Date Descending</option>
+              <option value="ASC">{filterOption.options}</option>
+              <option value="ASC"> Ascending</option>
+              <option value="DESC"> Descending</option>
             </select>
           )
       )}

@@ -3,7 +3,7 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilterNumberedMemos } from '@/components/PostFilter'
+import { PostFilter } from '@/components/PostFilter'
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
@@ -104,6 +104,30 @@ export default function NumberedMemosPage({ data, loading, error }) {
     return <>Loading...</>
   }
 
+  const filtersToGenerateDropdown = [
+    {
+      name: 'category',
+      options: categories,
+      type: 'select'
+    },
+    {
+      name: 'years',
+      options: years,
+      type: 'select'
+    },
+    {
+      name: 'keyword',
+      type: 'input'
+    },
+    {
+      name: 'sort by',
+      options: 'Sort by Year',
+      type: 'select'
+    },
+  ]
+
+
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
@@ -117,11 +141,10 @@ export default function NumberedMemosPage({ data, loading, error }) {
         {blocks && (
           <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
         )}
-        <PostFilterNumberedMemos
+        <PostFilter
           filters={filters}
           setFilters={setFilters}
-          categories={categories}
-          years={years}
+          filtersToGenerateDropdown={filtersToGenerateDropdown}
         />
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts

@@ -1,1 +1,1 @@
-export * from './PostFilterNumberedMemos'
+export * from './PostFilter'

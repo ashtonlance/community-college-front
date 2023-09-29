@@ -3,7 +3,7 @@ import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilterNumberedMemos } from '@/components/PostFilter'
+import { PostFilter } from '@/components/PostFilter'
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
@@ -25,8 +25,6 @@ export default function StaffIndexPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
 
-  console.log({ data })
-
   const staffIndex = useMemo(
     () => data?.allStaff?.nodes || [],
     [data?.allStaff?.nodes]
@@ -35,7 +33,7 @@ export default function StaffIndexPage({ data, loading, error }) {
   const [filters, setFilters] = useState({
     organization: '',
     department: '',
-    orderBy: { field: 'Last Name', order: 'ASC' },
+    orderBy: { field: 'STAFF_NAME', order: 'ASC' },
   })
 
   const organizations = useMemo(
@@ -54,14 +52,14 @@ export default function StaffIndexPage({ data, loading, error }) {
   )
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredMemos, setFilteredMemos] = useState(staffIndex)
+  const [filteredStaff, setFilteredStaff] = useState(staffIndex)
 
   const filterNumberedMemos = useCallback(() => {
     let result = staffIndex
 
     if (debouncedFilters.organization) {
       result = result.filter(memo =>
-        memo.numberedMemoCategories.nodes.name
+        memo.staffDetails.organization.name
           .toLowerCase()
           .includes(debouncedFilters.organization.toLowerCase())
       )
@@ -69,21 +67,21 @@ export default function StaffIndexPage({ data, loading, error }) {
 
     if (debouncedFilters.department) {
       result = result.filter(memo =>
-        memo.numberedMemo.date.includes(debouncedFilters.department)
+        memo.staffDetails.location == debouncedFilters.department
       )
     }
 
-    // if (debouncedFilters.orderBy.order === 'DESC') {
-    //   result = result.sort(
-    //     (a, b) => b.numberedMemo?.date?.localeCompare(a.numberedMemo?.date)
-    //   )
-    // } else {
-    //   result = result.sort(
-    //     (a, b) => a.numberedMemo?.date?.localeCompare(b.numberedMem?.date)
-    //   )
-    // }
+    if (debouncedFilters.orderBy.order === 'DESC') {
+      result = result.sort(
+        (a, b) => b.staffDetails?.staff_name?.localeCompare(a.staffDetails?.staff_name)
+      )
+    } else {
+      result = result.sort(
+        (a, b) => a.staffDetails?.staff_name?.localeCompare(b.staffDetails?.staff_name)
+      )
+    }
 
-    setFilteredMemos(result)
+    setFilteredStaff(result)
   }, [
     debouncedFilters.organization,
     debouncedFilters.department,
@@ -112,7 +110,7 @@ export default function StaffIndexPage({ data, loading, error }) {
     },
     {
       name: 'sort by',
-      options: 'Last Name',
+      options: 'Sort by Last Name',
       type: 'select'
     },
   ]
@@ -130,19 +128,18 @@ export default function StaffIndexPage({ data, loading, error }) {
         {blocks && (
           <WordPressBlocksViewer fallbackBlock={[] as any} blocks={blocks} />
         )}
-        <PostFilterNumberedMemos
+        <PostFilter
           filters={filters}
           setFilters={setFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
-          //   categories={organizations}
-          //   years={departments}
+
         />
         <div className="index-page-wrapper bg-grey">
-          {/* <PaginatedPosts
+          <PaginatedPosts
             currentPage={currentPage}
-            postType="numberedMemo"
-            posts={filteredMemos}
-          /> */}
+            postType="staff"
+            posts={filteredStaff}
+          />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
       </div>
@@ -173,7 +170,7 @@ StaffIndexPage.query = gql`
       }
     }
 
-    allStaff(where: { orderby: { field: DATE, order: ASC } }) {
+    allStaff(where: { orderby: { field: STAFF_NAME, order: ASC } }) {
       nodes {
         id
         staffDetails {
@@ -181,7 +178,7 @@ StaffIndexPage.query = gql`
           fieldGroupName
           jobTitle
           location
-          name
+          staffName
           phone
           location
           organizations {

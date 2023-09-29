@@ -2,9 +2,10 @@ import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
 import { GeneralCard } from '@/components/Cards'
 import { NumberedMemos, NumberedMemosHeading } from '../Cards/NumberedMemos'
+import { StaffCards, StaffCardsHeading } from '../Cards/StaffCards'
 const PAGE_SIZE = 9
 
-type PostType = 'numberedMemo' | 'colleges'
+type PostType = 'numberedMemo' | 'colleges' | 'staff'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -29,12 +30,15 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   return (
     <>
       {props.postType == 'numberedMemo' && <NumberedMemosHeading />}
+      {props.postType == 'staff' && <StaffCardsHeading />}
 
       {items.map((item, index) =>
         props.postType === 'colleges' ? (
           <GeneralCard key={index} card={item} />
-        ) : (
+        ) : props.postType === 'numberedMemo' ? (
           <NumberedMemos key={index} card={item} />
+        ) : (
+          props.postType === 'staff' && <StaffCards key={index} card={item} />
         )
       )}
       {items?.length > 0 && (
