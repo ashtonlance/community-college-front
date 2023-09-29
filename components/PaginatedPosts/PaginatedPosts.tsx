@@ -21,15 +21,15 @@ type PaginatedPostsProps = {
 }
 
 export const PaginatedPosts = (props: PaginatedPostsProps) => {
-  const { postType } = props
+  const { postType, posts } = props
   const router = useRouter()
 
   const offset = (props.currentPage - 1) * PAGE_SIZE
-  const items = props.posts.slice(offset, offset + PAGE_SIZE)
+  const items = (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
 
   const handlePageClick = (page: number) => {
     router.push(`${router.asPath?.split('?')?.[0]}?page=${page}`, null, {
-      shallow: true,
+      shallow: false,
     })
   }
 

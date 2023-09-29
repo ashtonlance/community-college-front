@@ -2,7 +2,7 @@ import { CTABanner } from '@/components/CTABanner'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
 import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
@@ -11,16 +11,12 @@ import { Button } from '@/components/Button'
 import { getDistance, convertDistance } from 'geolib'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-type ProgramFinderProps = {
-  any
-}
 
 const getCoordinates = async zipCode => {
   const response = await fetch(
     `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
   )
   const data = await response.json()
-  console.log(data, 'data from lookup')
   return {
     latitude: data?.results[0]?.geometry?.location?.lat,
     longitude: data?.results[0]?.geometry?.location?.lng,
@@ -59,80 +55,105 @@ export const ProgramFinder = props => {
       }
     })
   }, [programs, colleges])
-  // console.log(combined, 'combined')
 
-  // Initialize filters from URL query parameters or default values
-  const [filters, setFilters] = useState({
+  const [buttonClicked, setButtonClicked] = useState(false)
+
+  const [inputValues, setInputValues] = useState({
     programArea: router.query.programArea || '',
     radius: router.query.radius || '',
     zipCode: router.query.zipCode || '',
   })
 
-  const debouncedFilters = useDebounce(filters, 500)
-  const organizedPrograms = organizeProgramsByTaggedAreas(programs)
-  const [filteredPrograms, setFilteredPrograms] = useState(combined)
   const [zipCodeCoordinates, setZipCodeCoordinates] = useState(null)
+  const [filteredPrograms, setFilteredPrograms] = useState([])
+  const [shouldFilter, setShouldFilter] = useState(false)
 
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
-  useEffect(() => {
-    if (filters.zipCode) {
-      getCoordinates(filters.zipCode).then(coordinates => {
-        setZipCodeCoordinates(coordinates)
-      })
-    }
-  }, [filters.zipCode])
+  const inputValuesRef = useRef(inputValues)
 
-  // Update URL query parameters when filters change
   useEffect(() => {
-    const { page, ...rest } = router.query // Exclude 'page' from the current query parameters
+    inputValuesRef.current = inputValues
+  }, [inputValues])
+
+  const organizedPrograms = organizeProgramsByTaggedAreas(programs)
+
+  // useEffect(() => {
+  //   console.log(shouldFilter, 'shouldFilter')
+  //   console.log(filteredPrograms, filteredPrograms.length, 'filteredPrograms')
+  //   console.log(inputValues, 'inputValues')
+  // }, [filteredPrograms, shouldFilter, inputValues])
+
+  // Update filters state when URL query parameters change
+  useEffect(() => {
+    const newValues = {
+      programArea: router.query.programArea,
+      radius: router.query.radius,
+      zipCode: router.query.zipCode,
+    }
+
+    if (JSON.stringify(newValues) !== JSON.stringify(inputValues)) {
+      setInputValues(newValues)
+    }
+  }, [router.query])
+
+  useEffect(() => {
+    if (shouldFilter && zipCodeCoordinates) {
+      filterColleges(zipCodeCoordinates)
+    }
+  }, [shouldFilter, zipCodeCoordinates])
+
+  const handleSetFilters = (newFilters: any) => {
+    setInputValues(newFilters)
+
+    const { page, wordpressNode, ...rest } = router.query // Exclude 'page' from the current query parameters
     const newQuery = {
       ...rest,
-      ...filters,
+      ...newFilters,
     }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-      { shallow: true }
-    ) // Shallow routing, does not call getInitialProps
-  }, [filters])
+    // Convert the newQuery object to a query string
+    const queryString = new URLSearchParams(newQuery).toString()
 
-  const filterColleges = () => {
-    let result = combined // Use the combined list instead of colleges
+    // Update the URL without causing a page refresh or rerender
+    window.history.replaceState(null, '', `?${queryString}`)
+  }
 
-    if (debouncedFilters.programArea) {
-      result = result.filter(program => {
-        return program.taggedProgramAreas.nodes.some(
-          node => node.name === debouncedFilters.programArea
-        )
-      })
-    }
+  const filterColleges = coordinates => {
+    if (shouldFilter) {
+      let result = combined // Use the combined list instead of colleges
 
-    if (
-      debouncedFilters.zipCode &&
-      debouncedFilters.radius &&
-      zipCodeCoordinates
-    ) {
-      result = result.filter(program => {
-        const withinRadius = program.colleges.some(college => {
-          const collegeLatitude = college.collegeDetails.map.latitude
-          const collegeLongitude = college.collegeDetails.map.longitude
-          const distance = getDistance(
-            { latitude: collegeLatitude, longitude: collegeLongitude },
-            zipCodeCoordinates
+      if (inputValuesRef.current.programArea) {
+        result = result.filter(program => {
+          return program.taggedProgramAreas.nodes.some(
+            node => node.name === inputValuesRef.current.programArea
           )
-          const radiusInMeters = debouncedFilters.radius * 1609.334
-          return distance <= radiusInMeters
         })
-        return withinRadius
-      })
-    }
+      }
 
-    setFilteredPrograms(result)
+      if (
+        inputValuesRef.current.zipCode &&
+        inputValuesRef.current.radius &&
+        inputValuesRef.current.zipCode.length === 5 &&
+        coordinates
+      ) {
+        result = result.filter(program => {
+          const withinRadius = program.colleges.some(college => {
+            const collegeLatitude = college.collegeDetails.map.latitude
+            const collegeLongitude = college.collegeDetails.map.longitude
+            const distance = getDistance(
+              { latitude: collegeLatitude, longitude: collegeLongitude },
+              coordinates
+            )
+            const radiusInMeters = inputValuesRef.current.radius * 1609.334
+            return distance <= radiusInMeters
+          })
+          return withinRadius
+        })
+      }
+      setFilteredPrograms(result)
+      setShouldFilter(false)
+    }
   }
 
   return (
@@ -156,8 +177,9 @@ export const ProgramFinder = props => {
           <select
             id="programArea"
             className="h-full max-w-[229px] text-darkBeige"
+            value={inputValues.programArea}
             onChange={e =>
-              setFilters({ ...filters, programArea: e.target.value })
+              setInputValues({ ...inputValues, programArea: e.target.value })
             }
           >
             <option value="">Program Areas</option>
@@ -175,7 +197,10 @@ export const ProgramFinder = props => {
           <select
             id="radius"
             className="h-full w-[200px] text-darkBeige"
-            onChange={e => setFilters({ ...filters, radius: e.target.value })}
+            value={inputValues.radius}
+            onChange={e =>
+              setInputValues({ ...inputValues, radius: e.target.value })
+            }
           >
             <option value="">Mile Radius</option>
             <option value={10}>10</option>
@@ -193,11 +218,21 @@ export const ProgramFinder = props => {
             className="text-input w-[150px]"
             type="text"
             placeholder="Zip Code"
-            onChange={e => setFilters({ ...filters, zipCode: e.target.value })}
+            value={inputValues.zipCode}
+            onChange={e =>
+              setInputValues({ ...inputValues, zipCode: e.target.value })
+            }
           />
         </div>
         <Button
-          onClick={filterColleges}
+          onClick={async () => {
+            if (inputValues.zipCode.length === 5) {
+              const coordinates = await getCoordinates(inputValues.zipCode)
+              setZipCodeCoordinates(coordinates)
+            }
+            handleSetFilters(inputValues)
+            setShouldFilter(true)
+          }}
           content={'Search'}
           arrow
           classes="primary-btn navy"
