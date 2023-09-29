@@ -9,6 +9,8 @@ export const Button = ({
   linkto = '/',
   attributes = null,
   target = '',
+  onClick = () => {},
+  isButton = false,
 }) => {
   const ref = useRef(null)
 
@@ -24,6 +26,25 @@ export const Button = ({
     }
   }),
     [ref]
+
+  if (isButton) {
+    return (
+      <button
+        className={`button flex w-fit items-center justify-center gap-[11px] ${classes} group`}
+        ref={ref}
+        suppressHydrationWarning
+        onClick={onClick}
+      >
+        {content}
+        {arrow && (
+          <ArrowRight
+            className="h-5 w-5 text-gold group-hover:text-navy"
+            alt=""
+          />
+        )}
+      </button>
+    )
+  }
 
   if (attributes?.data) {
     const bgColorModule = attributes.data.background
@@ -60,6 +81,7 @@ export const Button = ({
         ref={ref}
         suppressHydrationWarning
         target={target}
+        onClick={onClick}
       >
         {content}
         {arrow && (

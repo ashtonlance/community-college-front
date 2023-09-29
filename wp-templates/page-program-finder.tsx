@@ -21,7 +21,10 @@ const getCoordinates = async zipCode => {
   )
   const data = await response.json()
   console.log(data, 'data from lookup')
-  return data?.results[0]?.geometry?.location
+  return {
+    latitude: data?.results[0]?.geometry?.location?.lat,
+    longitude: data?.results[0]?.geometry?.location?.lng,
+  }
 }
 
 export const ProgramFinder = props => {
@@ -44,16 +47,30 @@ export const ProgramFinder = props => {
     [data?.colleges?.nodes]
   )
 
+  const combined = useMemo(() => {
+    return programs.map(program => {
+      const matchedColleges = colleges.filter(college =>
+        program.colleges.nodes.some(node => node.slug === college.slug)
+      )
+
+      return {
+        ...program,
+        colleges: matchedColleges,
+      }
+    })
+  }, [programs, colleges])
+  // console.log(combined, 'combined')
+
+  // Initialize filters from URL query parameters or default values
   const [filters, setFilters] = useState({
-    degreeType: '',
-    keyword: '',
-    programArea: '',
-    radius: '',
-    zipCode: '',
+    programArea: router.query.programArea || '',
+    radius: router.query.radius || '',
+    zipCode: router.query.zipCode || '',
   })
+
   const debouncedFilters = useDebounce(filters, 500)
   const organizedPrograms = organizeProgramsByTaggedAreas(programs)
-  const [filteredColleges, setFilteredColleges] = useState(colleges)
+  const [filteredPrograms, setFilteredPrograms] = useState(combined)
   const [zipCodeCoordinates, setZipCodeCoordinates] = useState(null)
 
   const { page } = router.query
@@ -67,13 +84,30 @@ export const ProgramFinder = props => {
     }
   }, [filters.zipCode])
 
+  // Update URL query parameters when filters change
+  useEffect(() => {
+    const { page, ...rest } = router.query // Exclude 'page' from the current query parameters
+    const newQuery = {
+      ...rest,
+      ...filters,
+    }
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true }
+    ) // Shallow routing, does not call getInitialProps
+  }, [filters])
+
   const filterColleges = () => {
-    let result = colleges
+    let result = combined // Use the combined list instead of colleges
 
     if (debouncedFilters.programArea) {
-      Object.keys(result).forEach(key => {
-        result[key].programs = result[key].programs.filter(
-          program => program.programArea === debouncedFilters.programArea
+      result = result.filter(program => {
+        return program.taggedProgramAreas.nodes.some(
+          node => node.name === debouncedFilters.programArea
         )
       })
     }
@@ -83,24 +117,24 @@ export const ProgramFinder = props => {
       debouncedFilters.radius &&
       zipCodeCoordinates
     ) {
-      Object.keys(result).forEach(key => {
-        result[key].programs = result[key].programs.filter(program => {
+      result = result.filter(program => {
+        const withinRadius = program.colleges.some(college => {
+          const collegeLatitude = college.collegeDetails.map.latitude
+          const collegeLongitude = college.collegeDetails.map.longitude
           const distance = getDistance(
-            { latitude: program.latitude, longitude: program.longitude },
+            { latitude: collegeLatitude, longitude: collegeLongitude },
             zipCodeCoordinates
           )
-          const radiusInMeters = convertDistance(debouncedFilters.radius, 'mi')
+          const radiusInMeters = debouncedFilters.radius * 1609.334
           return distance <= radiusInMeters
         })
+        return withinRadius
       })
     }
 
-    setFilteredColleges(result)
+    setFilteredPrograms(result)
   }
 
-  useEffect(() => {
-    filterColleges()
-  }, [debouncedFilters])
   return (
     <Layout
       pageClassName="program-finder-page"
@@ -162,13 +196,19 @@ export const ProgramFinder = props => {
             onChange={e => setFilters({ ...filters, zipCode: e.target.value })}
           />
         </div>
-        <Button content={'Search'} arrow classes="primary-btn navy" />
+        <Button
+          onClick={filterColleges}
+          content={'Search'}
+          arrow
+          classes="primary-btn navy"
+          isButton
+        />
       </div>
-      <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
+      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] ">
         <PaginatedPosts
           currentPage={currentPage}
-          postType="colleges"
-          posts={filteredColleges}
+          postType="programFinder"
+          posts={filteredPrograms}
         />
       </div>
       {/* <CTABanner attributes={ctaAttributes} /> */}
@@ -205,6 +245,7 @@ ProgramFinder.query = gql`
       nodes {
         title
         uri
+        slug
         featuredImage {
           node {
             sourceUrl
@@ -246,6 +287,12 @@ ProgramFinder.query = gql`
         program {
           degreeTypes
           title
+          description
+        }
+        colleges {
+          nodes {
+            slug
+          }
         }
       }
     }
