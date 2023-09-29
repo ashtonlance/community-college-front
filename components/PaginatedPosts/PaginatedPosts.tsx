@@ -6,9 +6,11 @@ import {
   NumberedMemosHeading,
   ProgramCard,
 } from '@/components/Cards'
+import { StaffCards, StaffCardsHeading } from '../Cards/StaffCards'
+
 const PAGE_SIZE = 9
 
-type PostType = 'numberedMemo' | 'colleges' | 'programFinder'
+type PostType = 'numberedMemo' | 'colleges' | 'programFinder' | 'staff'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -34,16 +36,19 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   return (
     <>
       {props.postType == 'numberedMemo' && <NumberedMemosHeading />}
+      {props.postType == 'staff' && <StaffCardsHeading />}
 
       {items.map((item, index) =>
         postType === 'colleges' ? (
           <GeneralCard key={index} card={item} />
         ) : postType === 'numberedMemo' ? (
           <NumberedMemos key={index} card={item} />
+        ) : postType === 'staff' ? (
+          <StaffCards key={index} card={item} />
         ) : postType === 'programFinder' ? (
           <ProgramCard key={index} card={item} />
-        ) : null
-      )}
+        ) : null)}
+
 
       {items?.length > 0 && (
         <Pagination

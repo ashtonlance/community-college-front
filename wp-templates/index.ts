@@ -16,6 +16,7 @@ import NumberedMemosPage from './page-numbered-memos'
 import SingleNumberedMemo from './single-numbered-memo'
 import SingleProgramArea from './single-program-areas'
 import SingleProgram from './single-program'
+import StaffIndexPage from './page-staff'
 import { ProgramFinder } from './page-program-finder'
 
 const templates = {
@@ -37,7 +38,9 @@ const templates = {
   'single-program-areas': SingleProgramArea,
   'single-programs': SingleProgram,
   'single-numbered-memos': SingleNumberedMemo,
+  'page-staff-directory': StaffIndexPage,
   'page-program-finder': ProgramFinder,
+
 }
 
 export default templates

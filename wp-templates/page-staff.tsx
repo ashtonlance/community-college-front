@@ -9,7 +9,7 @@ import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 
-export default function NumberedMemosPage({ data, loading, error }) {
+export default function StaffIndexPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -25,75 +25,68 @@ export default function NumberedMemosPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
 
-  const numberedMemos = useMemo(
-    () => data?.numberedMemos?.nodes || [],
-    [data?.numberedMemos?.nodes]
+  const staffIndex = useMemo(
+    () => data?.allStaff?.nodes || [],
+    [data?.allStaff?.nodes]
   )
 
   const [filters, setFilters] = useState({
-    category: '',
-    year: '',
-    keyword: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    organization: '',
+    department: '',
+    orderBy: { field: 'STAFF_NAME', order: 'ASC' },
   })
 
-  const categories = useMemo(
+  const organizations = useMemo(
     () => [
       ...new Set(
-        numberedMemos.flatMap(memo =>
-          memo.numberedMemoCategories.nodes.map(category => category.name)
+        staffIndex?.flatMap(staff =>
+          staff.staffDetails.organizations.flatMap(org => org.name)
         )
       ),
     ],
-    [numberedMemos]
+    [staffIndex]
   )
-
-  const years = useMemo(
-    () => [
-      ...new Set(numberedMemos.map(memo => memo.numberedMemo?.date?.split('/')[2])),
-    ],
-    [numberedMemos]
+  const departments = useMemo(
+    () => [...new Set(staffIndex.map(staff => staff.staffDetails.location))],
+    [staffIndex]
   )
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
+  const [filteredStaff, setFilteredStaff] = useState(staffIndex)
 
   const filterNumberedMemos = useCallback(() => {
-    let result = numberedMemos
+    let result = staffIndex
 
-    if (debouncedFilters.category) {
+    if (debouncedFilters.organization) {
       result = result.filter(memo =>
-        memo.numberedMemoCategories.nodes.name
+        memo.staffDetails.organization.name
           .toLowerCase()
-          .includes(debouncedFilters.category.toLowerCase())
+          .includes(debouncedFilters.organization.toLowerCase())
       )
     }
 
-    if (debouncedFilters.year) {
-      result = result.filter(memo => memo.numberedMemo.date.includes(debouncedFilters.year))
-    }
-
-    if (debouncedFilters.keyword) {
+    if (debouncedFilters.department) {
       result = result.filter(memo =>
-        memo.numberedMemo.subject
-          .toLowerCase()
-          .includes(debouncedFilters.keyword.toLowerCase())
+        memo.staffDetails.location == debouncedFilters.department
       )
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort((a, b) => b.numberedMemo?.date?.localeCompare(a.numberedMemo?.date))
+      result = result.sort(
+        (a, b) => b.staffDetails?.staff_name?.localeCompare(a.staffDetails?.staff_name)
+      )
     } else {
-      result = result.sort((a, b) => a.numberedMemo?.date?.localeCompare(b.numberedMem?.date))
+      result = result.sort(
+        (a, b) => a.staffDetails?.staff_name?.localeCompare(b.staffDetails?.staff_name)
+      )
     }
 
-    setFilteredMemos(result)
+    setFilteredStaff(result)
   }, [
-    debouncedFilters.category,
-    debouncedFilters.keyword,
+    debouncedFilters.organization,
+    debouncedFilters.department,
     debouncedFilters.orderBy.order,
-    debouncedFilters.year,
-    numberedMemos,
+    staffIndex,
   ])
 
   useEffect(() => {
@@ -106,27 +99,21 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
   const filtersToGenerateDropdown = [
     {
-      name: 'category',
-      options: categories,
+      name: 'organization',
+      options: organizations,
       type: 'select'
     },
     {
-      name: 'years',
-      options: years,
+      name: 'department',
+      options: departments,
       type: 'select'
-    },
-    {
-      name: 'keyword',
-      type: 'input'
     },
     {
       name: 'sort by',
-      options: 'Sort by Year',
+      options: 'Sort by Last Name',
       type: 'select'
     },
   ]
-
-
 
   return (
     <Layout
@@ -145,12 +132,13 @@ export default function NumberedMemosPage({ data, loading, error }) {
           filters={filters}
           setFilters={setFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
+
         />
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="numberedMemo"
-            posts={filteredMemos}
+            postType="staff"
+            posts={filteredStaff}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -159,12 +147,12 @@ export default function NumberedMemosPage({ data, loading, error }) {
   )
 }
 
-NumberedMemosPage.variables = ({ uri }) => {
+StaffIndexPage.variables = ({ uri }) => {
   return { uri }
 }
 
-NumberedMemosPage.query = gql`
-  query numberedMemos($uri: ID!) {
+StaffIndexPage.query = gql`
+  query staffIndex($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
       slug
@@ -182,23 +170,22 @@ NumberedMemosPage.query = gql`
       }
     }
 
-    numberedMemos(where: { orderby: { field: DATE, order: ASC } }) {
+    allStaff(where: { orderby: { field: STAFF_NAME, order: ASC } }) {
       nodes {
-        numberedMemo {
-          body
-          date
-          memoFrom
-          number
-          subject
-          memoTo
-        }
-        numberedMemoCategories {
-          nodes {
+        id
+        staffDetails {
+          email
+          fieldGroupName
+          jobTitle
+          location
+          staffName
+          phone
+          location
+          organizations {
             name
+            link
           }
         }
-        numberedMemoId
-        uri
       }
     }
 
