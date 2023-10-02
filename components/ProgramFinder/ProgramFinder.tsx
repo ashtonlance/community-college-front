@@ -4,24 +4,18 @@ import { useRouter } from 'next/router'
 import { organizeProgramsByTaggedAreas, capitalize } from 'utils/programsHelper'
 import { Button } from '@/components/Button'
 
-const GET_PROGRAMS = gql`
+const GET_PROGRAM_AREAS = gql`
   query GetPrograms {
-    programs(first: 500, where: { orderby: { field: TITLE, order: ASC } }) {
+    programAreas(first: 50, where: { orderby: { field: TITLE, order: ASC } }) {
       nodes {
         title
-        taggedProgramAreas {
-          nodes {
-            uri
-            name
-          }
-        }
       }
     }
   }
 `
 
 export const ProgramFinderForm = () => {
-  const { data } = useQuery(GET_PROGRAMS)
+  const { data } = useQuery(GET_PROGRAM_AREAS)
   const router = useRouter()
 
   const [inputValues, setInputValues] = useState({
@@ -30,9 +24,8 @@ export const ProgramFinderForm = () => {
     zipCode: '',
   })
 
-  const programs = data?.programs?.nodes || []
-  const organizedPrograms = organizeProgramsByTaggedAreas(programs)
-
+  const programAreas = data?.programAreas?.nodes || []
+  console.log(programAreas)
   const handleSubmit = useCallback(() => {
     const queryString = new URLSearchParams(inputValues).toString()
     router.push(
@@ -58,11 +51,13 @@ export const ProgramFinderForm = () => {
           }
         >
           <option value="">Program Areas</option>
-          {Object.keys(organizedPrograms).map((key, i) => (
-            <option key={i} value={key}>
-              {capitalize(key)}
-            </option>
-          ))}
+          {programAreas.map((program: any, i) => {
+            return (
+              <option key={i} value={program?.title}>
+                {program?.title}
+              </option>
+            )
+          })}
         </select>
       </div>
       <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">
