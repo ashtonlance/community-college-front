@@ -2,38 +2,56 @@ import { CTABanner } from '@/components/CTABanner'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useMemo, useState, useEffect, useRef } from 'react'
+import { useMemo, useState, useEffect, useRef, useCallback } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { useDebounce } from '@uidotdev/usehooks'
 import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
 import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
 import { Button } from '@/components/Button'
-import { getDistance, convertDistance } from 'geolib'
+import { getDistance } from 'geolib'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 
 const getCoordinates = async zipCode => {
-  const response = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
-  )
-  const data = await response.json()
-  return {
-    latitude: data?.results[0]?.geometry?.location?.lat,
-    longitude: data?.results[0]?.geometry?.location?.lng,
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
+    )
+    const data = await response.json()
+    return {
+      latitude: data?.results[0]?.geometry?.location?.lat,
+      longitude: data?.results[0]?.geometry?.location?.lng,
+    }
+  } catch (error) {
+    console.error('Error fetching coordinates:', error)
+    return null
   }
 }
 
 export const ProgramFinder = props => {
-  const router = useRouter()
   const { data } = props
-  const menuItems = data?.menu?.menuItems || []
-  const programFinderIndex = data?.programFinderIndex || []
-  const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
-  const footerMenuItems = data?.footer?.menuItems || []
-  const hierarchicalFooterMenuItems =
-    flatListToHierarchical(footerMenuItems as any) || []
-  const settings = data?.settings?.siteSettings || []
+  const router = useRouter()
+
+  const menuItems = useMemo(
+    () => flatListToHierarchical(data?.menu?.menuItems) || [],
+    [data?.menu?.menuItems]
+  )
+  const programFinderIndex = useMemo(
+    () => data?.programFinderIndex || [],
+    [data?.programFinderIndex]
+  )
+  const footerMenuItems = useMemo(
+    () => flatListToHierarchical(data?.footer?.menuItems) || [],
+    [data?.footer?.menuItems]
+  )
+  const utilityNavigation = useMemo(
+    () => data?.settings?.utilityNavigation?.navigationItems || [],
+    [data?.settings?.utilityNavigation?.navigationItems]
+  )
+  const settings = useMemo(
+    () => data?.settings?.siteSettings || [],
+    [data?.settings?.siteSettings]
+  )
+
   const programs = useMemo(
     () => data?.programs?.nodes || [],
     [data?.programs?.nodes]
@@ -56,20 +74,15 @@ export const ProgramFinder = props => {
     })
   }, [programs, colleges])
 
-  const [buttonClicked, setButtonClicked] = useState(false)
-
-  const [inputValues, setInputValues] = useState({
+  const [inputValues, setInputValues] = useState(() => ({
     programArea: router.query.programArea || '',
     radius: router.query.radius || '',
     zipCode: router.query.zipCode || '',
-  })
+  }))
 
   const [zipCodeCoordinates, setZipCodeCoordinates] = useState(null)
   const [filteredPrograms, setFilteredPrograms] = useState([])
   const [shouldFilter, setShouldFilter] = useState(false)
-
-  const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const inputValuesRef = useRef(inputValues)
 
@@ -77,92 +90,114 @@ export const ProgramFinder = props => {
     inputValuesRef.current = inputValues
   }, [inputValues])
 
-  const organizedPrograms = organizeProgramsByTaggedAreas(programs)
+  const organizedPrograms = useMemo(
+    () => organizeProgramsByTaggedAreas(programs),
+    [programs]
+  )
 
-  // useEffect(() => {
-  //   console.log(shouldFilter, 'shouldFilter')
-  //   console.log(filteredPrograms, filteredPrograms.length, 'filteredPrograms')
-  //   console.log(inputValues, 'inputValues')
-  // }, [filteredPrograms, shouldFilter, inputValues])
+  const handleSetFilters = useCallback(
+    newFilters => {
+      setInputValues(newFilters)
 
-  // Update filters state when URL query parameters change
-  useEffect(() => {
-    const newValues = {
-      programArea: router.query.programArea,
-      radius: router.query.radius,
-      zipCode: router.query.zipCode,
-    }
+      const { page, wordpressNode, ...rest } = router.query
+      const newQuery = {
+        ...rest,
+        ...newFilters,
+      }
 
-    if (JSON.stringify(newValues) !== JSON.stringify(inputValues)) {
-      setInputValues(newValues)
-    }
-  }, [router.query])
+      const queryString = new URLSearchParams(newQuery).toString()
+
+      window.history.replaceState(null, '', `?${queryString}`)
+    },
+    [router.query]
+  )
+
+  const filterColleges = useCallback(
+    coordinates => {
+      if (shouldFilter) {
+        let result = combined // Use the combined list instead of colleges
+
+        if (inputValuesRef.current.programArea) {
+          result = result.filter(program => {
+            return program.taggedProgramAreas.nodes.some(
+              node => node.name === inputValuesRef.current.programArea
+            )
+          })
+        }
+
+        if (
+          inputValuesRef.current.zipCode &&
+          inputValuesRef.current.radius &&
+          inputValuesRef.current.zipCode.length === 5 &&
+          coordinates
+        ) {
+          result = result.filter(program => {
+            const withinRadius = program.colleges.some(college => {
+              const collegeLatitude = college.collegeDetails.map.latitude
+              const collegeLongitude = college.collegeDetails.map.longitude
+              const distance = getDistance(
+                { latitude: collegeLatitude, longitude: collegeLongitude },
+                coordinates
+              )
+              const radiusInMeters = inputValuesRef.current.radius * 1609.334
+              return distance <= radiusInMeters
+            })
+            return withinRadius
+          })
+        }
+        setFilteredPrograms(result)
+        setShouldFilter(false)
+      }
+    },
+    [combined, shouldFilter]
+  )
 
   useEffect(() => {
     if (shouldFilter && zipCodeCoordinates) {
       filterColleges(zipCodeCoordinates)
     }
-  }, [shouldFilter, zipCodeCoordinates])
+  }, [shouldFilter, zipCodeCoordinates, filterColleges])
 
-  const handleSetFilters = (newFilters: any) => {
-    setInputValues(newFilters)
-
-    const { page, wordpressNode, ...rest } = router.query // Exclude 'page' from the current query parameters
-    const newQuery = {
-      ...rest,
-      ...newFilters,
+  useEffect(() => {
+    const { programArea, radius, zipCode } = router.query
+    const newValues = {
+      programArea: programArea,
+      radius: radius,
+      zipCode: zipCode,
     }
-    // Convert the newQuery object to a query string
-    const queryString = new URLSearchParams(newQuery).toString()
+    setInputValues(newValues)
+  }, [router.query])
 
-    // Update the URL without causing a page refresh or rerender
-    window.history.replaceState(null, '', `?${queryString}`)
-  }
-
-  const filterColleges = coordinates => {
-    if (shouldFilter) {
-      let result = combined // Use the combined list instead of colleges
-
-      if (inputValuesRef.current.programArea) {
-        result = result.filter(program => {
-          return program.taggedProgramAreas.nodes.some(
-            node => node.name === inputValuesRef.current.programArea
-          )
-        })
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      const { programArea, radius, zipCode, widget } = router.query
+      const newValues = {
+        programArea: programArea,
+        radius: radius,
+        zipCode: zipCode,
       }
-
-      if (
-        inputValuesRef.current.zipCode &&
-        inputValuesRef.current.radius &&
-        inputValuesRef.current.zipCode.length === 5 &&
-        coordinates
-      ) {
-        result = result.filter(program => {
-          const withinRadius = program.colleges.some(college => {
-            const collegeLatitude = college.collegeDetails.map.latitude
-            const collegeLongitude = college.collegeDetails.map.longitude
-            const distance = getDistance(
-              { latitude: collegeLatitude, longitude: collegeLongitude },
-              coordinates
-            )
-            const radiusInMeters = inputValuesRef.current.radius * 1609.334
-            return distance <= radiusInMeters
-          })
-          return withinRadius
-        })
+      setInputValues(newValues)
+      if (programArea && radius && zipCode && widget === 'true') {
+        console.log(inputValues, 'inputValues')
+        if (zipCode.length === 5) {
+          const coordinates = await getCoordinates(zipCode)
+          setZipCodeCoordinates(coordinates)
+        }
+        handleSetFilters(newValues)
+        setShouldFilter(true)
       }
-      setFilteredPrograms(result)
-      setShouldFilter(false)
     }
-  }
+
+    fetchCoordinates()
+  }, [router.query])
 
   return (
     <Layout
       pageClassName="program-finder-page"
-      menuItems={hierarchicalMenuItems}
+      menuItems={menuItems}
       seo={programFinderIndex?.seo}
       utilityNavigation={utilityNavigation}
-      footerNavigation={hierarchicalFooterMenuItems}
+      footerNavigation={footerMenuItems}
       settings={settings}
     >
       <ProgramFinderHero
@@ -217,6 +252,7 @@ export const ProgramFinder = props => {
             id="zipCode"
             className="text-input w-[150px]"
             type="text"
+            pattern="[0-9]*"
             placeholder="Zip Code"
             value={inputValues.zipCode}
             onChange={e =>
@@ -239,9 +275,31 @@ export const ProgramFinder = props => {
           isButton
         />
       </div>
+      {filteredPrograms.length > 0 ? (
+        <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
+          <div className="h4 mb-0">
+            {'Showing '}
+            {filteredPrograms.length}{' '}
+            {filteredPrograms.length === 1 ? 'Result' : 'Results'}
+          </div>
+        </div>
+      ) : (
+        shouldFilter && (
+          <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
+            <div className="h4 mb-0">
+              {'Showing '}
+              {combined.length} {combined.length === 1 ? 'Result' : 'Results'}
+            </div>
+          </div>
+        )
+      )}
       <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] ">
         <PaginatedPosts
-          currentPage={currentPage}
+          currentPage={parseInt(
+            (Array.isArray(router.query.page)
+              ? router.query.page[0]
+              : router.query.page) || '1'
+          )}
           postType="programFinder"
           posts={filteredPrograms}
         />

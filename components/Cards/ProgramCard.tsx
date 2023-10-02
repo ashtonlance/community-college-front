@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import { cn } from 'utils'
-export const ProgramCard = ({ card }) => {
+import { FadeIn } from '@/components/FadeIn'
+export const ProgramCard = ({ card, index }) => {
   const collegesLength = card?.colleges?.length
   return (
-    <div
+    <FadeIn
+      delay
+      delayAmount={index / 10}
       key={card}
-      className={cn(
+      classes={cn(
         `flex max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full sm:p-[32px]`
       )}
     >
@@ -36,6 +39,6 @@ export const ProgramCard = ({ card }) => {
           </div>
         </Link>
       </div>
-    </div>
+    </FadeIn>
   )
 }

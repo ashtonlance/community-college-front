@@ -87,6 +87,7 @@ export const NavigationItem = ({
   ) : (
     <div className="group flex h-[50px] flex-col items-center justify-center gap-y-[6px]">
       <Link
+        suppressHydrationWarning
         onMouseOver={() => handleActiveItem(item.id)}
         className={cn(`
       no-child main-nav group flex cursor-pointer justify-center gap-2

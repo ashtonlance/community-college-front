@@ -46,9 +46,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
         ) : postType === 'staff' ? (
           <StaffCards key={index} card={item} />
         ) : postType === 'programFinder' ? (
-          <ProgramCard key={index} card={item} />
-        ) : null)}
-
+          <ProgramCard key={index} card={item} index={index} />
+        ) : null
+      )}
 
       {items?.length > 0 && (
         <Pagination

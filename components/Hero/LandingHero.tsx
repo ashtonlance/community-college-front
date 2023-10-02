@@ -20,6 +20,7 @@ export type HeroPropsType = {
   email?: string
   link?: string
   isCollegeSingle?: boolean
+  showProgramFinder?: boolean
 }
 
 export const LandingHero = ({
@@ -34,13 +35,14 @@ export const LandingHero = ({
   bgPosition,
   emptyBg,
   videoType,
+  showProgramFinder,
 }: HeroPropsType) => {
   return (
     <div
       className={cn(
         `flex h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
-          !bgImg && !bgVideo && `bg-${bgColor}`
-        }`
+          !bgImg && !bgVideo && `bg-${bgColor}'}`
+        } ${showProgramFinder ? 'pb-[335px]' : ''}`
       )}
       suppressHydrationWarning
     >

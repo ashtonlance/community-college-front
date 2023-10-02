@@ -1,0 +1,112 @@
+import { useState, useCallback } from 'react'
+import { useQuery, gql } from '@apollo/client'
+import { useRouter } from 'next/router'
+import { organizeProgramsByTaggedAreas, capitalize } from 'utils/programsHelper'
+import { Button } from '@/components/Button'
+
+const GET_PROGRAMS = gql`
+  query GetPrograms {
+    programs(first: 500, where: { orderby: { field: TITLE, order: ASC } }) {
+      nodes {
+        title
+        taggedProgramAreas {
+          nodes {
+            uri
+            name
+          }
+        }
+      }
+    }
+  }
+`
+
+export const ProgramFinderForm = () => {
+  const { data } = useQuery(GET_PROGRAMS)
+  const router = useRouter()
+
+  const [inputValues, setInputValues] = useState({
+    programArea: '',
+    radius: '',
+    zipCode: '',
+  })
+
+  const programs = data?.programs?.nodes || []
+  const organizedPrograms = organizeProgramsByTaggedAreas(programs)
+
+  const handleSubmit = useCallback(() => {
+    const queryString = new URLSearchParams(inputValues).toString()
+    router.push(
+      `/students/what-we-offer/program-finder?${queryString}&widget=true`
+    )
+  }, [inputValues, router])
+
+  return (
+    <div className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:px-[60px] sm:px-10">
+      <div className="mb-10 flex-1 basis-full text-center">
+        <span className="h2 mb-0">Discover your new career</span>
+      </div>
+      <div className="flex flex-1 basis-full items-center gap-x-[20px]">
+        <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
+          I&apos;m Interested In
+        </label>
+        <select
+          id="programArea"
+          className="h-[52px] w-full text-darkBeige"
+          value={inputValues.programArea}
+          onChange={e =>
+            setInputValues({ ...inputValues, programArea: e.target.value })
+          }
+        >
+          <option value="">Program Areas</option>
+          {Object.keys(organizedPrograms).map((key, i) => (
+            <option key={i} value={key}>
+              {capitalize(key)}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">
+        <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
+          Within
+        </label>
+        <select
+          id="radius"
+          className="h-full w-full text-darkBeige"
+          value={inputValues.radius}
+          onChange={e =>
+            setInputValues({ ...inputValues, radius: e.target.value })
+          }
+        >
+          <option value="">Mile Radius</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+          <option value={40}>40</option>
+        </select>
+      </div>
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">
+        <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
+          Of
+        </label>
+        <input
+          id="zipCode"
+          className="text-input w-[150px]"
+          type="text"
+          pattern="[0-9]*"
+          placeholder="Zip Code"
+          value={inputValues.zipCode}
+          onChange={e =>
+            setInputValues({ ...inputValues, zipCode: e.target.value })
+          }
+        />
+      </div>
+      <Button
+        onClick={handleSubmit}
+        content={'Search Programs'}
+        arrow
+        classes="primary-btn navy mt-10"
+        isButton
+      />
+    </div>
+  )
+}
