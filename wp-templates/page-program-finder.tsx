@@ -100,15 +100,23 @@ export const ProgramFinder = props => {
     newFilters => {
       setInputValues(newFilters)
 
-      const { page, wordpressNode, ...rest } = router.query
+      const { pathname, query } = router
       const newQuery = {
-        ...rest,
+        ...query,
         ...newFilters,
       }
 
       const queryString = new URLSearchParams(newQuery)?.toString()
 
-      window.history.replaceState(null, '', `?${queryString}`)
+      // window.history.replaceState(null, '', `?${queryString}`)
+      router.replace(
+        {
+          pathname,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true }
+      )
     },
     [router.query]
   )
@@ -211,7 +219,7 @@ export const ProgramFinder = props => {
         heading={programFinderIndex?.programFinderDetails?.title}
         description={programFinderIndex?.programFinderDetails?.description}
       />
-      <div className="flex items-stretch justify-center gap-x-[15px] bg-grey px-[205px] py-10 md:px-[60px] sm:px-10">
+      <div className="flex items-stretch justify-center gap-x-[15px] bg-grey px-[205px] py-10 md:flex-wrap md:px-[60px] sm:px-10">
         <div className="flex flex-1 items-center gap-x-[20px]">
           <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
             I&apos;m Interested In
