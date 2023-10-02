@@ -176,7 +176,6 @@ export const ProgramFinder = props => {
   }, [router.query])
 
   useEffect(() => {
-    console.log(isReady, 'isReady')
     if (isReady) {
       const { programArea, radius, zipCode, widget } = router.query
       const newValues = {

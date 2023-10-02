@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react'
 import { useQuery, gql } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { organizeProgramsByTaggedAreas, capitalize } from 'utils/programsHelper'
 import { Button } from '@/components/Button'
+import bg from '/public/angles/angled-bg_finder_grey.jpg'
 
 const GET_PROGRAM_AREAS = gql`
   query GetPrograms {
@@ -34,7 +34,14 @@ export const ProgramFinderForm = () => {
   }, [inputValues, router])
 
   return (
-    <div className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:px-[60px] sm:px-10">
+    <div
+      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:px-[60px] sm:px-10"
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'bottom',
+      }}
+    >
       <div className="mb-10 flex-1 basis-full text-center">
         <span className="h2 mb-0">Discover your new career</span>
       </div>
