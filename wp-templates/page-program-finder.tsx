@@ -28,9 +28,10 @@ const getCoordinates = async zipCode => {
 }
 
 export const ProgramFinder = props => {
-  const { data } = props
+  const { data, loading } = props
   const router = useRouter()
-
+  const { isReady, query } = useRouter()
+  const params = query?.params || []
   const menuItems = useMemo(
     () => flatListToHierarchical(data?.menu?.menuItems) || [],
     [data?.menu?.menuItems]
@@ -105,13 +106,14 @@ export const ProgramFinder = props => {
         ...newFilters,
       }
 
-      const queryString = new URLSearchParams(newQuery)
-      console.log(queryString, 'queryString')
-      if (queryString) {
-        window.history.replaceState(null, '', `?${queryString.toString()}`)
-      }
+      const queryString = new URLSearchParams(newQuery).toString()
+
+      window.history.replaceState(null, '', `?${queryString}`)
+      // router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
+      //   shallow: true,
+      // })
     },
-    [router.query]
+    [router]
   )
 
   const filterColleges = useCallback(
@@ -171,7 +173,8 @@ export const ProgramFinder = props => {
   }, [router.query])
 
   useEffect(() => {
-    const fetchCoordinates = async () => {
+    console.log(isReady, 'isReady')
+    if (isReady) {
       const { programArea, radius, zipCode, widget } = router.query
       const newValues = {
         programArea: programArea,
@@ -179,19 +182,26 @@ export const ProgramFinder = props => {
         zipCode: zipCode,
       }
       setInputValues(newValues)
-      if (programArea && radius && zipCode && widget === 'true') {
+      const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
+        console.log(programArea, radius, zipCode, widget, 'query')
         console.log(inputValues, 'inputValues')
-        if (zipCode.length === 5) {
-          const coordinates = await getCoordinates(zipCode)
-          setZipCodeCoordinates(coordinates)
+        if (programArea && radius && zipCode && widget === 'true') {
+          console.log(inputValues, 'inputValues')
+          if (zipCode.length === 5) {
+            const coordinates = await getCoordinates(zipCode)
+            setZipCodeCoordinates(coordinates)
+          }
+          handleSetFilters(newValues)
+          setShouldFilter(true)
         }
-        handleSetFilters(newValues)
-        setShouldFilter(true)
       }
-    }
+      console.log(programArea, radius, zipCode, widget, 'outside async')
+      // setTimeout(() => {
 
-    fetchCoordinates()
-  }, [router.query])
+      fetchCoordinates(programArea, radius, zipCode, widget)
+    }
+    // }, 1000)
+  }, [isReady])
 
   return (
     <Layout
