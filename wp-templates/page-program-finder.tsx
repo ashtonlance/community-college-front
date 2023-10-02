@@ -9,7 +9,7 @@ import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
 import { Button } from '@/components/Button'
 import { getDistance } from 'geolib'
 import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { ProgramCard } from '@/components/Cards'
 
 const getCoordinates = async zipCode => {
   try {
@@ -109,9 +109,6 @@ export const ProgramFinder = props => {
       const queryString = new URLSearchParams(newQuery)?.toString()
 
       window.history.replaceState(null, '', `?${queryString}`)
-      // router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
-      //   shallow: true,
-      // })
     },
     [router.query]
   )
@@ -312,16 +309,10 @@ export const ProgramFinder = props => {
           </div>
         )
       )}
-      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] ">
-        <PaginatedPosts
-          currentPage={parseInt(
-            (Array.isArray(router.query.page)
-              ? router.query.page[0]
-              : router.query.page) || '1'
-          )}
-          postType="programFinder"
-          posts={filteredPrograms}
-        />
+      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20">
+        {filteredPrograms.map((item, index) => (
+          <ProgramCard key={index} card={item} index={index} />
+        ))}
       </div>
       {/* <CTABanner attributes={ctaAttributes} /> */}
     </Layout>

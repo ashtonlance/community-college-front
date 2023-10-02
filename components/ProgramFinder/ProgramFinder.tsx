@@ -25,7 +25,7 @@ export const ProgramFinderForm = () => {
   })
 
   const programAreas = data?.programAreas?.nodes || []
-  console.log(programAreas)
+
   const handleSubmit = useCallback(() => {
     const queryString = new URLSearchParams(inputValues).toString()
     router.push(
@@ -52,6 +52,12 @@ export const ProgramFinderForm = () => {
         >
           <option value="">Program Areas</option>
           {programAreas.map((program: any, i) => {
+            const excludedProgramAreas = [
+              'Dual Enrollment (CCP)',
+              'College Entrance Prep',
+              'Finish High School',
+            ]
+            if (excludedProgramAreas.includes(program?.title)) return null
             return (
               <option key={i} value={program?.title}>
                 {program?.title}
