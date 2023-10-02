@@ -9,7 +9,7 @@ export const ProgramCard = ({ card, index }) => {
       delayAmount={index / 10}
       key={card}
       classes={cn(
-        `flex max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full sm:p-[32px]`
+        `flex max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full`
       )}
     >
       <div className="flex flex-1 flex-col">

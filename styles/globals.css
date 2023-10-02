@@ -190,7 +190,7 @@
 
   .gfield select,
   select {
-    @apply border-[#51525533] active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
+    @apply border-[#51525533] active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px] px-[20px] py-[14px];
   }
 
   .gfield legend,

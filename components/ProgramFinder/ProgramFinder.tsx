@@ -35,7 +35,7 @@ export const ProgramFinderForm = () => {
 
   return (
     <div
-      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:px-[60px] sm:px-10"
+      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:-mt-[9%] md:max-w-[90%] md:p-8"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: 'cover',

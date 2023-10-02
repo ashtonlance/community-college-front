@@ -219,14 +219,17 @@ export const ProgramFinder = props => {
         heading={programFinderIndex?.programFinderDetails?.title}
         description={programFinderIndex?.programFinderDetails?.description}
       />
-      <div className="flex items-stretch justify-center gap-x-[15px] bg-grey px-[205px] py-10 md:flex-wrap md:px-[60px] sm:px-10">
-        <div className="flex flex-1 items-center gap-x-[20px]">
-          <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
+      <div className="flex items-stretch justify-center gap-[15px] bg-grey px-[205px] py-10 md:flex-wrap md:px-[100px] sm:px-10">
+        <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-wrap">
+          <label
+            htmlFor="programArea"
+            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:text-center"
+          >
             I&apos;m Interested In
           </label>
           <select
             id="programArea"
-            className="h-full max-w-[229px] text-darkBeige"
+            className="h-[52px] w-[229px] text-darkBeige  sm:h-auto sm:w-full"
             value={inputValues.programArea}
             onChange={e =>
               setInputValues({ ...inputValues, programArea: e.target.value })
@@ -240,13 +243,16 @@ export const ProgramFinder = props => {
             ))}
           </select>
         </div>
-        <div className="flex flex-1 items-center gap-x-[20px]">
-          <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
+        <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+          <label
+            htmlFor="radius"
+            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+          >
             Within
           </label>
           <select
             id="radius"
-            className="h-full w-[200px] text-darkBeige"
+            className="h-full w-[200px] text-darkBeige sm:h-auto sm:w-full"
             value={inputValues.radius}
             onChange={e =>
               setInputValues({ ...inputValues, radius: e.target.value })
@@ -259,13 +265,16 @@ export const ProgramFinder = props => {
             <option value={40}>40</option>
           </select>
         </div>
-        <div className="flex flex-1 items-center gap-x-[20px]">
-          <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
+        <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+          <label
+            htmlFor="zipCode"
+            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+          >
             Of
           </label>
           <input
             id="zipCode"
-            className="text-input w-[150px]"
+            className="text-input w-[150px] sm:h-auto sm:w-full"
             type="text"
             pattern="[0-9]*"
             placeholder="Zip Code"
@@ -286,7 +295,7 @@ export const ProgramFinder = props => {
           }}
           content={'Search'}
           arrow
-          classes="primary-btn navy"
+          classes="primary-btn navy sm:basis-full"
           isButton
         />
       </div>
@@ -305,7 +314,7 @@ export const ProgramFinder = props => {
           </div>
         )
       )}
-      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20">
+      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-1 md:p-[60px] sm:p-10">
         {filteredPrograms.map((item, index) => (
           <ProgramCard key={index} card={item} index={index} />
         ))}
