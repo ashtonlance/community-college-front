@@ -106,7 +106,7 @@ export const ProgramFinder = props => {
         ...newFilters,
       }
 
-      const queryString = new URLSearchParams(newQuery).toString()
+      const queryString = new URLSearchParams(newQuery)?.toString()
 
       window.history.replaceState(null, '', `?${queryString}`)
       // router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
@@ -184,9 +184,15 @@ export const ProgramFinder = props => {
       setInputValues(newValues)
       const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
         console.log(programArea, radius, zipCode, widget, 'query')
-        console.log(inputValues, 'inputValues')
+        console.log(inputValues, 'inputValues outside if')
         if (programArea && radius && zipCode && widget === 'true') {
-          console.log(inputValues, 'inputValues')
+          console.log(newValues, 'newValues inside if')
+          console.log(inputValues, 'inputValues inside if')
+          setInputValues(newValues)
+          console.log(
+            inputValues,
+            'inputValues inside if again after setInputValues'
+          )
           if (zipCode.length === 5) {
             const coordinates = await getCoordinates(zipCode)
             setZipCodeCoordinates(coordinates)
