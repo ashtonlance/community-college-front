@@ -146,8 +146,12 @@ export const ProgramFinder = props => {
             return withinRadius
           })
         }
+
         setFilteredPrograms(result)
         setShouldFilter(false)
+        if (!result.length) {
+          setShouldFilter(true)
+        }
       } else {
         throw new Error('Missing coordinates')
       }
@@ -181,16 +185,8 @@ export const ProgramFinder = props => {
         zipCode: zipCode,
       }
       const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
-        console.log(programArea, radius, zipCode, widget, 'query')
-        console.log(inputValues, 'inputValues outside if')
         if (programArea && radius && zipCode && widget === 'true') {
-          console.log(newValues, 'newValues inside if')
-          console.log(inputValues, 'inputValues inside if')
           setInputValues(newValues)
-          console.log(
-            inputValues,
-            'inputValues inside if again after setInputValues'
-          )
           if (zipCode.length === 5) {
             const coordinates = await getCoordinates(zipCode)
             setZipCodeCoordinates(coordinates)
@@ -199,12 +195,8 @@ export const ProgramFinder = props => {
           setShouldFilter(true)
         }
       }
-      console.log(programArea, radius, zipCode, widget, 'outside async')
-      // setTimeout(() => {
-
       fetchCoordinates(programArea, radius, zipCode, widget)
     }
-    // }, 1000)
   }, [isReady])
 
   return (
@@ -302,10 +294,7 @@ export const ProgramFinder = props => {
       ) : (
         shouldFilter && (
           <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
-            <div className="h4 mb-0">
-              {'Showing '}
-              {combined.length} {combined.length === 1 ? 'Result' : 'Results'}
-            </div>
+            <div className="h4 mb-0">No Results found</div>
           </div>
         )
       )}
