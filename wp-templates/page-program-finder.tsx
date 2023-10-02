@@ -108,12 +108,12 @@ export const ProgramFinder = props => {
 
       const queryString = new URLSearchParams(newQuery)?.toString()
 
-      window.history.replaceState(null, '', `?${queryString}`)
-      // router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
-      //   shallow: true,
-      // })
+      // window.history.replaceState(null, '', `?${queryString}`)
+      router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
+        shallow: true,
+      })
     },
-    [router]
+    [router.query]
   )
 
   const filterColleges = useCallback(
