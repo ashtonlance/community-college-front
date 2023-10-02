@@ -108,17 +108,17 @@ export const ProgramFinder = props => {
 
       const queryString = new URLSearchParams(newQuery)?.toString()
 
-      // window.history.replaceState(null, '', `?${queryString}`)
-      router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
-        shallow: true,
-      })
+      window.history.replaceState(null, '', `?${queryString}`)
+      // router.push(`${router.asPath?.split('?')?.[0]}?${queryString}`, null, {
+      //   shallow: true,
+      // })
     },
     [router.query]
   )
 
   const filterColleges = useCallback(
     coordinates => {
-      if (shouldFilter) {
+      if (shouldFilter && coordinates) {
         let result = combined // Use the combined list instead of colleges
 
         if (inputValuesRef.current.programArea) {
@@ -151,6 +151,8 @@ export const ProgramFinder = props => {
         }
         setFilteredPrograms(result)
         setShouldFilter(false)
+      } else {
+        throw new Error('Missing coordinates')
       }
     },
     [combined, shouldFilter]
@@ -181,7 +183,6 @@ export const ProgramFinder = props => {
         radius: radius,
         zipCode: zipCode,
       }
-      setInputValues(newValues)
       const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
         console.log(programArea, radius, zipCode, widget, 'query')
         console.log(inputValues, 'inputValues outside if')
