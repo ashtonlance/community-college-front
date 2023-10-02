@@ -105,9 +105,11 @@ export const ProgramFinder = props => {
         ...newFilters,
       }
 
-      const queryString = new URLSearchParams(newQuery).toString()
+      const queryString = new URLSearchParams(newQuery)
 
-      window.history.replaceState(null, '', `?${queryString}`)
+      if (queryString) {
+        window.history.replaceState(null, '', `?${queryString.toString()}`)
+      }
     },
     [router.query]
   )
