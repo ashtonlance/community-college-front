@@ -100,18 +100,15 @@ export const ProgramFinder = props => {
     newFilters => {
       setInputValues(newFilters)
 
-      const { pathname, query } = router
-      console.log(query, 'query')
-      const { wordpressNode, ...restQuery } = query
+      const { page, wordpressNode, ...rest } = router.query
       const newQuery = {
-        ...restQuery,
+        ...rest,
         ...newFilters,
       }
-      console.log(newQuery, 'newQuery')
 
-      if (typeof window !== 'undefined') {
-        const queryString = new URLSearchParams(newQuery).toString()
-        window.history.replaceState({}, '', `${pathname}?${queryString}`)
+      const queryString = new URLSearchParams(newQuery)
+      if (queryString) {
+        window.history.replaceState(null, '', `?${queryString.toString()}`)
       }
     },
     [router.query]
@@ -136,21 +133,37 @@ export const ProgramFinder = props => {
           inputValuesRef.current.zipCode.length === 5 &&
           coordinates
         ) {
-          result = result.filter(program => {
-            const withinRadius = program.colleges.some(college => {
-              const collegeLatitude = college.collegeDetails.map.latitude
-              const collegeLongitude = college.collegeDetails.map.longitude
-              const distance = getDistance(
-                { latitude: collegeLatitude, longitude: collegeLongitude },
-                coordinates
-              )
-              const radiusInMeters = inputValuesRef.current.radius * 1609.334
-              return distance <= radiusInMeters
+          result = result
+            .map(program => {
+              const colleges = program.colleges
+                .map(college => {
+                  const collegeLatitude = college.collegeDetails.map.latitude
+                  const collegeLongitude = college.collegeDetails.map.longitude
+                  const distance = getDistance(
+                    { latitude: collegeLatitude, longitude: collegeLongitude },
+                    coordinates
+                  )
+                  const radiusInMeters =
+                    inputValuesRef.current.radius * 1609.334
+                  const withinRadius = distance <= radiusInMeters
+                  return {
+                    ...college,
+                    distance: distance / 1609.334, // Convert distance to miles
+                    withinRadius,
+                  }
+                })
+                .filter(college => college.withinRadius)
+                .sort((a, b) => a.distance - b.distance) // Sort colleges by distance
+
+              return {
+                ...program,
+                colleges,
+              }
             })
-            return withinRadius
-          })
+            .filter(program => program.colleges.length > 0)
         }
 
+        console.log(result, 'result')
         setFilteredPrograms(result)
         setShouldFilter(false)
         if (!result.length) {
@@ -201,6 +214,19 @@ export const ProgramFinder = props => {
       fetchCoordinates(programArea, radius, zipCode, widget)
     }
   }, [isReady])
+
+  const ctaAttributes = {
+    data: {
+      cta_copy: programFinderIndex?.programFinderDetails?.cta?.heading,
+      button_link: programFinderIndex?.programFinderDetails?.cta?.link?.url,
+      button_target:
+        programFinderIndex?.programFinderDetails?.cta?.link?.target,
+      button_label: programFinderIndex?.programFinderDetails?.cta?.link?.title,
+      background_color: 'gold',
+      type: 'fullWidth',
+      hasCard: true,
+    },
+  }
 
   return (
     <Layout
@@ -259,6 +285,7 @@ export const ProgramFinder = props => {
             <option value={20}>20</option>
             <option value={30}>30</option>
             <option value={40}>40</option>
+            <option value={100}>100</option>
           </select>
         </div>
         <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
@@ -282,7 +309,7 @@ export const ProgramFinder = props => {
         </div>
         <Button
           onClick={async () => {
-            if (inputValues.zipCode.length === 5) {
+            if (inputValues?.zipCode?.length === 5) {
               const coordinates = await getCoordinates(inputValues.zipCode)
               setZipCodeCoordinates(coordinates)
             }
@@ -315,7 +342,7 @@ export const ProgramFinder = props => {
           <ProgramCard key={index} card={item} index={index} />
         ))}
       </div>
-      {/* <CTABanner attributes={ctaAttributes} /> */}
+      <CTABanner attributes={ctaAttributes} />
     </Layout>
   )
 }
