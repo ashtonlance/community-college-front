@@ -241,86 +241,88 @@ export const ProgramFinder = props => {
         heading={programFinderIndex?.programFinderDetails?.title}
         description={programFinderIndex?.programFinderDetails?.description}
       />
-      <div className="flex items-stretch justify-center gap-[15px] bg-grey px-[205px] py-10 md:flex-wrap md:px-[100px] sm:px-10">
-        <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-wrap">
-          <label
-            htmlFor="programArea"
-            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:text-center"
-          >
-            I&apos;m Interested In
-          </label>
-          <select
-            id="programArea"
-            className="h-[52px] w-[229px] text-darkBeige  sm:h-auto sm:w-full"
-            value={inputValues.programArea}
-            onChange={e =>
-              setInputValues({ ...inputValues, programArea: e.target.value })
-            }
-          >
-            <option value="">Program Areas</option>
-            {Object.keys(organizedPrograms).map((key, i) => (
-              <option key={i} value={key}>
-                {capitalize(key)}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
-          <label
-            htmlFor="radius"
-            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
-          >
-            Within
-          </label>
-          <select
-            id="radius"
-            className="h-full w-[200px] text-darkBeige sm:h-auto sm:w-full"
-            value={inputValues.radius}
-            onChange={e =>
-              setInputValues({ ...inputValues, radius: e.target.value })
-            }
-          >
-            <option value="">Mile Radius</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={30}>30</option>
-            <option value={40}>40</option>
-            <option value={100}>100</option>
-          </select>
-        </div>
-        <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
-          <label
-            htmlFor="zipCode"
-            className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
-          >
-            Of
-          </label>
-          <input
-            id="zipCode"
-            className="text-input w-[150px] sm:h-auto sm:w-full"
-            type="text"
-            pattern="[0-9]*"
-            placeholder="Zip Code"
-            value={inputValues.zipCode}
-            onChange={e =>
-              setInputValues({ ...inputValues, zipCode: e.target.value })
-            }
+      <div className="bg-grey">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] md:flex-wrap">
+          <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-wrap">
+            <label
+              htmlFor="programArea"
+              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:text-center"
+            >
+              I&apos;m Interested In
+            </label>
+            <select
+              id="programArea"
+              className="h-[52px] w-[229px] text-darkBeige  sm:h-auto sm:w-full"
+              value={inputValues.programArea}
+              onChange={e =>
+                setInputValues({ ...inputValues, programArea: e.target.value })
+              }
+            >
+              <option value="">Program Areas</option>
+              {Object.keys(organizedPrograms).map((key, i) => (
+                <option key={i} value={key}>
+                  {capitalize(key)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+            <label
+              htmlFor="radius"
+              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+            >
+              Within
+            </label>
+            <select
+              id="radius"
+              className="h-full w-[200px] text-darkBeige sm:h-auto sm:w-full"
+              value={inputValues.radius}
+              onChange={e =>
+                setInputValues({ ...inputValues, radius: e.target.value })
+              }
+            >
+              <option value="">Mile Radius</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={100}>100</option>
+            </select>
+          </div>
+          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+            <label
+              htmlFor="zipCode"
+              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+            >
+              Of
+            </label>
+            <input
+              id="zipCode"
+              className="text-input w-[150px] sm:h-auto sm:w-full"
+              type="text"
+              pattern="[0-9]*"
+              placeholder="Zip Code"
+              value={inputValues.zipCode}
+              onChange={e =>
+                setInputValues({ ...inputValues, zipCode: e.target.value })
+              }
+            />
+          </div>
+          <Button
+            onClick={async () => {
+              if (inputValues?.zipCode?.length === 5) {
+                const coordinates = await getCoordinates(inputValues.zipCode)
+                setZipCodeCoordinates(coordinates)
+              }
+              handleSetFilters(inputValues)
+              setShouldFilter(true)
+            }}
+            content={'Search'}
+            arrow
+            classes="primary-btn navy sm:basis-full"
+            isButton
           />
         </div>
-        <Button
-          onClick={async () => {
-            if (inputValues?.zipCode?.length === 5) {
-              const coordinates = await getCoordinates(inputValues.zipCode)
-              setZipCodeCoordinates(coordinates)
-            }
-            handleSetFilters(inputValues)
-            setShouldFilter(true)
-          }}
-          content={'Search'}
-          arrow
-          classes="primary-btn navy sm:basis-full"
-          isButton
-        />
       </div>
       {filteredPrograms.length > 0 ? (
         <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
@@ -337,7 +339,7 @@ export const ProgramFinder = props => {
           </div>
         )
       )}
-      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-2 md:p-[60px] sm:grid-cols-1 sm:p-10">
+      <div className="mx-auto grid max-w-[1240px] grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-2 md:p-[60px] sm:grid-cols-1 sm:p-10">
         {filteredPrograms.map((item, index) => (
           <ProgramCard key={index} card={item} index={index} />
         ))}
