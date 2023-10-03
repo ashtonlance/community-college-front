@@ -106,17 +106,19 @@ export const ProgramFinder = props => {
         ...newFilters,
       }
 
-      const queryString = new URLSearchParams(newQuery)?.toString()
+      // router.replace(
+      //   {
+      //     pathname,
+      //     query: newQuery,
+      //   },
+      //   undefined,
+      //   { shallow: true }
+      // )
 
-      // window.history.replaceState(null, '', `?${queryString}`)
-      router.replace(
-        {
-          pathname,
-          query: newQuery,
-        },
-        undefined,
-        { shallow: true }
-      )
+      if (typeof window !== 'undefined') {
+        const queryString = new URLSearchParams(newQuery).toString()
+        window.history.replaceState({}, '', `${pathname}?${queryString}`)
+      }
     },
     [router.query]
   )
