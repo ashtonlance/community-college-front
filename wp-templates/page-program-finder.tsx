@@ -339,10 +339,12 @@ export const ProgramFinder = props => {
           </div>
         )
       )}
-      <div className="mx-auto grid max-w-[1240px] grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-2 md:p-[60px] sm:grid-cols-1 sm:p-10">
-        {filteredPrograms.map((item, index) => (
-          <ProgramCard key={index} card={item} index={index} />
-        ))}
+      <div className=" bg-white">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-3 gap-5 px-[100px] pb-20 pt-0 md:grid-cols-2 md:px-[60x] sm:grid-cols-1 sm:px-[40px]">
+          {filteredPrograms.map((item, index) => (
+            <ProgramCard key={index} card={item} index={index} />
+          ))}
+        </div>
       </div>
       <CTABanner attributes={ctaAttributes} />
     </Layout>
