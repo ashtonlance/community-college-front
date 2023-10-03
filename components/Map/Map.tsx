@@ -10,7 +10,6 @@ import { FadeIn } from '@/components/FadeIn'
 const MapInternal = GoogleMap as any
 
 export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
-
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -58,7 +57,11 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
   return isLoaded ? (
     <FadeIn>
       <div
-        className={`w-full bg-grey ${!isEmbed ? 'px-[100px] pb-[60px]' : null}`}
+        className={`w-full bg-grey ${
+          !isEmbed
+            ? 'px-[100px] pb-[60px] md:px-[60px] md:py-[40px] sm:px-5 sm:py-0'
+            : null
+        }`}
       >
         <MapInternal
           mapContainerStyle={containerStyle}

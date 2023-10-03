@@ -156,9 +156,9 @@ export default function CollegesArchive(props: CollegesIndexProps) {
         description={collegesIndex?.heroDescription}
       />
       <Map coordinates={getCoordinates(filteredColleges)} />
-      <div className="flex justify-center gap-x-[15px] px-[205px] py-10">
+      <div className="wrapper-default-inner-pages flex flex-wrap justify-center gap-[15px]">
         <select
-          className="flex-1 text-darkBeige"
+          className="max-w-full flex-1 text-darkBeige"
           onChange={e => setFilters({ ...filters, county: e.target.value })}
         >
           <option value="">Select a county</option>
@@ -196,7 +196,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
           <option value="DESC">Name Descending</option>
         </select>
       </div>
-      <div className="grid grid-cols-3 gap-5 bg-grey px-[100px] py-[10px] ">
+      <div className="wrapper-default-inner-pages grid grid-cols-3 gap-5 bg-grey sm:flex sm:flex-wrap">
         <PaginatedPosts
           currentPage={currentPage}
           postType="colleges"

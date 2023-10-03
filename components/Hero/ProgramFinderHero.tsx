@@ -36,11 +36,6 @@ export const ProgramFinderHero = ({ description, heading }: HeroPropsType) => {
   return (
     <div
       className={`relative flex h-fit justify-center bg-grey md:h-fit md:flex-col sm:items-center`}
-      // style={{
-      //   backgroundImage: `url(${bg.src})`,
-      //   backgroundPosition: 'center',
-      //   backgroundSize: 'cover',
-      // }}
     >
       <div
         className="wrapper-default-inner-pages flex w-full flex-col

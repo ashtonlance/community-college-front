@@ -15,7 +15,7 @@ export const Pagination = (props: PaginationProps) => {
   const totalPages = Math.ceil(total / pageSize)
 
   return (
-    <div className="pagination col-span-3 flex w-full items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:pb-10 sm:pt-8">
+    <div className="pagination col-span-3 flex w-full flex-wrap items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:pb-10 sm:pt-8">
       <span
         className={`${
           currentPage <= 1 && 'inactive-arrow'
