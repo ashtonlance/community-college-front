@@ -168,9 +168,9 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
         heading={programsIndex?.heroTitle}
         description={programsIndex?.heroDescription}
       />
-      <div className="flex flex-wrap justify-center gap-x-[15px] bg-grey px-[205px] py-10 md:px-[60px] sm:px-10">
+      <div className="wrapper-default-inner-pages flex flex-wrap justify-center gap-[15px] bg-grey">
         <select
-          className="flex-1 text-darkBeige"
+          className="max-w-full flex-1 text-darkBeige"
           onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
         >
           <option value="">Degree Type</option>
