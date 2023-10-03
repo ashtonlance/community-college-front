@@ -168,27 +168,31 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
         heading={programsIndex?.heroTitle}
         description={programsIndex?.heroDescription}
       />
-      <div className="wrapper-default-inner-pages flex flex-wrap justify-center gap-[15px] bg-grey">
-        <select
-          className="max-w-full flex-1 text-darkBeige"
-          onChange={e => setFilters({ ...filters, degreeType: e.target.value })}
-        >
-          <option value="">Degree Type</option>
+      <div className="bg-grey">
+        <div className="wrapper-default-inner-pages mx-auto flex flex-wrap justify-center gap-[15px]">
+          <select
+            className="max-w-full flex-1 text-darkBeige"
+            onChange={e =>
+              setFilters({ ...filters, degreeType: e.target.value })
+            }
+          >
+            <option value="">Degree Type</option>
 
-          {degreeTypes.map((type, i) =>
-            type !== null ? (
-              <option key={i} value={type}>
-                {capitalize(type)}
-              </option>
-            ) : null
-          )}
-        </select>
-        <input
-          className="text-input"
-          type="text"
-          placeholder="Search by keyword"
-          onChange={e => setFilters({ ...filters, keyword: e.target.value })}
-        />
+            {degreeTypes.map((type, i) =>
+              type !== null ? (
+                <option key={i} value={type}>
+                  {capitalize(type)}
+                </option>
+              ) : null
+            )}
+          </select>
+          <input
+            className="text-input"
+            type="text"
+            placeholder="Search by keyword"
+            onChange={e => setFilters({ ...filters, keyword: e.target.value })}
+          />
+        </div>
       </div>
       <div className="flex items-center justify-center bg-grey">
         <div>
