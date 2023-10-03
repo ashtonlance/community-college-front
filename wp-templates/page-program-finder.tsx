@@ -101,19 +101,13 @@ export const ProgramFinder = props => {
       setInputValues(newFilters)
 
       const { pathname, query } = router
+      console.log(query, 'query')
+      const { wordpressNode, ...restQuery } = query
       const newQuery = {
-        ...query,
+        ...restQuery,
         ...newFilters,
       }
-
-      // router.replace(
-      //   {
-      //     pathname,
-      //     query: newQuery,
-      //   },
-      //   undefined,
-      //   { shallow: true }
-      // )
+      console.log(newQuery, 'newQuery')
 
       if (typeof window !== 'undefined') {
         const queryString = new URLSearchParams(newQuery).toString()
