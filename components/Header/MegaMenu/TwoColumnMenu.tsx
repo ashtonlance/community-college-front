@@ -43,6 +43,16 @@ export const TwoColumnMenu = ({
         />
         <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="border-r-solid flex max-h-[425px] flex-1 flex-col flex-wrap justify-around gap-y-6 border-r-[1.5px] border-r-lightBlue md:border-0 md:text-left">
+            {parentItem ? (
+              <div className="flex flex-col pr-[40px]" key={parentItem.label}>
+                <Link
+                  className="links-sub-nav text-white hover:text-lightBlue"
+                  href={parentItem?.url || ''}
+                >
+                  {`${parentItem.label} Overview`}
+                </Link>
+              </div>
+            ) : null}
             {subItems?.map(subItem => {
               const secondaryLinks = subItem?.children?.length > 0
               return (
@@ -50,7 +60,9 @@ export const TwoColumnMenu = ({
                   <Link
                     className={cn(
                       `links-sub-nav ${
-                        secondaryLinks ? 'mb-[14px] md:mb-[10px] sm:mb-[8px]' : null
+                        secondaryLinks
+                          ? 'mb-[14px] md:mb-[10px] sm:mb-[8px]'
+                          : null
                       }`
                     )}
                     href={subItem?.url || ''}
@@ -75,14 +87,11 @@ export const TwoColumnMenu = ({
             })}
           </div>
 
-          <div className="flex w-[35%] flex-col justify-center items-center gap-8 pl-[80px] text-center md:hidden">
+          <div className="flex w-[35%] flex-col items-center justify-center gap-8 pl-[80px] text-center md:hidden">
             <span className="h3 text-white">
               Need help finding the right program?
             </span>
-            <Link
-              href="/programs"
-              className="secondary-btn gold"
-            >
+            <Link href="/programs" className="secondary-btn gold">
               Use Our Program Finder
             </Link>
           </div>

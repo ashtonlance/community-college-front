@@ -79,7 +79,7 @@ export default function SingleProgram(props) {
       {relatedPrograms?.relatedPrograms?.nodes?.length ? (
         <div className="p-[100px] md:p-[60px] sm:p-[40px] ">
           <h2 className="h3 mb-10 flex items-center gap-3">
-            Programs in This Program Area{' '}
+            Related Programs{' '}
             <span className="h5 text-darkBeige">{relatedPrograms?.length}</span>
           </h2>
           <ul className="grid grid-cols-5 gap-10 md:grid-cols-4 sm:grid-cols-2">
