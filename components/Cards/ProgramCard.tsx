@@ -40,14 +40,14 @@ export const ProgramCard = ({ card, index }) => {
               {card?.colleges?.slice(0, 3).map((college, i) => (
                 <div key={i} className="body-regular text-[14px] text-darkGrey">
                   {college.distance ? (
-                    <span>
+                    <span className="my-1">
                       <Link
                         href={college.uri ?? ''}
-                        className="body-regular text-[14px]  font-bold text-navy hover:text-darkBeige"
+                        className="body-regular w-full font-bold text-navy hover:text-darkBeige"
                       >
                         {college.title}
                       </Link>{' '}
-                      - {Math.ceil(college.distance)}mi. away
+                      <div>{Math.ceil(college.distance)}mi. away</div>
                     </span>
                   ) : null}
                 </div>
