@@ -242,7 +242,7 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] md:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] pt-0 md:flex-wrap">
           <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-wrap">
             <label
               htmlFor="programArea"
