@@ -337,7 +337,7 @@ export const ProgramFinder = props => {
           </div>
         )
       )}
-      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-1 md:p-[60px] sm:p-10">
+      <div className="grid grid-cols-3 gap-5 bg-white px-[100px] py-[10px] pb-20 md:grid-cols-2 md:p-[60px] sm:grid-cols-1 sm:p-10">
         {filteredPrograms.map((item, index) => (
           <ProgramCard key={index} card={item} index={index} />
         ))}
