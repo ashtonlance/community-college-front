@@ -19,6 +19,7 @@ import SingleProgram from './single-program'
 import StaffIndexPage from './page-staff'
 import ProgramFinder from './page-program-finder'
 import AnnualReportsPage from './page-annual-reports'
+import SingleAnnualReport from './single-annual-reports'
 
 const templates = {
   'front-page': FrontPage,
@@ -42,6 +43,7 @@ const templates = {
   'page-staff-directory': StaffIndexPage,
   'page-program-finder': ProgramFinder,
   'page-annual-reports': AnnualReportsPage,
+  'single-annual-reports': SingleAnnualReport,
 }
 
 export default templates
