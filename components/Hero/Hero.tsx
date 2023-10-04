@@ -22,7 +22,7 @@ type HeroAttributesProps = {
       background_image_position?: string
       background_video_file_or_url?: string
       background_video_uploaded?: number
-      show_program_finder?: boolean
+      show_program_finder?: string
     }
   }
 }
@@ -39,7 +39,7 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
   const subheading = attributes.data['sub-heading']
   const description = attributes.data.description
   const position = attributes.data.background_image_position
-  const showProgramFinder = attributes?.data?.show_program_finder || false
+  const showProgramFinder = attributes?.data?.show_program_finder || 'false'
 
   if (videoType == 'file') {
     bgVideo = attributes?.data?.background_video_uploaded
@@ -71,7 +71,7 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
             <ScrollIndicator emptyBg={emptyBg} />
           </div>
 
-          {showProgramFinder && <ProgramFinder />}
+          {showProgramFinder === 'true' && <ProgramFinder />}
         </>
       )
     case 'default':

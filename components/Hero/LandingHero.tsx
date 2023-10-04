@@ -20,7 +20,7 @@ export type HeroPropsType = {
   email?: string
   link?: string
   isCollegeSingle?: boolean
-  showProgramFinder?: boolean
+  showProgramFinder?: string
 }
 
 export const LandingHero = ({
@@ -42,7 +42,7 @@ export const LandingHero = ({
       className={cn(
         `flex h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
           !bgImg && !bgVideo && `bg-${bgColor}'}`
-        } ${showProgramFinder ? 'pb-[335px]' : ''}`
+        } ${showProgramFinder === 'true' ? 'pb-[335px]' : ''}`
       )}
       suppressHydrationWarning
     >

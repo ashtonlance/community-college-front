@@ -5,12 +5,20 @@ import {
   NumberedMemos,
   NumberedMemosHeading,
   ProgramCard,
+  AnnualReports,
+  AnnualReportsHeading,
+  StaffCards,
+  StaffCardsHeading,
 } from '@/components/Cards'
-import { StaffCards, StaffCardsHeading } from '../Cards/StaffCards'
 
 const PAGE_SIZE = 9
 
-type PostType = 'numberedMemo' | 'colleges' | 'programFinder' | 'staff'
+type PostType =
+  | 'numberedMemo'
+  | 'colleges'
+  | 'programFinder'
+  | 'staff'
+  | 'annualReports'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -35,8 +43,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
 
   return (
     <>
-      {props.postType == 'numberedMemo' && <NumberedMemosHeading />}
-      {props.postType == 'staff' && <StaffCardsHeading />}
+      {props.postType === 'numberedMemo' && <NumberedMemosHeading />}
+      {props.postType === 'staff' && <StaffCardsHeading />}
+      {props.postType === 'annualReports' && <AnnualReportsHeading />}
 
       {items.map((item, index) =>
         postType === 'colleges' ? (
@@ -47,6 +56,8 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
           <StaffCards key={index} card={item} />
         ) : postType === 'programFinder' ? (
           <ProgramCard key={index} card={item} index={index} />
+        ) : postType === 'annualReports' ? (
+          <AnnualReports key={index} card={item} />
         ) : null
       )}
 

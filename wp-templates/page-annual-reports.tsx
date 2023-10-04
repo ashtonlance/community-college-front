@@ -9,7 +9,7 @@ import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 
-export default function NumberedMemosPage({ data, loading, error }) {
+export default function AnnualReportsPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -25,9 +25,9 @@ export default function NumberedMemosPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
 
-  const numberedMemos = useMemo(
-    () => data?.numberedMemos?.nodes || [],
-    [data?.numberedMemos?.nodes]
+  const annualReports = useMemo(
+    () => data?.annualReports?.nodes || [],
+    [data?.annualReports?.nodes]
   )
 
   const [filters, setFilters] = useState({
@@ -37,32 +37,21 @@ export default function NumberedMemosPage({ data, loading, error }) {
     orderBy: { field: 'DATE', order: 'ASC' },
   })
 
-  const categories = useMemo(
-    () => [
-      ...new Set(
-        numberedMemos.flatMap(memo =>
-          memo.numberedMemoCategories.nodes.map(category => category.name)
-        )
-      ),
-    ],
-    [numberedMemos]
-  )
-
   const years = useMemo(
     () => [
       ...new Set(
-        numberedMemos.map(memo => memo.numberedMemo?.date?.split('/')[2])
+        annualReports.map(report => report.annualReport?.dueDate?.split('/')[2])
       ),
     ],
-    [numberedMemos]
+    [annualReports]
   )
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
+  const [filteredAnnualReports, setFilteredAnnualReports] =
+    useState(annualReports)
 
-  const filterNumberedMemos = useCallback(() => {
-    let result = numberedMemos
-
+  const filterAnnualReports = useCallback(() => {
+    let result = annualReports
     if (debouncedFilters.category) {
       result = result.filter(memo =>
         memo.numberedMemoCategories.nodes.name
@@ -72,14 +61,14 @@ export default function NumberedMemosPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.year) {
-      result = result.filter(memo =>
-        memo.numberedMemo.date.includes(debouncedFilters.year)
+      result = result.filter(annualReport =>
+        annualReport.annualReport.dueDate.includes(debouncedFilters.year)
       )
     }
 
     if (debouncedFilters.keyword) {
-      result = result.filter(memo =>
-        memo.numberedMemo.subject
+      result = result.filter(annualReport =>
+        annualReport.annualReport.title
           .toLowerCase()
           .includes(debouncedFilters.keyword.toLowerCase())
       )
@@ -87,37 +76,32 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort(
-        (a, b) => b.numberedMemo?.date?.localeCompare(a.numberedMemo?.date)
+        (a, b) => b.annualReport.dueDate?.localeCompare(a.annualReport.dueDate)
       )
     } else {
       result = result.sort(
-        (a, b) => a.numberedMemo?.date?.localeCompare(b.numberedMem?.date)
+        (a, b) => a.annualReport.dueDate?.localeCompare(b.annualReport.dueDate)
       )
     }
 
-    setFilteredMemos(result)
+    setFilteredAnnualReports(result)
   }, [
     debouncedFilters.category,
     debouncedFilters.keyword,
     debouncedFilters.orderBy.order,
     debouncedFilters.year,
-    numberedMemos,
+    annualReports,
   ])
 
   useEffect(() => {
-    filterNumberedMemos()
-  }, [debouncedFilters, filterNumberedMemos])
+    filterAnnualReports()
+  }, [debouncedFilters, annualReports])
 
   if (loading) {
     return <>Loading...</>
   }
 
   const filtersToGenerateDropdown = [
-    {
-      name: 'category',
-      options: categories,
-      type: 'select',
-    },
     {
       name: 'year',
       options: years,
@@ -155,8 +139,8 @@ export default function NumberedMemosPage({ data, loading, error }) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="numberedMemo"
-            posts={filteredMemos}
+            postType="annualReports"
+            posts={filteredAnnualReports}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -165,12 +149,12 @@ export default function NumberedMemosPage({ data, loading, error }) {
   )
 }
 
-NumberedMemosPage.variables = ({ uri }) => {
+AnnualReportsPage.variables = ({ uri }) => {
   return { uri }
 }
 
-NumberedMemosPage.query = gql`
-  query numberedMemos($uri: ID!) {
+AnnualReportsPage.query = gql`
+  query AnnualReports($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
       slug
@@ -188,27 +172,21 @@ NumberedMemosPage.query = gql`
       }
     }
 
-    numberedMemos(where: { orderby: { field: DATE, order: ASC } }) {
+    annualReports(where: { orderby: { field: DATE, order: ASC } }) {
       nodes {
-        numberedMemo {
-          body
-          date
-          memoFrom
-          number
-          subject
-          memoTo
+        annualReport {
+          additionalInformation
+          dueDate
+          title
+          updatedDate
         }
-        numberedMemoCategories {
-          nodes {
-            name
-          }
-        }
-        numberedMemoId
+        annualReportId
         uri
+        date
       }
     }
 
-    menu(id: "System Office", idType: NAME) {
+    menu(id: "faculty-and-staff", idType: LOCATION) {
       menuItems(first: 200) {
         nodes {
           id

@@ -63,6 +63,7 @@ export const ProgramFinderForm = () => {
               'Dual Enrollment (CCP)',
               'College Entrance Prep',
               'Finish High School',
+              'Sports & Recreation',
             ]
             if (excludedProgramAreas.includes(program?.title)) return null
             return (
@@ -90,6 +91,7 @@ export const ProgramFinderForm = () => {
           <option value={20}>20</option>
           <option value={30}>30</option>
           <option value={40}>40</option>
+          <option value={100}>100</option>
         </select>
       </div>
       <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">

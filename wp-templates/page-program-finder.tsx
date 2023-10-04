@@ -467,3 +467,5 @@ ProgramFinder.query = gql`
     }
   }
 `
+
+export default ProgramFinder
