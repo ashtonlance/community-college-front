@@ -9,6 +9,7 @@ import {
   AnnualReportsHeading,
   StaffCards,
   StaffCardsHeading,
+  NewsCard,
 } from '@/components/Cards'
 
 const PAGE_SIZE = 9
@@ -19,6 +20,7 @@ type PostType =
   | 'programFinder'
   | 'staff'
   | 'annualReports'
+  | 'news'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -58,6 +60,13 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
           <ProgramCard key={index} card={item} index={index} />
         ) : postType === 'annualReports' ? (
           <AnnualReports key={index} card={item} />
+        ) : postType === 'news' ? (
+          <NewsCard
+            key={index}
+            card={item}
+            currentPage={props.currentPage}
+            index={index}
+          />
         ) : null
       )}
 

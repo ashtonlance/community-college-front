@@ -26,7 +26,7 @@ export const Pagination = (props: PaginationProps) => {
       >
         <Arrow className="h-5 w-5 rotate-180 text-darkBeige" />
       </span>
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
         {Array.from({ length: totalPages }).map((_, i) => (
           <p
             key={i}
