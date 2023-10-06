@@ -6,6 +6,7 @@ import {
   getFeaturesCardStyle,
 } from '../../utils/attributesToClassNames'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const FeaturesCard = ({
   size,
@@ -15,6 +16,7 @@ export const FeaturesCard = ({
   cardStyle,
   optionalLink = null,
   bgColor,
+  image,
 }) => {
   const cardFinalStyle =
     cardStyle == 'black' ? getFeaturesCardStyle(cardStyle) : bgColor
@@ -24,6 +26,11 @@ export const FeaturesCard = ({
         alignment
       )}  ${cardFinalStyle} rounded-xl p-[40px] md:w-full sm:p-[32px]`}
     >
+      {image?.url && (
+        <div className="mb-[20px]">
+          <Image src={image?.url} width={400} height={200} alt={heading} />
+        </div>
+      )}
       <h4 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px]`}>
         {heading}
       </h4>

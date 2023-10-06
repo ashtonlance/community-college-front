@@ -27,7 +27,6 @@ export const TextAndImageBlock = ({ attributes }) => {
   const linkTitle = attributes?.data?.link?.title
   const linkUrl = attributes?.data?.link?.url
   const bgColor = attributes?.data?.background_color
-
   const { loading, error, data } = useQuery(GET_MEDIA_FILE, {
     variables: { mediaID },
   })

@@ -111,7 +111,7 @@ const GET_POST = gql`
           }
         }
       }
-      ... on News {
+      ... on NewsItem {
         id
         title
         newsCategories {
@@ -153,13 +153,20 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
       className={`flex w-full ${backgroundColor} overflow-hidden rounded-xl`}
     >
       {imgUrl ? (
-        <Image                   unoptimized={true}
-        src={imgUrl} alt={title} height={191} width={210} />
+        <Image
+          src={imgUrl}
+          alt={title}
+          height={191}
+          width={210}
+          className="object-cover object-center"
+        />
       ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
         <div className="flex items-center justify-center gap-[10px] text-darkGrey">
-          <p className="body-regular font-bold text-darkGrey capitalize">{category}</p>•
-          <p className="body-regular font-bold text-darkGrey">{date}</p>
+          <p className="body-regular font-bold capitalize text-darkGrey">
+            {category}
+          </p>
+          •<p className="body-regular font-bold text-darkGrey">{date}</p>
         </div>
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>
 
@@ -179,10 +186,10 @@ export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
   const { loading, error, data } = useQuery(GET_POST, {
     variables: { resourceId },
   })
-  if(loading){
-    return;
+  if (loading) {
+    return
   }
-  if(error){
+  if (error) {
     console.log(error)
   }
 

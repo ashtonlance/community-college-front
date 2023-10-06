@@ -35,6 +35,7 @@ export const FeaturesAndBenefits = ({
               bgColor={bgColorCard}
               key={card}
               heading={attributes.data[`card_${card}_heading`]}
+              image={attributes.data[`card_${card}_image`] || null}
               content={attributes.data[`card_${card}_body_copy`]}
               size={cards}
               alignment={attributes.data[`card_${card}_text_alignment`]}
