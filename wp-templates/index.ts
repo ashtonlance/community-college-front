@@ -22,6 +22,7 @@ import AnnualReportsPage from './page-annual-reports'
 import SingleAnnualReport from './single-annual-reports'
 import NewsPage from './page-news'
 import SingleNews from './single-news'
+import BoardMembersPage from './page-board-members'
 
 const templates = {
   'front-page': FrontPage,
@@ -48,6 +49,7 @@ const templates = {
   'single-annual-reports': SingleAnnualReport,
   'page-news': NewsPage,
   'single-news': SingleNews,
+  'page-board-members': BoardMembersPage,
 }
 
 export default templates

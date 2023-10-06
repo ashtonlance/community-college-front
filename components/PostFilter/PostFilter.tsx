@@ -19,7 +19,7 @@ export const PostFilter = ({
               <option className="capitalize" value="">
                 Select a {filterOption.name}
               </option>
-              {filterOption.options.map(option => (
+              {filterOption?.options?.map(option => (
                 <option key={option} value={option}>
                   {option}
                 </option>
