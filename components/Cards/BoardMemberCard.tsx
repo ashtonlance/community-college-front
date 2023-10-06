@@ -25,9 +25,9 @@ export const BoardMemberCard: React.FC<BoardMemberCardProps> = ({ card }) => {
           />
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
-          {card.boardMember?.role && (
+          {card.boardMember?.appointment && (
             <div className="mb-1 text-[18px] font-bold text-darkGrey">
-              {card.boardMember?.role}
+              {card.boardMember?.appointment}
             </div>
           )}
           <div className="h3 mb-[15px] font-condensed text-[24px]">
