@@ -70,9 +70,7 @@ export default function SingleBoardMember(props) {
             backgroundSize: 'cover',
           }}
           className="flex justify-between px-52 py-20 md:flex-col md:gap-y-[32px] md:px-[100px] md:py-[60px] sm:gap-y-[24px] sm:p-[40px]"
-        >
-          <SharePost postUrl={pageData?.link} />
-        </div>
+        ></div>
       </div>
     </Layout>
   )

@@ -17,7 +17,7 @@ export default function Page(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-
+  console.log(props, 'props')
   if (props.loading) {
     return <>Loading...</>
   }
@@ -41,16 +41,30 @@ export default function Page(props) {
   )
 }
 
-Page.variables = ({ databaseId }, ctx) => {
+function getFirstPathPart(slug: string | undefined): string {
+  if (!slug) {
+    return 'students'
+  }
+
+  const parts = slug.split('/')
+
+  return parts.length > 0 ? parts[1] : 'students'
+}
+
+Page.variables = (props, ctx) => {
+  const { databaseId } = props
+  let { uri } = props
+  let slug = getFirstPathPart(uri)
   return {
     databaseId,
+    slug,
     asPreview: ctx?.asPreview,
   }
 }
 
 Page.query = gql`
   ${Header.fragments.entry}
-  query Page($databaseId: ID!, $asPreview: Boolean = false) {
+  query Page($databaseId: ID!, $asPreview: Boolean = false, $slug: ID!) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
       title
@@ -64,7 +78,7 @@ Page.query = gql`
         }
       }
     }
-    menu(id: "students", idType: SLUG) {
+    menu(id: $slug, idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
