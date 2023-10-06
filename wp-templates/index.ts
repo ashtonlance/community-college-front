@@ -21,6 +21,7 @@ import ProgramFinder from './page-program-finder'
 import AnnualReportsPage from './page-annual-reports'
 import SingleAnnualReport from './single-annual-reports'
 import NewsPage from './page-news'
+import SingleNews from './single-news'
 
 const templates = {
   'front-page': FrontPage,
@@ -46,6 +47,7 @@ const templates = {
   'page-annual-reports': AnnualReportsPage,
   'single-annual-reports': SingleAnnualReport,
   'page-news': NewsPage,
+  'single-news': SingleNews,
 }
 
 export default templates
