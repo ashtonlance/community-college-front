@@ -10,7 +10,7 @@ import bg from 'assets/imgs/angled-bg-white.png'
 
 export default function SingleAnnualReport(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.annualReport
+  const pageData = props.data?.annualReportingPlan
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
@@ -74,7 +74,7 @@ SingleAnnualReport.variables = ({ databaseId }, ctx) => {
 SingleAnnualReport.query = gql`
   ${Header.fragments.entry}
   query GetAnnualReport($databaseId: ID!) {
-    annualReport(id: $databaseId, idType: DATABASE_ID) {
+    annualReportingPlan(id: $databaseId, idType: DATABASE_ID) {
       id
       title
       link

@@ -13,7 +13,6 @@ export default function AnnualReportsPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
   const menuItems = data?.menu?.menuItems || []
   const pageData = data?.page
   const preFooterContent = data?.menus?.nodes[0]
@@ -26,8 +25,8 @@ export default function AnnualReportsPage({ data, loading, error }) {
   const settings = data?.settings?.siteSettings || []
 
   const annualReports = useMemo(
-    () => data?.annualReports?.nodes || [],
-    [data?.annualReports?.nodes]
+    () => data?.annualReportingPlans?.nodes || [],
+    [data?.annualReportingPlans?.nodes]
   )
 
   const [filters, setFilters] = useState({
@@ -149,13 +148,13 @@ export default function AnnualReportsPage({ data, loading, error }) {
   )
 }
 
-AnnualReportsPage.variables = ({ uri }) => {
-  return { uri }
+AnnualReportsPage.variables = ({ uri, id }) => {
+  return { uri, id }
 }
 
 AnnualReportsPage.query = gql`
-  query AnnualReports($uri: ID!) {
-    page(id: $uri, idType: URI) {
+  query AnnualReports($id: ID!) {
+    page(id: $id, idType: ID) {
       id
       slug
       status
@@ -172,7 +171,7 @@ AnnualReportsPage.query = gql`
       }
     }
 
-    annualReports(where: { orderby: { field: DATE, order: ASC } }) {
+    annualReportingPlans(where: { orderby: { field: DATE, order: ASC } }) {
       nodes {
         annualReport {
           additionalInformation
@@ -180,7 +179,7 @@ AnnualReportsPage.query = gql`
           title
           updatedDate
         }
-        annualReportId
+        annualReportingPlanId
         uri
         date
       }
