@@ -21,6 +21,15 @@ const GET_POST = gql`
           }
         }
       }
+      ... on Page {
+        id
+        title
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+      }
       ... on DataDashboard {
         id
         title
@@ -147,7 +156,6 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
   const postUrl = props.sourceUrl
   const readMoreLabel = props.readMoreLabel
   const backgroundColor = props.backgroundColor
-
   return (
     <div
       className={`flex w-full ${backgroundColor} overflow-hidden rounded-xl`}
@@ -200,7 +208,6 @@ export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
   const title = data?.contentNode?.title
   const postUrl = data?.contentNode?.link || ''
   const readMoreLabel = getLabelFromCategory(category)
-
   return (
     <ResourcePresentational
       imgUrl={imgUrl}
