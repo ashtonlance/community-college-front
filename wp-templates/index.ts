@@ -40,6 +40,7 @@ const templates = {
   'page-employers': EmployersPage,
   'page-businesses': EmployersPage,
   'page-system-office': SystemOfficePage,
+  'page-about-us': SystemOfficePage,
   'page-programs': ProgramsArchive,
   'page-numbered-memos': NumberedMemosPage,
   'single-program-areas': SingleProgramArea,

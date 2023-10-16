@@ -48,6 +48,10 @@ function getFirstPathPart(slug: string | undefined): string {
 
   const parts = slug.split('/')
 
+  if (parts.length > 0 && parts[0] === 'businesses') {
+    return 'employers'
+  }
+
   if (parts.length > 0 && parts[0] === 'about-us') {
     return 'system-office'
   }

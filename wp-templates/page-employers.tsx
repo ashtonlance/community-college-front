@@ -64,7 +64,7 @@ EmployersPage.query = gql`
         }
       }
     }
-    menu(id: "Employers", idType: NAME) {
+    menu(id: "Businesses", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
