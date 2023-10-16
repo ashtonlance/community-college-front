@@ -171,7 +171,10 @@ AnnualReportsPage.query = gql`
       }
     }
 
-    annualReportingPlans(where: { orderby: { field: DATE, order: ASC } }) {
+    annualReportingPlans(
+      first: 100
+      where: { orderby: { field: DATE, order: ASC } }
+    ) {
       nodes {
         annualReport {
           additionalInformation

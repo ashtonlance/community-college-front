@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery } from '@apollo/client'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
@@ -12,9 +12,9 @@ const GET_BACKGROUND_VIDEO_FILE = gql`
   }
 `
 
-export const BackgroundVideoURL = ({url}:{url:string}) => {
+export const BackgroundVideoURL = ({ url }: { url: string }) => {
   return (
-    <div className="absolute w-full">
+    <div className="absolute w-full bg-navy">
       <div className="relative pt-[66.00%]">
         <ReactPlayer
           muted
@@ -31,8 +31,10 @@ export const BackgroundVideoURL = ({url}:{url:string}) => {
   )
 }
 
-export const BackgroundVideoFile = ({databaseId}) => {
-  const { loading, error, data } = useQuery(GET_BACKGROUND_VIDEO_FILE, {variables: { databaseId },});
+export const BackgroundVideoFile = ({ databaseId }) => {
+  const { loading, error, data } = useQuery(GET_BACKGROUND_VIDEO_FILE, {
+    variables: { databaseId },
+  })
 
   if (loading) {
     return
@@ -41,7 +43,7 @@ export const BackgroundVideoFile = ({databaseId}) => {
     console.log({ error })
   }
   if (data) {
-    const url = data?.mediaItem?.link;
+    const url = data?.mediaItem?.link
     return <BackgroundVideoURL url={url} />
   }
 }
