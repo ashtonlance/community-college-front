@@ -48,21 +48,18 @@ function getFirstPathPart(slug: string | undefined): string {
 
   const parts = slug.split('/')
 
-  if (parts.length > 0 && parts[0] === 'businesses') {
-    return 'employers'
-  }
-
-  if (parts.length > 0 && parts[0] === 'about-us') {
+  if (parts.length > 0 && parts[1] === 'about-us') {
     return 'system-office'
   }
 
-  return parts.length > 0 ? parts[0] : 'students'
+  return parts.length > 0 ? parts[1] : 'students'
 }
 
 Page.variables = (props, ctx) => {
   const { databaseId } = props
   let { uri } = props
   let slug = getFirstPathPart(uri)
+  console.log(slug, 'slugggggg')
   return {
     databaseId,
     slug,
