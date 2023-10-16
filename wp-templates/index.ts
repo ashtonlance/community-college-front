@@ -38,6 +38,7 @@ const templates = {
   'single-colleges': SingleCollege,
   'page-college-faculty-staff': FacultyAndStaffPage,
   'page-employers': EmployersPage,
+  'page-businesses': EmployersPage,
   'page-system-office': SystemOfficePage,
   'page-programs': ProgramsArchive,
   'page-numbered-memos': NumberedMemosPage,

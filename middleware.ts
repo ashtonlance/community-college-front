@@ -7,12 +7,12 @@ export function middleware(req: NextRequest) {
   if (pathname === '/') {
     if (cookie?.value === 'employers') {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/bussinesses`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/businesses`
       )
     }
-    if (cookie?.value === 'bussinesses') {
+    if (cookie?.value === 'businesses') {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/bussinesses`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/businesses`
       )
     }
     if (cookie?.value === 'college-faculty-staff') {
