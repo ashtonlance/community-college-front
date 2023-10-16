@@ -66,18 +66,20 @@ export default function StaffIndexPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.department) {
-      result = result.filter(memo =>
-        memo.staffDetails.location == debouncedFilters.department
+      result = result.filter(
+        memo => memo.staffDetails.location == debouncedFilters.department
       )
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort(
-        (a, b) => b.staffDetails?.staff_name?.localeCompare(a.staffDetails?.staff_name)
+        (a, b) =>
+          b.staffDetails?.staff_name?.localeCompare(a.staffDetails?.staff_name)
       )
     } else {
       result = result.sort(
-        (a, b) => a.staffDetails?.staff_name?.localeCompare(b.staffDetails?.staff_name)
+        (a, b) =>
+          a.staffDetails?.staff_name?.localeCompare(b.staffDetails?.staff_name)
       )
     }
 
@@ -101,17 +103,17 @@ export default function StaffIndexPage({ data, loading, error }) {
     {
       name: 'organization',
       options: organizations,
-      type: 'select'
+      type: 'select',
     },
     {
       name: 'department',
       options: departments,
-      type: 'select'
+      type: 'select',
     },
     {
       name: 'sort by',
       options: 'Sort by Last Name',
-      type: 'select'
+      type: 'select',
     },
   ]
 
@@ -132,7 +134,6 @@ export default function StaffIndexPage({ data, loading, error }) {
           filters={filters}
           setFilters={setFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
-
         />
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
@@ -170,7 +171,10 @@ StaffIndexPage.query = gql`
       }
     }
 
-    allStaff(where: { orderby: { field: STAFF_NAME, order: ASC } }) {
+    allStaff(
+      first: 200
+      where: { orderby: { field: STAFF_NAME, order: ASC } }
+    ) {
       nodes {
         id
         staffDetails {
