@@ -86,11 +86,12 @@ export const NewsCard: React.FC<NewsCardProps> = ({
           {card.newsCategories.nodes[0].name} • {''}
           {formatDate(card?.date)}
         </div>
-        <div className="h3 text-navy">{card?.title}d</div>
-        <div className="body-regular text-darkGrey ">
-          {card?.newsDetail?.excerpt ??
-            'Paragraph Regular excerpt area. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}
-        </div>
+        <div className="h3 text-navy">{card?.title}</div>
+        {card?.newsDetail?.excerpt ?? (
+          <div className="body-regular text-darkGrey ">
+            {card?.newsDetail?.excerpt}
+          </div>
+        )}
         <Link
           className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
           href={card.uri ?? ''}
