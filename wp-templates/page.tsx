@@ -48,7 +48,11 @@ function getFirstPathPart(slug: string | undefined): string {
 
   const parts = slug.split('/')
 
-  return parts.length > 0 ? parts[1] : 'students'
+  if (parts.length > 0 && parts[0] === 'about-us') {
+    return 'system-office'
+  }
+
+  return parts.length > 0 ? parts[0] : 'students'
 }
 
 Page.variables = (props, ctx) => {
