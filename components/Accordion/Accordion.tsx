@@ -13,13 +13,21 @@ export const AccordionDisplay = props => {
     props?.attributes?.data?.margins_bottom_spacing || 'medium'
   const accordionItems = []
   for (let i = 0; i < items; i++) {
+    let content = props?.attributes.data[`accordion_${i}_content`]
+    let heading = props?.attributes.data[`accordion_${i}_heading`]
     accordionItems.push(
       <AccordionItem key={`item-${i}`} value={`item-${i}`}>
-        <AccordionTrigger>
-          {props?.attributes.data[`accordion_${i}_heading`]}
-        </AccordionTrigger>
+        <AccordionTrigger>{heading}</AccordionTrigger>
         <AccordionContent>
-          {props?.attributes.data[`accordion_${i}_content`]}
+          {typeof content === 'string' ? (
+            content
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: content,
+              }}
+            />
+          )}
         </AccordionContent>
       </AccordionItem>
     )
