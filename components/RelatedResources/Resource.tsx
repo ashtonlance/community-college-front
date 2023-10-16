@@ -75,7 +75,7 @@ const GET_POST = gql`
           }
         }
       }
-      ... on AnnualReport {
+      ... on AnnualReportingPlan {
         id
         title
         featuredImage {
