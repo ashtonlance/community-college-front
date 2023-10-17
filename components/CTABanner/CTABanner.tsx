@@ -26,7 +26,7 @@ export const CTABanner = ({ attributes }) => {
           />
           <div
             className={cn(
-              `relative z-10 mx-auto flex max-w-[1030px] items-center md:flex-col ${
+              `relative z-10 mx-auto flex max-w-[1030px] items-center md:flex-col gap-10 ${
                 hasCard
                   ? 'flex-wrap justify-center rounded-xl bg-white px-[105px] py-[60px] md:p-[60px]'
                   : 'justify-between'
@@ -35,7 +35,7 @@ export const CTABanner = ({ attributes }) => {
           >
             <span
               className={cn(
-                `text-navy md:mb-[40px] md:text-center ${
+                `text-navy md:text-center ${
                   hasCard ? 'h3 mb-8 w-full text-center' : 'h2'
                 }`
               )}
