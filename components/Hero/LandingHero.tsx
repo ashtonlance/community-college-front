@@ -53,7 +53,6 @@ export const LandingHero = ({
 
       {bgImg && !bgVideo && (
         <Image
-          unoptimized={true}
           src={bgImg}
           alt=""
           fill
@@ -63,7 +62,6 @@ export const LandingHero = ({
       )}
       <div className="img-landing-hero absolute bottom-0 left-0 right-0 top-0 w-full">
         <Image
-          unoptimized={true}
           src={angles.src}
           alt=""
           fill

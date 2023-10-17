@@ -11,6 +11,7 @@ import {
   StaffCardsHeading,
   NewsCard,
   BoardMemberCard,
+  EventCard,
 } from '@/components/Cards'
 
 const PAGE_SIZE = 9
@@ -23,6 +24,7 @@ type PostType =
   | 'annualReports'
   | 'news'
   | 'boardMembers'
+  | 'events'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -71,6 +73,8 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
           />
         ) : postType === 'boardMembers' ? (
           <BoardMemberCard key={index} card={item} />
+        ) : postType === 'events' ? (
+          <EventCard key={index} card={item} />
         ) : null
       )}
 

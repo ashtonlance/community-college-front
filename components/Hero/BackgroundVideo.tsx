@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { gql, useQuery } from '@apollo/client'
-
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
+import Head from 'next/head'
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 const GET_BACKGROUND_VIDEO_FILE = gql`
   query GetVideoURLFromID($databaseId: ID!) {
@@ -25,6 +25,7 @@ export const BackgroundVideoURL = ({ url }: { url: string }) => {
           url={url}
           width="100%"
           height="100%"
+          playsinline
         />
       </div>
     </div>
@@ -44,6 +45,13 @@ export const BackgroundVideoFile = ({ databaseId }) => {
   }
   if (data) {
     const url = data?.mediaItem?.link
-    return <BackgroundVideoURL url={url} />
+    return (
+      <>
+        <Head>
+          <link rel="preload" as="embed" href="https://youtube.com" />
+        </Head>
+        <BackgroundVideoURL url={url} />
+      </>
+    )
   }
 }

@@ -49,10 +49,6 @@ export function Layout(props: LayoutProps) {
           rel="preconnect"
           href={process.env.NEXT_PUBLIC_WORDPRESS_URL}
         ></link>
-        <link
-          rel="dns-prefetch"
-          href={process.env.NEXT_PUBLIC_WORDPRESS_URL}
-        ></link>
         {fullHead}
       </Head>
       <Header
@@ -65,9 +61,9 @@ export function Layout(props: LayoutProps) {
       />
 
       <main
-      style={{
-        marginTop: `${navigationHeight}px`
-      }}
+        style={{
+          marginTop: `${navigationHeight}px`,
+        }}
         className={cn(`flex min-h-screen flex-col ${
           hasAnnouncementBar === '1'
             ? 'show-announcement-bar'
