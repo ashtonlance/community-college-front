@@ -2,7 +2,6 @@ import FrontPage from './front-page'
 import ResourcesArticle from './resources-article'
 import ResourcesIndex from './resources-index'
 import Page from './page'
-import Single from './single-event'
 import Events from './page-events'
 import Category from './category'
 import Tag from './tag'
@@ -24,6 +23,7 @@ import NewsPage from './page-news'
 import SingleNews from './single-news'
 import BoardMembersPage from './page-board-members'
 import SingleBoardMember from './single-board-member'
+import SingleEvent from './single-events'
 
 const templates = {
   'front-page': FrontPage,
@@ -32,7 +32,7 @@ const templates = {
   tag: Tag,
   'single-resource': ResourcesArticle,
   'page-all-resources': ResourcesIndex,
-  'single-event': Single,
+  'single-events': SingleEvent,
   'page-events': Events,
   'page-colleges': CollegesAchive,
   'single-colleges': SingleCollege,

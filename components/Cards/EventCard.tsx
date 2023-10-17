@@ -7,7 +7,6 @@ type EventCardProps = {
   card: any
 }
 export const EventCard: React.FC<EventCardProps> = ({ card }) => {
-  console.log({ card })
   return (
     <div
       key={card}

@@ -1,14 +1,10 @@
 import Link from 'next/link'
 import { getHeadingTag } from '../../utils/headingType'
-import { useState, useContext } from 'react'
-import { PageContext } from 'wp-templates/single-event'
-import { ButtonWithModalForm } from 'components/Button/ButtonWithModalForm'
 import Stroke from 'assets/icons/long-stroke.svg'
 
 export const TextBlock = ({ attributes }) => {
   const ctaLabel = attributes.data.button_button_text
   const ctaURL = attributes.data.button_button_link
-  const requestInvite = attributes.data.button_request_invite
   const headingContent = attributes.data.heading
   const headingSize = attributes.data.heading_size
   const heading = getHeadingTag(headingSize, headingContent)
@@ -18,9 +14,6 @@ export const TextBlock = ({ attributes }) => {
   const colorModule = attributes.data.background_color
   const bottomSpacing = attributes.data.component_spacing_bottom_spacing
   const topSpacing = attributes.data.component_spacing_top_spacing
-  const formEventRegistration = useContext(PageContext)
-
-  const [modalActive, setModalActive] = useState(false)
 
   return (
     <div
