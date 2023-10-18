@@ -60,6 +60,7 @@ export default function Custom404() {
   const footerMenuItems = data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
+  const settings = data?.settings?.siteSettings || []
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
