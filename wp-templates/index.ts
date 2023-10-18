@@ -28,6 +28,7 @@ import PagePropSchools from './page-proprietary-schools-directory'
 import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities'
 import SingleApprenticeshipOpportunity from './single-apprenticeship-opp'
 import PagePublicInformationOfficers from './page-public-information-officers'
+import FoundationBoardMembersPage from './page-foundation-board-members'
 
 const templates = {
   'front-page': FrontPage,
@@ -63,6 +64,7 @@ const templates = {
   'page-apprenticeship-opportunities': PageApprenticeshipOpportunities,
   'single-apprenticeship-opp': SingleApprenticeshipOpportunity,
   'page-public-information-officers': PagePublicInformationOfficers,
+  'page-foundation-board-members': FoundationBoardMembersPage,
 }
 
 export default templates
