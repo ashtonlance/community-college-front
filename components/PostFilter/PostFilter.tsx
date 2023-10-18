@@ -11,7 +11,7 @@ export const PostFilter = ({
           return (
             <select
               key={filterOption.name}
-              className="body-regular flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className="body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               onChange={e =>
                 setFilters({
                   ...filters,
