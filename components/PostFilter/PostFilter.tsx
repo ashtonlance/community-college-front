@@ -1,3 +1,4 @@
+import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
 export const PostFilter = ({
   filters,
   setFilters,
@@ -6,8 +7,9 @@ export const PostFilter = ({
   return (
     <div className="flex justify-center gap-x-[15px] px-[205px] py-[40px] md:flex-wrap md:justify-between md:gap-y-[15px] md:px-[60px] mdsm:mb-[32px] mdsm:w-full mdsm:flex-col mdsm:gap-y-[10px] mdsm:px-[40px] mdsm:py-[10px]">
       {filtersToGenerateDropdown.map(filterOption => {
+        const filterName = camelToSentenceCase(filterOption.name)
         if (filterOption.type === 'select') {
-          const isSortBy = filterOption.name === 'sort by'
+          const isSortBy = filterName === 'sort by'
           return (
             <select
               key={filterOption.name}
@@ -24,7 +26,7 @@ export const PostFilter = ({
               <option className="capitalize" value="">
                 {typeof filterOption.options === 'string'
                   ? filterOption.options
-                  : `Select a ${filterOption.name}`}
+                  : `Select ${getArticle(filterName)} ${filterName}`}
               </option>
               {Array.isArray(filterOption.options) &&
                 filterOption.options.map(option => (
@@ -46,7 +48,7 @@ export const PostFilter = ({
               key={filterOption.name}
               className="text-input body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               type="text"
-              placeholder={`Search by ${filterOption.name ?? 'keyword'}`}
+              placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
                 setFilters({ ...filters, [filterOption.name]: e.target.value })
               }

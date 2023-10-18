@@ -25,6 +25,7 @@ import BoardMembersPage from './page-board-members'
 import SingleBoardMember from './single-board-member'
 import SingleEvent from './single-events'
 import PagePropSchools from './page-proprietary-schools-directory'
+import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities'
 
 const templates = {
   'front-page': FrontPage,
@@ -57,6 +58,7 @@ const templates = {
   'page-board-members': BoardMembersPage,
   'single-board-members': SingleBoardMember,
   'page-proprietary-schools-directory': PagePropSchools,
+  'page-apprenticeship-opportunities': PageApprenticeshipOpportunities,
 }
 
 export default templates

@@ -10,7 +10,7 @@ import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { useRouter } from 'next/router'
 import { useDebounce } from '@uidotdev/usehooks'
 
-export default function PagePropSchools(props) {
+export default function PageApprenticeshipOpportunities(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
   const preFooterContent = props.data?.menus?.nodes[0]
@@ -23,38 +23,104 @@ export default function PagePropSchools(props) {
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    zipCode: '',
-    keyword: '',
-    orderBy: { field: 'TITLE', order: 'ASC' },
+    programArea: router.query.programArea || '',
+    zipCode: router.query.zipCode || '',
+    keyword: router.query.keyword || '',
+    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
   })
 
-  const schools = useMemo(
-    () => props?.data?.proprietarySchools?.nodes || [],
-    [props?.data?.proprietarySchools?.nodes]
+  const handleFilterChange = useCallback(
+    newFilters => {
+      // Update the state
+      setFilters(newFilters)
+
+      // Update the URL without causing a navigation
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...newFilters },
+        },
+        undefined,
+        { shallow: true }
+      )
+    },
+    [router, setFilters]
   )
 
-  const debouncedFilters = useDebounce(filters, 500)
-  const [filteredSchools, setFilteredSchools] = useState(schools)
+  const opportunities = useMemo(
+    () => props?.data?.apprenticeshipOpportunities?.nodes || [],
+    [props?.data?.apprenticeshipOpportunities?.nodes]
+  )
 
-  const filterSchools = useCallback(() => {
-    let result = schools
+  const opportunityProgramAreas = useMemo(() => {
+    const programAreas = opportunities
+      .map(opportunity => opportunity.apprenticeshipOpportunitiesProgramAreas)
+      .filter(Boolean)
+      .flat()
+      .map(programArea => programArea.nodes[0]?.name)
+      .filter(Boolean) // This will remove any undefined values
+
+    // Create a Set to remove duplicates and then convert it back to an array
+    const uniqueProgramAreas = Array.from(new Set(programAreas))
+
+    // Sort the array in alphabetical order
+    uniqueProgramAreas.sort()
+
+    return uniqueProgramAreas
+  }, [opportunities])
+
+  // const zipCodes = useMemo(() => {
+  //   const zipCodePattern = /\b\d{5}\b/g
+
+  //   const zipCodes = opportunities
+  //     .map(opportunity => opportunity.opportunityDetails?.offeredBy?.address)
+  //     .filter(Boolean)
+  //     .map(address => address.match(zipCodePattern))
+  //     .filter(Boolean)
+  //     .flat()
+
+  //   // Create a Set to remove duplicates and then convert it back to an array
+  //   const uniqueZipCodes = Array.from(new Set(zipCodes))
+
+  //   return uniqueZipCodes
+  // }, [opportunities])
+
+  const debouncedFilters = useDebounce(filters, 500)
+  const [filteredOpps, setFilteredOpps] = useState(opportunities)
+
+  const filterOpps = useCallback(() => {
+    let result = opportunities
+
     if (
       debouncedFilters.zipCode &&
       (debouncedFilters.zipCode.length === 5 ||
         debouncedFilters.zipCode.length === 0)
     ) {
-      result = result.filter(school => {
-        return (
-          school?.schoolDetails?.location?.postCode === debouncedFilters.zipCode
-        )
+      const zipCodePattern = /\b\d{5}\b/g
+      result = result.filter(opportunity => {
+        const address = opportunity?.opportunityDetails?.offeredBy?.address
+        const zipCodesInAddress = address ? address.match(zipCodePattern) : []
+        return zipCodesInAddress
+          ? zipCodesInAddress.includes(debouncedFilters.zipCode)
+          : false
       })
     }
 
     if (debouncedFilters.keyword) {
-      result = result.filter(school => {
-        return school.title
+      result = result.filter(opportunity => {
+        return opportunity.title
           ?.toLowerCase()
           ?.includes(debouncedFilters.keyword.toLowerCase())
+      })
+    }
+
+    if (debouncedFilters.programArea) {
+      result = result.filter(opportunity => {
+        const programAreas =
+          opportunity.apprenticeshipOpportunitiesProgramAreas?.nodes?.map(
+            node => node.name
+          )
+        return programAreas?.includes(debouncedFilters.programArea)
       })
     }
 
@@ -64,25 +130,32 @@ export default function PagePropSchools(props) {
       result = result.sort((a, b) => a.title?.localeCompare(b.title))
     }
 
-    setFilteredSchools(result)
+    setFilteredOpps(result)
   }, [
     debouncedFilters.zipCode,
     debouncedFilters.orderBy.order,
     debouncedFilters.keyword,
-    schools,
+    debouncedFilters.programArea,
+    opportunities,
   ])
 
   useEffect(() => {
-    filterSchools()
-  }, [debouncedFilters, filterSchools])
+    filterOpps()
+  }, [debouncedFilters, filterOpps, router.query])
 
   const filtersToGenerateDropdown = [
     {
-      name: 'zipCode',
+      name: 'programArea',
+      options: opportunityProgramAreas,
+      type: 'select',
+    },
+
+    {
+      name: 'keyword',
       type: 'input',
     },
     {
-      name: 'keyword',
+      name: 'zipCode',
       type: 'input',
     },
     {
@@ -114,8 +187,8 @@ export default function PagePropSchools(props) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="schools"
-            posts={filteredSchools}
+            postType="oppurtunities"
+            posts={filteredOpps}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -124,14 +197,14 @@ export default function PagePropSchools(props) {
   )
 }
 
-PagePropSchools.variables = ({ databaseId }, ctx) => {
+PageApprenticeshipOpportunities.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-PagePropSchools.query = gql`
+PageApprenticeshipOpportunities.query = gql`
   ${Header.fragments.entry}
   ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
@@ -179,23 +252,27 @@ PagePropSchools.query = gql`
         }
       }
     }
-    proprietarySchools(
-      first: 200
+    apprenticeshipOpportunities(
+      first: 100
       where: { orderby: { field: TITLE, order: ASC } }
     ) {
       nodes {
         title
-        schoolDetails {
-          details
-          phone
-          website {
-            title
-            url
-            target
+        uri
+        apprenticeshipOpportunitiesProgramAreas {
+          nodes {
+            name
           }
-          location {
-            streetAddress
-            postCode
+        }
+        opportunityDetails {
+          name
+          about
+          offeredBy {
+            address
+            email
+            employerName
+            fieldGroupName
+            phone
           }
         }
       }
