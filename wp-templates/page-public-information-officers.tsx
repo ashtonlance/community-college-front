@@ -9,116 +9,108 @@ import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { useRouter } from 'next/router'
 import { useDebounce } from '@uidotdev/usehooks'
-export default function PageEvents(props) {
+
+export default function PagePublicInformationOfficers(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const router = useRouter()
-  const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
   const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    audience: '',
-    type: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    county: router.query.county || '',
+    college: router.query.college || '',
+    keyword: router.query.keyword || '',
+    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
   })
 
-  const events = useMemo(
-    () => props?.data?.events?.nodes || [],
-    [props?.data?.events?.nodes]
+  const officers = useMemo(
+    () => props?.data?.page?.publicInformationOfficers?.officers || [],
+    [props?.data?.page?.publicInformationOfficers?.officers]
   )
 
-  const categories = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(
-          event => event?.eventsCategories?.nodes.map(category => category.name)
-        )
-      ),
-    ],
-    [events]
-  )
+  const counties = useMemo(() => {
+    const counties = officers.map(officer => officer.county).filter(Boolean)
+    return [...new Set(counties)]
+  }, [officers])
 
-  const tags = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(event => event?.eventsTags?.nodes.map(tag => tag.name))
-      ),
-    ],
-    [events]
-  )
+  const colleges = useMemo(() => {
+    const colleges = officers.map(officer => officer.college).filter(Boolean)
+    return [...new Set(colleges)]
+  }, [officers])
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredEvents, setFilteredEvents] = useState(events)
+  const [filteredOfficers, setFilteredOfficers] = useState(officers)
 
-  const filterEvents = useCallback(() => {
-    let result = events
+  const filterOfficers = useCallback(() => {
+    let result = officers
 
-    if (debouncedFilters.audience) {
-      result = result.filter(event => {
-        return event?.eventsTags?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.audience.toLowerCase())
-        })
-      })
+    if (debouncedFilters.county) {
+      result = result.filter(
+        officer => officer?.county === debouncedFilters.county
+      )
     }
 
-    if (debouncedFilters.type) {
-      result = result.filter(event => {
-        return event?.eventsCategories?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.type.toLowerCase())
-        })
+    if (debouncedFilters.college) {
+      result = result.filter(
+        officer => officer?.college === debouncedFilters.college
+      )
+    }
+
+    if (debouncedFilters.keyword) {
+      result = result.filter(officer => {
+        return officer.name
+          ?.toLowerCase()
+          ?.includes(debouncedFilters.keyword.toLowerCase())
       })
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(
-        (a, b) => b.eventDetails?.date?.localeCompare(a.eventDetails?.date)
-      )
+      result = result.sort((a, b) => b.name?.localeCompare(a.name))
     } else {
-      result = result.sort(
-        (a, b) => a.eventDetails?.date?.localeCompare(b.eventDetails?.date)
-      )
+      result = result.sort((a, b) => a.name?.localeCompare(b.name))
     }
 
-    setFilteredEvents(result)
+    setFilteredOfficers(result)
   }, [
-    debouncedFilters.audience,
+    debouncedFilters.college,
     debouncedFilters.orderBy.order,
-    debouncedFilters.type,
-    events,
+    debouncedFilters.keyword,
+    debouncedFilters.county,
+    officers,
   ])
 
   useEffect(() => {
-    filterEvents()
-  }, [debouncedFilters, filterEvents])
+    filterOfficers()
+  }, [debouncedFilters, filterOfficers, router.query])
 
   const filtersToGenerateDropdown = [
     {
-      name: 'audience',
-      options: tags,
+      name: 'county',
+      options: counties,
       type: 'select',
     },
     {
-      name: 'type',
-      options: categories,
+      name: 'college',
+      options: colleges,
       type: 'select',
+    },
+    {
+      name: 'keyword',
+      type: 'input',
     },
     {
       name: 'sort by',
-      options: 'Sort by Year',
+      options: 'Sort by Name',
       type: 'select',
     },
   ]
@@ -147,8 +139,8 @@ export default function PageEvents(props) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="events"
-            posts={filteredEvents}
+            postType="officers"
+            posts={filteredOfficers}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -157,17 +149,38 @@ export default function PageEvents(props) {
   )
 }
 
-PageEvents.variables = ({ databaseId }, ctx) => {
+function getFirstPathPart(slug: string | undefined): string {
+  if (!slug) {
+    return 'students'
+  }
+
+  const parts = slug.split('/')
+
+  if (parts.length > 0 && parts[1] === 'about-us') {
+    return 'system-office'
+  }
+
+  return parts.length > 0 ? parts[1] : 'students'
+}
+
+PagePublicInformationOfficers.variables = (props, ctx) => {
+  const { databaseId } = props
+  let { uri } = props
+  let slug = getFirstPathPart(uri)
   return {
     databaseId,
+    slug,
     asPreview: ctx?.asPreview,
   }
 }
 
-PageEvents.query = gql`
+PagePublicInformationOfficers.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
-  query Page($databaseId: ID!, $asPreview: Boolean = false) {
+  query PagePublicInformationOfficers(
+    $databaseId: ID!
+    $asPreview: Boolean = false
+    $slug: ID!
+  ) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
       title
@@ -180,19 +193,30 @@ PageEvents.query = gql`
           raw
         }
       }
+      publicInformationOfficers {
+        officers {
+          college
+          county
+          email
+          name
+        }
+      }
     }
-    menu(id: "students", idType: SLUG) {
+    menu(id: $slug, idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: NAME) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
+
     settings {
       siteSettings {
         announcementBar {
@@ -208,32 +232,6 @@ PageEvents.query = gql`
             title
             url
             target
-          }
-        }
-      }
-    }
-    events {
-      nodes {
-        title
-        uri
-        blocks
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-        eventDetails {
-          location
-          date
-        }
-        eventsCategories {
-          nodes {
-            name
-          }
-        }
-        eventsTags {
-          nodes {
-            name
           }
         }
       }

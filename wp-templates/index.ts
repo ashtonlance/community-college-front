@@ -27,6 +27,7 @@ import SingleEvent from './single-events'
 import PagePropSchools from './page-proprietary-schools-directory'
 import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities'
 import SingleApprenticeshipOpportunity from './single-apprenticeship-opp'
+import PagePublicInformationOfficers from './page-public-information-officers'
 
 const templates = {
   'front-page': FrontPage,
@@ -61,6 +62,7 @@ const templates = {
   'page-proprietary-schools-directory': PagePropSchools,
   'page-apprenticeship-opportunities': PageApprenticeshipOpportunities,
   'single-apprenticeship-opp': SingleApprenticeshipOpportunity,
+  'page-public-information-officers': PagePublicInformationOfficers,
 }
 
 export default templates

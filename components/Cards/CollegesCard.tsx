@@ -8,7 +8,7 @@ import Location from 'assets/icons/location.svg'
 type GeneralCardProps = {
   card: any
 }
-export const GeneralCard: React.FC<GeneralCardProps> = ({ card }) => {
+export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
   return (
     <div
       key={card}

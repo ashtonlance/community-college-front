@@ -18,6 +18,10 @@ export default function PageApprenticeshipOpportunities(props) {
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
+  const footerMenuItems = props.data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
+  const settings = props.data?.settings?.siteSettings || []
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -68,22 +72,6 @@ export default function PageApprenticeshipOpportunities(props) {
 
     return uniqueProgramAreas
   }, [opportunities])
-
-  // const zipCodes = useMemo(() => {
-  //   const zipCodePattern = /\b\d{5}\b/g
-
-  //   const zipCodes = opportunities
-  //     .map(opportunity => opportunity.opportunityDetails?.offeredBy?.address)
-  //     .filter(Boolean)
-  //     .map(address => address.match(zipCodePattern))
-  //     .filter(Boolean)
-  //     .flat()
-
-  //   // Create a Set to remove duplicates and then convert it back to an array
-  //   const uniqueZipCodes = Array.from(new Set(zipCodes))
-
-  //   return uniqueZipCodes
-  // }, [opportunities])
 
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredOpps, setFilteredOpps] = useState(opportunities)
@@ -174,6 +162,8 @@ export default function PageApprenticeshipOpportunities(props) {
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
+      settings={settings}
     >
       <div className="h-full bg-grey">
         {blocks && (

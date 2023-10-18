@@ -65,6 +65,7 @@ export default function Custom404() {
       menuItems={hierarchicalMenuItems}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
+      settings={settings}
     >
       <div className="flex h-screen flex-col items-center justify-center gap-[20px]">
         <h1>404</h1>

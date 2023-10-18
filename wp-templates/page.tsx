@@ -59,7 +59,6 @@ Page.variables = (props, ctx) => {
   const { databaseId } = props
   let { uri } = props
   let slug = getFirstPathPart(uri)
-  console.log(slug, 'slugggggg')
   return {
     databaseId,
     slug,

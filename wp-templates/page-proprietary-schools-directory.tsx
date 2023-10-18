@@ -18,6 +18,11 @@ export default function PagePropSchools(props) {
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
+
+  const footerMenuItems = props.data?.footer?.menuItems || []
+  const hierarchicalFooterMenuItems =
+    flatListToHierarchical(footerMenuItems as any) || []
+  const settings = props.data?.settings?.siteSettings || []
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -101,6 +106,8 @@ export default function PagePropSchools(props) {
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
+      footerNavigation={hierarchicalFooterMenuItems}
+      settings={settings}
     >
       <div className="h-full bg-grey">
         {blocks && (
