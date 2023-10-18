@@ -51,7 +51,7 @@ export default function BoardMembersPage({ data, loading, error }) {
     () => [
       ...new Set(
         boardMembers
-          .map(memo => memo.boardMember.termExpiration.split('/')[2])
+          .map(memo => memo.boardMember?.termExpiration?.split('/')[2])
           .filter(Boolean)
       ),
     ],
@@ -73,10 +73,11 @@ export default function BoardMembersPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.expiration) {
-      result = result.filter(boardMember =>
-        boardMember.boardMember.termExpiration.includes(
-          debouncedFilters.expiration
-        )
+      result = result.filter(
+        boardMember =>
+          boardMember.boardMember?.termExpiration.includes(
+            debouncedFilters.expiration
+          )
       )
     }
 
