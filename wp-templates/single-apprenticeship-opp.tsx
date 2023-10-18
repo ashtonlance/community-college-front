@@ -34,7 +34,7 @@ export default function SingleApprenticeshipOpportunity(props) {
         heading={pageData?.title}
         bgImg={pageData?.featuredImage?.node?.sourceUrl}
         description={pageData?.collegeDetails?.county}
-        phone={pageData?.opportunityDetails?.offeredBy?.phone || '256-431-6036'}
+        phone={pageData?.opportunityDetails?.offeredBy?.phone}
         email={pageData?.opportunityDetails?.offeredBy?.email}
         category={
           pageData?.apprenticeshipOpportunitiesProgramAreas?.nodes[0]?.name
