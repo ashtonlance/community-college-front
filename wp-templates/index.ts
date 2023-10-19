@@ -26,13 +26,14 @@ import SingleBoardMember from './single-board-member'
 import SingleEvent from './single-events'
 import PagePropSchools from './page-proprietary-schools-directory'
 import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities'
-import SingleApprenticeshipOpportunity from './single-apprenticeship-opp'
+import SingleApprenticeshipOpportunity from './single-data-dashboards'
 import PagePublicInformationOfficers from './page-public-information-officers'
 import FoundationBoardMembersPage from './page-foundation-board-members'
 import StateBoardMeetingMinutesPage from './page-state-board-meeting-minutes'
 import SingleBoardMeeting from './single-board-meetings'
 import StateBoardPropSchoolsMeetingMinutesPage from './page-state-board-of-proprietary-schools-meeting-minutes'
 import PageDataDashboards from './page-data-dashboards'
+import SingleDataDashboard from './single-data-dashboards'
 
 const templates = {
   'front-page': FrontPage,
@@ -74,6 +75,7 @@ const templates = {
   'page-state-board-of-proprietary-schools-meeting-minutes':
     StateBoardPropSchoolsMeetingMinutesPage,
   'page-data-dashboards': PageDataDashboards,
+  'single-data-dashboards': SingleDataDashboard,
 }
 
 export default templates

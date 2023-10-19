@@ -4,11 +4,10 @@ import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
 import { WYSIWYG } from '@/components/WYSIWYG'
-import { CTABanner } from '@/components/CTABanner'
 
-export default function SingleApprenticeshipOpp(props) {
+export default function SingleDataDashboard(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.apprenticeshipOpportunity
+  const pageData = props.data?.dataDashboard
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
@@ -16,11 +15,21 @@ export default function SingleApprenticeshipOpp(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  console.log(pageData, 'pageData')
+  const embedParams = pageData?.dataDashboardDetails
+  const {
+    elementHeight = '',
+    elementWidth = '',
+    parameterName = '',
+    parameterTabs = '',
+    parameterToolbar = '',
+  } = embedParams
+
+  const embedUrl = `https://public.tableau.com/views/${parameterName}?:embed=y&amp;:showVizHome=no&amp;:host_url=https%3A%2F%2Fpublic.tableau.com%2F&amp;:embed_code_version=3&amp;:tabs=${parameterTabs}&amp;:toolbar=${parameterToolbar}&amp;:animate_transition=yes&amp;:display_static_image=yes&amp;:display_spinner=no&amp;:display_overlay=yes&amp;:display_count=yes&amp;:loadOrderID=0`
 
   if (props.loading) {
     return <>Loading...</>
   }
+
   return (
     <Layout
       pageClassName="college-single-page"
@@ -41,25 +50,11 @@ export default function SingleApprenticeshipOpp(props) {
         }
         location={pageData?.opportunityDetails?.offeredBy?.address}
       />
-      {pageData?.opportunityDetails?.about ? (
-        <WYSIWYG
-          attributes={{
-            data: {
-              content: pageData?.opportunityDetails?.about,
-              background_color: 'grey',
-            },
-          }}
-        />
-      ) : null}
-      <CTABanner
+      <WYSIWYG
         attributes={{
           data: {
-            cta_copy: 'Interested? Contact the employer.',
-            button_link: pageData?.opportunityDetails?.offeredBy?.email,
-            button_label: 'Send An Email',
-            hasCard: true,
-            type: 'fullWidth',
-            emailLink: true,
+            content: `<iframe frameborder="0" marginheight="0" marginwidth="0" title="Data Visualization" allowtransparency={true} allowFullscreen={true} class="tableauViz" style="display: block; width: ${elementWidth}px; height: ${elementHeight}px; margin: 0px; padding: 0px; border: none;" src="${embedUrl}"></iframe>`,
+            background_color: 'grey',
           },
         }}
       />
@@ -67,38 +62,31 @@ export default function SingleApprenticeshipOpp(props) {
   )
 }
 
-SingleApprenticeshipOpp.variables = ({ databaseId }, ctx) => {
+SingleDataDashboard.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-SingleApprenticeshipOpp.query = gql`
+SingleDataDashboard.query = gql`
   ${Header.fragments.entry}
   query GetApprenticeshipOpp($databaseId: ID!) {
-    apprenticeshipOpportunity(id: $databaseId, idType: DATABASE_ID) {
+    dataDashboard(id: $databaseId, idType: DATABASE_ID) {
       id
       title
       seo {
         fullHead
         title
       }
-      apprenticeshipOpportunitiesProgramAreas {
-        nodes {
-          name
-        }
-      }
-      opportunityDetails {
-        name
-        about
-        offeredBy {
-          address
-          email
-          employerName
-          fieldGroupName
-          phone
-        }
+      dataDashboardDetails {
+        title
+        details
+        elementHeight
+        elementWidth
+        parameterName
+        parameterTabs
+        parameterToolbar
       }
     }
 

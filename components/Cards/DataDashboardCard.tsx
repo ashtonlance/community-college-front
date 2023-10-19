@@ -8,7 +8,6 @@ type OpportunityCardProps = {
   card: any
 }
 export const DataDashboardCard: React.FC<OpportunityCardProps> = ({ card }) => {
-  console.log({ card })
   return (
     <div
       key={card}

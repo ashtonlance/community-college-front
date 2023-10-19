@@ -35,7 +35,7 @@ export const ApprenticeshipHero = ({
 }: ApprenticeshipHeroProps) => {
   const router = useRouter()
   const breadcrumbs = generateBreadcrumbs(router)
-  const cleanLocation = location.replace(/>br \/>/g, '')
+  const cleanLocation = location?.replace(/>br \/>/g, '')
 
   return (
     <div

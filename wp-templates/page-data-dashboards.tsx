@@ -239,10 +239,11 @@ PageDataDashboards.query = gql`
 
     dataDashboards(
       first: 150
-      where: { orderby: { field: TITLE, order: DESC } }
+      where: { orderby: { field: TITLE, order: ASC } }
     ) {
       nodes {
         date
+        uri
         dataDashboardDetails {
           title
         }
