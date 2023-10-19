@@ -18,14 +18,14 @@ export const BackgroundVideoURL = ({ url }: { url: string }) => {
       <Head>
         <link rel="preconnect" href="https://youtube.com" />
       </Head>
-      <div className="absolute h-full w-full bg-navy pt-[75.25%]">
+      <div className="absolute h-full w-full bg-navy top-0">
         {/* <div className="relative h-full w-full "> */}
         <ReactPlayer
           muted
           playing
           loop
           controls={false}
-          className="absolute left-0 top-0"
+          className="video-wrapper absolute !w-full !h-full top-[50%] left-[50%] translate-x-[-50%]	translate-y-[-50%]"
           url={url}
           width="100%"
           height="100%"

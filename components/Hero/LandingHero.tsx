@@ -40,7 +40,7 @@ export const LandingHero = ({
   return (
     <div
       className={cn(
-        `flex h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
+        `flex relative h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
           !bgImg && !bgVideo && `bg-${bgColor}'}`
         } ${showProgramFinder === 'true' ? 'pb-[335px]' : ''}`
       )}
@@ -60,7 +60,7 @@ export const LandingHero = ({
           priority
         />
       )}
-      <div className="img-landing-hero absolute bottom-0 left-0 right-0 top-0 w-full">
+      {/* <div className="img-landing-hero absolute bottom-0 left-0 right-0 top-0 w-full">
         <Image
           src={angles.src}
           alt=""
@@ -68,7 +68,7 @@ export const LandingHero = ({
           className={`img-landing-hero z-[2] object-fill`}
           priority
         />
-      </div>
+      </div> */}
       <div className="landing-hero-text relative z-10 ml-[15%] mr-[30%] flex w-[55%] flex-col md:mx-[100px] md:w-full sm:mx-[40px]">
         {subheading && (
           <div className="flex items-center gap-[15px]">
