@@ -80,6 +80,7 @@ SingleBoardMeeting.query = gql`
       link
       seo {
         fullHead
+        title
       }
       featuredImage {
         node {

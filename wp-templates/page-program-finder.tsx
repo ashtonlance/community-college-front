@@ -361,6 +361,7 @@ ProgramFinder.query = gql`
     programFinderIndex: page(id: $uri, idType: URI) {
       seo {
         fullHead
+        title
       }
       programFinderDetails {
         title

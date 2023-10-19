@@ -82,6 +82,7 @@ SingleApprenticeshipOpportunity.query = gql`
       title
       seo {
         fullHead
+        title
       }
       apprenticeshipOpportunitiesProgramAreas {
         nodes {
