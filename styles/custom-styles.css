@@ -122,6 +122,10 @@ table td {
   @apply bg-lightBlue font-extrabold text-navy uppercase;
 }
 
+.wysiwyg a {
+  @apply text-navy underline underline-offset-2 hover:text-darkBeige transition-colors;
+}
+
 .yt-lite {
   background-color: #000;
   position: relative;
