@@ -11,6 +11,7 @@ type FrontPageProps = {
 }
 
 export default function FrontPage(props: FrontPageProps) {
+  console.log({ props })
   const menuItems = props.data?.menu?.menuItems || []
   const homePageData = props.data?.nodeByUri as Page
   const preFooterContent = props.data?.menus?.nodes[0] || []

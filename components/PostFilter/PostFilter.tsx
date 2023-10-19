@@ -9,7 +9,7 @@ export const PostFilter = ({
       {filtersToGenerateDropdown.map(filterOption => {
         const filterName = camelToSentenceCase(filterOption.name)
         if (filterOption.type === 'select') {
-          const isSortBy = filterName === 'sort by'
+          const isSortBy = filterName.toLowerCase() === 'sort by'
           return (
             <select
               key={filterOption.name}

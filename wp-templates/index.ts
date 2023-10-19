@@ -29,6 +29,7 @@ import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities
 import SingleApprenticeshipOpportunity from './single-apprenticeship-opp'
 import PagePublicInformationOfficers from './page-public-information-officers'
 import FoundationBoardMembersPage from './page-foundation-board-members'
+import StateBoardMeetingMinutesPage from './page-state-board-meeting-minutes'
 
 const templates = {
   'front-page': FrontPage,
@@ -65,6 +66,7 @@ const templates = {
   'single-apprenticeship-opp': SingleApprenticeshipOpportunity,
   'page-public-information-officers': PagePublicInformationOfficers,
   'page-foundation-board-members': FoundationBoardMembersPage,
+  'page-state-board-meeting-minutes': StateBoardMeetingMinutesPage,
 }
 
 export default templates

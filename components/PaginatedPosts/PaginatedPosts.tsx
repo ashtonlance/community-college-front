@@ -15,6 +15,8 @@ import {
   SchoolCard,
   OpportunitiesCard,
   OfficerCard,
+  BoardMeetingCard,
+  BoardMeetingHeading,
 } from '@/components/Cards'
 
 const PAGE_SIZE = 9
@@ -31,6 +33,7 @@ type PostType =
   | 'schools'
   | 'oppurtunities'
   | 'officers'
+  | 'boardMeeting'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -58,6 +61,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {props.postType === 'numberedMemo' && <NumberedMemosHeading />}
       {props.postType === 'staff' && <StaffCardsHeading />}
       {props.postType === 'annualReports' && <AnnualReportsHeading />}
+      {props.postType === 'boardMeeting' && <BoardMeetingHeading />}
 
       {items.map((item, index) =>
         postType === 'colleges' ? (
@@ -87,9 +91,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
           <OpportunitiesCard key={index} card={item} />
         ) : postType === 'officers' ? (
           <OfficerCard key={index} card={item} />
-        ) : (
-          <CollegesCard key={index} card={item} />
-        )
+        ) : postType === 'boardMeeting' ? (
+          <BoardMeetingCard key={index} card={item} />
+        ) : null
       )}
 
       {items?.length > 0 && (
