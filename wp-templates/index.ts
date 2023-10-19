@@ -31,6 +31,7 @@ import PagePublicInformationOfficers from './page-public-information-officers'
 import FoundationBoardMembersPage from './page-foundation-board-members'
 import StateBoardMeetingMinutesPage from './page-state-board-meeting-minutes'
 import SingleBoardMeeting from './single-board-meetings'
+import StateBoardPropSchoolsMeetingMinutesPage from './page-state-board-of-proprietary-schools-meeting-minutes'
 
 const templates = {
   'front-page': FrontPage,
@@ -69,6 +70,8 @@ const templates = {
   'page-foundation-board-members': FoundationBoardMembersPage,
   'page-state-board-meeting-minutes': StateBoardMeetingMinutesPage,
   'single-board-meetings': SingleBoardMeeting,
+  'page-state-board-of-proprietary-schools-meeting-minutes':
+    StateBoardPropSchoolsMeetingMinutesPage,
 }
 
 export default templates
