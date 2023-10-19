@@ -29,7 +29,7 @@ export const DataDashboardCard: React.FC<OpportunityCardProps> = ({ card }) => {
             className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.uri ?? ''}
           >
-            Learn More
+            View Dashboard
             <Arrow className="text-gold transition-colors duration-100 group-hover:text-navy" />
           </Link>
         </div>
