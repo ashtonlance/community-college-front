@@ -27,8 +27,7 @@ export default function PageDataDashboards(props) {
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    programArea: router.query.programArea || '',
-    zipCode: router.query.zipCode || '',
+    category: router.query.category || '',
     keyword: router.query.keyword || '',
     orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
   })
@@ -56,94 +55,89 @@ export default function PageDataDashboards(props) {
     [props?.data?.apprenticeshipOpportunities?.nodes]
   )
 
-  const opportunityProgramAreas = useMemo(() => {
-    const programAreas = opportunities
-      .map(opportunity => opportunity.apprenticeshipOpportunitiesProgramAreas)
+  const dataDashboards = useMemo(
+    () => props?.data?.dataDashboards?.nodes || [],
+    [props?.data?.dataDashboards?.nodes]
+  )
+
+  const categories = useMemo(() => {
+    const categories = dataDashboards
+      .map(dataDashboard => dataDashboard.dataDashboardsCategories?.nodes)
       .filter(Boolean)
       .flat()
-      .map(programArea => programArea.nodes[0]?.name)
+      .map(category => category.name)
       .filter(Boolean) // This will remove any undefined values
 
     // Create a Set to remove duplicates and then convert it back to an array
-    const uniqueProgramAreas = Array.from(new Set(programAreas))
+    const uniqueCategories = Array.from(new Set(categories))
 
     // Sort the array in alphabetical order
-    uniqueProgramAreas.sort()
+    uniqueCategories.sort()
 
-    return uniqueProgramAreas
-  }, [opportunities])
+    return uniqueCategories
+  }, [dataDashboards])
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredOpps, setFilteredOpps] = useState(opportunities)
+  const [filteredDataDashboards, setFilteredDataDashboards] =
+    useState(dataDashboards)
 
-  const filterOpps = useCallback(() => {
-    let result = opportunities
-
-    if (
-      debouncedFilters.zipCode &&
-      (debouncedFilters.zipCode.length === 5 ||
-        debouncedFilters.zipCode.length === 0)
-    ) {
-      const zipCodePattern = /\b\d{5}\b/g
-      result = result.filter(opportunity => {
-        const address = opportunity?.opportunityDetails?.offeredBy?.address
-        const zipCodesInAddress = address ? address.match(zipCodePattern) : []
-        return zipCodesInAddress
-          ? zipCodesInAddress.includes(debouncedFilters.zipCode)
-          : false
-      })
-    }
+  const filterDataDashboards = useCallback(() => {
+    let result = dataDashboards
 
     if (debouncedFilters.keyword) {
-      result = result.filter(opportunity => {
-        return opportunity.title
+      result = result.filter(dashboard => {
+        return dashboard?.dataDashboardDetails?.title
           ?.toLowerCase()
           ?.includes(debouncedFilters.keyword.toLowerCase())
       })
     }
 
-    if (debouncedFilters.programArea) {
-      result = result.filter(opportunity => {
-        const programAreas =
-          opportunity.apprenticeshipOpportunitiesProgramAreas?.nodes?.map(
-            node => node.name
-          )
-        return programAreas?.includes(debouncedFilters.programArea)
+    if (debouncedFilters.category) {
+      result = result.filter(dashboard => {
+        const categories = dashboard.dataDashboardsCategories?.nodes?.map(
+          node => node.name
+        )
+        return categories?.includes(debouncedFilters.category)
       })
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort((a, b) => b.title?.localeCompare(a.title))
+      result = result.sort(
+        (a, b) =>
+          b?.dataDashboardDetails?.title?.localeCompare(
+            a.dataDashboardDetails?.title
+          )
+      )
     } else {
-      result = result.sort((a, b) => a.title?.localeCompare(b.title))
+      result = result.sort(
+        (a, b) =>
+          a.dataDashboardDetails?.title?.localeCompare(
+            b.dataDashboardDetails?.title
+          )
+      )
     }
 
-    setFilteredOpps(result)
+    setFilteredDataDashboards(result)
   }, [
-    debouncedFilters.zipCode,
     debouncedFilters.orderBy.order,
     debouncedFilters.keyword,
-    debouncedFilters.programArea,
-    opportunities,
+    debouncedFilters.category,
+    dataDashboards,
   ])
 
   useEffect(() => {
-    filterOpps()
-  }, [debouncedFilters, filterOpps, router.query])
+    filterDataDashboards()
+  }, [debouncedFilters, filterDataDashboards])
 
   const filtersToGenerateDropdown = [
     {
-      name: 'programArea',
-      options: opportunityProgramAreas,
+      name: 'category',
+      options: categories,
       type: 'select',
     },
 
     {
       name: 'keyword',
-      type: 'input',
-    },
-    {
-      name: 'zipCode',
       type: 'input',
     },
     {
@@ -177,8 +171,8 @@ export default function PageDataDashboards(props) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="oppurtunities"
-            posts={filteredOpps}
+            postType="dataDashboards"
+            posts={filteredDataDashboards}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -242,27 +236,20 @@ PageDataDashboards.query = gql`
         }
       }
     }
-    apprenticeshipOpportunities(
-      first: 100
-      where: { orderby: { field: TITLE, order: ASC } }
+
+    dataDashboards(
+      first: 150
+      where: { orderby: { field: TITLE, order: DESC } }
     ) {
       nodes {
-        title
-        uri
-        apprenticeshipOpportunitiesProgramAreas {
+        date
+        dataDashboardDetails {
+          title
+        }
+        dataDashboardsCategories {
           nodes {
             name
-          }
-        }
-        opportunityDetails {
-          name
-          about
-          offeredBy {
-            address
-            email
-            employerName
-            fieldGroupName
-            phone
+            link
           }
         }
       }
