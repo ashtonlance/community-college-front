@@ -1,7 +1,7 @@
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
 import {
-  GeneralCard,
+  CollegesCard,
   NumberedMemos,
   NumberedMemosHeading,
   ProgramCard,
@@ -12,6 +12,12 @@ import {
   NewsCard,
   BoardMemberCard,
   EventCard,
+  SchoolCard,
+  OpportunitiesCard,
+  OfficerCard,
+  BoardMeetingCard,
+  BoardMeetingHeading,
+  DataDashboardCard,
 } from '@/components/Cards'
 
 const PAGE_SIZE = 9
@@ -25,6 +31,11 @@ type PostType =
   | 'news'
   | 'boardMembers'
   | 'events'
+  | 'schools'
+  | 'oppurtunities'
+  | 'officers'
+  | 'boardMeeting'
+  | 'dataDashboards'
 
 type PaginatedPostsProps = {
   currentPage: number
@@ -52,10 +63,11 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {props.postType === 'numberedMemo' && <NumberedMemosHeading />}
       {props.postType === 'staff' && <StaffCardsHeading />}
       {props.postType === 'annualReports' && <AnnualReportsHeading />}
+      {props.postType === 'boardMeeting' && <BoardMeetingHeading />}
 
       {items.map((item, index) =>
         postType === 'colleges' ? (
-          <GeneralCard key={index} card={item} />
+          <CollegesCard key={index} card={item} />
         ) : postType === 'numberedMemo' ? (
           <NumberedMemos key={index} card={item} />
         ) : postType === 'staff' ? (
@@ -75,7 +87,19 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
           <BoardMemberCard key={index} card={item} />
         ) : postType === 'events' ? (
           <EventCard key={index} card={item} />
-        ) : null
+        ) : postType === 'schools' ? (
+          <SchoolCard key={index} card={item} />
+        ) : postType === 'oppurtunities' ? (
+          <OpportunitiesCard key={index} card={item} />
+        ) : postType === 'officers' ? (
+          <OfficerCard key={index} card={item} />
+        ) : postType === 'boardMeeting' ? (
+          <BoardMeetingCard key={index} card={item} />
+        ) : postType === 'dataDashboards' ? (
+          <DataDashboardCard key={index} card={item} />
+        ) : (
+          <></>
+        )
       )}
 
       {items?.length > 0 && (

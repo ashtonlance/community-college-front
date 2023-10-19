@@ -2,11 +2,10 @@ import FrontPage from './front-page'
 import ResourcesArticle from './resources-article'
 import ResourcesIndex from './resources-index'
 import Page from './page'
-import Single from './single-event'
 import Events from './page-events'
 import Category from './category'
 import Tag from './tag'
-import CollegesAchive from './archive-colleges'
+import CollegesAchive from './page-colleges'
 import SingleCollege from './single-college'
 import FacultyAndStaffPage from './page-college-faculty-staff'
 import EmployersPage from './page-employers'
@@ -24,6 +23,16 @@ import NewsPage from './page-news'
 import SingleNews from './single-news'
 import BoardMembersPage from './page-board-members'
 import SingleBoardMember from './single-board-member'
+import SingleEvent from './single-events'
+import PagePropSchools from './page-proprietary-schools-directory'
+import PageApprenticeshipOpportunities from './page-apprenticeship-opportunities'
+import SingleApprenticeshipOpportunity from './single-apprenticeship-opp'
+import PagePublicInformationOfficers from './page-public-information-officers'
+import FoundationBoardMembersPage from './page-foundation-board-members'
+import StateBoardMeetingMinutesPage from './page-state-board-meeting-minutes'
+import SingleBoardMeeting from './single-board-meetings'
+import StateBoardPropSchoolsMeetingMinutesPage from './page-state-board-of-proprietary-schools-meeting-minutes'
+import PageDataDashboards from './page-data-dashboards'
 
 const templates = {
   'front-page': FrontPage,
@@ -32,7 +41,7 @@ const templates = {
   tag: Tag,
   'single-resource': ResourcesArticle,
   'page-all-resources': ResourcesIndex,
-  'single-event': Single,
+  'single-events': SingleEvent,
   'page-events': Events,
   'page-colleges': CollegesAchive,
   'single-colleges': SingleCollege,
@@ -55,6 +64,16 @@ const templates = {
   'single-news': SingleNews,
   'page-board-members': BoardMembersPage,
   'single-board-members': SingleBoardMember,
+  'page-proprietary-schools-directory': PagePropSchools,
+  'page-apprenticeship-opportunities': PageApprenticeshipOpportunities,
+  'single-apprenticeship-opp': SingleApprenticeshipOpportunity,
+  'page-public-information-officers': PagePublicInformationOfficers,
+  'page-foundation-board-members': FoundationBoardMembersPage,
+  'page-state-board-meeting-minutes': StateBoardMeetingMinutesPage,
+  'single-board-meetings': SingleBoardMeeting,
+  'page-state-board-of-proprietary-schools-meeting-minutes':
+    StateBoardPropSchoolsMeetingMinutesPage,
+  'page-data-dashboards': PageDataDashboards,
 }
 
 export default templates

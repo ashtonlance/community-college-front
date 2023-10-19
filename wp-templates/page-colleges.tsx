@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { useMemo, useState, useEffect } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
+import { PostFilter } from '@/components/PostFilter'
 
 type CollegesIndexProps = {
   data: {
@@ -72,7 +73,6 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     () => data?.colleges?.nodes || [],
     [data?.colleges?.nodes]
   )
-  console.log(colleges, 'colleges')
 
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -87,6 +87,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     keyword: '',
     orderBy: { field: 'TITLE', order: 'ASC' },
   })
+
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredColleges, setFilteredColleges] = useState(colleges)
 
@@ -143,6 +144,27 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     return <>Loading...</>
   }
 
+  const filtersToGenerateDropdown = [
+    {
+      name: 'county',
+      options: counties,
+      type: 'select',
+    },
+    {
+      name: 'zipCode',
+      type: 'input',
+    },
+    {
+      name: 'keyword',
+      type: 'input',
+    },
+    {
+      name: 'sort by',
+      options: 'Sort by Name',
+      type: 'select',
+    },
+  ]
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
@@ -151,59 +173,27 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      <DefaultHero
-        heading={collegesIndex?.heroTitle}
-        description={collegesIndex?.heroDescription}
-      />
-      <Map coordinates={getCoordinates(filteredColleges)} />
-      <div className="wrapper-default-inner-pages flex flex-wrap justify-center gap-[15px]">
-        <select
-          className="max-w-full flex-1 text-darkBeige"
-          onChange={e => setFilters({ ...filters, county: e.target.value })}
-        >
-          <option value="">Select a county</option>
-          {counties.map(county =>
-            county !== null ? (
-              <option key={county} value={county}>
-                {county}
-              </option>
-            ) : null
-          )}
-        </select>
-        <input
-          className="text-input"
-          type="text"
-          placeholder="Search by zip code"
-          onChange={e => setFilters({ ...filters, zipCode: e.target.value })}
+      <div className="h-full bg-grey">
+        <DefaultHero
+          heading={collegesIndex?.heroTitle}
+          description={collegesIndex?.heroDescription}
         />
-        <input
-          className="text-input"
-          type="text"
-          placeholder="Search by keyword"
-          onChange={e => setFilters({ ...filters, keyword: e.target.value })}
+        <Map coordinates={getCoordinates(filteredColleges)} />
+        <PostFilter
+          filters={filters}
+          setFilters={setFilters}
+          filtersToGenerateDropdown={filtersToGenerateDropdown}
         />
-        <select
-          onChange={e =>
-            setFilters({
-              ...filters,
-              orderBy: { field: 'TITLE', order: e.target.value },
-            })
-          }
-          className="flex-1 text-navy"
-        >
-          <option value="ASC">Order by</option>
-          <option value="ASC">Name Ascending</option>
-          <option value="DESC">Name Descending</option>
-        </select>
+        <div className="index-page-wrapper bg-grey">
+          <PaginatedPosts
+            currentPage={currentPage}
+            postType="colleges"
+            posts={filteredColleges}
+          />
+        </div>
+
+        <CTABanner attributes={ctaAttributes} />
       </div>
-      <div className="wrapper-default-inner-pages grid grid-cols-3 gap-5 bg-grey sm:flex sm:flex-wrap">
-        <PaginatedPosts
-          currentPage={currentPage}
-          postType="colleges"
-          posts={filteredColleges}
-        />
-      </div>
-      <CTABanner attributes={ctaAttributes} />
     </Layout>
   )
 }

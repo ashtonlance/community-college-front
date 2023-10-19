@@ -14,8 +14,12 @@ const GET_BACKGROUND_VIDEO_FILE = gql`
 
 export const BackgroundVideoURL = ({ url }: { url: string }) => {
   return (
-    <div className="absolute w-full bg-navy">
-      <div className="relative pt-[66.00%]">
+    <>
+      <Head>
+        <link rel="preconnect" href="https://youtube.com" />
+      </Head>
+      <div className="absolute h-full w-full bg-navy pt-[75.25%]">
+        {/* <div className="relative h-full w-full "> */}
         <ReactPlayer
           muted
           playing
@@ -27,8 +31,9 @@ export const BackgroundVideoURL = ({ url }: { url: string }) => {
           height="100%"
           playsinline
         />
+        {/* </div> */}
       </div>
-    </div>
+    </>
   )
 }
 
@@ -47,9 +52,6 @@ export const BackgroundVideoFile = ({ databaseId }) => {
     const url = data?.mediaItem?.link
     return (
       <>
-        <Head>
-          <link rel="preload" as="embed" href="https://youtube.com" />
-        </Head>
         <BackgroundVideoURL url={url} />
       </>
     )

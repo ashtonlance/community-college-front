@@ -2,16 +2,13 @@ import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
+import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
 import { WYSIWYG } from '@/components/WYSIWYG'
-import { NumberedMemoHero } from '@/components/Hero/NumberedMemoHero'
-import SharePost from 'components/SharePost/SharePost'
-import { ResourceTags } from 'components/ResourceTags/ResourceTags'
-import bg from 'assets/imgs/angled-bg-white.png'
-import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { CTABanner } from '@/components/CTABanner'
 
-export default function SingleNews(props) {
+export default function SingleApprenticeshipOpportunity(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.newsItem
+  const pageData = props.data?.apprenticeshipOpportunity
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
@@ -19,7 +16,6 @@ export default function SingleNews(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  const tags = pageData.newsCategories?.nodes
   console.log(pageData, 'pageData')
 
   if (props.loading) {
@@ -27,72 +23,81 @@ export default function SingleNews(props) {
   }
   return (
     <Layout
-      pageClassName="single-numbered-memo-page"
+      pageClassName="college-single-page"
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      <DefaultHero
-        heading={pageData.title}
-        bgImg={pageData.featuredImage?.node?.sourceUrl}
+      <ApprenticeshipHero
+        heading={pageData?.title}
+        bgImg={pageData?.featuredImage?.node?.sourceUrl}
+        description={pageData?.collegeDetails?.county}
+        phone={pageData?.opportunityDetails?.offeredBy?.phone}
+        email={pageData?.opportunityDetails?.offeredBy?.email}
+        category={
+          pageData?.apprenticeshipOpportunitiesProgramAreas?.nodes[0]?.name
+        }
+        location={pageData?.opportunityDetails?.offeredBy?.address}
       />
-      <div className="bg-grey">
-        {pageData?.newsDetail?.details && (
-          <WYSIWYG
-            attributes={{
-              data: { content: pageData?.newsDetail?.details },
-            }}
-          />
-        )}
-        <div
-          style={{
-            backgroundImage: `url(${bg.src})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
+      {pageData?.opportunityDetails?.about ? (
+        <WYSIWYG
+          attributes={{
+            data: {
+              content: pageData?.opportunityDetails?.about,
+              background_color: 'grey',
+            },
           }}
-          className="flex justify-between px-52 py-20 md:flex-col md:gap-y-[32px] md:px-[100px] md:py-[60px] sm:gap-y-[24px] sm:p-[40px]"
-        >
-          <ResourceTags nodes={tags} />
-          <SharePost postUrl={pageData?.link} />
-        </div>
-      </div>
+        />
+      ) : null}
+      <CTABanner
+        attributes={{
+          data: {
+            cta_copy: 'Interested? Contact the employer.',
+            button_link: pageData?.opportunityDetails?.offeredBy?.email,
+            button_label: 'Send An Email',
+            hasCard: true,
+            type: 'fullWidth',
+            emailLink: true,
+          },
+        }}
+      />
     </Layout>
   )
 }
 
-SingleNews.variables = ({ databaseId }, ctx) => {
+SingleApprenticeshipOpportunity.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-SingleNews.query = gql`
+SingleApprenticeshipOpportunity.query = gql`
   ${Header.fragments.entry}
-  query GetSingleNews($databaseId: ID!) {
-    newsItem(id: $databaseId, idType: DATABASE_ID) {
+  query GetApprenticeshipOpp($databaseId: ID!) {
+    apprenticeshipOpportunity(id: $databaseId, idType: DATABASE_ID) {
       id
       title
-      link
       seo {
         fullHead
         title
       }
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-      newsDetail {
-        details
-        title
-      }
-      newsCategories {
+      apprenticeshipOpportunitiesProgramAreas {
         nodes {
           name
-          link
+        }
+      }
+      opportunityDetails {
+        name
+        about
+        offeredBy {
+          address
+          email
+          employerName
+          fieldGroupName
+          phone
         }
       }
     }

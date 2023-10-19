@@ -3,14 +3,14 @@ import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { WYSIWYG } from '@/components/WYSIWYG'
-import { NumberedMemoHero } from '@/components/Hero/NumberedMemoHero'
 import SharePost from 'components/SharePost/SharePost'
 import { ResourceTags } from 'components/ResourceTags/ResourceTags'
 import bg from 'assets/imgs/angled-bg-white.png'
+import { EventHero } from '@/components/Hero/EventHero'
 
-export default function SingleNumberedMemo(props) {
+export default function SingleEvent(props) {
   const menuItems = props.data?.menu?.menuItems || []
-  const pageData = props.data?.numberedMemo
+  const pageData = props.data?.event
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
@@ -18,7 +18,8 @@ export default function SingleNumberedMemo(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  const tags = pageData.numberedMemoCategories?.nodes
+  const tags = pageData.eventsTags?.nodes || []
+  console.log(pageData, 'pageData')
 
   if (props.loading) {
     return <>Loading...</>
@@ -32,19 +33,21 @@ export default function SingleNumberedMemo(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
     >
-      <NumberedMemoHero
-        heading={pageData.numberedMemo.subject}
-        number={pageData.numberedMemo.number}
-        date={pageData.numberedMemo.date}
-        from={pageData.numberedMemo.memoFrom}
-        to={pageData.numberedMemo.memoTo}
-        categories={tags}
+      <EventHero
+        heading={pageData.title}
+        bgImg={pageData.featuredImage?.node?.sourceUrl}
+        ctaLabel={pageData.eventDetails?.heroCta?.title}
+        ctaURL={pageData.eventDetails?.heroCta?.url}
+        location={pageData.eventDetails?.location}
+        date={pageData.eventDetails?.date}
+        time={pageData.eventDetails?.time}
+        description={pageData?.eventsCategories?.nodes[0]?.name}
       />
       <div className="bg-grey">
-        {pageData?.numberedMemo?.body && (
+        {pageData?.eventDetails?.details && (
           <WYSIWYG
             attributes={{
-              data: { content: pageData?.numberedMemo?.body },
+              data: { content: pageData?.eventDetails?.details },
             }}
           />
         )}
@@ -64,17 +67,17 @@ export default function SingleNumberedMemo(props) {
   )
 }
 
-SingleNumberedMemo.variables = ({ databaseId }, ctx) => {
+SingleEvent.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-SingleNumberedMemo.query = gql`
+SingleEvent.query = gql`
   ${Header.fragments.entry}
-  query GetProgramArea($databaseId: ID!) {
-    numberedMemo(id: $databaseId, idType: DATABASE_ID) {
+  query GetSingleEvent($databaseId: ID!) {
+    event(id: $databaseId, idType: DATABASE_ID) {
       id
       title
       link
@@ -87,16 +90,25 @@ SingleNumberedMemo.query = gql`
           sourceUrl
         }
       }
-      numberedMemo {
-        body
+      eventDetails {
+        details
+        name
         date
-        fieldGroupName
-        memoFrom
-        memoTo
-        number
-        subject
+        time
+        location
+        heroCta {
+          title
+          url
+          target
+        }
       }
-      numberedMemoCategories {
+      eventsCategories {
+        nodes {
+          name
+          link
+        }
+      }
+      eventsTags {
         nodes {
           name
           link

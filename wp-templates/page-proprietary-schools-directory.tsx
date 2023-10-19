@@ -9,116 +9,90 @@ import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { useRouter } from 'next/router'
 import { useDebounce } from '@uidotdev/usehooks'
-export default function PageEvents(props) {
+
+export default function PagePropSchools(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const router = useRouter()
-  const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    audience: '',
-    type: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    zipCode: '',
+    keyword: '',
+    orderBy: { field: 'TITLE', order: 'ASC' },
   })
 
-  const events = useMemo(
-    () => props?.data?.events?.nodes || [],
-    [props?.data?.events?.nodes]
-  )
-
-  const categories = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(
-          event => event?.eventsCategories?.nodes.map(category => category.name)
-        )
-      ),
-    ],
-    [events]
-  )
-
-  const tags = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(event => event?.eventsTags?.nodes.map(tag => tag.name))
-      ),
-    ],
-    [events]
+  const schools = useMemo(
+    () => props?.data?.proprietarySchools?.nodes || [],
+    [props?.data?.proprietarySchools?.nodes]
   )
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredEvents, setFilteredEvents] = useState(events)
+  const [filteredSchools, setFilteredSchools] = useState(schools)
 
-  const filterEvents = useCallback(() => {
-    let result = events
-
-    if (debouncedFilters.audience) {
-      result = result.filter(event => {
-        return event?.eventsTags?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.audience.toLowerCase())
-        })
+  const filterSchools = useCallback(() => {
+    let result = schools
+    if (
+      debouncedFilters.zipCode &&
+      (debouncedFilters.zipCode.length === 5 ||
+        debouncedFilters.zipCode.length === 0)
+    ) {
+      result = result.filter(school => {
+        return (
+          school?.schoolDetails?.location?.postCode === debouncedFilters.zipCode
+        )
       })
     }
 
-    if (debouncedFilters.type) {
-      result = result.filter(event => {
-        return event?.eventsCategories?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.type.toLowerCase())
-        })
+    if (debouncedFilters.keyword) {
+      result = result.filter(school => {
+        return school.title
+          ?.toLowerCase()
+          ?.includes(debouncedFilters.keyword.toLowerCase())
       })
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(
-        (a, b) => b.eventDetails?.date?.localeCompare(a.eventDetails?.date)
-      )
+      result = result.sort((a, b) => b.title?.localeCompare(a.title))
     } else {
-      result = result.sort(
-        (a, b) => a.eventDetails?.date?.localeCompare(b.eventDetails?.date)
-      )
+      result = result.sort((a, b) => a.title?.localeCompare(b.title))
     }
 
-    setFilteredEvents(result)
+    setFilteredSchools(result)
   }, [
-    debouncedFilters.audience,
+    debouncedFilters.zipCode,
     debouncedFilters.orderBy.order,
-    debouncedFilters.type,
-    events,
+    debouncedFilters.keyword,
+    schools,
   ])
 
   useEffect(() => {
-    filterEvents()
-  }, [debouncedFilters, filterEvents])
+    filterSchools()
+  }, [debouncedFilters, filterSchools])
 
   const filtersToGenerateDropdown = [
     {
-      name: 'audience',
-      options: tags,
-      type: 'select',
+      name: 'zipCode',
+      type: 'input',
     },
     {
-      name: 'type',
-      options: categories,
-      type: 'select',
+      name: 'keyword',
+      type: 'input',
     },
     {
       name: 'sort by',
-      options: 'Sort by Year',
+      options: 'Sort by Name',
       type: 'select',
     },
   ]
@@ -147,8 +121,8 @@ export default function PageEvents(props) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="events"
-            posts={filteredEvents}
+            postType="schools"
+            posts={filteredSchools}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -157,14 +131,14 @@ export default function PageEvents(props) {
   )
 }
 
-PageEvents.variables = ({ databaseId }, ctx) => {
+PagePropSchools.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-PageEvents.query = gql`
+PagePropSchools.query = gql`
   ${Header.fragments.entry}
   ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
@@ -212,28 +186,23 @@ PageEvents.query = gql`
         }
       }
     }
-    events {
+    proprietarySchools(
+      first: 200
+      where: { orderby: { field: TITLE, order: ASC } }
+    ) {
       nodes {
         title
-        uri
-        blocks
-        featuredImage {
-          node {
-            sourceUrl
+        schoolDetails {
+          details
+          phone
+          website {
+            title
+            url
+            target
           }
-        }
-        eventDetails {
-          location
-          date
-        }
-        eventsCategories {
-          nodes {
-            name
-          }
-        }
-        eventsTags {
-          nodes {
-            name
+          location {
+            streetAddress
+            postCode
           }
         }
       }

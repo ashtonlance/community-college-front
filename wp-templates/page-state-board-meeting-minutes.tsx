@@ -9,7 +9,7 @@ import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 
-export default function BoardMembersPage({ data, loading, error }) {
+export default function StateBoardMeetingMinutesPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -25,85 +25,79 @@ export default function BoardMembersPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
 
-  const boardMembers = useMemo(
-    () => data?.boardMembers?.nodes || [],
-    [data?.boardMembers?.nodes]
+  const boardMeetings = useMemo(
+    () => data?.boardMeetings?.nodes || [],
+    [data?.boardMeetings?.nodes]
   )
 
   const [filters, setFilters] = useState({
-    appointment: '',
-    expiration: '',
-    orderBy: { field: 'TITLE', order: 'ASC' },
+    category: '',
+    year: '',
+    keyword: '',
+    orderBy: { field: 'DATE', order: 'DESC' },
   })
 
-  const appointments = useMemo(
-    () => [
-      ...new Set(
-        boardMembers.map(memo => memo.boardMember?.appointment).filter(Boolean)
-      ),
-    ],
-    [boardMembers]
-  )
+  const years = useMemo(() => {
+    const yearsSet = new Set(
+      boardMeetings
+        .map(meeting => meeting.boardMeetingDetails?.date?.split('/')[2])
+        .filter(Boolean) // remove empty or undefined values
+    )
 
-  const expirations = useMemo(
-    () => [
-      ...new Set(
-        boardMembers
-          .map(memo => memo.boardMember?.termExpiration?.split('/')[2])
-          .filter(Boolean)
-      ),
-    ],
-    [boardMembers]
-  )
+    // convert Set to Array, map to Number and sort
+    return Array.from(yearsSet)
+      .map(Number)
+      .sort((a, b) => a - b)
+  }, [boardMeetings])
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredBoardMembers, setFilteredBoardMembers] = useState(boardMembers)
+  const [filteredBoardMeetings, setFilteredBoardMeetings] =
+    useState(boardMeetings)
 
-  const filterBoardMembers = useCallback(() => {
-    let result = boardMembers
+  const filterBoardMeetings = useCallback(() => {
+    let result = boardMeetings
 
-    if (debouncedFilters.appointment) {
-      result = result.filter(boardMember =>
-        boardMember.boardMember.appointment.includes(
-          debouncedFilters.appointment
-        )
+    if (debouncedFilters.year) {
+      result = result.filter(meeting =>
+        meeting.boardMeetingDetails.date.includes(debouncedFilters.year)
       )
     }
 
-    if (debouncedFilters.expiration) {
-      result = result.filter(
-        boardMember =>
-          boardMember.boardMember?.termExpiration.includes(
-            debouncedFilters.expiration
-          )
+    if (debouncedFilters.keyword) {
+      result = result.filter(meeting =>
+        meeting.title
+          .toLowerCase()
+          .includes(debouncedFilters.keyword.toLowerCase())
       )
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort((a, b) => {
-        const aLastName = a.boardMember.name.split(' ').pop() || ''
-        const bLastName = b.boardMember.name.split(' ').pop() || ''
-        return bLastName.localeCompare(aLastName)
-      })
+      result = result.sort(
+        (a, b) =>
+          b.boardMeetingDetails?.date?.localeCompare(
+            a.boardMeetingDetails?.date
+          )
+      )
     } else {
-      result = result.sort((a, b) => {
-        const aLastName = a.boardMember.name.split(' ').pop() || ''
-        const bLastName = b.boardMember.name.split(' ').pop() || ''
-        return aLastName.localeCompare(bLastName)
-      })
+      result = result.sort(
+        (a, b) =>
+          a.boardMeetingDetails?.date?.localeCompare(
+            b.boardMeetingDetails?.date
+          )
+      )
     }
 
-    setFilteredBoardMembers(result)
+    setFilteredBoardMeetings(result)
   }, [
-    debouncedFilters.expiration,
-    debouncedFilters.appointment,
+    debouncedFilters.keyword,
     debouncedFilters.orderBy.order,
-    boardMembers,
+    debouncedFilters.year,
+    boardMeetings,
   ])
 
   useEffect(() => {
-    filterBoardMembers()
-  }, [debouncedFilters, filterBoardMembers])
+    filterBoardMeetings()
+  }, [debouncedFilters, filterBoardMeetings])
 
   if (loading) {
     return <>Loading...</>
@@ -111,18 +105,17 @@ export default function BoardMembersPage({ data, loading, error }) {
 
   const filtersToGenerateDropdown = [
     {
-      name: 'appointment',
-      options: appointments,
+      name: 'year',
+      options: years,
       type: 'select',
     },
     {
-      name: 'expiration',
-      options: expirations,
-      type: 'select',
+      name: 'keyword',
+      type: 'input',
     },
     {
       name: 'sort by',
-      options: 'Sort by Last Name',
+      options: 'Sort by Year',
       type: 'select',
     },
   ]
@@ -148,8 +141,8 @@ export default function BoardMembersPage({ data, loading, error }) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="boardMembers"
-            posts={filteredBoardMembers}
+            postType="boardMeeting"
+            posts={filteredBoardMeetings}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -158,12 +151,12 @@ export default function BoardMembersPage({ data, loading, error }) {
   )
 }
 
-BoardMembersPage.variables = ({ uri }) => {
+StateBoardMeetingMinutesPage.variables = ({ uri }) => {
   return { uri }
 }
 
-BoardMembersPage.query = gql`
-  query boardMembers($uri: ID!) {
+StateBoardMeetingMinutesPage.query = gql`
+  query StateBoardMeetings($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
       slug
@@ -181,34 +174,33 @@ BoardMembersPage.query = gql`
       }
     }
 
-    boardMembers(
+    boardMeetings(
       first: 200
       where: {
         taxQuery: {
           taxArray: {
             operator: NOT_EXISTS
-            taxonomy: BOARDMEMBERSCATEGORY
-            terms: "Foundation"
+            taxonomy: BOARDMEETINGCATEGORY
+            terms: "Proprietary"
           }
         }
-        orderby: { field: TITLE, order: ASC }
+        orderby: { field: DATE, order: DESC }
       }
     ) {
       nodes {
-        featuredImage {
-          node {
-            sourceUrl
+        boardMeetingCategories {
+          nodes {
+            name
           }
+        }
+        boardMeetingDetails {
+          date
+          details
+          location
+          title
         }
         title
         uri
-        boardMember {
-          name
-          committeeAssignments
-          role
-          appointment
-          termExpiration
-        }
       }
     }
 

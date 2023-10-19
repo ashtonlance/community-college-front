@@ -9,116 +9,140 @@ import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { useRouter } from 'next/router'
 import { useDebounce } from '@uidotdev/usehooks'
-export default function PageEvents(props) {
+
+export default function PageDataDashboards(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
-  const preFooterContent = props.data?.menus.nodes[0]
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = pageData && [...pageData.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
-  const router = useRouter()
-  const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
   const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    audience: '',
-    type: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    category: router.query.category || '',
+    keyword: router.query.keyword || '',
+    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
   })
 
-  const events = useMemo(
-    () => props?.data?.events?.nodes || [],
-    [props?.data?.events?.nodes]
+  const handleFilterChange = useCallback(
+    newFilters => {
+      // Update the state
+      setFilters(newFilters)
+
+      // Update the URL without causing a navigation
+      router.replace(
+        {
+          pathname: router.pathname,
+          query: { ...router.query, ...newFilters },
+        },
+        undefined,
+        { shallow: true }
+      )
+    },
+    [router, setFilters]
   )
 
-  const categories = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(
-          event => event?.eventsCategories?.nodes.map(category => category.name)
-        )
-      ),
-    ],
-    [events]
+  const opportunities = useMemo(
+    () => props?.data?.apprenticeshipOpportunities?.nodes || [],
+    [props?.data?.apprenticeshipOpportunities?.nodes]
   )
 
-  const tags = useMemo(
-    () => [
-      ...new Set(
-        events.flatMap(event => event?.eventsTags?.nodes.map(tag => tag.name))
-      ),
-    ],
-    [events]
+  const dataDashboards = useMemo(
+    () => props?.data?.dataDashboards?.nodes || [],
+    [props?.data?.dataDashboards?.nodes]
   )
+
+  const categories = useMemo(() => {
+    const categories = dataDashboards
+      .map(dataDashboard => dataDashboard.dataDashboardsCategories?.nodes)
+      .filter(Boolean)
+      .flat()
+      .map(category => category.name)
+      .filter(Boolean) // This will remove any undefined values
+
+    // Create a Set to remove duplicates and then convert it back to an array
+    const uniqueCategories = Array.from(new Set(categories))
+
+    // Sort the array in alphabetical order
+    uniqueCategories.sort()
+
+    return uniqueCategories
+  }, [dataDashboards])
 
   const debouncedFilters = useDebounce(filters, 500)
-  const [filteredEvents, setFilteredEvents] = useState(events)
+  const [filteredDataDashboards, setFilteredDataDashboards] =
+    useState(dataDashboards)
 
-  const filterEvents = useCallback(() => {
-    let result = events
+  const filterDataDashboards = useCallback(() => {
+    let result = dataDashboards
 
-    if (debouncedFilters.audience) {
-      result = result.filter(event => {
-        return event?.eventsTags?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.audience.toLowerCase())
-        })
+    if (debouncedFilters.keyword) {
+      result = result.filter(dashboard => {
+        return dashboard?.dataDashboardDetails?.title
+          ?.toLowerCase()
+          ?.includes(debouncedFilters.keyword.toLowerCase())
       })
     }
 
-    if (debouncedFilters.type) {
-      result = result.filter(event => {
-        return event?.eventsCategories?.nodes?.some(node => {
-          return node.name
-            ?.toLowerCase()
-            ?.includes(debouncedFilters.type.toLowerCase())
-        })
+    if (debouncedFilters.category) {
+      result = result.filter(dashboard => {
+        const categories = dashboard.dataDashboardsCategories?.nodes?.map(
+          node => node.name
+        )
+        return categories?.includes(debouncedFilters.category)
       })
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort(
-        (a, b) => b.eventDetails?.date?.localeCompare(a.eventDetails?.date)
+        (a, b) =>
+          b?.dataDashboardDetails?.title?.localeCompare(
+            a.dataDashboardDetails?.title
+          )
       )
     } else {
       result = result.sort(
-        (a, b) => a.eventDetails?.date?.localeCompare(b.eventDetails?.date)
+        (a, b) =>
+          a.dataDashboardDetails?.title?.localeCompare(
+            b.dataDashboardDetails?.title
+          )
       )
     }
 
-    setFilteredEvents(result)
+    setFilteredDataDashboards(result)
   }, [
-    debouncedFilters.audience,
     debouncedFilters.orderBy.order,
-    debouncedFilters.type,
-    events,
+    debouncedFilters.keyword,
+    debouncedFilters.category,
+    dataDashboards,
   ])
 
   useEffect(() => {
-    filterEvents()
-  }, [debouncedFilters, filterEvents])
+    filterDataDashboards()
+  }, [debouncedFilters, filterDataDashboards])
 
   const filtersToGenerateDropdown = [
     {
-      name: 'audience',
-      options: tags,
-      type: 'select',
-    },
-    {
-      name: 'type',
+      name: 'category',
       options: categories,
       type: 'select',
     },
+
+    {
+      name: 'keyword',
+      type: 'input',
+    },
     {
       name: 'sort by',
-      options: 'Sort by Year',
+      options: 'Sort by Name',
       type: 'select',
     },
   ]
@@ -147,8 +171,8 @@ export default function PageEvents(props) {
         <div className="index-page-wrapper bg-grey">
           <PaginatedPosts
             currentPage={currentPage}
-            postType="events"
-            posts={filteredEvents}
+            postType="dataDashboards"
+            posts={filteredDataDashboards}
           />
         </div>
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -157,14 +181,14 @@ export default function PageEvents(props) {
   )
 }
 
-PageEvents.variables = ({ databaseId }, ctx) => {
+PageDataDashboards.variables = ({ databaseId }, ctx) => {
   return {
     databaseId,
     asPreview: ctx?.asPreview,
   }
 }
 
-PageEvents.query = gql`
+PageDataDashboards.query = gql`
   ${Header.fragments.entry}
   ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
@@ -212,28 +236,20 @@ PageEvents.query = gql`
         }
       }
     }
-    events {
+
+    dataDashboards(
+      first: 150
+      where: { orderby: { field: TITLE, order: DESC } }
+    ) {
       nodes {
-        title
-        uri
-        blocks
-        featuredImage {
-          node {
-            sourceUrl
-          }
+        date
+        dataDashboardDetails {
+          title
         }
-        eventDetails {
-          location
-          date
-        }
-        eventsCategories {
+        dataDashboardsCategories {
           nodes {
             name
-          }
-        }
-        eventsTags {
-          nodes {
-            name
+            link
           }
         }
       }

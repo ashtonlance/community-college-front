@@ -9,7 +9,7 @@ import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
 
-export default function BoardMembersPage({ data, loading, error }) {
+export default function FoundationBoardMembersPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
@@ -32,7 +32,6 @@ export default function BoardMembersPage({ data, loading, error }) {
 
   const [filters, setFilters] = useState({
     appointment: '',
-    expiration: '',
     orderBy: { field: 'TITLE', order: 'ASC' },
   })
 
@@ -116,11 +115,6 @@ export default function BoardMembersPage({ data, loading, error }) {
       type: 'select',
     },
     {
-      name: 'expiration',
-      options: expirations,
-      type: 'select',
-    },
-    {
       name: 'sort by',
       options: 'Sort by Last Name',
       type: 'select',
@@ -158,11 +152,11 @@ export default function BoardMembersPage({ data, loading, error }) {
   )
 }
 
-BoardMembersPage.variables = ({ uri }) => {
+FoundationBoardMembersPage.variables = ({ uri }) => {
   return { uri }
 }
 
-BoardMembersPage.query = gql`
+FoundationBoardMembersPage.query = gql`
   query boardMembers($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
@@ -186,7 +180,7 @@ BoardMembersPage.query = gql`
       where: {
         taxQuery: {
           taxArray: {
-            operator: NOT_EXISTS
+            operator: EXISTS
             taxonomy: BOARDMEMBERSCATEGORY
             terms: "Foundation"
           }

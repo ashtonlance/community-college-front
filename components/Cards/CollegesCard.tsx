@@ -8,12 +8,12 @@ import Location from 'assets/icons/location.svg'
 type GeneralCardProps = {
   card: any
 }
-export const GeneralCard: React.FC<GeneralCardProps> = ({ card }) => {
+export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
   return (
     <div
       key={card}
       className={cn(
-        `flex max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full`
+        `col-span-4 flex flex-col overflow-hidden rounded-xl md:col-span-6 sm:col-span-12 `
       )}
     >
       <div className="flex flex-1 flex-col">

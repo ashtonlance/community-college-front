@@ -11,6 +11,37 @@ export const CTABanner = ({ attributes }) => {
   const type = attributes.data.type === 'fullWidth' ? 'full-width' : 'inset'
   const bgImageColor = bgColor === 'lightBlue' ? 'blue' : 'orange'
   const hasCard = attributes?.data?.hasCard || false
+  const isEmailLink = attributes?.data?.emailLink || false
+
+  const renderButton = () => {
+    if (isEmailLink) {
+      return (
+        <a
+          href={`mailto:${btn_link}`}
+          className={cn(
+            `  h-fit w-fit whitespace-nowrap ${
+              hasCard ? 'secondary-btn navy' : 'primary-btn  white'
+            }`
+          )}
+        >
+          {btn_label}
+        </a>
+      )
+    } else {
+      return (
+        <Button
+          content={btn_label}
+          arrow={hasCard ? false : true}
+          classes={cn(
+            `  w-fit whitespace-nowrap h-fit ${
+              hasCard ? 'secondary-btn navy' : 'primary-btn  white'
+            }`
+          )}
+          linkto={btn_link}
+        />
+      )
+    }
+  }
 
   if (type === 'full-width') {
     return (
@@ -26,7 +57,7 @@ export const CTABanner = ({ attributes }) => {
           />
           <div
             className={cn(
-              `relative z-10 mx-auto flex max-w-[1030px] items-center md:flex-col gap-10 ${
+              `relative z-10 mx-auto flex max-w-[1030px] items-center gap-10 md:flex-col ${
                 hasCard
                   ? 'flex-wrap justify-center rounded-xl bg-white px-[105px] py-[60px] md:p-[60px]'
                   : 'justify-between'
@@ -42,16 +73,7 @@ export const CTABanner = ({ attributes }) => {
             >
               {copy}
             </span>
-            <Button
-              content={btn_label}
-              arrow={hasCard ? false : true}
-              classes={cn(
-                `  w-fit whitespace-nowrap h-fit ${
-                  hasCard ? 'secondary-btn navy' : 'primary-btn  white'
-                }`
-              )}
-              linkto={btn_link}
-            />
+            {renderButton()}
           </div>
         </div>
       </FadeIn>
@@ -59,19 +81,19 @@ export const CTABanner = ({ attributes }) => {
   } else if (type === 'inset') {
     return (
       <FadeIn>
-        <div className={`px-[105px] py-[60px] sm:p-[40px]`}
-        style={{backgroundImage: `url(/angles/angled-bg_${type}-cta_${bgImageColor}.jpg)`, backgroundSize: 'cover'}}
+        <div
+          className={`px-[105px] py-[60px] sm:p-[40px]`}
+          style={{
+            backgroundImage: `url(/angles/angled-bg_${type}-cta_${bgImageColor}.jpg)`,
+            backgroundSize: 'cover',
+          }}
         >
-
           <div className="relative overflow-hidden rounded-xl bg-white px-[105px] py-[60px] md:p-[60px] sm:p-[40px]">
-            <div className="relative z-10 mx-auto flex flex-col max-w-[1030px] items-center justify-between md:flex-col">
-              <h3 className={`h3 md:mb-[32px] sm:text-[28px] md:text-center`}>{copy}</h3>
-              <Button
-                content={btn_label}
-                arrow={true}
-                classes={`${type==='inset' ? 'secondary-btn navy' : 'primary-btn white'}`}
-                linkto={btn_link}
-              />
+            <div className="relative z-10 mx-auto flex max-w-[1030px] flex-col items-center justify-between md:flex-col">
+              <h3 className={`h3 md:mb-[32px] md:text-center sm:text-[28px]`}>
+                {copy}
+              </h3>
+              {renderButton()}
             </div>
           </div>
         </div>

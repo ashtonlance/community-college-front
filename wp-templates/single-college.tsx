@@ -145,6 +145,7 @@ SingleCollege.query = gql`
       title
       seo {
         fullHead
+        title
       }
       featuredImage {
         node {
