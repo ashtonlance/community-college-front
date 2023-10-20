@@ -87,7 +87,7 @@ export default function SingleCollege(props) {
         ctaURL={pageData?.collegeDetails?.linkToWebsite?.url}
         isCollegeSingle={true}
       />
-      <div className="flex flex-wrap md:px-[100px] md:py-[60px] sm:p-10 ">
+      <div className="flex flex-wrap px-52 py-20 md:px-[100px] md:py-[60px] sm:p-10 ">
         <div className="basis-1/2 md:basis-full">
           {pageData?.collegeDetails?.map ? (
             <>
