@@ -38,9 +38,12 @@ export const EventCard: React.FC<EventCardProps> = ({ card }) => {
               </div>
             )}
           </div>
-          <div className="h3 mb-[15px] text-center font-serif text-[24px]">
+          <Link
+            className="h3 mb-[15px] text-center font-serif text-[24px] hover:text-darkBeige"
+            href={card?.uri || '/'}
+          >
             {card?.title}
-          </div>
+          </Link>
           {/* <div
             className="body-regular mb-[10px] text-darkGrey"
             dangerouslySetInnerHTML={{

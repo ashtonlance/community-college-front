@@ -17,9 +17,12 @@ export const BoardMeetingCard = ({ card }) => {
 
   return (
     <div className="col-span-12 col-start-1 grid grid-flow-row grid-cols-12 items-center gap-[20px] rounded-[12px] bg-white px-[24px] py-[20px] md:grid-cols-6 md:px-[20px] md:py-[14px] mdsm:grid-cols-4 mdsm:p-[20px]">
-      <div className="footer-links-headline col-span-5 col-start-1 mb-0 text-justify text-navy hover:text-navy md:col-span-2 mdsm:col-span-4">
+      <Link
+       className="footer-links-headline col-span-5 col-start-1 mb-0 text-justify text-navy hover:text-navy md:col-span-2 mdsm:col-span-4"
+        href={card?.uri || '/'}
+      >
         {card.title}
-      </div>
+      </Link>
       <div className="body-small col-span-1 col-start-6 font-bold md:col-start-3 mdsm:col-start-1">
         {card.boardMeetingDetails?.location}
       </div>

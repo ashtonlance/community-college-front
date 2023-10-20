@@ -27,7 +27,12 @@ export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
           />
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
-          <div className="h3 mb-5 text-[28px]">{card.collegeDetails?.name}</div>
+          <Link
+            className="h3 mb-5 text-[28px] hover:text-darkBeige"
+            href={card?.uri || '/'}
+          >
+            {card.collegeDetails?.name}
+          </Link>
           <div className="mb-[10px] flex">
             {card?.collegeDetails?.map ? (
               <>

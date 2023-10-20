@@ -22,7 +22,12 @@ export const OpportunitiesCard: React.FC<OpportunityCardProps> = ({ card }) => {
               {card?.apprenticeshipOpportunitiesProgramAreas?.nodes[0]?.name}
             </div>
           )}
-          <div className="h3 mb-5 font-serif text-[24px]">{card?.title}</div>
+          <Link
+            className="h3 mb-5 font-serif text-[24px] hover:text-darkBeige"
+            href={card?.uri ?? ''}
+          >
+            {card?.title}
+          </Link>
           <Link
             className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.uri ?? ''}
