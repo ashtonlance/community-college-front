@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 
 const AboutMenu = dynamic(
   async () => {
-    const { AboutMenu } = await import('./AboutMenu')
+    const { AboutMenu } = await import('./MobileChildSubMenu')
     return { default: AboutMenu }
   },
   {

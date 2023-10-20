@@ -60,7 +60,7 @@
     @apply cursor-pointer p-4 pb-0 rounded-lg text-[18px] sm:text-[15px] font-bold tracking-[-0.18px] leading-[110%] text-navy font-condensed ;
   }
   .links-mobile-nav {
-    @apply cursor-pointer py-[20px] text-[28px] font-bold tracking-[-0.02em] leading-[110%] font-sans;
+    @apply cursor-pointer py-[20px] text-[24px] font-bold tracking-[-0.24px] leading-[110%] font-condensed;
   }
   .secondary-nav {
     @apply cursor-pointer text-[13px] py-[18px] px-[16px] rounded-lg sm:text-[12px] font-bold leading-[110%] text-black font-sans hover:bg-gmt-200 hover:text-black;
@@ -160,7 +160,7 @@
     @apply bg-gmt-transparent backdrop-blur-[6px] fixed w-full left-0 top-[155px] md:top-[91px] right-0 bottom-0;
   }
   .internal-menu-mobile .semi-modal {
-    @apply top-[110px];
+    @apply top-[146px];
   }
   .featured-resource-content p {
     @apply text-[20px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-white font-sans;

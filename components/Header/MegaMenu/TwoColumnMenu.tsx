@@ -2,8 +2,10 @@ import Link from 'next/link'
 import { cn } from 'utils'
 import { useClickAway } from '@uidotdev/usehooks'
 import { MutableRefObject } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import bg from 'assets/imgs/angled-bg-menu.jpg'
+import React from 'react'
 
 type TwoColumnMenuProps = {
   subItems: any
@@ -20,6 +22,20 @@ export const TwoColumnMenu = ({
   parentItem,
   activeItem,
 }: TwoColumnMenuProps) => {
+  const [navigationHeight, setNavigationHeight] = useState(undefined)
+  const navigation = document.getElementById('topbar');
+  // get header size dynamically to move main content below
+  const handleResize = () => {
+    setNavigationHeight(
+      navigation.clientHeight
+      );
+    }
+  
+  useEffect(() => {
+    setNavigationHeight(navigation.clientHeight)
+    window.addEventListener("resize", handleResize, false);
+  }, [navigation])
+
   const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
     const target = e.target as Element
     if (!target.classList.contains('main-nav')) {

@@ -213,7 +213,7 @@ export const Header = forwardRef(
               toggleHamburgerMenu={setHamburgerMenuOpen}
             />
           </div>
-          <span className="search-wrapper-icon hidden h-[100%] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
+          <span className="search-wrapper-icon hidden h-[calc(100%+2px)] top-0 items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
             <Search
               transparentMode={displayTransparentMode}
               searchOpened={setSearchOpened}
