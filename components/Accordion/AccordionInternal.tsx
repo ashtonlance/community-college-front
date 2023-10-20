@@ -33,7 +33,10 @@ const ProgramsAccordionItem = React.forwardRef<
   // @ts-ignore
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn('bg-grey px-8 py-5 md:px-0 sm:py-[10px] md:py-[15px] py-5', className)}
+    className={cn(
+      'bg-grey px-8 py-5 md:px-0 md:py-[15px] sm:py-[10px]',
+      className
+    )}
     {...props}
   />
 ))
@@ -132,21 +135,28 @@ ProgramsAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className={cn(
-      'body-regular overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-      className
-    )}
-    {...props}
-  >
-    <div
-      className="whitespace-pre-wrap pb-4 pt-5"
-      dangerouslySetInnerHTML={{ __html: children }}
-    ></div>
-  </AccordionPrimitive.Content>
-))
+>(({ className, children, ...props }, ref) => {
+  const isChildrenObject = typeof children === 'object'
+
+  return (
+    <AccordionPrimitive.Content
+      ref={ref}
+      className={cn(
+        'body-regular overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+        className
+      )}
+      {...props}
+    >
+      <div className="whitespace-pre-wrap pb-4 pt-5">
+        {isChildrenObject ? (
+          children
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: children as string }} />
+        )}
+      </div>
+    </AccordionPrimitive.Content>
+  )
+})
 AccordionContent.displayName = AccordionPrimitive.Content.displayName
 
 const ProgramsAccordionContent = React.forwardRef<
@@ -161,7 +171,9 @@ const ProgramsAccordionContent = React.forwardRef<
     )}
     {...props}
   >
-    <div className="whitespace-pre-wrap pb-5 sm:pb-[14px] md:pb-[17px] sm:pt-5 pt-6">{children}</div>
+    <div className="whitespace-pre-wrap pb-5 pt-6 md:pb-[17px] sm:pb-[14px] sm:pt-5">
+      {children}
+    </div>
   </AccordionPrimitive.Content>
 ))
 ProgramsAccordionContent.displayName = AccordionPrimitive.Content.displayName
