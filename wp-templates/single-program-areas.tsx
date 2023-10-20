@@ -48,7 +48,7 @@ export default function SingleProgramArea(props) {
             Programs in This Program Area{' '}
             <span className="h5 text-darkBeige">{relatedPrograms?.length}</span>
           </h2>
-          <ul className="grid grid-cols-5 gap-10 md:grid-cols-4 sm:grid-cols-2">
+          <ul className="grid grid-cols-5 gap-5 sm:gap-[10px] md:gap-[15px] md:grid-cols-4 sm:grid-cols-2">
             {relatedPrograms.map(program => {
               return (
                 <div
@@ -56,7 +56,7 @@ export default function SingleProgramArea(props) {
                   key={program.uri}
                 >
                   <Link
-                    className="font-condensed text-xl font-bold text-navy"
+                    className="font-condensed text-xl font-bold text-navy tracking-[-0.2px] text-center"
                     href={program.uri}
                   >
                     {program.title}
@@ -67,7 +67,7 @@ export default function SingleProgramArea(props) {
                     program.program.degreeTypes?.includes(
                       'workforceContinuingEducation'
                     )) && (
-                    <div className="tag absolute right-0 top-0 rounded bg-grey group-hover:bg-lightBlue">
+                    <div className="tag absolute right-0 top-0 bg-white rounded-bl-lg rounded-tr-lg text-darkGrey group-hover:bg-lightBlue">
                       {program.program.degreeTypes?.includes(
                         'continuingEducation'
                       )

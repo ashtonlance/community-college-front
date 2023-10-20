@@ -55,13 +55,13 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                 className={`flex items-center gap-x-3 text-left hover:text-darkBeige md:mr-4`}
               >
                 {programArea}
-                <span className="h5 text-darkBeige">
+                <span className="h5 text-darkBeige sm:mt-[5px] mt-[10px]">
                   {data?.programs?.length}
                 </span>
               </Link>
             </ProgramsAccordionTrigger>
             <ProgramsAccordionContent>
-              <div className="grid w-full grid-cols-5 gap-5 px-[4px] md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
+              <div className="grid w-full grid-cols-5 gap-5 md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
                 {data.programs.map(program => {
                   return (
                     <div
@@ -69,7 +69,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                       key={program.uri}
                     >
                       <Link
-                        className="font-condensed text-xl font-bold text-navy"
+                        className="font-condensed text-xl font-bold text-navy tracking-[-0.2px] text-center"
                         href={program.uri}
                       >
                         {program.title}
@@ -80,7 +80,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                         program.program.degreeTypes?.includes(
                           'workforceContinuingEducation'
                         )) && (
-                        <div className="tag absolute right-0 top-0 rounded bg-grey group-hover:bg-lightBlue">
+                        <div className="tag absolute right-0 top-0 rounded-bl-lg rounded-tr-lg text-darkGrey bg-grey group-hover:bg-lightBlue">
                           {program.program.degreeTypes?.includes(
                             'continuingEducation'
                           )
@@ -100,7 +100,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
 
   return (
     <div className={`bg-grey`}>
-      <div className={`module-spacing-top-medium module-spacing-bottom-medium`}>
+      <div className={`md:pt-8 pt-10 module-spacing-bottom-medium`}>
         <Accordion type="single" collapsible>
           {accordionItems}
         </Accordion>

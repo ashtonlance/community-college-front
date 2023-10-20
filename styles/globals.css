@@ -139,7 +139,7 @@
     @apply  border-navy text-navy hover:bg-gold hover:border-gold;
   }
   .tag {
-    @apply capitalize text-[12px] w-fit rounded-lg sm:text-[11px] font-bold leading-[140%] font-sans py-[6px] px-[12px] sm:py-[6px] sm:px-[10px];
+    @apply capitalize sm:text-[10px] md:text-[11px] text-[12px] w-fit font-extrabold leading-[110%] font-sans px-[6px] sm:py-[3px] md:py-[4px] py-[5px];
   }
   .mega-menu {
     @apply flex absolute left-0 right-0 bg-navy text-white py-[60px] px-[100px] h-fit md:py-[60px] md:pr-[110px] md:pl-[100px] md:h-fit md:flex-col md:top-[88px] sm:px-[40px] sm:py-[20px] md:justify-end md:items-end w-full;

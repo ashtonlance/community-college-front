@@ -169,7 +169,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
         description={programsIndex?.heroDescription}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex flex-wrap justify-center gap-[15px]">
+        <div className="wrapper-default-inner-pages mx-auto flex flex-wrap justify-center gap-[15px] sm:pb-[15px] md:pb-5 pt-0 pb-5">
           <select
             className="max-w-full flex-1 text-darkBeige"
             onChange={e =>

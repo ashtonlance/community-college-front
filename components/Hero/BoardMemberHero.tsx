@@ -58,7 +58,7 @@ export const BoardMemberHero = ({
         )}
         {appointment && (
           <p className="body-large font-bold text-darkGrey ">
-            Appointment: {appointment}
+            Appointment: <span className='font-normal'>{appointment}</span>
           </p>
         )}
         {termExpiration && (

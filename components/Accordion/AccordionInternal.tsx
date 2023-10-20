@@ -33,7 +33,7 @@ const ProgramsAccordionItem = React.forwardRef<
   // @ts-ignore
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn('mb-5 bg-grey px-8 py-5 md:px-0', className)}
+    className={cn('bg-grey px-8 py-5 md:px-0 sm:py-[10px] md:py-[15px] py-5', className)}
     {...props}
   />
 ))
@@ -161,7 +161,7 @@ const ProgramsAccordionContent = React.forwardRef<
     )}
     {...props}
   >
-    <div className="whitespace-pre-wrap pb-4 pt-5">{children}</div>
+    <div className="whitespace-pre-wrap pb-5 sm:pb-[14px] md:pb-[17px] sm:pt-5 pt-6">{children}</div>
   </AccordionPrimitive.Content>
 ))
 ProgramsAccordionContent.displayName = AccordionPrimitive.Content.displayName

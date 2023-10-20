@@ -242,17 +242,17 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] pt-0 md:flex-wrap">
-          <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] py-10 sm:pt-[10px] md:pt-5 md:pb-8 md:flex-wrap">
+          <div className="flex flex-1 basis-full items-center gap-x-[20px] md:flex-wrap">
             <label
               htmlFor="programArea"
-              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:text-center"
             >
               I&apos;m Interested In
             </label>
             <select
               id="programArea"
-              className="h-[52px] w-[229px] text-darkBeige  sm:h-auto sm:w-full"
+              className="h-[52px] w-[229px] text-darkBeige  sm:h-auto md:w-full"
               value={inputValues.programArea}
               onChange={e =>
                 setInputValues({ ...inputValues, programArea: e.target.value })
@@ -266,16 +266,16 @@ export const ProgramFinder = props => {
               ))}
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+          <div className="flex flex-1 items-center gap-x-[20px] md:basis-full md:flex-wrap">
             <label
               htmlFor="radius"
-              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:w-full md:text-center"
             >
               Within
             </label>
             <select
               id="radius"
-              className="h-full w-[200px] text-darkBeige sm:h-auto sm:w-full"
+              className="h-full w-[200px] text-darkBeige md:h-auto md:w-full"
               value={inputValues.radius}
               onChange={e =>
                 setInputValues({ ...inputValues, radius: e.target.value })
@@ -289,10 +289,10 @@ export const ProgramFinder = props => {
               <option value={100}>100</option>
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full sm:flex-wrap">
+          <div className="flex flex-1 items-center gap-x-[20px] md:basis-full md:flex-wrap">
             <label
               htmlFor="zipCode"
-              className="h5 mb-0 whitespace-nowrap sm:mx-auto sm:mb-3 sm:w-full sm:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:w-full md:text-center"
             >
               Of
             </label>
@@ -325,8 +325,8 @@ export const ProgramFinder = props => {
         </div>
       </div>
       {filteredPrograms.length > 0 ? (
-        <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
-          <div className="h4 mb-0">
+        <div className="bg-grey flex items-center justify-center px-[205px] sm:py-5 md:py-10 py-[60px] md:px-[60px] sm:px-10 text-center">
+          <div className="h2 mb-0">
             {'Showing '}
             {filteredPrograms.length}{' '}
             {filteredPrograms.length === 1 ? 'Result' : 'Results'}
@@ -334,12 +334,15 @@ export const ProgramFinder = props => {
         </div>
       ) : (
         shouldFilter && (
-          <div className="flex items-center justify-center px-[205px] py-10 md:px-[60px] sm:px-10">
-            <div className="h4 mb-0">No Results found</div>
+          <div className="bg-grey flex items-center justify-center px-[205px] sm:py-5 md:py-10 py-[60px] md:px-[60px] sm:px-10 text-center">
+            <div className="flex flex-col sm:gap-5 gap-6">
+              <div className="h2 mb-0">No results found.</div>
+              <p>Please adjust your selected filter and try again.</p>
+            </div>
           </div>
         )
       )}
-      <div className=" bg-white">
+      <div className=" bg-grey">
         <div className="mx-auto grid max-w-[1440px] grid-cols-3 gap-5 px-[100px] pb-20 pt-0 md:grid-cols-2 md:px-[60x] sm:grid-cols-1 sm:px-[40px]">
           {filteredPrograms.map((item, index) => (
             <ProgramCard key={index} card={item} index={index} />
