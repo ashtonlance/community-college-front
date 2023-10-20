@@ -5,6 +5,10 @@ import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { WYSIWYG } from '@/components/WYSIWYG'
 import Link from 'next/link'
+import { unslugify } from 'utils/unslugify'
+import Arrow from 'assets/icons/angled-arrow.svg'
+import bg from '/assets/imgs/angled-bg-defaultHero.png'
+import bgFlip from '/assets/imgs/angled-bg-defaultHero-flip.png'
 
 const GET_RELATED_PROGRAMS = gql`
   query GetRelatedPrograms($slug: [String]) {
@@ -45,6 +49,9 @@ export default function SingleProgram(props) {
   } = useQuery(GET_RELATED_PROGRAMS, {
     variables: { slug },
   })
+
+  console.log({ props })
+
   if (props.loading) {
     return <>Loading...</>
   }
@@ -63,34 +70,81 @@ export default function SingleProgram(props) {
         description={pageData?.program?.description}
       />
       {pageData?.program?.about ? (
-        <WYSIWYG
-          attributes={{
-            data: { content: pageData?.program?.about },
-          }}
-        />
+        <div>
+          <WYSIWYG
+            attributes={{
+              data: {
+                content: pageData?.program?.about,
+                background_color: 'grey',
+              },
+            }}
+          />
+        </div>
       ) : null}
       {pageData?.program?.programDetails ? (
-        <WYSIWYG
-          attributes={{
-            data: { content: pageData?.program?.programDetails },
+        <div
+          style={{
+            backgroundImage: `url(${bgFlip.src})`,
+            backgroundPosition: 'top',
+            backgroundSize: 'cover',
           }}
-        />
+        >
+          <WYSIWYG
+            attributes={{
+              data: { content: pageData?.program?.programDetails },
+            }}
+          />
+        </div>
+      ) : null}
+      {pageData?.colleges?.nodes?.length ? (
+        <div
+          style={{
+            backgroundImage: `url(${bg.src})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
+          <div
+            className={`module-spacing-bottom-none module-spacing-top-none mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px]  md:flex-col`}
+          >
+            <div className="mx-auto flex max-w-[1030px] grow flex-col gap-[10px] rounded-xl border border-lightBlue p-[40px]">
+              <h5 className="mb-[32px] font-extrabold">
+                Colleges That Offer This Program
+              </h5>
+              <div className="grid auto-cols-max grid-flow-col grid-cols-3  grid-rows-4 md:grid-rows-5 sm:flex sm:flex-col">
+                {pageData?.colleges?.nodes?.map(college => {
+                  return (
+                    <Link
+                      className="sub-nav relative mb-[12px] flex max-w-[90%] items-center gap-[7px] pr-8 font-normal text-darkGrey hover:text-navy"
+                      key={college?.uri}
+                      href={college?.uri ?? ''}
+                    >
+                      {unslugify(college?.slug)}
+
+                      <Arrow className="absolute right-4 top-[25%] text-gold" />
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
       ) : null}
       {relatedPrograms?.relatedPrograms?.nodes?.length ? (
-        <div className="p-[100px] md:p-[60px] sm:p-[40px] ">
+        <div className="bg-grey p-[100px] md:p-[60px] sm:p-[40px]">
           <h2 className="h3 mb-10 flex items-center gap-3">
             Related Programs{' '}
             <span className="h5 text-darkBeige">{relatedPrograms?.length}</span>
           </h2>
-          <ul className="grid grid-cols-5 gap-5 sm:gap-[10px] md:gap-[15px] md:grid-cols-4 sm:grid-cols-2">
+          <ul className="grid grid-cols-5 gap-5 md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
             {relatedPrograms?.relatedPrograms?.nodes?.map(program => {
               return (
                 <div
-                  className="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-grey p-5 hover:bg-white hover:outline hover:outline-2 hover:outline-lightBlue"
+                  className="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-white p-5 hover:bg-white hover:outline hover:outline-2 hover:outline-lightBlue"
                   key={program.uri}
                 >
                   <Link
-                    className="font-condensed text-xl font-bold text-navy tracking-[-0.2px] text-center"
+                    className="text-center font-condensed text-xl font-bold tracking-[-0.2px] text-navy"
                     href={program.uri}
                   >
                     {program.title}
@@ -101,7 +155,7 @@ export default function SingleProgram(props) {
                     program.program.degreeTypes?.includes(
                       'workforceContinuingEducation'
                     )) && (
-                    <div className="tag absolute right-0 top-0 rounded-bl-lg rounded-tr-lg text-darkGrey bg-white group-hover:bg-lightBlue">
+                    <div className="tag absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-white text-darkGrey group-hover:bg-lightBlue">
                       {program.program.degreeTypes?.includes(
                         'continuingEducation'
                       )

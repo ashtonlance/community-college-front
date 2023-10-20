@@ -22,7 +22,7 @@ export function middleware(req: NextRequest) {
     }
     if (cookie?.value === 'system-office') {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/system-office`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/about-us`
       )
     }
   }
