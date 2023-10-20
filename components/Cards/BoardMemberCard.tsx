@@ -30,9 +30,12 @@ export const BoardMemberCard: React.FC<BoardMemberCardProps> = ({ card }) => {
               {card.boardMember?.appointment}
             </div>
           )}
-          <div className="h3 mb-[15px] font-condensed text-[24px]">
-            {card.boardMember?.name}
-          </div>
+          <Link
+            className="h3 mb-[15px] font-condensed text-[24px] hover:text-darkBeige"
+            href={card?.uri || '/'}
+          >
+            {card.boardMember?.name}          
+          </Link>
           <div
             className="body-regular mb-[10px] text-darkGrey"
             dangerouslySetInnerHTML={{

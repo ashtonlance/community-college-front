@@ -231,4 +231,14 @@
   .index-page-wrapper{
     @apply mx-[100px] md:mx-[60px] mdsm:mx-[40px] grid grid-cols-12 md:grid-cols-6 sm:grid-cols-4 grid-flow-row gap-5 auto-cols-fr;
   }
+  .video-wrapper > div {
+    @apply absolute !w-[150vmax] h-full top-[50%] left-[50%] translate-x-[-50%]	translate-y-[-50%];
+  }
+
+  @media (min-width: 1024px) {  
+    .video-wrapper > div {
+      @apply !h-[150vmax];
+    }
+  }
+  
 }

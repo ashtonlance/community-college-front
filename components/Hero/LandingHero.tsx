@@ -40,7 +40,7 @@ export const LandingHero = ({
   return (
     <div
       className={cn(
-        `flex h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
+        `flex relative h-full items-center bg-cover bg-no-repeat py-[150px] md:pb-[100px] md:pt-[180px] sm:flex sm:items-center sm:justify-center sm:pb-[60px] sm:pt-[100px] ${
           !bgImg && !bgVideo && `bg-${bgColor}'}`
         } ${showProgramFinder === 'true' ? 'pb-[335px]' : ''}`
       )}

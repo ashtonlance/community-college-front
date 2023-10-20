@@ -24,7 +24,7 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
                 key={i}
                 className="font-bold text-darkBeige hover:text-navy"
               >
-                {crumb.title}
+                {crumb.title.replace('And', '&')}
               </Link>
               {/* separator */}
               <span className="font-bold text-beige"> / </span>

@@ -17,7 +17,13 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({ card }) => {
     >
       <div className="flex flex-1 flex-col">
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
-          <div className="h3 mb-5 font-serif text-[24px]">{card?.title}</div>
+          <Link
+            className="h3 mb-5 font-serif text-[24px] hover:text-darkBeige"
+            href={card?.schoolDetails?.website?.url ?? ''}
+            target={card?.schoolDetails?.website?.target || '_self'}
+          >
+            {card?.title}
+          </Link>
           {card?.schoolDetails?.location && (
             <div className="mb-[10px] flex min-w-[18px] items-center">
               <Location className="mr-[10px] h-[18px] w-[18px] text-gold" />
