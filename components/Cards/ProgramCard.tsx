@@ -10,12 +10,12 @@ export const ProgramCard = ({ card, index }) => {
       delayAmount={index / 10}
       key={card}
       classes={cn(
-        `flex max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full`
+        `flex sm:max-w-none max-w-[400px] flex-col overflow-hidden rounded-xl md:w-full`
       )}
     >
       <div className="flex flex-1 flex-col">
         <Link className="group flex flex-1 flex-col" href={card?.uri ?? ''}>
-          <div className="flex flex-1 flex-col justify-between bg-grey p-10">
+          <div className="flex flex-1 flex-col justify-between bg-white p-10">
             <div className="h3 mb-5 text-[28px] group-hover:text-darkBeige">
               {card?.title}
             </div>

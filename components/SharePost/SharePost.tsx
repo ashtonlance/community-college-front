@@ -27,13 +27,15 @@ export default function SharePost(props: SharePostProps) {
       </small>
 
       <CopyToClipboard text={props.postUrl} onCopy={() => setCopied(true)}>
-        <Image
+        {copied ? 
+          <span className="body-small text-navy">Copied</span> :  
+          <Image
           alt=""
           src={copy}
           width={24}
           height={24}
           className="cursor-pointer"
-        />
+        />}
       </CopyToClipboard>
 
       <FacebookShareButton url={props.postUrl}>
