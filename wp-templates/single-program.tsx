@@ -111,17 +111,22 @@ export default function SingleProgram(props) {
               <h5 className="mb-[32px] font-extrabold">
                 Colleges That Offer This Program
               </h5>
-              <div className="grid auto-cols-max grid-flow-col grid-cols-3  grid-rows-4 md:grid-rows-5 sm:flex sm:flex-col">
+              <div
+                className={`grid grid-flow-row ${
+                  pageData?.colleges?.nodes?.length <= 3
+                    ? 'grid-cols-1'
+                    : 'grid-cols-3'
+                } sm:flex sm:flex-col`}
+              >
                 {pageData?.colleges?.nodes?.map(college => {
                   return (
                     <Link
-                      className="sub-nav relative mb-[12px] flex max-w-[90%] items-center gap-[7px] pr-8 font-normal text-darkGrey hover:text-navy"
+                      className="sub-nav body-regular col-span-1 mb-[12px] flex max-w-fit items-center gap-[7px] pr-8 font-normal text-darkGrey hover:text-navy"
                       key={college?.uri}
                       href={college?.uri ?? ''}
                     >
                       {unslugify(college?.slug)}
-
-                      <Arrow className="absolute right-4 top-[25%] text-gold" />
+                      <Arrow className="text-gold" />
                     </Link>
                   )
                 })}
@@ -159,7 +164,7 @@ export default function SingleProgram(props) {
                       {program.program.degreeTypes?.includes(
                         'continuingEducation'
                       )
-                        ? 'CE'
+                        ? 'WCE'
                         : 'WCE'}
                     </div>
                   )}

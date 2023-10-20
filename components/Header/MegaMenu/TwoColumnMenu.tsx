@@ -91,7 +91,10 @@ export const TwoColumnMenu = ({
             <span className="h3 text-white">
               Need help finding the right program?
             </span>
-            <Link href="/programs" className="secondary-btn gold">
+            <Link
+              href="/students/what-we-offer/program-finder/"
+              className="secondary-btn gold"
+            >
               Use Our Program Finder
             </Link>
           </div>
