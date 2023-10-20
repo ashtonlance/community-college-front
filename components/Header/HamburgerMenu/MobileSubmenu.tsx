@@ -133,34 +133,6 @@ export const MobileSubmenu = ({ items }) => {
 
         {menu}
 
-        {!activeMenu && (
-          <>
-            <div className="mt-[100px] flex w-full justify-between">
-              <Link
-                href="/customer-support"
-                className="links-sub-nav text-white"
-              >
-                Customer Support
-              </Link>
-              <div
-                onClick={() => setLoginModalActive(true)}
-                className="links-sub-nav text-white"
-              >
-                Login
-              </div>
-              <Modal
-                modalContent={<Login />}
-                modalActive={loginModalActive}
-                handleClose={() => setLoginModalActive(false)}
-              />
-            </div>
-            <Button
-              content="work with us"
-              arrow={true}
-              classes="hidden primary-btn white mt-[40px]"
-            />
-          </>
-        )}
       </div>
     </div>
   )
