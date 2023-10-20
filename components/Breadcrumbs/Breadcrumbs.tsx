@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cn } from 'utils/index'
 
 export type CrumbItem = {
   title: string
@@ -16,25 +17,31 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
     >
       {items.map((crumb, i) => {
         const isLastItem = i === items.length - 1
+        const isSecondToLastItem = i === items.length - 2
         if (!isLastItem) {
           return (
             <span key={i}>
               <Link
                 href={crumb.href}
                 key={i}
-                className="font-bold text-darkBeige hover:text-navy"
+                className={`font-bold hover:text-navy ${
+                  isSecondToLastItem ? 'text-navy' : 'text-darkBeige'
+                }`}
               >
                 {crumb.title.replace('And', '&')}
               </Link>
               {/* separator */}
-              <span className="font-bold text-beige"> / </span>
+              {!isSecondToLastItem && (
+                <span className="font-bold text-beige"> / </span>
+              )}
             </span>
           )
         } else {
           return (
-            <span key={i} className="font-bold text-navy">
-              {crumb.title}
-            </span>
+            // <span key={i} className="font-bold text-navy">
+            //   {crumb.title}
+            // </span>
+            null
           )
         }
       })}
