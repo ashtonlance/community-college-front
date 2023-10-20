@@ -13,8 +13,9 @@ export const isCurrentPage = (url, asPath) => {
   if (!url?.endsWith('/')) {
     url = url + '/'
   }
-  const slugToMatch =
-    asPath.split('/')[2] !== '/' ? asPath.split('/')[2] : asPath
+
+  const slugToMatch = asPath.split('/')[1] !== '/' ? asPath.split('/')[1] : 'asPath'
+
   return asPath !== '/' && url.includes(slugToMatch)
 }
 

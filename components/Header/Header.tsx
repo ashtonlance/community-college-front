@@ -35,16 +35,21 @@ const Logo = ({ scrolled }) => {
 
 const UtilityItem = ({ item, onClick }) => {
   const router = useRouter()
-
   return (
     <Link
       onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
-      className={cn(`utility-item-btn ${
-        item.navItem.title === 'Students' ? 'bg-gold text-navy' : ''
-      }
-                    `)}
-      href={item?.navItem?.url || ''}
+      className={cn(`utility-item-btn
+        ${
+          isCurrentPage(item?.navItem?.url, router.asPath)
+            ? 'bg-gold text-navy'
+            : ''
+        }
+        ${
+          router.asPath === '/' &&  item?.navItem?.title === 'Students' ? 'bg-gold text-navy' : ''
+        }
+      `)}
+      href={item?.navItem?.url || ''} 
     >
       {decode(item?.navItem?.title)}
     </Link>
@@ -125,8 +130,8 @@ export const Header = forwardRef(
         })
       } else if (item?.navItem?.url === '/') {
         setCookie('ncccs-preferred-landing-page', 'students', { path: '/' })
-      } else if (item?.navItem?.url === '/college-faculty-staff/') {
-        setCookie('ncccs-preferred-landing-page', 'college-faculty-staff', {
+      } else if (item?.navItem?.url === '/college-faculty-and-staff/') {
+        setCookie('ncccs-preferred-landing-page', 'college-faculty-and-staff', {
           path: '/',
         })
       }
