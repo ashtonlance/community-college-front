@@ -234,11 +234,24 @@
   .video-wrapper > div {
     @apply absolute !w-[150vmax] h-full top-[50%] left-[50%] translate-x-[-50%]	translate-y-[-50%];
   }
+  
+  @media (min-width: 640px) {  
+    .video-wrapper > div {
+      @apply !w-[175vmax];
+    }
+  }
 
   @media (min-width: 1024px) {  
     .video-wrapper > div {
       @apply !h-[150vmax];
     }
   }
+
+  @media (min-width: 1440px) {  
+    .video-wrapper > div {
+      @apply !w-[125vmax];
+    }
+  }
+
   
 }

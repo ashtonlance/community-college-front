@@ -69,7 +69,7 @@ export const LandingHero = ({
           priority
         />
       </div>
-      <div className="landing-hero-text relative z-10 ml-[15%] mr-[30%] flex w-[55%] flex-col md:mx-[100px] md:w-full sm:mx-[40px]">
+      <div className="landing-hero-text relative z-10 ml-[15%] mr-[30%] flex w-[55%] flex-col md:mx-[100px] md:w-full sm:mx-[40px] z-10">
         {subheading && (
           <div className="flex items-center gap-[15px]">
             <h2
