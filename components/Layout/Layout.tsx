@@ -34,8 +34,15 @@ export function Layout(props: LayoutProps) {
   const navigation = React.createRef<HTMLDivElement>()
 
   // get header size dynamically to move main content below
+  const handleResize = () => {
+    setNavigationHeight(
+      navigation?.current?.clientHeight
+      );
+    }
+
   useEffect(() => {
-    setNavigationHeight(navigation?.current?.offsetHeight)
+    setNavigationHeight(navigation?.current?.clientHeight)
+    window.addEventListener("resize", handleResize, false);
   }, [navigation])
 
   return (

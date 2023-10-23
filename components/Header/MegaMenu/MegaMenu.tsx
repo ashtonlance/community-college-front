@@ -3,17 +3,6 @@
 // import { AboutMenu } from './AboutMenu'
 import dynamic from 'next/dynamic'
 
-const AboutMenu = dynamic(
-  async () => {
-    const { AboutMenu } = await import('./AboutMenu')
-    return { default: AboutMenu }
-  },
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-) as unknown as React.FC<any>
-
 const ResourcesMenu = dynamic(
   async () => {
     const { ResourcesMenu } = await import('./ResourcesMenu')
@@ -41,7 +30,10 @@ export const MegaMenu = ({ item, handleActiveItem, activeItem }) => {
   switch (item.label) {
     case 'About':
       return (
-        <AboutMenu handleActiveItem={handleActiveItem} subItems={subItems} />
+        <TwoColumnMenu
+          handleActiveItem={handleActiveItem}
+          subItems={subItems}
+        />
       )
     case 'Services':
       return (

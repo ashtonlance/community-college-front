@@ -35,15 +35,18 @@ const Logo = ({ scrolled }) => {
 
 const UtilityItem = ({ item, onClick }) => {
   const router = useRouter()
-
   return (
     <Link
       onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
-      className={cn(`utility-item-btn ${
-        item.navItem.title === 'Students' ? 'bg-gold text-navy' : ''
-      }
-                    `)}
+      className={cn(`utility-item-btn
+        ${
+          isCurrentPage(item?.navItem?.url, router.asPath, true)
+            ? 'bg-gold text-navy'
+            : ''
+        }
+        
+      `)}
       href={item?.navItem?.url || ''}
     >
       {decode(item?.navItem?.title)}
@@ -125,8 +128,8 @@ export const Header = forwardRef(
         })
       } else if (item?.navItem?.url === '/') {
         setCookie('ncccs-preferred-landing-page', 'students', { path: '/' })
-      } else if (item?.navItem?.url === '/college-faculty-staff/') {
-        setCookie('ncccs-preferred-landing-page', 'college-faculty-staff', {
+      } else if (item?.navItem?.url === '/college-faculty-and-staff/') {
+        setCookie('ncccs-preferred-landing-page', 'college-faculty-and-staff', {
           path: '/',
         })
       }
@@ -208,7 +211,7 @@ export const Header = forwardRef(
               toggleHamburgerMenu={setHamburgerMenuOpen}
             />
           </div>
-          <span className="search-wrapper-icon hidden h-[100%] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
+          <span className="search-wrapper-icon top-0 hidden h-[calc(100%+2px)] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
             <Search
               transparentMode={displayTransparentMode}
               searchOpened={setSearchOpened}
