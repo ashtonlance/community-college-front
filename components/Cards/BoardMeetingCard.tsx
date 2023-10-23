@@ -18,7 +18,7 @@ export const BoardMeetingCard = ({ card }) => {
   return (
     <div className="col-span-12 col-start-1 grid grid-flow-row grid-cols-12 items-center gap-[20px] rounded-[12px] bg-white px-[24px] py-[20px] md:grid-cols-6 md:px-[20px] md:py-[14px] mdsm:grid-cols-4 mdsm:p-[20px]">
       <Link
-       className="footer-links-headline col-span-5 col-start-1 mb-0 text-justify text-navy hover:text-navy md:col-span-2 mdsm:col-span-4"
+        className="footer-links-headline col-span-5 col-start-1 mb-0 text-justify text-navy hover:text-navy md:col-span-2 mdsm:col-span-4"
         href={card?.uri || '/'}
       >
         {card.title}
@@ -33,7 +33,7 @@ export const BoardMeetingCard = ({ card }) => {
         className="body-small group col-span-2 col-end-13 flex items-center justify-end gap-[12px] font-bold text-darkGrey hover:text-navy md:col-span-1 md:col-end-7 mdsm:col-span-4 mdsm:col-start-1 mdsm:justify-start sm:text-[12px]"
         href={card?.uri || '/'}
       >
-        View Meeting Minutes
+        View Meeting Materials
         <Arrow className="text-gold transition-colors duration-100 group-hover:text-navy" />
       </Link>
     </div>
