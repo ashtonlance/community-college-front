@@ -3,17 +3,17 @@ import { getHeadingTag } from '../../utils/headingType'
 import Stroke from 'assets/icons/long-stroke.svg'
 
 export const TextBlock = ({ attributes }) => {
-  const ctaLabel = attributes.data.button_button_text
-  const ctaURL = attributes.data.button_button_link
-  const headingContent = attributes.data.heading
-  const headingSize = attributes.data.heading_size
+  const ctaLabel = attributes.data?.button_button_text
+  const ctaURL = attributes.data?.button_button_link
+  const headingContent = attributes.data?.heading
+  const headingSize = attributes.data?.heading_size
   const heading = getHeadingTag(headingSize, headingContent)
-  const description = attributes.data.body_copy
-  const tags = attributes.data.above_header_content_tags
-  const aboveHeading = attributes.data.above_header_content_headline
-  const colorModule = attributes.data.background_color
-  const bottomSpacing = attributes.data.component_spacing_bottom_spacing
-  const topSpacing = attributes.data.component_spacing_top_spacing
+  const description = attributes.data?.body_copy
+  const tags = attributes.data?.above_header_content_tags
+  const aboveHeading = attributes.data?.above_header_content_headline
+  const colorModule = attributes.data?.background_color
+  const bottomSpacing = attributes.data?.component_spacing_bottom_spacing
+  const topSpacing = attributes.data?.component_spacing_top_spacing
 
   return (
     <div
