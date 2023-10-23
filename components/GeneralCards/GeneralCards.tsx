@@ -30,7 +30,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
         `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
       )}
     >
-      <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-between gap-[20px] md:flex-col md:items-center">
+      <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-center gap-[20px] md:flex-col md:items-center">
         {cards > 0 &&
           [...Array(cards).keys()].map(card => {
             const image_position = attributes.data[`card_${card}_image_position`]
@@ -40,8 +40,8 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                 className={cn(
                   `${cards == 1 && 'grow'} ${
                     cards == 2 && 'w-[calc(50%-10px)]'
-                  } ${cards > 2 && 'w-[calc(33%-10px)]'} ${cardColor}
-                  overflow-hidden rounded-xl text-center md:w-full sm:p-[32px]`
+                  } ${cards > 2 && 'flex-1 min-w-[30%] md:max-w-none max-w-[33.33%]'} ${cardColor}
+                  overflow-hidden rounded-xl text-center md:w-full sm:p-[32px] flex flex-col`
                 )}
               >
                 {attributes.data[`card_${card}_image`].url ? (
@@ -55,20 +55,24 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     )}
                   />
                 ) : null}
-                <div className="flex flex-col px-10 py-[50px]">
+                <div className="flex flex-col px-10 py-[50px] flex-1">
                   <h3>{attributes.data[`card_${card}_heading`]}</h3>
                   <div
-                    className="body-large mb-[32px] text-gmt-500"
+                    className="body-large text-gmt-500"
                     dangerouslySetInnerHTML={{
                       __html: attributes.data[`card_${card}_body_copy`],
                     }}
                   />
-                  <Link
-                    className="secondary-btn outline-btn navy mx-auto py-[14px]"
-                    href={attributes.data[`card_${card}_button_url`]}
-                  >
-                    {attributes.data[`card_${card}_button_label`]}
-                  </Link>
+                  {attributes.data[`card_${card}_button_url`] &&  attributes.data[`card_${card}_button_label`] ? (
+                    <div className="mt-auto">
+                    <Link
+                      className="secondary-btn outline-btn navy mx-auto py-[14px] mt-8"
+                      href={attributes.data[`card_${card}_button_url`]}
+                    >
+                      {attributes.data[`card_${card}_button_label`]}
+                    </Link>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             )
