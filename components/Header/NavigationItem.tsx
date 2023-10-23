@@ -21,9 +21,13 @@ export const isCurrentPage = (url = '', asPath = '', isUtil = false) => {
   } else if (pathParts[2] !== '/' && !isUtil) {
     slugToMatch = pathParts[2]
   } else if (isUtil) {
-    slugToMatch = pathParts[1]
+    if (url === '/' || url === 'http://localhost:3000/') {
+      slugToMatch = 'students'
+      return true
+    } else {
+      slugToMatch = pathParts[1]
+    }
   }
-
   return asPath !== '/' && url.includes(slugToMatch)
 }
 

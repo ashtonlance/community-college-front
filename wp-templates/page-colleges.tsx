@@ -125,7 +125,6 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     } else {
       result = result.sort((a, b) => a.title.localeCompare(b.title))
     }
-    console.log(result)
     setFilteredColleges(result)
   }
 
@@ -254,6 +253,7 @@ CollegesArchive.query = gql`
         }
         seo {
           fullHead
+          title
         }
         collegeDetails {
           name
