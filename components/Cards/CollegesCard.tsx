@@ -23,7 +23,7 @@ export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
             alt=""
             width={400}
             height={200}
-            className="max-h-[200px] object-cover"
+            className="max-h-[200px] object-cover min-w-[100%]"
           />
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
