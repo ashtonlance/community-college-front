@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { cn } from 'utils'
+import bg from 'assets/imgs/angled-bg-menu.jpg'
+import Image from 'next/image'
 
 type MobileChildSubMenuProps = {
   subItems: any
@@ -13,22 +15,22 @@ export const MobileChildSubMenu = ({
   handleActiveItem,
 }: MobileChildSubMenuProps) => {
   return (
-    <div className="semi-modal">
+    <div className="semi-modal bg-transparent">
       <div
         // onMouseLeave={() => handleActiveItem('')}
         className={cn(
-          `mega-menu h-[100px] py-[40px] md:top-[65px] md:min-h-[170px] ${classes}`
+          `mega-menu relative h-[100px] py-[40px] md:top-[65px] md:min-h-[170px] ${classes} bg-transparent`
         )}
       >
-        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between">
+        <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="flex flex-1 justify-around md:mt-[24px] md:flex-col md:gap-[14px] sm:mt-0">
-            {subItems?.map(subItem => {
+            {subItems?.map((subItem, i) => {
               return (
                 <>
                   <Link
                     href={subItem?.url || ''}
-                    className="links-sub-nav text-[20px] flex capitalize text-white"
-                    key={subItem?.label}
+                    className="links-sub-nav flex text-[20px] capitalize text-white"
+                    key={subItem?.url + i}
                   >
                     {subItem?.label}
                   </Link>
@@ -36,8 +38,8 @@ export const MobileChildSubMenu = ({
                     return (
                       <Link
                         href={subItemChild?.url || ''}
-                        className="links-sub-nav flex capitalize text-lightBlue text-sm leading-[100%] font-sans font-normal"
-                        key={subItemChild?.label}
+                        className="links-sub-nav flex font-sans text-sm font-normal capitalize leading-[100%] text-lightBlue"
+                        key={subItemChild?.label + i}
                       >
                         {subItemChild?.label}
                       </Link>

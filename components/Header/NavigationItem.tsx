@@ -15,8 +15,6 @@ export const isCurrentPage = (url = '', asPath = '', isUtil = false) => {
   }
 
   const pathParts = asPath.split('/')
-  console.log(pathParts, 'pathParts')
-  console.log(url, 'url', asPath, 'asPath', isUtil, 'isUtil')
   let slugToMatch = asPath
   if (pathParts.length === 3 && !isUtil) {
     return
@@ -24,7 +22,6 @@ export const isCurrentPage = (url = '', asPath = '', isUtil = false) => {
     slugToMatch = pathParts[2]
   } else if (isUtil) {
     slugToMatch = pathParts[1]
-    console.log(slugToMatch, 'slugToMatch')
   }
 
   return asPath !== '/' && url.includes(slugToMatch)
