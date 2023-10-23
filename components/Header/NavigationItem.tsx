@@ -16,7 +16,6 @@ export const isCurrentPage = (url: string, asPath: string) => {
 
   const pathParts = asPath.split('/')
   let slugToMatch = asPath
-  console.log(pathParts.length, pathParts, 'path parts')
   if (pathParts.length === 3) {
     return
     // slugToMatch = pathParts[1]
