@@ -55,7 +55,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                 className={`flex items-center gap-x-3 text-left hover:text-darkBeige md:mr-4`}
               >
                 {programArea}
-                <span className="h5 text-darkBeige sm:mt-[5px] mt-[10px]">
+                <span className="h5 mt-[10px] text-darkBeige sm:mt-[5px]">
                   {data?.programs?.length}
                 </span>
               </Link>
@@ -69,7 +69,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                       key={program.uri}
                     >
                       <Link
-                        className="font-condensed text-xl font-bold text-navy tracking-[-0.2px] text-center"
+                        className="text-center font-condensed text-xl font-bold tracking-[-0.2px] text-navy"
                         href={program.uri}
                       >
                         {program.title}
@@ -80,11 +80,11 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
                         program.program.degreeTypes?.includes(
                           'workforceContinuingEducation'
                         )) && (
-                        <div className="tag absolute right-0 top-0 rounded-bl-lg rounded-tr-lg text-darkGrey bg-grey group-hover:bg-lightBlue">
+                        <div className="tag absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-grey text-darkGrey group-hover:bg-lightBlue">
                           {program.program.degreeTypes?.includes(
                             'continuingEducation'
                           )
-                            ? 'CE'
+                            ? 'WCE'
                             : 'WCE'}
                         </div>
                       )}
@@ -100,7 +100,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
 
   return (
     <div className={`bg-grey`}>
-      <div className={`md:pt-8 pt-10 module-spacing-bottom-medium`}>
+      <div className={`module-spacing-bottom-medium pt-10 md:pt-8`}>
         <Accordion type="single" collapsible>
           {accordionItems}
         </Accordion>
