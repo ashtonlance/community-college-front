@@ -30,9 +30,10 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
         `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
       )}
     >
-      <div className="px-[100px] md:px-[60x] sm:px-[40px] flex flex-wrap justify-between gap-[20px] md:flex-col md:items-center">
+      <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-between gap-[20px] md:flex-col md:items-center">
         {cards > 0 &&
           [...Array(cards).keys()].map(card => {
+            const image_position = attributes.data[`card_${card}_image_position`]
             return (
               <div
                 key={card}
@@ -49,7 +50,9 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     alt=""
                     width={400}
                     height={200}
-                    className='w-full h-[200px] object-cover'
+                    className={cn(
+                      `w-full sm:h-[200px] md:h-[250px] h-[200px] object-cover object-${image_position}`
+                    )}
                   />
                 ) : null}
                 <div className="flex flex-col px-10 py-[50px]">
