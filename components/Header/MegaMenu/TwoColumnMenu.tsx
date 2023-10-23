@@ -22,22 +22,19 @@ export const TwoColumnMenu = ({
   parentItem,
   activeItem,
 }: TwoColumnMenuProps) => {
-  const [navigationHeight, setNavigationHeight] = useState(undefined)
+  const [navigationHeight, setNavigationHeight] = useState(150)
   const navigation = document.getElementById('topbar')
   // get header size dynamically to move main content below
   const handleResize = () => {
     setNavigationHeight(navigation.clientHeight)
-    console.log(navigationHeight, 'nav height')
   }
 
   useEffect(() => {
-    setNavigationHeight(navigation.clientHeight)
+    if (navigation.clientHeight > 190) {
+      setNavigationHeight(207)
+    }
     window.addEventListener('resize', handleResize, false)
   }, [navigation])
-
-  useEffect(() => {
-    setNavigationHeight(navigation.clientHeight)
-  }, [])
 
   const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
     const target = e.target as Element
