@@ -153,41 +153,44 @@ export const Header = forwardRef(
         {announcementBar?.showAnnouncementBar === '1' ? (
           <AnnouncementBar announcementBar={announcementBar} />
         ) : null}
-        <div className="flex w-full justify-between bg-navy">
+        <div className="mx-auto flex w-full justify-between bg-navy">
           <div className="flex w-full items-center justify-between">
-            {utilityNavigation && (
-              <>
-                <div className="flex h-full items-center justify-center md:w-full md:justify-between">
-                  {utilityNavigation
-                    .slice(0, 4)
-                    ?.map(item => (
-                      <UtilityItem
-                        onClick={e => handleUtilityNavigationClick(e, item)}
-                        key={item?.navItem?.title}
-                        item={item}
+            <div className="mx-auto flex w-full max-w-[1700px] items-center justify-between px-4 md:px-6 sm:px-0">
+              {utilityNavigation && (
+                <>
+                  <div className="flex h-full items-center justify-center md:w-full md:justify-between">
+                    {utilityNavigation
+                      .slice(0, 4)
+                      ?.map(item => (
+                        <UtilityItem
+                          onClick={e => handleUtilityNavigationClick(e, item)}
+                          key={item?.navItem?.title}
+                          item={item}
+                        />
+                      ))}
+                  </div>
+                  <div className="flex h-full items-center justify-center md:hidden">
+                    {utilityNavigation
+                      .slice(4)
+                      ?.map(item => (
+                        <UtilityItem
+                          onClick={e => handleUtilityNavigationClick(e, item)}
+                          key={item?.navItem?.title}
+                          item={item}
+                        />
+                      ))}
+
+                    <span className="search-wrapper-icon flex h-[45px] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:hidden md:h-[50px] md:w-[50px] md:justify-center md:p-0">
+                      <Search
+                        transparentMode={displayTransparentMode}
+                        searchOpened={setSearchOpened}
                       />
-                    ))}
-                </div>
-                <div className="flex h-full items-center justify-center md:hidden">
-                  {utilityNavigation
-                    .slice(4)
-                    ?.map(item => (
-                      <UtilityItem
-                        onClick={e => handleUtilityNavigationClick(e, item)}
-                        key={item?.navItem?.title}
-                        item={item}
-                      />
-                    ))}
-                </div>
-              </>
-            )}
+                    </span>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-          <span className="search-wrapper-icon flex items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:hidden md:h-[50px] md:w-[50px] md:justify-center md:p-0">
-            <Search
-              transparentMode={displayTransparentMode}
-              searchOpened={setSearchOpened}
-            />
-          </span>
         </div>
         <div
           className={cn(

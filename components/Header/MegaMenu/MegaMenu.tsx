@@ -41,7 +41,7 @@ export const MegaMenu = ({ item, handleActiveItem, activeItem }) => {
       )
     case 'Resources':
       return (
-        <ResourcesMenu
+        <TwoColumnMenu
           handleActiveItem={handleActiveItem}
           subItems={subItems}
         />
