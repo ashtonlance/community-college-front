@@ -41,15 +41,13 @@ const UtilityItem = ({ item, onClick }) => {
       key={item?.navItem?.title}
       className={cn(`utility-item-btn
         ${
-          isCurrentPage(item?.navItem?.url, router.asPath)
+          isCurrentPage(item?.navItem?.url, router.asPath, true)
             ? 'bg-gold text-navy'
             : ''
         }
-        ${
-          router.asPath === '/' &&  item?.navItem?.title === 'Students' ? 'bg-gold text-navy' : ''
-        }
+        
       `)}
-      href={item?.navItem?.url || ''} 
+      href={item?.navItem?.url || ''}
     >
       {decode(item?.navItem?.title)}
     </Link>
@@ -213,7 +211,7 @@ export const Header = forwardRef(
               toggleHamburgerMenu={setHamburgerMenuOpen}
             />
           </div>
-          <span className="search-wrapper-icon hidden h-[calc(100%+2px)] top-0 items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
+          <span className="search-wrapper-icon top-0 hidden h-[calc(100%+2px)] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:absolute md:right-0 md:flex md:w-[110px]">
             <Search
               transparentMode={displayTransparentMode}
               searchOpened={setSearchOpened}
