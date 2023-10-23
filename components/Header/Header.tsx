@@ -126,7 +126,10 @@ export const Header = forwardRef(
         setCookie('ncccs-preferred-landing-page', 'system-office', {
           path: '/',
         })
-      } else if (item?.navItem?.url === '/') {
+      } else if (
+        item?.navItem?.url === '/' ||
+        item?.navItem?.url === '/students'
+      ) {
         setCookie('ncccs-preferred-landing-page', 'students', { path: '/' })
       } else if (item?.navItem?.url === '/college-faculty-and-staff/') {
         setCookie('ncccs-preferred-landing-page', 'college-faculty-and-staff', {
