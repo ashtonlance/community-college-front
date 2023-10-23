@@ -54,7 +54,7 @@ export const TextAndImageBlock = ({ attributes }) => {
         ) : (
           data?.mediaItem?.sourceUrl && (
             <div
-              className="h-[520px] w-[50%] self-center rounded-[12px] bg-cover md:w-full"
+              className="h-[520px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
               style={{ backgroundImage: `url(${data?.mediaItem?.sourceUrl})` }}
             ></div>
           )
