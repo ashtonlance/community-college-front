@@ -95,7 +95,11 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const filterColleges = () => {
     let result = colleges
 
-    if (debouncedFilters.zipCode) {
+    if (
+      debouncedFilters.zipCode &&
+      (debouncedFilters.zipCode.length === 5 ||
+        debouncedFilters.zipCode.length === 0)
+    ) {
       result = result.filter(
         college =>
           college.collegeDetails.map.postCode === debouncedFilters.zipCode
