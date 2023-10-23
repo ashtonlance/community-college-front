@@ -30,7 +30,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
         `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
       )}
     >
-      <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-between gap-[20px] md:flex-col md:items-center">
+      <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-center gap-[20px] md:flex-col md:items-center">
         {cards > 0 &&
           [...Array(cards).keys()].map(card => {
             const image_position = attributes.data[`card_${card}_image_position`]
@@ -40,7 +40,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                 className={cn(
                   `${cards == 1 && 'grow'} ${
                     cards == 2 && 'w-[calc(50%-10px)]'
-                  } ${cards > 2 && 'w-[calc(33%-10px)]'} ${cardColor}
+                  } ${cards > 2 && 'flex-1 min-w-[30%] md:max-w-none max-w-[33.33%]'} ${cardColor}
                   overflow-hidden rounded-xl text-center md:w-full sm:p-[32px] flex flex-col`
                 )}
               >
