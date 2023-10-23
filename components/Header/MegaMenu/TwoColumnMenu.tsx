@@ -23,18 +23,21 @@ export const TwoColumnMenu = ({
   activeItem,
 }: TwoColumnMenuProps) => {
   const [navigationHeight, setNavigationHeight] = useState(undefined)
-  const navigation = document.getElementById('topbar');
+  const navigation = document.getElementById('topbar')
   // get header size dynamically to move main content below
   const handleResize = () => {
-    setNavigationHeight(
-      navigation.clientHeight
-      );
-    }
-  
+    setNavigationHeight(navigation.clientHeight)
+    console.log(navigationHeight, 'nav height')
+  }
+
   useEffect(() => {
     setNavigationHeight(navigation.clientHeight)
-    window.addEventListener("resize", handleResize, false);
+    window.addEventListener('resize', handleResize, false)
   }, [navigation])
+
+  useEffect(() => {
+    setNavigationHeight(navigation.clientHeight)
+  }, [])
 
   const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
     const target = e.target as Element
@@ -43,12 +46,8 @@ export const TwoColumnMenu = ({
     }
   })
   return (
-    <div className="fixed left-0 top-[155px] w-full">
-      <div
-        // onMouseLeave={() => handleActiveItem('')}
-        className={cn(`mega-menu z-30 md:top-0 ${classes}`)}
-        ref={ref}
-      >
+    <div className={`fixed left-0 top-[${navigationHeight}px] w-full`}>
+      <div className={cn(`mega-menu z-30 md:top-0 ${classes}`)} ref={ref}>
         <Image
           className="pointer-events-none object-fill object-center"
           src={bg}
@@ -116,7 +115,7 @@ export const TwoColumnMenu = ({
           </div>
         </div>
       </div>
-      <div className="semi-modal"></div>
+      <div className={`semi-modal top-[${navigationHeight}px]`}></div>
     </div>
   )
 }

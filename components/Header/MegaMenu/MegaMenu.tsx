@@ -1,6 +1,3 @@
-// import { ServicesMenu } from './ServicesMenu'
-// import { ResourcesMenu } from './ResourcesMenu'
-// import { AboutMenu } from './AboutMenu'
 import dynamic from 'next/dynamic'
 
 const ResourcesMenu = dynamic(
