@@ -51,7 +51,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     width={400}
                     height={200}
                     className={cn(
-                      `w-full sm:h-[200px] md:h-[250px] h-[200px] object-cover object-${image_position}`
+                      `w-full sm:h-[200px] md:h-[350px] h-[300px] object-cover object-${image_position}`
                     )}
                   />
                 ) : null}
