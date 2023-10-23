@@ -29,7 +29,6 @@ export const Footer = ({ menuItems, footerNavigation }) => {
   const utilityMenu = footerNavigation?.filter(
     node => node.label === 'Utility Menu'
   )
-  console.log(footerNavigation, 'footerNavigation')
   return (
     <div className="grid-rows-auto relative grid grid-cols-12 px-[100px] py-[80px] text-white md:gap-y-[40px] md:p-[60px] sm:gap-y-0 sm:px-[32px] sm:py-[48px]">
       <div className="col-start-1 col-end-3 md:col-span-12 sm:mb-[25px]">
