@@ -14,11 +14,14 @@ export const ProgramCard = ({ card, index }) => {
       )}
     >
       <div className="flex flex-1 flex-col">
-        <Link className="group flex flex-1 flex-col" href={card?.uri ?? ''}>
+        <div className="group flex flex-1 flex-col">
           <div className="flex flex-1 flex-col justify-between bg-white p-10">
-            <div className="h3 mb-5 text-[28px] group-hover:text-darkBeige">
+            <Link
+              href={card?.uri ?? ''}
+              className="h3 mb-5 text-[28px] group-hover:text-darkBeige"
+            >
               {card?.title}
-            </div>
+            </Link>
             <div className="mb-5 flex w-fit items-center">
               {card?.program?.desctipion ? (
                 <div className="text-base text-darkBeige">
@@ -66,7 +69,7 @@ export const ProgramCard = ({ card, index }) => {
               )}
             </div>
           </div>
-        </Link>
+        </div>
       </div>
     </FadeIn>
   )

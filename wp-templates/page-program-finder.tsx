@@ -162,8 +162,6 @@ export const ProgramFinder = props => {
             })
             .filter(program => program.colleges.length > 0)
         }
-
-        console.log(result, 'result')
         setFilteredPrograms(result)
         setShouldFilter(false)
         if (!result.length) {
@@ -242,7 +240,7 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] py-10 sm:pt-[10px] md:pt-5 md:pb-8 md:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] py-10 md:flex-wrap md:pb-8 md:pt-5 sm:pt-[10px]">
           <div className="flex flex-1 basis-full items-center gap-x-[20px] md:flex-wrap">
             <label
               htmlFor="programArea"
@@ -252,7 +250,7 @@ export const ProgramFinder = props => {
             </label>
             <select
               id="programArea"
-              className="h-[52px] w-[229px] text-darkBeige  sm:h-auto md:w-full"
+              className="h-[52px] w-[229px] text-darkBeige  md:w-full sm:h-auto"
               value={inputValues.programArea}
               onChange={e =>
                 setInputValues({ ...inputValues, programArea: e.target.value })
@@ -325,7 +323,7 @@ export const ProgramFinder = props => {
         </div>
       </div>
       {filteredPrograms.length > 0 ? (
-        <div className="bg-grey flex items-center justify-center px-[205px] sm:py-5 md:py-10 py-[60px] md:px-[60px] sm:px-10 text-center">
+        <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
           <div className="h2 mb-0">
             {'Showing '}
             {filteredPrograms.length}{' '}
@@ -334,8 +332,8 @@ export const ProgramFinder = props => {
         </div>
       ) : (
         shouldFilter && (
-          <div className="bg-grey flex items-center justify-center px-[205px] sm:py-5 md:py-10 py-[60px] md:px-[60px] sm:px-10 text-center">
-            <div className="flex flex-col sm:gap-5 gap-6">
+          <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
+            <div className="flex flex-col gap-6 sm:gap-5">
               <div className="h2 mb-0">No results found.</div>
               <p>Please adjust your selected filter and try again.</p>
             </div>

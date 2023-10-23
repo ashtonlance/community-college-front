@@ -10,6 +10,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
 import { PostFilter } from '@/components/PostFilter'
+import { CollegesCard } from '@/components/Cards'
 
 type CollegesIndexProps = {
   data: {
@@ -94,7 +95,11 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const filterColleges = () => {
     let result = colleges
 
-    if (debouncedFilters.zipCode) {
+    if (
+      debouncedFilters.zipCode &&
+      (debouncedFilters.zipCode.length === 5 ||
+        debouncedFilters.zipCode.length === 0)
+    ) {
       result = result.filter(
         college =>
           college.collegeDetails.map.postCode === debouncedFilters.zipCode
@@ -120,7 +125,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     } else {
       result = result.sort((a, b) => a.title.localeCompare(b.title))
     }
-
+    console.log(result)
     setFilteredColleges(result)
   }
 
@@ -184,12 +189,29 @@ export default function CollegesArchive(props: CollegesIndexProps) {
           setFilters={setFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
         />
-        <div className="index-page-wrapper bg-grey">
-          <PaginatedPosts
-            currentPage={currentPage}
-            postType="colleges"
-            posts={filteredColleges}
-          />
+        <div
+          className={`index-page-wrapper bg-grey ${
+            filteredColleges.length < 9 ? 'pb-10' : null
+          }`}
+        >
+          {filteredColleges.length > 0 ? (
+            filteredColleges.length > 9 ? (
+              <PaginatedPosts
+                currentPage={currentPage}
+                postType="colleges"
+                posts={filteredColleges}
+              />
+            ) : (
+              <>
+                {filteredColleges.map((college, index) => (
+                  <CollegesCard key={index} card={college} />
+                ))}
+                <div className="pb-10"></div>
+              </>
+            )
+          ) : (
+            <p className="h3 col-span-12 text-center">No results found.</p>
+          )}
         </div>
 
         <CTABanner attributes={ctaAttributes} />

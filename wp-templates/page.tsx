@@ -45,11 +45,15 @@ function getFirstPathPart(slug: string | undefined): string {
   if (!slug) {
     return 'students'
   }
-
+  console.log({ slug })
   const parts = slug.split('/')
 
   if (parts.length > 0 && parts[1] === 'about-us') {
     return 'system-office'
+  }
+
+  if (parts.length > 0 && parts[1] === 'college-faculty-staff') {
+    return 'college-faculty-and-staff'
   }
 
   return parts.length > 0 ? parts[1] : 'students'

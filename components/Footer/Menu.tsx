@@ -22,7 +22,7 @@ export const Menu = ({ subItems, classlist = '', label = '' }) => {
           return (
             <Link
               key={subItem?.label}
-              href={subItem.url?.url || ''}
+              href={subItem.url || ''}
               className="cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:text-center md:text-[11px] sm:text-[8px]"
             >
               {subItem.label}

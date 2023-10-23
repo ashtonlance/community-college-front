@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { cn } from 'utils'
 import Stroke from 'assets/icons/stroke.svg'
 
-export const isCurrentPage = (url, asPath) => {
+export const isCurrentPage = (url: string, asPath: string) => {
   // Check if the domain is in the url
   if (!url?.startsWith(process.env.NEXT_PUBLIC_SITE_URL)) {
     url = process.env.NEXT_PUBLIC_SITE_URL + url
@@ -14,7 +14,15 @@ export const isCurrentPage = (url, asPath) => {
     url = url + '/'
   }
 
-  const slugToMatch = asPath.split('/')[1] !== '/' ? asPath.split('/')[1] : 'asPath'
+  const pathParts = asPath.split('/')
+  let slugToMatch = asPath
+  if (pathParts.length === 3) {
+    return
+    // slugToMatch = pathParts[1]
+    // console.log(slugToMatch, 'slugToMatch')
+  } else if (pathParts[2] !== '/') {
+    slugToMatch = pathParts[2]
+  }
 
   return asPath !== '/' && url.includes(slugToMatch)
 }

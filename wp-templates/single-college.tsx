@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
@@ -8,6 +8,39 @@ import Location from 'assets/icons/location.svg'
 import { WYSIWYG } from '@/components/WYSIWYG'
 import { CTABanner } from '@/components/CTABanner'
 import { Testimonial } from '@/components/Testimonial'
+import { useRouter } from 'next/router'
+import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/Accordion/AccordionInternal'
+import { useEffect, useState } from 'react'
+import { FadeIn } from '@/components/FadeIn'
+import Link from 'next/link'
+
+const GET_PROGRAMS = gql`
+  query GetPrograms($slug: [String]) {
+    programs(
+      first: 100
+      where: {
+        orderby: { field: TITLE, order: ASC }
+        taxQuery: { taxArray: { taxonomy: COLLEGE, terms: $slug, field: SLUG } }
+      }
+    ) {
+      nodes {
+        title
+        uri
+        taggedProgramAreas {
+          nodes {
+            name
+          }
+        }
+      }
+    }
+  }
+`
 export default function SingleCollege(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.college
@@ -19,6 +52,18 @@ export default function SingleCollege(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   console.log(pageData, 'pageData')
+  const router = useRouter()
+  const slug = router?.query?.wordpressNode[1]
+  const { data: programs } = useQuery(GET_PROGRAMS, {
+    variables: { slug },
+  })
+  const [programAreas, setProgramAreas] = useState([])
+
+  useEffect(() => {
+    if (programs?.programs?.nodes?.length > 0) {
+      setProgramAreas(organizeProgramsByTaggedAreas(programs?.programs?.nodes))
+    }
+  }, [programs])
 
   if (props.loading) {
     return <>Loading...</>
@@ -42,8 +87,8 @@ export default function SingleCollege(props) {
         ctaURL={pageData?.collegeDetails?.linkToWebsite?.url}
         isCollegeSingle={true}
       />
-      <div className="flex px-52 pb-10 pt-20 ">
-        <div className="basis-1/2">
+      <div className="flex flex-wrap px-52 py-20 md:px-[100px] md:py-[60px] sm:p-10 ">
+        <div className="basis-1/2 md:basis-full">
           {pageData?.collegeDetails?.map ? (
             <>
               <div className="mb-[27px] flex items-center">
@@ -52,7 +97,7 @@ export default function SingleCollege(props) {
                   Physical Address
                 </span>
               </div>
-              <address className="h4 mb-10 max-w-[19ch] whitespace-pre-wrap not-italic">
+              <address className="h4 mb-10 max-w-[21ch] whitespace-pre-line not-italic">
                 <div className="w-full">
                   {pageData?.collegeDetails?.map?.streetNumber}{' '}
                   {pageData?.collegeDetails?.map?.streetName}
@@ -78,7 +123,7 @@ export default function SingleCollege(props) {
             </>
           ) : null}
         </div>
-        <div className="basis-1/2">
+        <div className="basis-1/2 md:basis-full">
           <Map
             coordinates={[
               {
@@ -115,6 +160,36 @@ export default function SingleCollege(props) {
           />
         </div>
       ) : null}
+      <FadeIn>
+        <div className="bg-grey">
+          <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
+            <Accordion className="w-full" type="single" collapsible>
+              {Object.keys(programAreas).map((key, index) => (
+                <AccordionItem
+                  className="bg-white"
+                  key={index}
+                  value={`item-${index}`}
+                >
+                  <AccordionTrigger>{key}</AccordionTrigger>
+                  <AccordionContent>
+                    {programAreas[key].programs.map((program, i) => {
+                      return (
+                        <Link
+                          className="block w-full text-left underline hover:text-darkGrey"
+                          href={program?.uri ?? ''}
+                          key={i}
+                        >
+                          {program.title}
+                        </Link>
+                      )
+                    })}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </FadeIn>
       <CTABanner
         attributes={{
           data: {

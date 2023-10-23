@@ -1,5 +1,7 @@
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
 import {
   CollegesCard,
   NumberedMemos,
@@ -52,9 +54,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const offset = (props.currentPage - 1) * PAGE_SIZE
   const items = (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
 
-  const handlePageClick = (page: number) => {
-    router.push(`${router.asPath?.split('?')?.[0]}?page=${page}`, null, {
-      shallow: false,
+  const handlePageClick = (pageNumber: number) => {
+    router.push(`${router.asPath?.split('?')?.[0]}?page=${pageNumber}`, null, {
+      shallow: true,
     })
   }
 
