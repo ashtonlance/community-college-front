@@ -109,10 +109,10 @@ export const Footer = ({ menuItems, footerNavigation }) => {
       />
       <div className="footer-links-headline order-2 col-start-12 md:col-span-3 md:col-start-9 sm:col-span-12 sm:col-start-1 sm:mb-[12px]">
         <div className="flex flex-col gap-y-5 md:gap-y-3 sm:gap-y-2">
-          {utilityMenu[0]?.children?.map(item => {
+          {utilityMenu[0]?.children?.map((item, i) => {
             return (
               <Link
-                key={item?.label}
+                key={item?.label + i}
                 className="font-condensed text-lg text-white hover:text-lightBlue md:text-center sm:text-[15px]"
                 href={item?.url || ''}
               >

@@ -314,3 +314,19 @@ table td {
 .index-page-wrapper .pagination{
   @apply col-span-12;
 }
+
+.aa-Panel {
+z-index: 1000;
+}
+
+.aa-Autocomplete {
+  @apply bg-navy py-4;
+}
+
+.aa-Form {
+  @apply mx-auto max-w-3xl;
+}
+
+.aa-DetachedSearchButton {
+  @apply bg-white w-9/12 mx-auto;
+}
