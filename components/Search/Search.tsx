@@ -7,7 +7,11 @@ import { MemoizedAutoComplete } from './Autocomplete'
 import { getAlgoliaResults } from '@algolia/autocomplete-js'
 import { Hit } from './Hit'
 import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query-suggestions'
-import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
+import {
+  createLocalStorageRecentSearchesPlugin,
+  search,
+} from '@algolia/autocomplete-plugin-recent-searches'
+import { useClickAway } from '@uidotdev/usehooks'
 
 import '@algolia/autocomplete-theme-classic'
 
@@ -30,7 +34,7 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
   indexName: INSTANT_SEARCH_QUERY_SUGGESTIONS,
   getSearchParams() {
     return {
-      hitsPerPage: 10,
+      hitsPerPage: 3,
     }
   },
   categoryAttribute: [
@@ -44,6 +48,7 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
     return {
       ...source,
       getItemUrl({ item }) {
+        // console.log(item, 'item')
         return item.permalink
       },
       onSelect({ setIsOpen }) {
@@ -53,12 +58,12 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
         ...source.templates,
         item(params) {
           const { item, html } = params
-          console.log(item, 'item header')
+          // console.log(item, 'item header')
           return html`<a
-            class="aa-ItemLink"
+            className="aa-ItemLink"
             href="https://google.com?q=${item.query}"
           >
-            ${item?.post_title}
+            ${source.templates.item(params).props.children}
           </a>`
         },
       },
@@ -75,6 +80,15 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
 
   const [navigationHeight, setNavigationHeight] = useState(140)
   const [navigation, setNavigation] = useState(null)
+
+  const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
+    const target = e.target as Element
+    if (!target.classList.contains('main-nav')) {
+      console.log(target, 'target')
+      closeSearchBar()
+      console.log(searchBarActive, 'searchBarActive in ref')
+    }
+  })
 
   useEffect(() => {
     setNavigation(document.getElementById('topbar'))
@@ -112,8 +126,16 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
     setSearchBarActive(!searchBarActive)
   }
 
+  const closeSearchBar = () => {
+    searchOpened(false)
+    setSearchBarActive(false)
+  }
+
   return (
-    <div className="flex items-center gap-[10px] hover:cursor-pointer">
+    <div
+      className="flex items-center gap-[10px] hover:cursor-pointer"
+      // ref={ref}
+    >
       <div
         className="flex items-center gap-[10px] hover:cursor-pointer"
         onClick={toggleSearchBar}
@@ -212,7 +234,11 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
                   },
                 },
                 getItemUrl({ item }) {
-                  return item.permalink
+                  const urlWithoutDomain = item?.permalink?.replace(
+                    'https://ncccsstg.wpengine.com',
+                    ''
+                  )
+                  return urlWithoutDomain
                 },
               },
             ]}

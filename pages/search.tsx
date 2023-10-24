@@ -9,8 +9,6 @@ import { Hits, InstantSearch, Pagination, SearchBox } from 'react-instantsearch'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
-const PAGE_SIZE = 3
-
 const GET_SEARCH = gql`
   ${Header.fragments.entry}
 
