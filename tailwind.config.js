@@ -70,5 +70,10 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
-  safelist: ['top-[207px]', 'top-[150px]', 'top-[192px]', 'top-[200px]'],
+  safelist: [
+    'top-[207px]',
+    'top-[150px]',
+    'top-[192px]',
+    'top-[200px], top-[140px]',
+  ],
 }

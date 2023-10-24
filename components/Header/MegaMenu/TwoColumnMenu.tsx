@@ -22,7 +22,7 @@ export const TwoColumnMenu = ({
   parentItem,
   activeItem,
 }: TwoColumnMenuProps) => {
-  const [navigationHeight, setNavigationHeight] = useState(150)
+  const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = document.getElementById('topbar')
   // get header size dynamically to move main content below
   const handleResize = () => {
@@ -32,6 +32,8 @@ export const TwoColumnMenu = ({
   useEffect(() => {
     if (navigation.clientHeight > 190) {
       setNavigationHeight(200)
+    } else {
+      setNavigationHeight(140)
     }
     window.addEventListener('resize', handleResize, false)
   }, [navigation])
