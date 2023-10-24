@@ -121,7 +121,7 @@ table td {
   @apply bg-lightBlue font-extrabold text-navy uppercase;
 }
 
-.wysiwyg a {
+.wysiwyg p a {
   @apply text-navy underline underline-offset-2 hover:text-darkBeige transition-colors;
 }
 

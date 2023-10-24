@@ -67,13 +67,15 @@ export const TextAndImageBlock = ({ attributes }) => {
             className="body-regular text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
           />
-          <Link
-            target="_blank"
-            className="secondary-btn outline-btn navy mt-[40px]"
-            href={linkUrl ?? ''}
-          >
-            {linkTitle}
-          </Link>
+          {linkUrl && linkTitle ? (
+            <Link
+              target="_blank"
+              className="secondary-btn outline-btn navy mt-[40px]"
+              href={linkUrl ?? ''}
+            >
+              {linkTitle}
+            </Link>
+          ) : null }
         </div>
       </div>
     </div>
