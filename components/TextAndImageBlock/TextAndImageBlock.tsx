@@ -54,15 +54,19 @@ export const TextAndImageBlock = ({ attributes }) => {
         ) : (
           data?.mediaItem?.sourceUrl && (
             <div
-              className="h-[520px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
+              className="sm:h-[300px] md:h-[400px] h-[440px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
               style={{ backgroundImage: `url(${data?.mediaItem?.sourceUrl})` }}
             ></div>
           )
         )}
 
         <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full wysiwyg">
-          <p className="body-large mb-[32px] font-bold text-navy">{title}</p>
-          <span className="mb-[32px]">{heading}</span>
+          {title ? (
+            <p className="body-large mb-[32px] font-bold text-navy">{title}</p>
+          ) : null }
+          {headingContent ? (
+            <span className="mb-[32px]">{heading}</span>
+          ) : null }
           <div
             className="body-regular text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
