@@ -1,24 +1,22 @@
 // @ts-nocheck
-import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import Close from '/assets/icons/close.svg'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch'
-import { Autocomplete, MemoizedAutoComplete } from './Autocomplete'
+import { MemoizedAutoComplete } from './Autocomplete'
 import { getAlgoliaResults } from '@algolia/autocomplete-js'
 import { Hit } from './Hit'
 import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query-suggestions'
-import '@algolia/autocomplete-theme-classic'
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
 
-import Link from 'next/link'
-import { cn } from 'utils/index'
+import '@algolia/autocomplete-theme-classic'
 
 type SearchProps = {
   transparentMode: boolean
   searchOpened: (val: boolean) => void
 }
 
-const searchClient = algoliasearch(
+export const searchClient = algoliasearch(
   'PG0GKBPWHA',
   '7df94afcf55425f42a8834ee1f6da871'
 )
@@ -27,20 +25,27 @@ export const INSTANT_SEARCH_INDEX_NAME = 'wp_searchable_posts'
 export const INSTANT_SEARCH_QUERY_SUGGESTIONS =
   'wp_searchable_posts_query_suggestions'
 
-const querySuggestionsPlugin = createQuerySuggestionsPlugin({
+export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
   searchClient,
   indexName: INSTANT_SEARCH_QUERY_SUGGESTIONS,
   getSearchParams() {
     return {
-      hitsPerPage: 5,
+      hitsPerPage: 10,
     }
   },
+  categoryAttribute: [
+    'instant_search',
+    'facets',
+    'exact_matches',
+    'categories',
+    'taxonomies',
+  ],
   transformSource({ source, onTapAhead }) {
     return {
       ...source,
-      // getItemUrl({ item }) {
-      //   return `https://google.com?q=${item.query}`;
-      // },
+      getItemUrl({ item }) {
+        return item.permalink
+      },
       onSelect({ setIsOpen }) {
         setIsOpen(true)
       },
@@ -61,8 +66,11 @@ const querySuggestionsPlugin = createQuerySuggestionsPlugin({
   },
 })
 
+const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
+  key: 'navbar',
+})
+
 export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
-  const [searchedTerm, setSearchedTerm] = useState('')
   const [searchBarActive, setSearchBarActive] = useState(false)
 
   const [navigationHeight, setNavigationHeight] = useState(140)
@@ -71,9 +79,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   useEffect(() => {
     setNavigation(document.getElementById('topbar'))
   }, [])
-  useEffect(() => {
-    console.log(searchBarActive, 'searchBarActive')
-  }, [searchBarActive])
+
   // get header size dynamically to move main content below
   const handleResize = () => {
     setNavigationHeight(navigation?.clientHeight)
@@ -88,9 +94,18 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
     window.addEventListener('resize', handleResize, false)
   }, [navigation])
 
-  const handleChange = event => {
-    setSearchedTerm(event.target.value)
-  }
+  useEffect(() => {
+    if (!navigation) return
+    const resizeObserver = new ResizeObserver(() => {
+      if (navigation?.clientHeight > 190) {
+        setNavigationHeight(192)
+      } else {
+        setNavigationHeight(navigation?.clientHeight)
+      }
+    })
+    resizeObserver.observe(navigation)
+    return () => resizeObserver.disconnect() // clean up
+  }, [navigation, navigationHeight])
 
   const toggleSearchBar = () => {
     searchOpened(!searchBarActive)
@@ -161,7 +176,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
         //       : 'top-[-100px] h-[0px] opacity-0'
         //   } delay-250 semi-modal absolute left-0 right-0 z-0 flex items-center justify-center gap-3 bg-white  transition-opacity ease-in-out sm:px-[20px]`
         // )}
-        className={`semi-modal ${
+        className={`${
           searchBarActive ? 'semi-modal' : 'hidden'
         } top-[${navigationHeight}px]`}
       >
@@ -201,7 +216,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
                 },
               },
             ]}
-            plugins={[querySuggestionsPlugin]}
+            plugins={[querySuggestionsPlugin, recentSearchesPlugin]}
             placeholder={'Search'}
           />
         </InstantSearch>

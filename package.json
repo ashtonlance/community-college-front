@@ -24,6 +24,7 @@
     "@alexanderjeurissen/use-storybook": "^2.0.5",
     "@algolia/autocomplete-js": "^1.11.1",
     "@algolia/autocomplete-plugin-query-suggestions": "^1.11.1",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.11.1",
     "@algolia/autocomplete-theme-classic": "^1.11.1",
     "@apollo/client": "^3.7.12",
     "@faustwp/blocks": "^2.0.0",

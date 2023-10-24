@@ -330,3 +330,19 @@ z-index: 1000;
 .aa-DetachedSearchButton {
   @apply bg-white w-9/12 mx-auto;
 }
+
+.aa-Label {
+  @apply mb-0;
+}
+
+.ais-Hits-list {
+  @apply flex flex-col gap-4 py-4;
+}
+
+.ais-Pagination-list {
+  @apply list-none flex gap-4 py-4;
+}
+
+.ais-Pagination-list li {
+  @apply list-none;
+}
