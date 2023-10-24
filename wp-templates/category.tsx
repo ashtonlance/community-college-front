@@ -74,7 +74,6 @@ Category.variables = ({ uri }, ctx) => {
 
 Category.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query GetCategoryPage($uri: String!) {
     nodeByUri(uri: $uri) {
       ... on Category {
@@ -97,9 +96,11 @@ Category.query = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: SLUG) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
   }

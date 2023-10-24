@@ -33,7 +33,7 @@ export default function Tag(props: TagProps) {
   } else {
     const menuItems = props.data?.menu?.menuItems || []
     const seo = props.data?.nodeByUri?.seo
-    const preFooterContent = props.data?.menus.nodes[0]
+    const preFooterContent = props.data?.menus?.nodes[0]
     const { page } = router.query
     const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
     const tagName = props.data?.nodeByUri?.name
@@ -70,7 +70,6 @@ Tag.variables = ({ uri }, ctx) => {
 
 Tag.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query GetTagPage($uri: String!, $asPreview: Boolean = false) {
     nodeByUri(uri: $uri, asPreview: $asPreview) {
       ... on Tag {
@@ -95,9 +94,11 @@ Tag.query = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: SLUG) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
   }

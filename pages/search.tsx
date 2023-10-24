@@ -13,7 +13,6 @@ const PAGE_SIZE = 3
 
 const GET_SEARCH = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   ${GravityForm.fragments.entry}
   query SearchQuery($offset: Int!, $searchedTerm: String!, $size: Int = ${PAGE_SIZE}) {
     resources(where: { search: $searchedTerm, offsetPagination: { offset: $offset, size: $size }}) {
@@ -53,9 +52,11 @@ const GET_SEARCH = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: SLUG) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
     gfForm(id: "3", idType: DATABASE_ID) {
