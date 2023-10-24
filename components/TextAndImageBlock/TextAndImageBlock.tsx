@@ -60,11 +60,11 @@ export const TextAndImageBlock = ({ attributes }) => {
           )
         )}
 
-        <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full">
+        <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full wysiwyg">
           <p className="body-large mb-[32px] font-bold text-navy">{title}</p>
           <span className="mb-[32px]">{heading}</span>
           <div
-            className="body-regular whitespace-pre-wrap text-darkGrey"
+            className="body-regular text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
           />
           <Link
