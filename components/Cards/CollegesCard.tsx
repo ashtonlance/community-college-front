@@ -18,13 +18,15 @@ export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
     >
       <div className="flex flex-1 flex-col">
         {card.featuredImage?.node?.sourceUrl ? (
-          <Image
-            src={card.featuredImage.node.sourceUrl}
-            alt=""
-            width={400}
-            height={200}
-            className="max-h-[200px] object-cover min-w-[100%]"
-          />
+          <Link href={card?.uri || '/'}>
+            <Image
+              src={card.featuredImage.node.sourceUrl}
+              alt=""
+              width={400}
+              height={200}
+              className="max-h-[200px] object-cover min-w-[100%]"
+            />
+          </Link> 
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
           <Link

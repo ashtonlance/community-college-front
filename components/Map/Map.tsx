@@ -72,6 +72,7 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
           options={mapOptions}
         >
           {coordinates.map((coordinate, index) => {
+            console.log(coordinate)
             return (
               <MarkerF
                 key={index}
@@ -85,7 +86,7 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
                 {activeMarker === index ? (
                   <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
                     <div className="flex max-w-[250px] flex-col gap-2">
-                      <div className="h5">{coordinate.name}</div>
+                      <a href={coordinate.uri} className="h5">{coordinate.name}</a>
                       <div className="body-regular max-w-[75%] text-navy">
                         {coordinate.streetAddress}
                       </div>
