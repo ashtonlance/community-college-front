@@ -30,20 +30,35 @@ export function Layout(props: LayoutProps) {
   const settings = props?.settings || []
   const fullHead = props?.seo?.fullHead ? parse(props?.seo?.fullHead) : ''
   const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar
-  const [navigationHeight, setNavigationHeight] = useState(undefined)
+  const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = React.createRef<HTMLDivElement>()
 
   // get header size dynamically to move main content below
   const handleResize = () => {
-    setNavigationHeight(
-      navigation?.current?.clientHeight
-      );
-    }
+    setNavigationHeight(navigation?.current?.clientHeight)
+  }
 
   useEffect(() => {
-    setNavigationHeight(navigation?.current?.clientHeight)
-    window.addEventListener("resize", handleResize, false);
+    if (navigation?.current?.clientHeight > 190) {
+      setNavigationHeight(192)
+    } else {
+      setNavigationHeight(140)
+    }
+    window.addEventListener('resize', handleResize, false)
   }, [navigation])
+
+  useEffect(() => {
+    if (!navigation.current) return
+    const resizeObserver = new ResizeObserver(() => {
+      if (navigation?.current?.clientHeight > 190) {
+        setNavigationHeight(192)
+      } else {
+        setNavigationHeight(140)
+      }
+    })
+    resizeObserver.observe(navigation.current)
+    return () => resizeObserver.disconnect() // clean up
+  }, [navigation, navigationHeight])
 
   return (
     <>

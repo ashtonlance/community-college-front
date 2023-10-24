@@ -8,6 +8,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      xl: { max: '1536px' },
       lg: { max: '1400px' },
       md: { max: '1080px' },
       mdsm: { max: '728px' },
@@ -69,5 +70,5 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
-  safelist: ['top-[207px]', 'top-[150px]', 'top-[192px]'],
+  safelist: ['top-[207px]', 'top-[150px]', 'top-[192px]', 'top-[200px]'],
 }

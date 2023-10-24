@@ -31,7 +31,7 @@ export const TwoColumnMenu = ({
 
   useEffect(() => {
     if (navigation.clientHeight > 190) {
-      setNavigationHeight(207)
+      setNavigationHeight(200)
     }
     window.addEventListener('resize', handleResize, false)
   }, [navigation])

@@ -155,7 +155,7 @@ export const Header = forwardRef(
         ) : null}
         <div className="mx-auto flex w-full justify-between bg-navy">
           <div className="flex w-full items-center justify-between">
-            <div className="mx-auto flex w-full max-w-[1700px] items-center justify-between px-4 md:px-6 sm:px-0">
+            <div className="xl:px-0 mx-auto flex w-full max-w-[1700px] items-center justify-between px-4 md:px-6 sm:px-0">
               {utilityNavigation && (
                 <>
                   <div className="flex h-full items-center justify-center md:w-full md:justify-between">
