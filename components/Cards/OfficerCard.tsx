@@ -16,7 +16,7 @@ export const OfficerCard: React.FC<OfficerCardProps> = ({ card }) => {
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
           <div className="body-regular mb-3 flex items-center gap-x-2 font-bold text-darkGrey">
             {card?.college && <span>{card?.college}</span>}•
-            {card?.county && <span>{card?.county}</span>}
+            {card?.title && <span>{card?.title}</span>}
           </div>
           <div className="h3 mb-5 font-serif text-[24px]">{card?.name}</div>
           <a
