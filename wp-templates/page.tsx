@@ -93,7 +93,7 @@ Page.query = gql`
         }
       }
     }
-    footer: menu(id: "Footer", idType: NAME) {
+    footer: menu(id: "Footer", idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

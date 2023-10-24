@@ -190,7 +190,6 @@ PageDataDashboards.variables = ({ databaseId }, ctx) => {
 
 PageDataDashboards.query = gql`
   ${Header.fragments.entry}
-  ${PreFooter.fragments.entry}
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
@@ -212,9 +211,11 @@ PageDataDashboards.query = gql`
         }
       }
     }
-    menus(where: { slug: "footer" }) {
-      nodes {
-        ...PreFooterFragment
+    footer: menu(id: "Footer", idType: SLUG) {
+      menuItems(first: 200) {
+        nodes {
+          ...NavigationMenuFragment
+        }
       }
     }
     settings {

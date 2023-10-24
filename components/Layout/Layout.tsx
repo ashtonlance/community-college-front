@@ -32,7 +32,6 @@ export function Layout(props: LayoutProps) {
   const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar
   const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = React.createRef<HTMLDivElement>()
-
   // get header size dynamically to move main content below
   const handleResize = () => {
     setNavigationHeight(navigation?.current?.clientHeight)
