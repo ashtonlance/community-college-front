@@ -143,6 +143,20 @@ table td {
   @apply mb-8 md:mb-6;
 }
 
+.wysiwyg ol {
+  @apply list-decimal list-inside;
+}
+
+.wysiwyg ol,
+.wysiwyg ol li,
+.wysiwyg ol li::marker {
+  @apply me-4 ms-[-0.5px];
+}
+
+.wysiwyg ol {
+  @apply text-darkGrey;
+}
+
 .wysiwyg li {
   @apply mb-2;
 }
