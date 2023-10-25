@@ -135,6 +135,11 @@ table td {
   @apply mb-6 md:mb-4;
 }
 
+.wysiwyg p:has(+ ul),
+.wysiwyg p:has(+ ol) {
+  @apply mb-4;
+}
+
 .wysiwyg p:not(:has(+ p)) {
   @apply mb-8 md:mb-6;
 }
