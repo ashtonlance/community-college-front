@@ -367,7 +367,7 @@ z-index: 1000;
 }
 
 .aa-Input {
-  @apply text-2xl placeholder:text-darkBeige font-bold text-navy;
+  @apply text-2xl placeholder:text-darkBeige font-bold text-navy md:text-lg;
 }
 
 .aa-Input:focus {

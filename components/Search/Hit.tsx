@@ -15,7 +15,7 @@ export function Hit({ hit, components }) {
   return (
     <a href={urlWithoutDomain} className="aa-ItemLink">
       <div className="aa-ItemContent">
-        <div className="aa-ItemTitle sub-nav text-xl text-navy">
+        <div className="aa-ItemTitle sub-nav text-xl text-navy md:text-lg">
           {hit?.post_title !== '' && (
             <components.Highlight hit={hit} attribute="post_title" />
           )}
