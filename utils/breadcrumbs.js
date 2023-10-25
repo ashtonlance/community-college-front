@@ -3,6 +3,7 @@ import { unslugify } from 'utils/unslugify'
 
 export default function generateBreadcrumbs(router) {
 
+  // console.log('router', title)
     // Remove any query parameters, as those aren't included in breadcrumbs
     const asPathWithoutQuery = router.asPath.split('?')[0]
 
@@ -17,9 +18,10 @@ export default function generateBreadcrumbs(router) {
     const crumblist = asPathNestedRoutes.map((subpath, idx) => {
       // We can get the partial nested route for the crumb
       // by joining together the path parts up to this point.
-      const href = '/' + asPathNestedRoutes.slice(0, idx + 1).join('/')
+      let href = '/' + asPathNestedRoutes.slice(0, idx + 1).join('/')
       // The title will just be the route string for now
       const title = unslugify(subpath)
+      href === '/colleges' ? href = '/students/what-we-offer/colleges/' : ''
       return { href, title }
     })
 
