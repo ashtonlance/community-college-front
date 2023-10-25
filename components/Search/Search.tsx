@@ -130,10 +130,20 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   const toggleSearchBar = () => {
     searchOpened(!searchBarActive)
     setSearchBarActive(!searchBarActive)
-    if (!searchBarActive) {
-      disableBodyScroll(ref?.current)
-    } else {
-      enableBodyScroll(ref?.current)
+
+    // Check if not a mobile device
+    const userAgent = navigator.userAgent
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        userAgent
+      )
+
+    if (!isMobile) {
+      if (!searchBarActive) {
+        disableBodyScroll(ref?.current)
+      } else {
+        enableBodyScroll(ref?.current)
+      }
     }
   }
 

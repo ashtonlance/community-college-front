@@ -331,7 +331,7 @@ z-index: 1000;
 }
 
 .aa-Autocomplete {
-  @apply bg-white py-9 px-24;
+  @apply bg-white py-9 px-24 md:py-4 md:px-8;
 }
 
 .aa-Form {
@@ -386,7 +386,7 @@ z-index: 1000;
 }
 
 .aa-Item {
-  @apply bg-white rounded-md py-8 px-16 mt-[20px];
+  @apply bg-white rounded-md py-8 px-16 mt-[20px] md:py-4 md:px-8;
 }
 
 .aa-Item[aria-selected=true] {
