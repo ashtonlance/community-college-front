@@ -49,6 +49,7 @@ type CollegesIndexProps = {
 
 const getCoordinates = (colleges: any[]) =>
   colleges.map(college => {
+    const uri = college.uri
     const { title: name, featuredImage } = college || {}
     const { phoneNumber } = college?.collegeDetails || {}
     const {
@@ -56,7 +57,7 @@ const getCoordinates = (colleges: any[]) =>
       longitude: lng,
       streetAddress,
     } = college?.collegeDetails?.map || {}
-    return { featuredImage, lat, lng, name, streetAddress, phoneNumber }
+    return { featuredImage, lat, lng, name, streetAddress, phoneNumber, uri}
   })
 
 export default function CollegesArchive(props: CollegesIndexProps) {
