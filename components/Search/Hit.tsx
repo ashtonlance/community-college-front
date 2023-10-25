@@ -15,14 +15,14 @@ export function Hit({ hit, components }) {
   return (
     <a href={urlWithoutDomain} className="aa-ItemLink">
       <div className="aa-ItemContent">
-        <div className="aa-ItemTitle">
+        <div className="aa-ItemTitle sub-nav text-xl text-navy">
           {hit?.post_title !== '' && (
             <components.Highlight hit={hit} attribute="post_title" />
           )}
           {hit?.post_type_label && (
-            <span className="aa-ItemContentSubtitle aa-ItemContentSubtitle--inline">
+            <span className="aa-ItemContentSubtitle aa-ItemContentSubtitle--inline font-normal text-darkGrey">
               <span className="aa-ItemContentSubtitleIcon" /> in{' '}
-              <span className="aa-ItemContentSubtitleCategory">
+              <span className="aa-ItemContentSubtitleCategory text-darkGrey">
                 {hit.post_type_label}
               </span>
             </span>

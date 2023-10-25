@@ -326,11 +326,15 @@ z-index: 1000;
 }
 
 .aa-Autocomplete {
-  @apply bg-navy py-4;
+  @apply bg-white py-9 px-24;
 }
 
 .aa-Form {
-  @apply mx-auto max-w-3xl;
+  @apply mx-auto border-none max-w-none;
+}
+
+.aa-Form:focus-within {
+  @apply shadow-none outline-lightBlue border-lightBlue;
 }
 
 .aa-DetachedSearchButton {
@@ -351,4 +355,36 @@ z-index: 1000;
 
 .ais-Pagination-list li {
   @apply list-none;
+}
+
+.aa-SubmitIcon {
+  @apply !text-gold;
+}
+
+.aa-Input {
+  @apply text-2xl placeholder:text-darkBeige font-bold text-navy;
+}
+
+.aa-Input:focus {
+  @apply outline-none border-none border-transparent !shadow-none !shadow-transparent;
+  box-shadow: none !important;
+}
+
+.aa-Panel {
+  @apply !w-full !left-0 mt-0 rounded-none pt-8 px-24 pb-14;
+  background-image: url(/angles/angled-bg_finder_grey-flip.jpg);
+  background-size: cover;
+}
+
+.aa-List {
+  @apply flex flex-col;
+}
+
+.aa-Item {
+  @apply bg-white rounded-md py-8 px-16 mt-[20px];
+}
+
+.aa-Item[aria-selected=true] {
+  background-color: rgba(var(--aa-selected-color-rgb),.205);
+  @apply bg-navy bg-opacity-10;
 }

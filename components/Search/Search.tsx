@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Close from '/assets/icons/close.svg'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch'
@@ -11,7 +11,11 @@ import {
   createLocalStorageRecentSearchesPlugin,
   search,
 } from '@algolia/autocomplete-plugin-recent-searches'
-import { useClickAway } from '@uidotdev/usehooks'
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
 
 import '@algolia/autocomplete-theme-classic'
 
@@ -81,14 +85,16 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   const [navigationHeight, setNavigationHeight] = useState(140)
   const [navigation, setNavigation] = useState(null)
 
-  const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
-    const target = e.target as Element
-    if (!target.classList.contains('main-nav')) {
-      console.log(target, 'target')
-      closeSearchBar()
-      console.log(searchBarActive, 'searchBarActive in ref')
-    }
-  })
+  const ref = useRef(null)
+
+  // const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
+  //   const target = e.target as Element
+  //   if (!target.classList.contains('main-nav')) {
+  //     console.log(target, 'target')
+  //     closeSearchBar()
+  //     console.log(searchBarActive, 'searchBarActive in ref')
+  //   }
+  // })
 
   useEffect(() => {
     setNavigation(document.getElementById('topbar'))
@@ -124,17 +130,23 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   const toggleSearchBar = () => {
     searchOpened(!searchBarActive)
     setSearchBarActive(!searchBarActive)
+    if (!searchBarActive) {
+      disableBodyScroll(ref?.current)
+    } else {
+      enableBodyScroll(ref?.current)
+    }
   }
 
-  const closeSearchBar = () => {
-    searchOpened(false)
-    setSearchBarActive(false)
-  }
+  useEffect(() => {
+    return () => {
+      clearAllBodyScrollLocks()
+    }
+  }, [])
 
   return (
     <div
       className="flex items-center gap-[10px] hover:cursor-pointer"
-      // ref={ref}
+      ref={ref}
     >
       <div
         className="flex items-center gap-[10px] hover:cursor-pointer"
@@ -211,6 +223,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
         >
           <MemoizedAutoComplete
             openOnFocus={true}
+            autoFocus={true}
             getSources={({ query }) => [
               {
                 sourceId: 'wp_searchable_posts_query_suggestions',
@@ -243,7 +256,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
               },
             ]}
             plugins={[querySuggestionsPlugin, recentSearchesPlugin]}
-            placeholder={'Search'}
+            placeholder={'Enter a search term...'}
           />
         </InstantSearch>
       </div>
