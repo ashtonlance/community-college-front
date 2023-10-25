@@ -2,8 +2,6 @@ import { unslugify } from 'utils/unslugify'
 
 
 export default function generateBreadcrumbs(router) {
-
-  // console.log('router', title)
     // Remove any query parameters, as those aren't included in breadcrumbs
     const asPathWithoutQuery = router.asPath.split('?')[0]
 
