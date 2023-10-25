@@ -3,6 +3,8 @@ import { getHeadingTag } from '../../utils/headingType'
 import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { BackgroundVideoURL } from '../Hero/BackgroundVideo'
+import LiteYouTubeEmbed from 'react-lite-youtube-embed'
+import { getYouTubeId } from 'utils/embed'
 
 const GET_MEDIA_FILE = gql`
   query GetMediaURLFromID($mediaID: ID!) {
@@ -23,50 +25,45 @@ export const TextAndImageBlock = ({ attributes }) => {
   const imgPosition = attributes.data.image_position
   const bottomSpacing = attributes.data.component_spacing_bottom_spacing
   const topSpacing = attributes.data.component_spacing_top_spacing
-  const mediaID = attributes.data.media
   const linkTitle = attributes?.data?.link?.title
   const linkUrl = attributes?.data?.link?.url
   const bgColor = attributes?.data?.background_color
-  const { loading, error, data } = useQuery(GET_MEDIA_FILE, {
-    variables: { mediaID },
-  })
-
-  if (loading) {
-    return
-  }
-  if (error) {
-    console.log({ error })
-  }
+  const image = attributes?.data?.image || ''
+  const video = attributes?.data?.video || ''
+  const videoOrImage = attributes?.data?.video_or_image || 'image'
+  const id = getYouTubeId(video)
 
   return (
     <div
       className={`px-[100px] md:px-[60px] bg-${bgColor} sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
-        className={`mx-auto flex w-full max-w-[1220px] gap-[80px] ${
-          imgPosition.includes('right') && 'flex-row-reverse'
-        } md:h-fit md:flex-col md:gap-[60px]`}
+        className={`mx-auto flex w-full max-w-[1220px] gap-[80px] ${imgPosition.includes('right') && 'flex-row-reverse'
+          } md:h-fit md:flex-col md:gap-[60px]`}
       >
-        {data?.mediaItem?.link && !data?.mediaItem?.sourceUrl ? (
-          <div className="relative w-[50%]">
-            <BackgroundVideoURL url={data?.mediaItem?.link} />
-          </div>
+        {videoOrImage === 'image' ? (
+          <div
+            className="sm:h-[300px] md:h-[400px] h-[440px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
+            style={{ backgroundImage: `url(${image.url})` }}
+          ></div>
         ) : (
-          data?.mediaItem?.sourceUrl && (
-            <div
-              className="sm:h-[300px] md:h-[400px] h-[440px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
-              style={{ backgroundImage: `url(${data?.mediaItem?.sourceUrl})` }}
-            ></div>
-          )
+          <div className="h-full w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center">
+            <LiteYouTubeEmbed
+              id={id}
+              title={'video'}
+              noCookie={true}
+              playlist={false}
+            />
+          </div>
         )}
 
         <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full wysiwyg">
           {title ? (
             <p className="body-large mb-[32px] font-bold text-navy">{title}</p>
-          ) : null }
+          ) : null}
           {headingContent ? (
             <span className="mb-[32px]">{heading}</span>
-          ) : null }
+          ) : null}
           <div
             className="body-regular text-darkGrey"
             dangerouslySetInnerHTML={{ __html: text }}
@@ -79,7 +76,7 @@ export const TextAndImageBlock = ({ attributes }) => {
             >
               {linkTitle}
             </Link>
-          ) : null }
+          ) : null}
         </div>
       </div>
     </div>
