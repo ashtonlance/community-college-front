@@ -135,11 +135,6 @@ table td {
   @apply mb-6 md:mb-4;
 }
 
-.wysiwyg p:has(+ ul),
-.wysiwyg p:has(+ ol) {
-  @apply mb-4;
-}
-
 .wysiwyg p:not(:has(+ p)) {
   @apply mb-8 md:mb-6;
 }
@@ -176,6 +171,11 @@ table td {
 .wysiwyg ol:last-child,
 .wysiwyg p:last-child {
   @apply !mb-0;
+}
+
+.wysiwyg p:has(+ ul),
+.wysiwyg p:has(+ ol) {
+  @apply mb-4;
 }
 
 .wysiwyg img.alignright {
