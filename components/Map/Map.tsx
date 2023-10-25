@@ -72,7 +72,6 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
           options={mapOptions}
         >
           {coordinates.map((coordinate, index) => {
-            console.log(coordinate)
             return (
               <MarkerF
                 key={index}

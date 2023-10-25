@@ -121,7 +121,8 @@ table td {
   @apply bg-lightBlue font-extrabold text-navy uppercase;
 }
 
-.wysiwyg p a {
+.wysiwyg p a,
+.wysiwyg li a  {
   @apply text-navy underline underline-offset-2 hover:text-darkBeige transition-colors;
 }
 
@@ -140,7 +141,7 @@ table td {
 
 .wysiwyg ul,
 .wysiwyg ol {
-  @apply mb-8 md:mb-6 ml-6;
+  @apply mb-8 md:mb-6 !ml-6;
 }
 
 .wysiwyg ul li,
