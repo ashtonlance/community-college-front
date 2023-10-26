@@ -4,7 +4,7 @@ import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
@@ -30,11 +30,47 @@ export default function StaffIndexPage({ data, loading, error }) {
     [data?.allStaff?.nodes]
   )
 
+  // Set filters and add to URL
+  const handleSetFilters = useCallback(
+    newFilters => {
+      setFilters(newFilters)
+
+      // const { page, wordpressNode, ...rest } = router.query
+      // const newQuery = {
+      //   ...rest,
+      //   ...newFilters,
+      // }
+
+      // const queryString = new URLSearchParams(newQuery)
+      // if (queryString) {
+      //   console.log("newquery string added")
+      //   window.history.replaceState(null, '', `?${queryString.toString()}`)
+      // }
+    },
+    [router.query]
+  )
+
   const [filters, setFilters] = useState({
     organization: '',
     department: '',
     orderBy: { field: 'STAFF_NAME', order: 'ASC' },
   })
+
+  const inputValuesRef = useRef(filters)
+
+  useEffect(() => {
+    inputValuesRef.current = filters
+  }, [filters])
+
+  useEffect(() => {
+    const { organization, department, orderBy } = router.query
+    const newValues = {
+      organization: organization,
+      department: department,
+      orderBy: orderBy
+    }
+    setFilters(newValues)
+  }, [router.query])
 
   const organizations = useMemo(
     () => [
@@ -54,45 +90,113 @@ export default function StaffIndexPage({ data, loading, error }) {
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredStaff, setFilteredStaff] = useState(staffIndex)
 
+
+
+
+
+
   const filterNumberedMemos = useCallback(() => {
+    console.log("inputValuesRef", inputValuesRef.current.organization)
+    console.log("filterNumberedMemos Callback")
     let result = staffIndex
 
+    // if (
+    //   inputValuesRef.current.organization
+    // ) {
+    //   // let result = staffIndex
+    //   console.log("1", debouncedFilters.organization)
+    //   debouncedFilters.organization = inputValuesRef.current.organization
+    //   // result = result.filter(memo => {
+    //   //   return memo.staffDetails.organizations.find(organization => organization.name.toLowerCase() === "programs")
+
+    //   // })
+    //   console.log("2", debouncedFilters.organization)
+    // }
+
     if (debouncedFilters.organization) {
-      result = result.filter(memo =>{
+      result = result.filter(memo => {
         return memo.staffDetails.organizations.find(organization => organization.name.toLowerCase() === debouncedFilters.organization.toLowerCase())
 
       })
     }
 
     if (debouncedFilters.department) {
-      result = result.filter(
-        memo => memo.staffDetails.location == debouncedFilters.department
-      )
+      result = result.filter(memo => {
+        return memo.staffDetails.location.toLowerCase() === debouncedFilters.department.toLowerCase()
+      })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(
-        (a, b) =>
-          b.staffDetails?.staff_name?.localeCompare(a.staffDetails?.staff_name)
-      )
-    } else {
-      result = result.sort(
-        (a, b) =>
-          a.staffDetails?.staff_name?.localeCompare(b.staffDetails?.staff_name)
-      )
-    }
 
+
+    // asc == a-z
+    // switch(debouncedFilters.orderBy.order) {
+
+    //   case 'ASC':
+    //     result = result.sort(
+    //       (a, b) =>
+    //         a.staffDetails?.staffName?.slice(
+    //           a.staffDetails.staffName.lastIndexOf(' ') + 1
+    //       ).localeCompare(b.staffDetails?.staffName?.slice(
+    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
+    //       ))
+    //     )
+    //     break;
+    //   case 'DESC':
+    //     result = result.sort(
+    //       (a, b) =>
+    //         b.staffDetails?.staffName?.slice(
+    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
+    //       ).localeCompare(a.staffDetails?.staffName?.slice(
+    //         a.staffDetails.staffName.lastIndexOf(' ') + 1
+    //     ))
+    //     )
+    //     break;
+    //   default:
+    //     result = result.sort(
+    //       (a, b) =>
+    //         a.staffDetails?.staffName?.slice(
+    //           a.staffDetails.staffName.lastIndexOf(' ') + 1
+    //       ).localeCompare(b.staffDetails?.staffName?.slice(
+    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
+    //       ))
+    //     )
+    // }
+
+    // if (debouncedFilters.orderBy.order === 'DESC') {
+    //   console.log("des", debouncedFilters.orderBy.order)
+    //   result = result.sort(
+    //     (a, b) =>
+    //       b.staffDetails?.staffName?.slice(
+    //         b.staffDetails.staffName.lastIndexOf(' ') + 1
+    //     ).localeCompare(a.staffDetails?.staffName?.slice(
+    //       a.staffDetails.staffName.lastIndexOf(' ') + 1
+    //   ))
+    //   )
+    // } else {
+    //   console.log("asc", debouncedFilters.orderBy.order)
+    //   result = result.sort(
+    //     (a, b) =>
+    //       a.staffDetails?.staffName?.slice(
+    //         a.staffDetails.staffName.lastIndexOf(' ') + 1
+    //     ).localeCompare(b.staffDetails?.staffName?.slice(
+    //         b.staffDetails.staffName.lastIndexOf(' ') + 1
+    //     ))
+    //   )
+    // }
+    console.log("res", result)
     setFilteredStaff(result)
   }, [
     debouncedFilters.organization,
-    debouncedFilters.department,
-    debouncedFilters.orderBy.order,
+    debouncedFilters.department, 
+    debouncedFilters.orderBy, 
     staffIndex,
+    inputValuesRef
   ])
 
   useEffect(() => {
     filterNumberedMemos()
   }, [debouncedFilters, filterNumberedMemos])
+
 
   if (loading) {
     return <>Loading...</>
@@ -131,7 +235,7 @@ export default function StaffIndexPage({ data, loading, error }) {
         )}
         <PostFilter
           filters={filters}
-          setFilters={setFilters}
+          setFilters={handleSetFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
         />
         <div className="index-page-wrapper bg-grey">
