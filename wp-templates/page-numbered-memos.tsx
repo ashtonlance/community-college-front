@@ -62,13 +62,10 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
   const filterNumberedMemos = useCallback(() => {
     let result = numberedMemos
-
     if (debouncedFilters.category) {
       result = result.filter(memo =>
-        memo.numberedMemoCategories.nodes.name
-          .toLowerCase()
-          .includes(debouncedFilters.category.toLowerCase())
-      )
+        memo.numberedMemoCategories.nodes.find(category => category.name.toLowerCase() === debouncedFilters.category.toLowerCase())
+              )
     }
 
     if (debouncedFilters.year) {
@@ -188,7 +185,9 @@ NumberedMemosPage.query = gql`
       }
     }
 
-    numberedMemos(where: { orderby: { field: DATE, order: ASC } }) {
+    numberedMemos(
+      first: 1000
+      where: { orderby: { field: DATE, order: ASC } }) {
       nodes {
         numberedMemo {
           body
