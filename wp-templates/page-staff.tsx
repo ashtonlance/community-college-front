@@ -58,11 +58,10 @@ export default function StaffIndexPage({ data, loading, error }) {
     let result = staffIndex
 
     if (debouncedFilters.organization) {
-      result = result.filter(memo =>
-        memo.staffDetails.organization.name
-          .toLowerCase()
-          .includes(debouncedFilters.organization.toLowerCase())
-      )
+      result = result.filter(memo =>{
+        return memo.staffDetails.organizations.find(organization => organization.name.toLowerCase() === debouncedFilters.organization.toLowerCase())
+
+      })
     }
 
     if (debouncedFilters.department) {
