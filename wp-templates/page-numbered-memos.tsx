@@ -59,7 +59,6 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
-
   const filterNumberedMemos = useCallback(() => {
     let result = numberedMemos
     if (debouncedFilters.category) {
@@ -84,21 +83,30 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort(
-        (a, b) => b.numberedMemo?.date?.localeCompare(a.numberedMemo?.date)
+        (a, b) => {
+          const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
+          const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
+          return new Date(b_date) - new Date (a_date)
+        }
       )
     } else {
       result = result.sort(
-        (a, b) => a.numberedMemo?.date?.localeCompare(b.numberedMem?.date)
+        (a, b) => {
+          const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
+          const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
+          return new Date(a_date) - new Date (b_date)
+        }
       )
     }
 
     setFilteredMemos(result)
+    
   }, [
     debouncedFilters.category,
     debouncedFilters.keyword,
     debouncedFilters.orderBy.order,
     debouncedFilters.year,
-    numberedMemos,
+    numberedMemos
   ])
 
   useEffect(() => {
