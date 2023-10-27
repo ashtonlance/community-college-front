@@ -12,9 +12,11 @@ type WYSIWYGProps = {
       component_spacing_top_spacing?: string,
     }
   }
+  customClasses?: string
 }
 
 export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
+  const customClasses = props.customClasses || ''
   const content = props?.attributes?.data?.content || ''
   const bgColor = props?.attributes?.data?.background_color || ''
   const bottomSpacing =
@@ -27,7 +29,7 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
   const reactHtml = renderToString(reactElement)
   return (
     <div
-      className={`bg-${bgColor} wysiwyg body-regular px-52 py-20 module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
+      className={`bg-${bgColor} ${customClasses} wysiwyg body-regular px-52 py-20 module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
       dangerouslySetInnerHTML={{ __html: reactHtml }}
     />
   )

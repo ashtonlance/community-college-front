@@ -42,20 +42,24 @@ export default function SingleBoardMember(props) {
         email={pageData?.boardMember?.email}
       />
       <div className="bg-grey">
-        <div className="flex md:flex-wrap">
+        <div className="flex md:flex-wrap sm:px-10 md:px-[100px] px-[205px] gap-[40px] md:gap-8">
           {pageData?.boardMember?.biography && (
+            <div className="sm:p-10 md:w-full w-[60%]">
+            <div className="h2">About</div>
             <div className="">
               <WYSIWYG
+                customClasses='!px-0 sm:!pt-5 md:!pt-6 !pt-8 !pb-0'
                 attributes={{
                   data: { content: pageData?.boardMember?.biography },
                 }}
               />
             </div>
+            </div>
           )}
           {pageData?.boardMember?.committeeAssignments && (
-            <div className="px-52 py-20 md:px-[100px] md:py-[60px] sm:p-10">
-              <div className="h5">Committee Assignments</div>
-              <div
+            <div className="md:w-full w-[40%]">
+              <div className="h5 sm:m-5 md:mb-6 mb-8">Committee Assignments</div>
+              <div className='wysiwyg'
                 dangerouslySetInnerHTML={{
                   __html: pageData?.boardMember?.committeeAssignments,
                 }}

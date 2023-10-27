@@ -62,15 +62,15 @@ export default function StaffIndexPage({ data, loading, error }) {
     inputValuesRef.current = filters
   }, [filters])
 
-  useEffect(() => {
-    const { organization, department, orderBy } = router.query
-    const newValues = {
-      organization: organization,
-      department: department,
-      orderBy: orderBy
-    }
-    setFilters(newValues)
-  }, [router.query])
+  // useEffect(() => {
+  //   const { organization, department, orderBy } = router.query
+  //   const newValues = {
+  //     organization: organization,
+  //     department: department,
+  //     orderBy: orderBy
+  //   }
+  //   setFilters(newValues)
+  // }, [router.query])
 
   const organizations = useMemo(
     () => [
@@ -96,22 +96,7 @@ export default function StaffIndexPage({ data, loading, error }) {
 
 
   const filterNumberedMemos = useCallback(() => {
-    console.log("inputValuesRef", inputValuesRef.current.organization)
-    console.log("filterNumberedMemos Callback")
     let result = staffIndex
-
-    // if (
-    //   inputValuesRef.current.organization
-    // ) {
-    //   // let result = staffIndex
-    //   console.log("1", debouncedFilters.organization)
-    //   debouncedFilters.organization = inputValuesRef.current.organization
-    //   // result = result.filter(memo => {
-    //   //   return memo.staffDetails.organizations.find(organization => organization.name.toLowerCase() === "programs")
-
-    //   // })
-    //   console.log("2", debouncedFilters.organization)
-    // }
 
     if (debouncedFilters.organization) {
       result = result.filter(memo => {
@@ -126,63 +111,30 @@ export default function StaffIndexPage({ data, loading, error }) {
       })
     }
 
+    if (debouncedFilters.orderBy.order === 'DESC') {
+      result = result.sort(memo => {
+        return memo.staffDetails.location.toLowerCase() === 'system office'
+      })
 
-
-    // asc == a-z
-    // switch(debouncedFilters.orderBy.order) {
-
-    //   case 'ASC':
-    //     result = result.sort(
-    //       (a, b) =>
-    //         a.staffDetails?.staffName?.slice(
-    //           a.staffDetails.staffName.lastIndexOf(' ') + 1
-    //       ).localeCompare(b.staffDetails?.staffName?.slice(
-    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
-    //       ))
-    //     )
-    //     break;
-    //   case 'DESC':
-    //     result = result.sort(
-    //       (a, b) =>
-    //         b.staffDetails?.staffName?.slice(
-    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
-    //       ).localeCompare(a.staffDetails?.staffName?.slice(
-    //         a.staffDetails.staffName.lastIndexOf(' ') + 1
-    //     ))
-    //     )
-    //     break;
-    //   default:
-    //     result = result.sort(
-    //       (a, b) =>
-    //         a.staffDetails?.staffName?.slice(
-    //           a.staffDetails.staffName.lastIndexOf(' ') + 1
-    //       ).localeCompare(b.staffDetails?.staffName?.slice(
-    //           b.staffDetails.staffName.lastIndexOf(' ') + 1
-    //       ))
-    //     )
-    // }
-
-    // if (debouncedFilters.orderBy.order === 'DESC') {
-    //   console.log("des", debouncedFilters.orderBy.order)
-    //   result = result.sort(
-    //     (a, b) =>
-    //       b.staffDetails?.staffName?.slice(
-    //         b.staffDetails.staffName.lastIndexOf(' ') + 1
-    //     ).localeCompare(a.staffDetails?.staffName?.slice(
-    //       a.staffDetails.staffName.lastIndexOf(' ') + 1
-    //   ))
-    //   )
-    // } else {
-    //   console.log("asc", debouncedFilters.orderBy.order)
-    //   result = result.sort(
-    //     (a, b) =>
-    //       a.staffDetails?.staffName?.slice(
-    //         a.staffDetails.staffName.lastIndexOf(' ') + 1
-    //     ).localeCompare(b.staffDetails?.staffName?.slice(
-    //         b.staffDetails.staffName.lastIndexOf(' ') + 1
-    //     ))
-    //   )
-    // }
+      // result = result.sort(
+      //   (a, b) =>
+      //     b.staffDetails?.staffName?.slice(
+      //       b.staffDetails.staffName.lastIndexOf(' ') + 1
+      //   ).localeCompare(a.staffDetails?.staffName?.slice(
+      //     a.staffDetails.staffName.lastIndexOf(' ') + 1
+      // ))
+      // )
+    } else {
+      console.log("asc", debouncedFilters.orderBy.order)
+      result = result.sort(
+        (a, b) =>
+          a.staffDetails?.staffName?.slice(
+            a.staffDetails.staffName.lastIndexOf(' ') + 1
+        ).localeCompare(b.staffDetails?.staffName?.slice(
+            b.staffDetails.staffName.lastIndexOf(' ') + 1
+        ))
+      )
+    }
     console.log("res", result)
     setFilteredStaff(result)
   }, [
