@@ -86,7 +86,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
         (a, b) => {
           const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
           const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          return new Date(b_date) - new Date (a_date)
+          return new Date(b_date).getTime() - new Date (a_date).getTime()
         }
       )
     } else {
@@ -94,13 +94,13 @@ export default function NumberedMemosPage({ data, loading, error }) {
         (a, b) => {
           const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
           const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          return new Date(a_date) - new Date (b_date)
+          return new Date(a_date).getTime() - new Date (b_date).getTime()
         }
       )
     }
 
     setFilteredMemos(result)
-    
+
   }, [
     debouncedFilters.category,
     debouncedFilters.keyword,
