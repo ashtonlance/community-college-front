@@ -90,11 +90,6 @@ export default function StaffIndexPage({ data, loading, error }) {
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredStaff, setFilteredStaff] = useState(staffIndex)
 
-
-
-
-
-
   const filterNumberedMemos = useCallback(() => {
     let result = staffIndex
 
@@ -112,20 +107,15 @@ export default function StaffIndexPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(memo => {
-        return memo.staffDetails.location.toLowerCase() === 'system office'
-      })
-
-      // result = result.sort(
-      //   (a, b) =>
-      //     b.staffDetails?.staffName?.slice(
-      //       b.staffDetails.staffName.lastIndexOf(' ') + 1
-      //   ).localeCompare(a.staffDetails?.staffName?.slice(
-      //     a.staffDetails.staffName.lastIndexOf(' ') + 1
-      // ))
-      // )
+      result = result.sort(
+        (a, b) =>
+          b.staffDetails?.staffName?.slice(
+            b.staffDetails.staffName.lastIndexOf(' ') + 1
+        ).localeCompare(a.staffDetails?.staffName?.slice(
+          a.staffDetails.staffName.lastIndexOf(' ') + 1
+      ))
+      )
     } else {
-      console.log("asc", debouncedFilters.orderBy.order)
       result = result.sort(
         (a, b) =>
           a.staffDetails?.staffName?.slice(
@@ -135,14 +125,12 @@ export default function StaffIndexPage({ data, loading, error }) {
         ))
       )
     }
-    console.log("res", result)
     setFilteredStaff(result)
   }, [
     debouncedFilters.organization,
     debouncedFilters.department, 
     debouncedFilters.orderBy, 
     staffIndex,
-    inputValuesRef
   ])
 
   useEffect(() => {

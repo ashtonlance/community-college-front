@@ -37,7 +37,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
     orderBy: { field: 'DATE', order: 'ASC' },
   })
 
-  const categories =[ useMemo(
+  const categories = useMemo(
     () => [
       ...new Set(
         numberedMemos.flatMap(memo =>
@@ -46,7 +46,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
       ),
     ],
     [numberedMemos]
-  )]
+  )
 
   const years = useMemo(
     () => [
@@ -59,9 +59,8 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
-  // console.log(filteredMemos[0].numberedMemo)
+
   const filterNumberedMemos = useCallback(() => {
-    console.log("CALLBACK RUNNING")
     let result = numberedMemos
     if (debouncedFilters.category) {
       result = result.filter(memo =>
@@ -101,7 +100,6 @@ export default function NumberedMemosPage({ data, loading, error }) {
       )
     }
 
-    console.log("RES", result[0])
     setFilteredMemos(result)
 
   }, [
