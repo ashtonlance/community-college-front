@@ -218,7 +218,7 @@ NewsPage.query = gql`
       }
     }
     footer: menu(id: "Footer", idType: NAME) {
-      menuItems(first: 200) {
+      menuItems(first: 500) {
         nodes {
           ...NavigationMenuFragment
         }
