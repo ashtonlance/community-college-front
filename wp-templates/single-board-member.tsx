@@ -44,7 +44,7 @@ export default function SingleBoardMember(props) {
       <div className="bg-grey">
         <div className="flex md:flex-wrap sm:px-10 md:px-[100px] px-[205px] gap-[40px] md:gap-8">
           {pageData?.boardMember?.biography && (
-            <div className="sm:p-10 md:w-full w-[60%]">
+            <div className="md:w-full w-[60%]">
             <div className="h2">About</div>
             <div className="">
               <WYSIWYG
