@@ -51,7 +51,7 @@ export default function SingleCollege(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  console.log(pageData, 'pageData')
+
   const router = useRouter()
   const slug = router?.query?.wordpressNode[1]
   const { data: programs } = useQuery(GET_PROGRAMS, {

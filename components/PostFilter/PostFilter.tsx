@@ -15,12 +15,12 @@ export const PostFilter = ({
               key={filterOption.name}
               className="body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               onChange={e =>
-                setFilters({
-                  ...filters,
+                setFilters(prevFilters => ({
+                  ...prevFilters,
                   [isSortBy ? 'orderBy' : filterOption.name]: isSortBy
                     ? { field: 'NAME', order: e.target.value }
                     : e.target.value,
-                })
+                }))
               }
             >
               <option className="capitalize" value="">
@@ -36,8 +36,8 @@ export const PostFilter = ({
                 ))}
               {isSortBy && (
                 <>
-                  <option value="ASC"> Ascending</option>
-                  <option value="DESC"> Descending</option>
+                  <option value="ASC">Ascending</option>
+                  <option value="DESC">Descending</option>
                 </>
               )}
             </select>
@@ -50,7 +50,10 @@ export const PostFilter = ({
               type="text"
               placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
-                setFilters({ ...filters, [filterOption.name]: e.target.value })
+                setFilters(prevFilters => ({
+                  ...prevFilters,
+                  [filterOption.name]: e.target.value,
+                }))
               }
             />
           )

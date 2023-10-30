@@ -34,7 +34,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
     category: '',
     year: '',
     keyword: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    orderBy: { field: 'DATE', order: 'DESC' },
   })
 
   const categories = useMemo(
@@ -61,10 +61,14 @@ export default function NumberedMemosPage({ data, loading, error }) {
   const [filteredMemos, setFilteredMemos] = useState(numberedMemos)
 
   const filterNumberedMemos = useCallback(() => {
-    let result = numberedMemos
+    let result = [...numberedMemos]
     if (debouncedFilters.category) {
       result = result.filter(memo =>
-        memo.numberedMemoCategories.nodes.find(category => category.name.toLowerCase() === debouncedFilters.category.toLowerCase())
+        memo.numberedMemoCategories.nodes.find(
+          category =>
+            category.name.toLowerCase() ===
+            debouncedFilters.category.toLowerCase()
+        )
       )
     }
 
@@ -83,32 +87,36 @@ export default function NumberedMemosPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(
-        (a, b) => {
-          const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          return new Date(b_date).getTime() - new Date (a_date).getTime()
-        }
-      )
+      result = result.sort((a, b) => {
+        const a_date = a.numberedMemo?.date
+          ?.split('/')
+          .reverse()
+          .toString()
+          .replaceAll(',', '-')
+        const b_date = b.numberedMemo?.date
+          ?.split('/')
+          .reverse()
+          .toString()
+          .replaceAll(',', '-')
+        return new Date(b_date).getTime() - new Date(a_date).getTime()
+      })
     } else {
-      result = result.sort(
-        (a, b) => {
-          const a_date = a.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          const b_date = b.numberedMemo?.date?.split("/").reverse().toString().replaceAll(',','-')
-          return new Date(a_date).getTime() - new Date (b_date).getTime()
-        }
-      )
+      result = result.sort((a, b) => {
+        const a_date = a.numberedMemo?.date
+          ?.split('/')
+          .reverse()
+          .toString()
+          .replaceAll(',', '-')
+        const b_date = b.numberedMemo?.date
+          ?.split('/')
+          .reverse()
+          .toString()
+          .replaceAll(',', '-')
+        return new Date(a_date).getTime() - new Date(b_date).getTime()
+      })
     }
-
-    setFilteredMemos(result)
-
-  }, [
-    debouncedFilters.category,
-    debouncedFilters.keyword,
-    debouncedFilters.orderBy.order,
-    debouncedFilters.year,
-    numberedMemos
-  ])
+    setFilteredMemos([...result])
+  }, [numberedMemos, debouncedFilters])
 
   useEffect(() => {
     filterNumberedMemos()
@@ -196,7 +204,8 @@ NumberedMemosPage.query = gql`
 
     numberedMemos(
       first: 1200
-      where: { orderby: { field: DATE, order: ASC } }) {
+      where: { orderby: { field: DATE, order: DESC } }
+    ) {
       nodes {
         numberedMemo {
           body

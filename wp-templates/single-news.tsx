@@ -20,7 +20,6 @@ export default function SingleNews(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData.newsCategories?.nodes
-  console.log(pageData, 'pageData')
 
   if (props.loading) {
     return <>Loading...</>
