@@ -12,7 +12,7 @@ export type LayoutProps = {
   form?: any
   seo?: any
   pageClassName?: string
-  children: any
+  children?: any
   utilityNavigation?: any
   footerNavigation?: any
   settings?: any

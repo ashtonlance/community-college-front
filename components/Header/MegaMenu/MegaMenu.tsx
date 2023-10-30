@@ -24,7 +24,6 @@ const PlainMenu = dynamic(
 
 export const MegaMenu = ({ item, handleActiveItem, activeItem }) => {
   const subItems = item.children
-  console.log(item, 'item')
   if (item?.children?.some(child => child.children?.length > 0)) {
     return (
       <TwoColumnMenu
