@@ -46,6 +46,7 @@ export const ContactBlock = ({ attributes }) => {
         {link ? (
           // tertiary-btn
           <Link
+            aria-label={"Learn more about " + link.title}
             className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={link.url}
             target={link.target}

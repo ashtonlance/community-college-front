@@ -179,6 +179,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>
 
         <Link
+          aria-label={"Read article about " + title}
           className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
           href={postUrl}
         >
