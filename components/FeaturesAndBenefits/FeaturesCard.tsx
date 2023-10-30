@@ -24,7 +24,7 @@ export const FeaturesCard = ({
     <div
       className={`${getWidth(size)} ${getTextAlign(
         alignment
-      )}  ${cardFinalStyle} rounded-xl p-[40px] md:w-full sm:p-[32px]`}
+      )}  ${cardFinalStyle} rounded-xl p-[40px] md:w-full sm:p-[32px] flex flex-col`}
     >
       {image?.url && (
         <div className="mb-[20px]">
@@ -41,10 +41,10 @@ export const FeaturesCard = ({
         dangerouslySetInnerHTML={{ __html: content }}
       />
       {optionalLink && (
-        <div className="mt-[30px]">
+        <div className="mt-auto">
           {cardStyle === 'black' && (
             <Link
-              className="secondary-btn border-[1.5px] border-solid border-white"
+              className="mt-[30px] secondary-btn border-[1.5px] border-solid border-white"
               href={optionalLink}
             >
               Contact Sales
@@ -53,7 +53,7 @@ export const FeaturesCard = ({
 
           {optionalLink && (
             <Link
-              className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+              className="mt-[30px] group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
               href={optionalLink.url}
             >
               {optionalLink.title}
