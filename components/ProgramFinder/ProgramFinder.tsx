@@ -45,7 +45,7 @@ export const ProgramFinderForm = () => {
       <div className="mb-10 flex-1 basis-full text-center">
         <span className="h2 mb-0">Discover your new career</span>
       </div>
-      <div className="flex flex-1 basis-full items-center gap-x-[20px]">
+      <div className="flex sm:flex-col sm:gap-y-5 flex-1 basis-full items-center gap-x-[20px]">
         <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
           I&apos;m Interested In
         </label>
@@ -74,7 +74,7 @@ export const ProgramFinderForm = () => {
           })}
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">
+      <div className="flex flex-1 sm:flex-col sm:gap-y-5 sm:basis-full basis-[48%] items-center gap-x-[20px]">
         <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
           Within
         </label>
@@ -94,13 +94,13 @@ export const ProgramFinderForm = () => {
           <option value={100}>100</option>
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px]">
+      <div className="flex flex-1 sm:flex-col sm:gap-y-5 sm:basis-full basis-[48%] items-center gap-x-[20px]">
         <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
           Of
         </label>
         <input
           id="zipCode"
-          className="text-input w-[150px]"
+          className="text-input sm:w-full w-[150px]"
           type="text"
           pattern="[0-9]*"
           placeholder="Zip Code"
