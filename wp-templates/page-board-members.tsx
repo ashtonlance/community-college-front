@@ -60,7 +60,7 @@ export default function BoardMembersPage({ data, loading, error }) {
   const [filteredBoardMembers, setFilteredBoardMembers] = useState(boardMembers)
 
   const filterBoardMembers = useCallback(() => {
-    let result = boardMembers
+    let result = [...boardMembers]
 
     if (debouncedFilters.appointment) {
       result = result.filter(boardMember =>
@@ -93,7 +93,7 @@ export default function BoardMembersPage({ data, loading, error }) {
       })
     }
 
-    setFilteredBoardMembers(result)
+    setFilteredBoardMembers([...result])
   }, [
     debouncedFilters.expiration,
     debouncedFilters.appointment,

@@ -50,7 +50,8 @@ export default function AnnualReportsPage({ data, loading, error }) {
     useState(annualReports)
 
   const filterAnnualReports = useCallback(() => {
-    let result = annualReports
+    let result = [...annualReports]
+
     if (debouncedFilters.category) {
       result = result.filter(memo =>
         memo.numberedMemoCategories.nodes.name
@@ -83,7 +84,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
       )
     }
 
-    setFilteredAnnualReports(result)
+    setFilteredAnnualReports([...result])
   }, [
     debouncedFilters.category,
     debouncedFilters.keyword,

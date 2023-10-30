@@ -77,7 +77,7 @@ export default function PageApprenticeshipOpportunities(props) {
   const [filteredOpps, setFilteredOpps] = useState(opportunities)
 
   const filterOpps = useCallback(() => {
-    let result = opportunities
+    let result = [...opportunities]
 
     if (
       debouncedFilters.zipCode &&
@@ -118,7 +118,7 @@ export default function PageApprenticeshipOpportunities(props) {
       result = result.sort((a, b) => a.title?.localeCompare(b.title))
     }
 
-    setFilteredOpps(result)
+    setFilteredOpps([...result])
   }, [
     debouncedFilters.zipCode,
     debouncedFilters.orderBy.order,

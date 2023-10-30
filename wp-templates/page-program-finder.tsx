@@ -117,7 +117,7 @@ export const ProgramFinder = props => {
   const filterColleges = useCallback(
     coordinates => {
       if (shouldFilter && coordinates) {
-        let result = combined // Use the combined list instead of colleges
+        let result = [...combined] // Use the combined list instead of colleges
 
         if (inputValuesRef.current.programArea) {
           result = result.filter(program => {
@@ -162,7 +162,7 @@ export const ProgramFinder = props => {
             })
             .filter(program => program.colleges.length > 0)
         }
-        setFilteredPrograms(result)
+        setFilteredPrograms([...result])
         setShouldFilter(false)
         if (!result.length) {
           setShouldFilter(true)

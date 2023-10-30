@@ -62,7 +62,7 @@ export default function NewsPage({ data, loading, error }) {
   const [filteredNewsItems, setFilteredNewsItems] = useState(newsItems)
 
   const filterNumberedMemos = useCallback(() => {
-    let result = newsItems
+    let result = [...newsItems]
 
     if (debouncedFilters.category) {
       result = result.filter(item => {
@@ -94,7 +94,7 @@ export default function NewsPage({ data, loading, error }) {
       result = result.sort((a, b) => a?.date?.localeCompare(b?.date))
     }
 
-    setFilteredNewsItems(result)
+    setFilteredNewsItems([...result])
   }, [
     debouncedFilters.category,
     debouncedFilters.tag,

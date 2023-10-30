@@ -61,7 +61,7 @@ export default function PageEvents(props) {
   const [filteredEvents, setFilteredEvents] = useState(events)
 
   const filterEvents = useCallback(() => {
-    let result = events
+    let result = [...events]
 
     if (debouncedFilters.audience) {
       result = result.filter(event => {
@@ -93,7 +93,7 @@ export default function PageEvents(props) {
       )
     }
 
-    setFilteredEvents(result)
+    setFilteredEvents([...result])
   }, [
     debouncedFilters.audience,
     debouncedFilters.orderBy.order,

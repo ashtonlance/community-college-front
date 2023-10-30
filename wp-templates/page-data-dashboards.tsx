@@ -82,7 +82,7 @@ export default function PageDataDashboards(props) {
     useState(dataDashboards)
 
   const filterDataDashboards = useCallback(() => {
-    let result = dataDashboards
+    let result = [...dataDashboards]
 
     if (debouncedFilters.keyword) {
       result = result.filter(dashboard => {
@@ -117,7 +117,7 @@ export default function PageDataDashboards(props) {
       )
     }
 
-    setFilteredDataDashboards(result)
+    setFilteredDataDashboards([...result])
   }, [
     debouncedFilters.orderBy.order,
     debouncedFilters.keyword,

@@ -42,7 +42,7 @@ export default function PagePropSchools(props) {
   const [filteredSchools, setFilteredSchools] = useState(schools)
 
   const filterSchools = useCallback(() => {
-    let result = schools
+    let result = [...schools]
     if (
       debouncedFilters.zipCode &&
       (debouncedFilters.zipCode.length === 5 ||
@@ -69,7 +69,7 @@ export default function PagePropSchools(props) {
       result = result.sort((a, b) => a.title?.localeCompare(b.title))
     }
 
-    setFilteredSchools(result)
+    setFilteredSchools([...result])
   }, [
     debouncedFilters.zipCode,
     debouncedFilters.orderBy.order,

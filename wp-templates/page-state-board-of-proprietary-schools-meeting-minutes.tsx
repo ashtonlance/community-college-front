@@ -59,7 +59,7 @@ export default function StateBoardPropSchoolsMeetingMinutesPage({
     useState(boardMeetings)
 
   const filterBoardMeetings = useCallback(() => {
-    let result = boardMeetings
+    let result = [...boardMeetings]
 
     if (debouncedFilters.year) {
       result = result.filter(meeting =>
@@ -91,7 +91,7 @@ export default function StateBoardPropSchoolsMeetingMinutesPage({
       )
     }
 
-    setFilteredBoardMeetings(result)
+    setFilteredBoardMeetings([...result])
   }, [
     debouncedFilters.keyword,
     debouncedFilters.orderBy.order,

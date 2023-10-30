@@ -1,6 +1,6 @@
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
-
+import { useEffect, useState, useMemo } from 'react'
 import {
   CollegesCard,
   NumberedMemos,
@@ -49,11 +49,51 @@ type PaginatedPostsProps = {
 export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const { postType, posts } = props
   const router = useRouter()
-  const offset = (props.currentPage - 1) * PAGE_SIZE
-  const items = (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
+  const [currentPage, setCurrentPage] = useState(props.currentPage)
+
+  useEffect(() => {
+    setCurrentPage(props.currentPage)
+  }, [props.currentPage])
+
+  useEffect(() => {
+    // setCurrentPage(1)
+
+    // Create a URL object with the current full URL
+    const url = new URL(window.location.href)
+
+    // Get the current query parameters
+    const params = new URLSearchParams(url.search)
+
+    // Update the 'page' parameter
+    params.set('page', String(currentPage))
+
+    // Generate the new URL
+    const newUrl = `${url.pathname}?${params.toString()}`
+
+    router.push(newUrl, null, {
+      shallow: true,
+    })
+  }, [posts?.length])
+
+  const items = useMemo(() => {
+    const offset = (currentPage - 1) * PAGE_SIZE
+    return (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
+  }, [posts, currentPage])
 
   const handlePageClick = (pageNumber: number) => {
-    router.push(`${router.asPath?.split('?')?.[0]}?page=${pageNumber}`, null, {
+    setCurrentPage(pageNumber)
+
+    // Create a URL object with the current full URL
+    const url = new URL(window.location.href)
+
+    // Get the current query parameters
+    const params = new URLSearchParams(url.search)
+    // Update the 'page' parameter
+    params.set('page', String(pageNumber))
+
+    // Generate the new URL
+    const newUrl = `${url.pathname}?${params.toString()}`
+    router.replace(newUrl, null, {
       shallow: true,
     })
   }
@@ -67,36 +107,36 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
 
       {items.map((item, index) =>
         postType === 'colleges' ? (
-          <CollegesCard key={index} card={item} />
+          <CollegesCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'numberedMemo' ? (
           <NumberedMemos key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'staff' ? (
-          <StaffCards key={index} card={item} />
+          <StaffCards key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'programFinder' ? (
-          <ProgramCard key={index} card={item} index={index} />
+          <ProgramCard key={`${item.uri}-${index}`} card={item} index={index} />
         ) : postType === 'annualReports' ? (
-          <AnnualReports key={index} card={item} />
+          <AnnualReports key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'news' ? (
           <NewsCard
-            key={index}
+            key={`${item.uri}-${index}`}
             card={item}
             currentPage={props.currentPage}
             index={index}
           />
         ) : postType === 'boardMembers' ? (
-          <BoardMemberCard key={index} card={item} />
+          <BoardMemberCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'events' ? (
-          <EventCard key={index} card={item} />
+          <EventCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'schools' ? (
-          <SchoolCard key={index} card={item} />
+          <SchoolCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'oppurtunities' ? (
-          <OpportunitiesCard key={index} card={item} />
+          <OpportunitiesCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'officers' ? (
-          <OfficerCard key={index} card={item} />
+          <OfficerCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'boardMeeting' ? (
-          <BoardMeetingCard key={index} card={item} />
+          <BoardMeetingCard key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'dataDashboards' ? (
-          <DataDashboardCard key={index} card={item} />
+          <DataDashboardCard key={`${item.uri}-${index}`} card={item} />
         ) : (
           <></>
         )

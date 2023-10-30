@@ -55,7 +55,7 @@ export default function StateBoardMeetingMinutesPage({ data, loading, error }) {
     useState(boardMeetings)
 
   const filterBoardMeetings = useCallback(() => {
-    let result = boardMeetings
+    let result = [...boardMeetings]
 
     if (debouncedFilters.year) {
       result = result.filter(meeting =>
@@ -87,7 +87,7 @@ export default function StateBoardMeetingMinutesPage({ data, loading, error }) {
       )
     }
 
-    setFilteredBoardMeetings(result)
+    setFilteredBoardMeetings([...result])
   }, [
     debouncedFilters.keyword,
     debouncedFilters.orderBy.order,

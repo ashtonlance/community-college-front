@@ -57,7 +57,7 @@ const getCoordinates = (colleges: any[]) =>
       longitude: lng,
       streetAddress,
     } = college?.collegeDetails?.map || {}
-    return { featuredImage, lat, lng, name, streetAddress, phoneNumber, uri}
+    return { featuredImage, lat, lng, name, streetAddress, phoneNumber, uri }
   })
 
 export default function CollegesArchive(props: CollegesIndexProps) {
@@ -79,7 +79,10 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
   const counties = useMemo(
-    () => [...new Set(colleges.map(college => college.collegeDetails.county))],
+    () =>
+      [...new Set(colleges.map(college => college.collegeDetails.county))]
+        .sort()
+        .filter(Boolean),
     [colleges]
   )
 
@@ -94,7 +97,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const [filteredColleges, setFilteredColleges] = useState(colleges)
 
   const filterColleges = () => {
-    let result = colleges
+    let result = [...colleges]
 
     if (
       debouncedFilters.zipCode &&
@@ -126,7 +129,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     } else {
       result = result.sort((a, b) => a.title.localeCompare(b.title))
     }
-    setFilteredColleges(result)
+    setFilteredColleges([...result])
   }
 
   useEffect(() => {

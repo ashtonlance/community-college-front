@@ -30,60 +30,26 @@ export default function StaffIndexPage({ data, loading, error }) {
     [data?.allStaff?.nodes]
   )
 
-  // Set filters and add to URL
-  const handleSetFilters = useCallback(
-    newFilters => {
-      setFilters(newFilters)
-
-      // const { page, wordpressNode, ...rest } = router.query
-      // const newQuery = {
-      //   ...rest,
-      //   ...newFilters,
-      // }
-
-      // const queryString = new URLSearchParams(newQuery)
-      // if (queryString) {
-      //   console.log("newquery string added")
-      //   window.history.replaceState(null, '', `?${queryString.toString()}`)
-      // }
-    },
-    [router.query]
-  )
-
   const [filters, setFilters] = useState({
-    organization: '',
-    department: '',
-    orderBy: { field: 'STAFF_NAME', order: 'ASC' },
+    organization: router.query?.organization || '',
+    department: router.query?.department || '',
+    orderBy: router.query?.orderBy || { field: 'STAFF_NAME', order: 'DESC' },
   })
 
-  const inputValuesRef = useRef(filters)
-
-  useEffect(() => {
-    inputValuesRef.current = filters
-  }, [filters])
-
-  // useEffect(() => {
-  //   const { organization, department, orderBy } = router.query
-  //   const newValues = {
-  //     organization: organization,
-  //     department: department,
-  //     orderBy: orderBy
-  //   }
-  //   setFilters(newValues)
-  // }, [router.query])
-
   const organizations = useMemo(
-    () => [
-      ...new Set(
-        staffIndex?.flatMap(staff =>
-          staff.staffDetails.organizations.flatMap(org => org.name)
-        )
-      ),
-    ],
+    () =>
+      [
+        ...new Set(
+          staffIndex?.flatMap(staff =>
+            staff.staffDetails.organizations.flatMap(org => org.name)
+          )
+        ),
+      ].sort(),
     [staffIndex]
   )
   const departments = useMemo(
-    () => [...new Set(staffIndex.map(staff => staff.staffDetails.location))],
+    () =>
+      [...new Set(staffIndex.map(staff => staff.staffDetails.location))].sort(),
     [staffIndex]
   )
 
@@ -91,52 +57,56 @@ export default function StaffIndexPage({ data, loading, error }) {
   const [filteredStaff, setFilteredStaff] = useState(staffIndex)
 
   const filterNumberedMemos = useCallback(() => {
-    let result = staffIndex
+    let result = [...staffIndex]
 
-    if (debouncedFilters.organization) {
+    if (debouncedFilters?.organization) {
       result = result.filter(memo => {
-        return memo.staffDetails.organizations.find(organization => organization.name.toLowerCase() === debouncedFilters.organization.toLowerCase())
-
+        return memo.staffDetails.organizations.find(
+          organization =>
+            organization.name.toLowerCase() ===
+            debouncedFilters.organization.toLowerCase()
+        )
       })
     }
 
-    if (debouncedFilters.department) {
+    if (debouncedFilters?.department) {
       result = result.filter(memo => {
-        return memo.staffDetails.location.toLowerCase() === debouncedFilters.department.toLowerCase()
+        return (
+          memo.staffDetails.location.toLowerCase() ===
+          debouncedFilters.department.toLowerCase()
+        )
       })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters?.orderBy?.order === 'ASC') {
       result = result.sort(
         (a, b) =>
-          b.staffDetails?.staffName?.slice(
-            b.staffDetails.staffName.lastIndexOf(' ') + 1
-        ).localeCompare(a.staffDetails?.staffName?.slice(
-          a.staffDetails.staffName.lastIndexOf(' ') + 1
-      ))
+          b.staffDetails?.staffName
+            ?.slice(b.staffDetails.staffName.lastIndexOf(' ') + 1)
+            .localeCompare(
+              a.staffDetails?.staffName?.slice(
+                a.staffDetails.staffName.lastIndexOf(' ') + 1
+              )
+            )
       )
     } else {
       result = result.sort(
         (a, b) =>
-          a.staffDetails?.staffName?.slice(
-            a.staffDetails.staffName.lastIndexOf(' ') + 1
-        ).localeCompare(b.staffDetails?.staffName?.slice(
-            b.staffDetails.staffName.lastIndexOf(' ') + 1
-        ))
+          a.staffDetails?.staffName
+            ?.slice(a.staffDetails.staffName.lastIndexOf(' ') + 1)
+            .localeCompare(
+              b.staffDetails?.staffName?.slice(
+                b.staffDetails.staffName.lastIndexOf(' ') + 1
+              )
+            )
       )
     }
-    setFilteredStaff(result)
-  }, [
-    debouncedFilters.organization,
-    debouncedFilters.department, 
-    debouncedFilters.orderBy, 
-    staffIndex,
-  ])
+    setFilteredStaff([...result])
+  }, [debouncedFilters, staffIndex])
 
   useEffect(() => {
     filterNumberedMemos()
   }, [debouncedFilters, filterNumberedMemos])
-
 
   if (loading) {
     return <>Loading...</>
@@ -175,7 +145,7 @@ export default function StaffIndexPage({ data, loading, error }) {
         )}
         <PostFilter
           filters={filters}
-          setFilters={handleSetFilters}
+          setFilters={setFilters}
           filtersToGenerateDropdown={filtersToGenerateDropdown}
         />
         <div className="index-page-wrapper bg-grey">
@@ -216,7 +186,7 @@ StaffIndexPage.query = gql`
 
     allStaff(
       first: 200
-      where: { orderby: { field: STAFF_NAME, order: ASC } }
+      where: { orderby: { field: STAFF_NAME, order: DESC } }
     ) {
       nodes {
         id

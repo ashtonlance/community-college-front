@@ -52,7 +52,7 @@ export default function PagePublicInformationOfficers(props) {
   const [filteredOfficers, setFilteredOfficers] = useState(officers)
 
   const filterOfficers = useCallback(() => {
-    let result = officers
+    let result = [...officers]
 
     if (debouncedFilters.county) {
       result = result.filter(
@@ -80,7 +80,7 @@ export default function PagePublicInformationOfficers(props) {
       result = result.sort((a, b) => a.name?.localeCompare(b.name))
     }
 
-    setFilteredOfficers(result)
+    setFilteredOfficers([...result])
   }, [
     debouncedFilters.college,
     debouncedFilters.orderBy.order,

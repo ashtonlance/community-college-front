@@ -1,9 +1,44 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
+
 export const PostFilter = ({
   filters,
   setFilters,
   filtersToGenerateDropdown,
 }) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const newFilters = { ...filters }
+    Object.keys(router.query).forEach(key => {
+      newFilters[key] = router.query[key]
+    })
+    setFilters(newFilters)
+  }, [router.query])
+
+  const handleFilterChange = (
+    name: string,
+    value: string | { field: string; order: string }
+  ) => {
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: value,
+    }))
+
+    const newValue =
+      typeof value === 'string' ? value : `${value.field}:${value.order}`
+    const newQuery = { ...router.query, [name]: newValue }
+    delete newQuery.wordpressNode
+
+    const queryString = new URLSearchParams(
+      newQuery as Record<string, string>
+    ).toString()
+    setTimeout(() => {
+      window.history.replaceState(null, '', `?${queryString}`)
+    }, 1000)
+  }
+
   return (
     <div className="flex justify-center gap-x-[15px] px-[205px] py-[40px] md:flex-wrap md:justify-between md:gap-y-[15px] md:px-[60px] mdsm:mb-[32px] mdsm:w-full mdsm:flex-col mdsm:gap-y-[10px] mdsm:px-[40px] mdsm:py-[10px]">
       {filtersToGenerateDropdown.map(filterOption => {
@@ -15,13 +50,14 @@ export const PostFilter = ({
               key={filterOption.name}
               className="body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               onChange={e =>
-                setFilters(prevFilters => ({
-                  ...prevFilters,
-                  [isSortBy ? 'orderBy' : filterOption.name]: isSortBy
+                handleFilterChange(
+                  isSortBy ? 'orderBy' : filterOption.name,
+                  isSortBy
                     ? { field: 'NAME', order: e.target.value }
-                    : e.target.value,
-                }))
+                    : e.target.value
+                )
               }
+              value={filters[filterOption.name]}
             >
               <option className="capitalize" value="">
                 {typeof filterOption.options === 'string'
@@ -50,11 +86,9 @@ export const PostFilter = ({
               type="text"
               placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
-                setFilters(prevFilters => ({
-                  ...prevFilters,
-                  [filterOption.name]: e.target.value,
-                }))
+                handleFilterChange(filterOption.name, e.target.value)
               }
+              value={filters[filterOption.name]}
             />
           )
         }

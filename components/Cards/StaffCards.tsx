@@ -25,9 +25,9 @@ export const StaffCards = ({ card }) => {
         {staffDetail.jobTitle}
       </div>
       <div className="body-small col-span-2 col-start-6 md:col-start-4 mdsm:col-start-2">
-        {staffDetail.organizations.flatMap(org => 
-         (<div>{org.name}</div>))
-        }
+        {staffDetail.organizations.flatMap(org => (
+          <div key={org.name}>{org.name}</div>
+        ))}
       </div>
       <div className="body-small col-span-2 col-start-8 md:col-start-5 mdsm:col-start-3">
         {staffDetail.location}
