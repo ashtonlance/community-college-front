@@ -13,7 +13,7 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
     <div
       aria-label="Breadcrumbs"
-      className="mb-8 flex flex-wrap items-start gap-2 md:mb-6"
+      className="mb-8 flex flex-wrap items-start gap-x-2 md:mb-6"
     >
       {items.map((crumb, i) => {
         const isLastItem = i === items.length - 1
