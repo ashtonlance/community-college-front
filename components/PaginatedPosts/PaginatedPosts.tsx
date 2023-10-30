@@ -1,6 +1,5 @@
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
 import {
   CollegesCard,
@@ -50,7 +49,6 @@ type PaginatedPostsProps = {
 export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const { postType, posts } = props
   const router = useRouter()
-
   const offset = (props.currentPage - 1) * PAGE_SIZE
   const items = (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
 
@@ -71,7 +69,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
         postType === 'colleges' ? (
           <CollegesCard key={index} card={item} />
         ) : postType === 'numberedMemo' ? (
-          <NumberedMemos key={index} card={item} />
+          <NumberedMemos key={`${item.uri}-${index}`} card={item} />
         ) : postType === 'staff' ? (
           <StaffCards key={index} card={item} />
         ) : postType === 'programFinder' ? (

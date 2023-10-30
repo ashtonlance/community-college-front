@@ -16,7 +16,6 @@ export default function SingleApprenticeshipOpp(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  console.log(pageData, 'pageData')
 
   if (props.loading) {
     return <>Loading...</>

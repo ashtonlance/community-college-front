@@ -18,7 +18,6 @@ export default function SingleBoardMember(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData?.newsCategories?.nodes
-  console.log(pageData, 'pageData')
 
   if (props.loading) {
     return <>Loading...</>
@@ -42,24 +41,27 @@ export default function SingleBoardMember(props) {
         email={pageData?.boardMember?.email}
       />
       <div className="bg-grey">
-        <div className="flex md:flex-wrap sm:px-10 md:px-[100px] px-[205px] gap-[40px] md:gap-8">
+        <div className="flex gap-[40px] px-[205px] md:flex-wrap md:gap-8 md:px-[100px] sm:px-10">
           {pageData?.boardMember?.biography && (
-            <div className="md:w-full w-[60%]">
-            <div className="h2">About</div>
-            <div className="">
-              <WYSIWYG
-                customClasses='!px-0 sm:!pt-5 md:!pt-6 !pt-8 !pb-0'
-                attributes={{
-                  data: { content: pageData?.boardMember?.biography },
-                }}
-              />
-            </div>
+            <div className="w-[60%] md:w-full">
+              <div className="h2">About</div>
+              <div className="">
+                <WYSIWYG
+                  customClasses="!px-0 sm:!pt-5 md:!pt-6 !pt-8 !pb-0"
+                  attributes={{
+                    data: { content: pageData?.boardMember?.biography },
+                  }}
+                />
+              </div>
             </div>
           )}
           {pageData?.boardMember?.committeeAssignments && (
-            <div className="md:w-full w-[40%]">
-              <div className="h5 sm:m-5 md:mb-6 mb-8">Committee Assignments</div>
-              <div className='wysiwyg'
+            <div className="w-[40%] md:w-full">
+              <div className="h5 mb-8 md:mb-6 sm:m-5">
+                Committee Assignments
+              </div>
+              <div
+                className="wysiwyg"
                 dangerouslySetInnerHTML={{
                   __html: pageData?.boardMember?.committeeAssignments,
                 }}
