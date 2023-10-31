@@ -35,26 +35,28 @@ export default function NewsPage({ data, loading, error }) {
     category: '',
     year: '',
     tag: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    orderBy: { field: 'DATE', order: 'DESC' },
   })
 
   const categories = useMemo(
-    () => [
-      ...new Set(
-        newsItems.flatMap(news =>
-          news.newsCategories.nodes.map(category => category.name)
-        )
-      ),
-    ],
+    () =>
+      [
+        ...new Set(
+          newsItems.flatMap(news =>
+            news.newsCategories.nodes.map(category => category.name)
+          )
+        ),
+      ].sort(),
     [newsItems]
   )
 
   const tags = useMemo(
-    () => [
-      ...new Set(
-        newsItems.flatMap(news => news.newsTags.nodes.map(tag => tag.name))
-      ),
-    ],
+    () =>
+      Array.from(
+        new Set(
+          newsItems.flatMap(news => news.newsTags.nodes.map(tag => tag.name))
+        )
+      ).sort(),
     [newsItems]
   )
 
@@ -183,7 +185,7 @@ NewsPage.query = gql`
         }
       }
     }
-    newsItems(first: 500) {
+    newsItems(first: 500, where: { orderby: { field: DATE, order: DESC } }) {
       nodes {
         title
         slug
