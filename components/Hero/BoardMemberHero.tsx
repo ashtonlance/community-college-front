@@ -24,7 +24,6 @@ export const BoardMemberHero = ({
   role = '',
   biography = '',
 }) => {
-  console.log(bgImg, 'bgImg')
   const router = useRouter()
   const breadcrumbs = generateBreadcrumbs(router)
   return (
@@ -58,7 +57,7 @@ export const BoardMemberHero = ({
         )}
         {appointment && (
           <p className="body-large font-bold text-darkGrey ">
-            Appointment: <span className='font-normal'>{appointment}</span>
+            Appointment: <span className="font-normal">{appointment}</span>
           </p>
         )}
         {termExpiration && (

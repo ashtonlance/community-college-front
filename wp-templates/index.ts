@@ -34,6 +34,7 @@ import SingleBoardMeeting from './single-board-meetings'
 import StateBoardPropSchoolsMeetingMinutesPage from './page-state-board-of-proprietary-schools-meeting-minutes'
 import PageDataDashboards from './page-data-dashboards'
 import SingleDataDashboard from './single-data-dashboards'
+import SingleStaff from './single-staff'
 
 const templates = {
   'front-page': FrontPage,
@@ -76,6 +77,7 @@ const templates = {
     StateBoardPropSchoolsMeetingMinutesPage,
   'page-data-dashboards': PageDataDashboards,
   'single-data-dashboards': SingleDataDashboard,
+  'single-staff': SingleStaff,
 }
 
 export default templates

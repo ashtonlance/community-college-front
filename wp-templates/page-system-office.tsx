@@ -17,7 +17,7 @@ export default function SystemOfficePage(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  console.log(props, 'props')
+
   if (props.loading) {
     return <>Loading...</>
   }

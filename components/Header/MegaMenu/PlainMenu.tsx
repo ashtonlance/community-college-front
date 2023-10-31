@@ -22,7 +22,6 @@ export const PlainMenu = ({
   } else {
     wrapperClasses = `semi-modal`
   }
-  console.log(subItems, 'subItems')
   const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = document.getElementById('topbar')
   // get header size dynamically to move main content below

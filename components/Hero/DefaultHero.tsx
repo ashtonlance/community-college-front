@@ -9,7 +9,6 @@ import Phone from 'assets/icons/phone.svg'
 import Mail from 'assets/icons/mail.svg'
 import generateBreadcrumbs from '../../utils/breadcrumbs'
 
-
 export const DefaultHero = ({
   bgImg,
   subheading,
@@ -37,14 +36,6 @@ export const DefaultHero = ({
         className="wrapper-default-inner-pages flex w-[60%] flex-col
       items-baseline justify-center bg-cover pb-[80px] md:w-full md:pb-0"
       >
-        {subheading && (
-          <div className="mb-[32px] flex items-center gap-[15px]">
-            <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
-              {subheading}
-            </h2>
-          </div>
-        )}
-
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="default-hero-headline">{heading}</h1>
 
@@ -52,6 +43,14 @@ export const DefaultHero = ({
           <p className="body-large mb-[40px] font-bold text-darkGrey sm:mb-[32px]">
             {description}
           </p>
+        )}
+
+        {subheading && (
+          <div className="mb-[32px] flex items-center gap-[15px]">
+            <h2 className="font-sans text-[16px] font-bold leading-[150%] text-darkGrey sm:text-[14px]">
+              {subheading}
+            </h2>
+          </div>
         )}
         {phone || email ? (
           <div className="mb-16 flex w-fit items-center gap-x-5">
