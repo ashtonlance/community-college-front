@@ -22,10 +22,14 @@ export const BoardMemberHero = ({
   appointment = '',
   termExpiration = '',
   role = '',
-  biography = '',
+  type = '',
 }) => {
   const router = useRouter()
-  const breadcrumbs = generateBreadcrumbs(router)
+  const slug =
+    type === 'Foundation'
+      ? '/about-us/foundation/foundation-board-members/'
+      : '/about-us/state-board/board-members/'
+  const breadcrumbs = generateBreadcrumbs(router, slug)
   return (
     <div
       className={`md:pb-0] relative flex h-fit py-[80px] md:h-fit md:flex-col sm:items-center sm:justify-center`}

@@ -17,8 +17,8 @@ export default function SingleBoardMember(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  const tags = pageData?.newsCategories?.nodes
-
+  const boardMemberType =
+    props.data?.boardMember?.boardMembersCategories?.nodes[0]?.name
   if (props.loading) {
     return <>Loading...</>
   }
@@ -37,7 +37,7 @@ export default function SingleBoardMember(props) {
         appointment={pageData?.boardMember?.appointment}
         termExpiration={pageData?.boardMember?.termExpiration}
         role={pageData?.boardMember?.role}
-        biography={pageData?.boardMember?.biography}
+        type={boardMemberType}
         email={pageData?.boardMember?.email}
       />
       <div className="bg-grey">
@@ -114,9 +114,15 @@ SingleBoardMember.query = gql`
         termExpiration
         committeeAssignments
       }
+
+      boardMembersCategories {
+        nodes {
+          name
+        }
+      }
     }
 
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
