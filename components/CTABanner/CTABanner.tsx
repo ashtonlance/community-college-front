@@ -31,10 +31,17 @@ export const CTABanner = ({ attributes }) => {
       return (
         <Button
           content={btn_label}
-          arrow={hasCard ? false : true}
+          arrow={false}
           classes={cn(
-            `  w-fit whitespace-nowrap h-fit ${
-              hasCard ? 'secondary-btn navy' : 'primary-btn  white'
+            `primary-btn w-fit whitespace-nowrap h-fit
+            ${
+              type === "inset" ? 'secondary-btn navy' : 'white'
+            }
+            ${
+              bgColor === "gold" ? 'hover:!text-white' : ''
+            }
+            ${
+              bgColor === "gold" && type === "full-width" ? 'hover:!bg-navy' : ''
             }`
           )}
           linkto={btn_link}
