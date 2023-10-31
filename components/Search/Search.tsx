@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Close from '/assets/icons/close.svg'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch'
@@ -16,6 +16,8 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock'
+import { useRouter } from 'next/router'
+import { useDebounce } from '@uidotdev/usehooks'
 
 import '@algolia/autocomplete-theme-classic'
 
@@ -52,7 +54,6 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
     return {
       ...source,
       getItemUrl({ item }) {
-        // console.log(item, 'item')
         return item.permalink
       },
       onSelect({ setIsOpen }) {
@@ -60,16 +61,15 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
       },
       templates: {
         ...source.templates,
-        item(params) {
-          const { item, html } = params
-          // console.log(item, 'item header')
-          return html`<a
-            className="aa-ItemLink"
-            href="https://google.com?q=${item.query}"
-          >
-            ${source.templates.item(params).props.children}
-          </a>`
-        },
+        // item(params) {
+        //   const { item, html } = params
+        //   return html`<a
+        //     className="aa-ItemLink"
+        //     href="https://google.com?q=${item.query}"
+        //   >
+        //     ${source.templates.item(params).props.children}
+        //   </a>`
+        // },
       },
     }
   },
@@ -85,16 +85,17 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   const [navigationHeight, setNavigationHeight] = useState(140)
   const [navigation, setNavigation] = useState(null)
 
-  const ref = useRef(null)
+  const [searchValue, setSearchValue] = useState('')
+  const debouncedSearchTerm = useDebounce(searchValue, 500)
+  const setSearchValueCallback = useCallback(
+    (value: string) => {
+      console.log('value', value)
+      setSearchValue(value)
+    },
+    [setSearchValue]
+  )
 
-  // const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
-  //   const target = e.target as Element
-  //   if (!target.classList.contains('main-nav')) {
-  //     console.log(target, 'target')
-  //     closeSearchBar()
-  //     console.log(searchBarActive, 'searchBarActive in ref')
-  //   }
-  // })
+  const ref = useRef(null)
 
   useEffect(() => {
     setNavigation(document.getElementById('topbar'))
@@ -213,13 +214,6 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       </div>
 
       <div
-        // className={cn(
-        //   `${
-        //     searchBarActive
-        //       ? `top-[${navigationHeight}px] h-[80px] opacity-100 sm:top-[70px]`
-        //       : 'top-[-100px] h-[0px] opacity-0'
-        //   } delay-250 semi-modal absolute left-0 right-0 z-0 flex items-center justify-center gap-3 bg-white  transition-opacity ease-in-out sm:px-[20px]`
-        // )}
         className={`${
           searchBarActive ? 'semi-modal' : 'hidden'
         } top-[${navigationHeight}px]`}
@@ -231,43 +225,46 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
             preserveSharedStateOnUnmount: true,
           }}
         >
-          <MemoizedAutoComplete
-            openOnFocus={true}
-            autoFocus={true}
-            getSources={({ query }) => [
-              {
-                sourceId: 'wp_searchable_posts_query_suggestions',
-                getItems() {
-                  return getAlgoliaResults({
-                    searchClient,
-                    queries: [
-                      {
-                        indexName: 'wp_searchable_posts',
-                        query,
-                      },
-                    ],
-                  })
-                },
-                templates: {
-                  item({ item, components }) {
-                    return <Hit hit={item} components={components} />
+          <div className="flex w-full bg-white px-8">
+            <MemoizedAutoComplete
+              openOnFocus={true}
+              autoFocus={true}
+              setSearchValue={setSearchValueCallback}
+              getSources={({ query }) => [
+                {
+                  sourceId: 'wp_searchable_posts_query_suggestions',
+                  getItems() {
+                    return getAlgoliaResults({
+                      searchClient,
+                      queries: [
+                        {
+                          indexName: 'wp_searchable_posts',
+                          query,
+                        },
+                      ],
+                    })
                   },
-                  noResults() {
-                    return 'No results.'
+                  templates: {
+                    item({ item, components }) {
+                      return <Hit hit={item} components={components} />
+                    },
+                    noResults() {
+                      return 'No results.'
+                    },
+                  },
+                  getItemUrl({ item }) {
+                    const urlWithoutDomain = item?.permalink?.replace(
+                      'https://ncccsstg.wpengine.com',
+                      ''
+                    )
+                    return urlWithoutDomain
                   },
                 },
-                getItemUrl({ item }) {
-                  const urlWithoutDomain = item?.permalink?.replace(
-                    'https://ncccsstg.wpengine.com',
-                    ''
-                  )
-                  return urlWithoutDomain
-                },
-              },
-            ]}
-            plugins={[querySuggestionsPlugin, recentSearchesPlugin]}
-            placeholder={'Enter a search term...'}
-          />
+              ]}
+              plugins={[querySuggestionsPlugin, recentSearchesPlugin]}
+              placeholder={'Enter a search term...'}
+            />
+          </div>
         </InstantSearch>
       </div>
     </div>

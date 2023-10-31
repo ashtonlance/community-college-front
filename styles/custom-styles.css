@@ -393,3 +393,7 @@ z-index: 1000;
   background-color: rgba(var(--aa-selected-color-rgb),.205);
   @apply bg-navy bg-opacity-10;
 }
+
+.aa-ItemTitle mark {
+  @apply text-gold;
+}

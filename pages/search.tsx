@@ -1,9 +1,10 @@
 import { INSTANT_SEARCH_INDEX_NAME, searchClient } from '@/components/Search'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, ApolloClient, InMemoryCache } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { PreFooter } from 'components/PreFooter'
-
+import { useRouter } from 'next/router'
+import { renderToString } from 'react-dom/server'
 import { PlainHit } from '@/components/Search/Hit'
 import { Hits, InstantSearch, Pagination, SearchBox } from 'react-instantsearch'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
@@ -11,7 +12,6 @@ import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 const GET_SEARCH = gql`
   ${Header.fragments.entry}
-
   query SearchQuery {
     menu(id: "students", idType: SLUG) {
       menuItems(first: 200) {
@@ -52,7 +52,6 @@ const GET_SEARCH = gql`
 export default function Search() {
   const { loading, error, data } = useQuery(GET_SEARCH)
   const menuItems = data?.menu?.menuItems || []
-  const preFooterContent = data?.menus?.nodes[0]
   const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const footerMenuItems = data?.footer?.menuItems || []
@@ -65,6 +64,9 @@ export default function Search() {
     title: 'Search Results',
     schema: data?.resources?.pageInfo?.seo?.schema,
   }
+
+  const router = useRouter()
+  const searchQuery = router?.query?.query
 
   if (loading) {
     return
@@ -92,6 +94,12 @@ export default function Search() {
               future={{
                 preserveSharedStateOnUnmount: true,
               }}
+              insights
+              initialUiState={{
+                wp_searchable_posts: {
+                  query: searchQuery as any,
+                },
+              }}
             >
               <SearchBox placeholder="Search" autoFocus />
 
@@ -101,7 +109,6 @@ export default function Search() {
           </div>
         </div>
       </div>
-      {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
     </Layout>
   )
 }

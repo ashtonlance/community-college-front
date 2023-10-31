@@ -1,4 +1,3 @@
-import React, { createElement } from 'react'
 import { Highlight } from 'react-instantsearch'
 
 type PlainHitProps = {
@@ -7,7 +6,6 @@ type PlainHitProps = {
 }
 
 export function Hit({ hit, components }) {
-  // console.log(hit, 'hit')
   const urlWithoutDomain = hit?.permalink?.replace(
     'https://ncccsstg.wpengine.com',
     ''

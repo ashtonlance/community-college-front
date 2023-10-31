@@ -72,6 +72,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-instantsearch": "^7.2.0",
+    "react-instantsearch-router-nextjs": "^7.3.0",
     "react-lite-youtube-embed": "^2.3.52",
     "react-loader-spinner": "^5.3.4",
     "react-multi-select-component": "^4.3.4",

@@ -1,11 +1,29 @@
 import { autocomplete } from '@algolia/autocomplete-js'
-import React, { createElement, Fragment, useEffect, useRef, memo } from 'react'
+import {
+  KeyboardEvent,
+  createElement,
+  Fragment,
+  useEffect,
+  useRef,
+  memo,
+  useState,
+  useCallback,
+} from 'react'
 import { createRoot } from 'react-dom/client'
+import { useRouter } from 'next/router'
 
 export function Autocomplete(props) {
   const containerRef = useRef(null)
   const panelRootRef = useRef(null)
   const rootRef = useRef(null)
+  const [searchValue, _setSearchValue] = useState('')
+  const router = useRouter()
+  const searchValueRef = useRef(searchValue) // use ref instead of variable
+
+  const setSearchValue = useCallback(value => {
+    searchValueRef.current = value // update ref
+    _setSearchValue(value)
+  }, [])
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -26,15 +44,39 @@ export function Autocomplete(props) {
 
         panelRootRef.current.render(children)
       },
+      onStateChange({ state }) {
+        setSearchValue(state.query)
+      },
       ...props,
     })
 
     return () => {
       search.destroy()
     }
-  }, [props])
+  }, [props, setSearchValue])
 
-  return <div className="" ref={containerRef} />
+  useEffect(() => {
+    const handleEnterKey = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        router.push(`/search?query=${searchValue}`) // use ref
+      }
+    }
+
+    window.addEventListener('keydown', handleEnterKey)
+
+    return () => {
+      window.removeEventListener('keydown', handleEnterKey)
+    }
+  }, [searchValueRef, searchValue]) // add nonStateSearchRef.current to dependency array
+
+  return (
+    <>
+      <div className="w-full" ref={containerRef} />
+      <button onClick={() => router.push(`/search?query=${searchValue}`)}>
+        Search
+      </button>
+    </>
+  )
 }
 
 export const MemoizedAutoComplete = memo(Autocomplete)
