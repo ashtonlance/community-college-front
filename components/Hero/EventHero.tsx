@@ -63,7 +63,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
         <h1 className="default-hero-headline">{heading}</h1>
 
         {description && bgImg && (
-          <p className="body-large mb-[40px] font-bold text-darkGrey sm:mb-[32px]">
+          <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">
             {description}
           </p>
         )}
@@ -102,14 +102,14 @@ export const EventHero: React.FC<EventHeroProps> = ({
       {bgImg ? (
         <div
           className="wrapper-default-inner-pages relative flex min-h-[400px]
-         w-[40%] flex-col items-baseline justify-center rounded-bl-[12px] bg-cover pl-0 md:w-full
+         w-[40%] flex-col items-baseline justify-center rounded-bl-xl bg-cover pl-0 md:w-full
          md:pl-[60px] md:pt-0 sm:pl-[40px]"
         >
           <Image
             src={bgImg}
             alt=""
             fill
-            className={`object-cover object-${bgPosition} z-0`}
+            className={`object-cover rounded-bl-xl object-${bgPosition} z-0`}
             priority
           />
         </div>

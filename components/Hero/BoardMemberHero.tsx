@@ -55,7 +55,7 @@ export const BoardMemberHero = ({
         <h1 className="default-hero-headline">{heading}</h1>
 
         {description && bgImg && (
-          <p className="body-large mb-[40px] font-bold text-darkGrey sm:mb-[32px]">
+          <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">
             {description}
           </p>
         )}
