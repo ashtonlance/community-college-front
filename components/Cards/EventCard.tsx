@@ -31,7 +31,8 @@ export const EventCard: React.FC<EventCardProps> = ({ card }) => {
                 {card.eventsCategories?.nodes[0]?.name}
               </div>
             )}
-            <div> • </div>
+            {card.eventsCategories?.nodes.length > 0 &&
+              card.eventDetails?.date && <div> • </div>}
             {card.eventDetails?.date && (
               <div className="body-regular font-bold text-darkGrey">
                 {formatDate(card.eventDetails?.date)}

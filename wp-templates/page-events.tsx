@@ -213,7 +213,7 @@ PageEvents.query = gql`
         }
       }
     }
-    events {
+    events(first: 500, where: { orderby: { field: DATE, order: DESC } }) {
       nodes {
         title
         uri
