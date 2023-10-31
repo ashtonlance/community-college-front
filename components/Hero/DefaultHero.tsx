@@ -101,7 +101,7 @@ export const DefaultHero = ({
         </div>
       ) : (
         description && (
-          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px] h-full">
+          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px] lg:h-auto h-full">
             <p className="body-large text-darkGrey md:mb-[20px] lg:mt-0 mt-[56px]">
               {description}
             </p>
