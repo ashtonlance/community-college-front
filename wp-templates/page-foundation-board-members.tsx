@@ -30,6 +30,8 @@ export default function FoundationBoardMembersPage({ data, loading, error }) {
     [data?.boardMembers?.nodes]
   )
 
+  console.log({ boardMembers })
+
   const [filters, setFilters] = useState({
     appointment: '',
     orderBy: { field: 'TITLE', order: 'ASC' },
