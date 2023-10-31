@@ -81,7 +81,7 @@ export const DefaultHero = ({
         ) : null}
 
         {ctaURL && ctaLabel && (
-          <Link href={ctaURL} className={`secondary-btn navy`}>
+          <Link href={ctaURL} className={`secondary-btn navy mb-6`}>
             {ctaLabel}
           </Link>
         )}
