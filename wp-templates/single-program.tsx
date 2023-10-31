@@ -13,6 +13,7 @@ import bgFlip from '/assets/imgs/angled-bg-defaultHero-flip.png'
 const GET_RELATED_PROGRAMS = gql`
   query GetRelatedPrograms($slug: [String]) {
     relatedPrograms: programs(
+      first: 100
       where: {
         orderby: { field: TITLE, order: ASC }
         taxQuery: {
