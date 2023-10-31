@@ -3,11 +3,12 @@ import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useCallback } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
 import { ProgramsAccordion } from '@/components/Accordion/ProgamsAccordion'
 import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
+import { PostFilter } from '@/components/PostFilter'
 
 type ProgramsIndexProps = {
   data: {
@@ -81,6 +82,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+
   const programs = useMemo(
     () => data?.programs?.nodes || [],
     [data?.programs?.nodes]
@@ -106,20 +108,24 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
     degreeType: '',
     keyword: '',
   })
+
   const debouncedFilters = useDebounce(filters, 500)
   const organizedPrograms = organizeProgramsByTaggedAreas(programs)
   const [filteredPrograms, setFilteredPrograms] = useState(organizedPrograms)
 
-  const filterPrograms = () => {
-    let result = organizedPrograms
+  const filterPrograms = useCallback(() => {
+    let result = { ...organizedPrograms }
 
     if (debouncedFilters.degreeType) {
       Object.keys(result).forEach(key => {
-        result[key].programs = result[key].programs.filter(
-          program =>
+        result[key].programs = result[key].programs.filter(program => {
+          const isFiltered =
             program.program.degreeTypes &&
             program.program.degreeTypes.includes(debouncedFilters.degreeType)
-        )
+          if (isFiltered) {
+          }
+          return isFiltered
+        })
       })
     }
 
@@ -133,8 +139,8 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       })
     }
 
-    setFilteredPrograms(result)
-  }
+    setFilteredPrograms({ ...result })
+  }, [debouncedFilters, organizedPrograms])
 
   useEffect(() => {
     filterPrograms()
@@ -151,6 +157,18 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       hasCard: true,
     },
   }
+
+  const filtersToGenerateDropdown = [
+    {
+      name: 'degreeType',
+      options: degreeTypes,
+      type: 'select',
+    },
+    {
+      name: 'keyword',
+      type: 'input',
+    },
+  ]
 
   if (loading) {
     return <>Loading...</>
@@ -169,30 +187,11 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
         description={programsIndex?.heroDescription}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex flex-wrap justify-center gap-[15px] sm:pb-[15px] md:pb-5 pt-0 pb-5">
-          <select
-            className="max-w-full flex-1 text-darkBeige"
-            onChange={e =>
-              setFilters({ ...filters, degreeType: e.target.value })
-            }
-          >
-            <option value="">Degree Type</option>
-
-            {degreeTypes.map((type, i) =>
-              type !== null ? (
-                <option key={i} value={type}>
-                  {capitalize(type)}
-                </option>
-              ) : null
-            )}
-          </select>
-          <input
-            className="text-input"
-            type="text"
-            placeholder="Search by keyword"
-            onChange={e => setFilters({ ...filters, keyword: e.target.value })}
-          />
-        </div>
+        <PostFilter
+          filters={filters}
+          setFilters={setFilters}
+          filtersToGenerateDropdown={filtersToGenerateDropdown}
+        />
       </div>
       <div className="flex items-center justify-center bg-grey">
         <div>

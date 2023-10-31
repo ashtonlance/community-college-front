@@ -67,7 +67,7 @@ export const PostFilter = ({
               {Array.isArray(filterOption.options) &&
                 filterOption.options.map(option => (
                   <option key={option} value={option}>
-                    {option}
+                    {camelToSentenceCase(option)}
                   </option>
                 ))}
               {isSortBy && (

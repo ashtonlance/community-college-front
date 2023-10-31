@@ -86,6 +86,7 @@ export default function SingleProgramArea(props) {
 }
 
 SingleProgramArea.variables = ({ databaseId, slug }, ctx) => {
+  console.log({ slug })
   return {
     databaseId,
     slug,
@@ -115,6 +116,7 @@ SingleProgramArea.query = gql`
     }
 
     relatedPrograms: programs(
+      first: 100
       where: {
         orderby: { field: TITLE, order: ASC }
         taxQuery: {

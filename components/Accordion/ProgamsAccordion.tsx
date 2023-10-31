@@ -61,7 +61,7 @@ export const ProgramsAccordion: React.FC<ProgramsAccordionProps> = ({
               </Link>
             </ProgramsAccordionTrigger>
             <ProgramsAccordionContent>
-              <div className="grid w-full grid-cols-5 gap-5 md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
+              <div className="grid w-full grid-cols-5 gap-5 px-1 md:grid-cols-4 md:gap-[15px] sm:grid-cols-2 sm:gap-[10px]">
                 {data.programs.map(program => {
                   return (
                     <div
