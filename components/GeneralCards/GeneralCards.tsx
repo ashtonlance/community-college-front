@@ -51,11 +51,14 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                     width={400}
                     height={200}
                     className={cn(
-                      `w-full sm:h-[200px] md:h-[350px] h-[300px] object-cover object-${image_position}`
+                      `w-full sm:mb-8 mb-0 sm:h-[200px] md:h-[350px] h-[300px] object-cover object-${image_position}`
                     )}
                   />
-                ) : null}
-                <div className="flex flex-col px-10 py-[50px] flex-1">
+                  ) : null}
+                  <div className={cn(
+                        `flex flex-col sm:p-0 md:p-10 px-10 py-[50px] flex-1`
+                      )}
+                  >
                   <h3>{attributes.data[`card_${card}_heading`]}</h3>
                   <div
                     className="body-large text-gmt-500"
