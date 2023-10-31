@@ -18,10 +18,10 @@ export function Autocomplete(props) {
   const rootRef = useRef(null)
   const [searchValue, _setSearchValue] = useState('')
   const router = useRouter()
-  const searchValueRef = useRef(searchValue) // use ref instead of variable
+  const searchValueRef = useRef(searchValue)
 
   const setSearchValue = useCallback(value => {
-    searchValueRef.current = value // update ref
+    searchValueRef.current = value
     _setSearchValue(value)
   }, [])
 
@@ -67,7 +67,7 @@ export function Autocomplete(props) {
     return () => {
       window.removeEventListener('keydown', handleEnterKey)
     }
-  }, [searchValueRef, searchValue]) // add nonStateSearchRef.current to dependency array
+  }, [searchValue])
 
   return (
     <>
