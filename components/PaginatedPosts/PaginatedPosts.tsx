@@ -1,6 +1,6 @@
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
 import {
   CollegesCard,
   NumberedMemos,
@@ -50,29 +50,34 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const { postType, posts } = props
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(props.currentPage)
+  const prevPostsLength = useRef(posts?.length)
 
   useEffect(() => {
     setCurrentPage(props.currentPage)
   }, [props.currentPage])
 
   useEffect(() => {
-    // setCurrentPage(1)
+    if (prevPostsLength.current !== posts?.length) {
+      setCurrentPage(1)
 
-    // Create a URL object with the current full URL
-    const url = new URL(window.location.href)
+      // Create a URL object with the current full URL
+      const url = new URL(window.location.href)
 
-    // Get the current query parameters
-    const params = new URLSearchParams(url.search)
+      // Get the current query parameters
+      const params = new URLSearchParams(url.search)
 
-    // Update the 'page' parameter
-    params.set('page', String(currentPage))
+      // Update the 'page' parameter
+      params.set('page', String(currentPage))
 
-    // Generate the new URL
-    const newUrl = `${url.pathname}?${params.toString()}`
+      // Generate the new URL
+      const newUrl = `${url.pathname}?${params.toString()}`
 
-    router.push(newUrl, null, {
-      shallow: true,
-    })
+      router.push(newUrl, null, {
+        shallow: true,
+      })
+    }
+
+    prevPostsLength.current = posts?.length
   }, [posts?.length])
 
   const items = useMemo(() => {
