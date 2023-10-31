@@ -221,7 +221,7 @@ export const ProgramFinder = props => {
         programFinderIndex?.programFinderDetails?.cta?.link?.target,
       button_label: programFinderIndex?.programFinderDetails?.cta?.link?.title,
       background_color: 'gold',
-      type: 'fullWidth',
+      type: 'inset',
       hasCard: true,
     },
   }
