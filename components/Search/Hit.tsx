@@ -1,4 +1,5 @@
 import { Highlight } from 'react-instantsearch'
+import { truncate } from 'utils/stringHelpers'
 
 type PlainHitProps = {
   hit: any
@@ -32,15 +33,15 @@ export function Hit({ hit, components }) {
 }
 
 export const PlainHit: React.FC<PlainHitProps> = ({ hit }) => {
-  // console.log(hit, 'hit')
+  console.log(hit, 'hit')
   const urlWithoutDomain = hit?.permalink?.replace(
     'https://ncccsstg.wpengine.com',
     ''
   )
   return (
-    <a href={urlWithoutDomain} className="aa-ItemLink">
+    <a href={urlWithoutDomain} className="aa-ItemLink py-4">
       <div className="aa-ItemContent">
-        <div className="aa-ItemTitle text-navy hover:text-darkGrey">
+        <div className="aa-ItemTitle body-large font-bold text-navy hover:text-darkGrey">
           <Highlight attribute="post_title" hit={hit} />
           {hit?.post_type_label && (
             <span className="aa-ItemContentSubtitle aa-ItemContentSubtitle--inline">
@@ -50,6 +51,9 @@ export const PlainHit: React.FC<PlainHitProps> = ({ hit }) => {
               </span>
             </span>
           )}
+          <div className="body-regular text-darkGrey">
+            {truncate(hit?.content || '', 150)}
+          </div>
         </div>
       </div>
     </a>

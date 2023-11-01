@@ -122,6 +122,9 @@ dependencies:
   html-to-react:
     specifier: ^1.6.0
     version: 1.6.0(react@18.2.0)
+  instantsearch.css:
+    specifier: ^8.1.0
+    version: 8.1.0
   js-cookie:
     specifier: ^3.0.5
     version: 3.0.5
@@ -13580,6 +13583,10 @@ packages:
       through: 2.3.8
       wrap-ansi: 6.2.0
     dev: true
+
+  /instantsearch.css@8.1.0:
+    resolution: {integrity: sha512-rPhcAZ02bLwUn3iOXbldZW/yl+17guWoH3qWYZ8nQEwNBx5+wZ6Bv8mFqqK448+R2aU4nbFKIhmoTIPXI5Zobg==}
+    dev: false
 
   /instantsearch.js@4.58.0(algoliasearch@4.20.0):
     resolution: {integrity: sha512-Y5vERyhoE1jEWew33OdsRbB24q2Pexft4/HK6a+QOO22C3qoGIkc3i4rP8RbB4kecDvkziFi/YCGE5t1B6J3eg==}

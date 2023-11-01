@@ -362,7 +362,7 @@ z-index: 1000;
   @apply list-none;
 }
 
-.aa-SubmitIcon {
+.aa-SubmitIcon, .ais-SearchBox-submitIcon {
   @apply !text-gold;
 }
 
@@ -397,3 +397,19 @@ z-index: 1000;
 .aa-ItemTitle mark {
   @apply text-gold;
 }
+
+.ais-SearchBox-form {
+  @apply flex;
+}
+
+.ais-SearchBox-input {
+  @apply flex-1 rounded-[5px] border-2 border-[#51525533] px-[20px] py-[14px] text-navy placeholder:text-darkBeige focus-within:ring-transparent focus:border-lightBlue focus:ring-transparent focus-visible:outline-transparent active:outline-transparent active:placeholder:text-navy;
+}
+
+.ais-SearchBox-submit, .ais-SearchBox-reset {
+  @apply hidden;
+ }
+
+ .aa-ItemContentSubtitleCategory {
+  @apply text-navy;
+ }

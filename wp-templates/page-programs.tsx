@@ -7,7 +7,7 @@ import { useMemo, useState, useEffect, useCallback } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { useDebounce } from '@uidotdev/usehooks'
 import { ProgramsAccordion } from '@/components/Accordion/ProgamsAccordion'
-import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
+import { organizeProgramsByTaggedAreas } from 'utils/programsHelper'
 import { PostFilter } from '@/components/PostFilter'
 
 type ProgramsIndexProps = {
