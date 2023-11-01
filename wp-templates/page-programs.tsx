@@ -153,7 +153,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       button_target: programsIndex?.cta?.link?.target,
       button_label: programsIndex?.cta?.link?.title,
       background_color: 'gold',
-      type: 'fullWidth',
+      type: 'inset',
       hasCard: true,
     },
   }

@@ -143,7 +143,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       button_target: collegesIndex?.cta?.link?.target,
       button_label: collegesIndex?.cta?.link?.title,
       background_color: 'gold',
-      type: 'fullWidth',
+      type: 'inset',
       hasCard: true,
     },
   }

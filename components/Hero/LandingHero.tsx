@@ -65,7 +65,7 @@ export const LandingHero = ({
           src={angles.src}
           alt=""
           fill
-          className={`img-landing-hero z-[2] object-fill`}
+          className={`img-landing-hero z-[2] object-fill !h-[calc(100%+0.5px)]`}
           priority
         />
       </div>
