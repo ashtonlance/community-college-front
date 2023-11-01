@@ -97,7 +97,7 @@ export const CTABanner = ({ attributes }) => {
         >
           <div className="relative overflow-hidden rounded-xl bg-white px-[105px] py-[60px] md:p-[60px] sm:p-[40px]">
             <div className="relative z-10 mx-auto flex max-w-[1030px] flex-col items-center justify-between md:flex-col">
-              <h3 className={`h3 md:mb-[32px] md:text-center sm:text-[28px]`}>
+              <h3 className={`h3 sm:mb-[20px] md:mb-[24px] mb-8 text-center sm:text-[28px]`}>
                 {copy}
               </h3>
               {renderButton()}
