@@ -48,7 +48,7 @@ export const PostFilter = ({
           return (
             <select
               key={filterOption.name}
-              className="body-regular md:max-w-none max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className="body-regular md:max-w-none max-w-[250px] basis-[calc(33.33%-15px)] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               onChange={e =>
                 handleFilterChange(
                   isSortBy ? 'orderBy' : filterOption.name,
@@ -82,7 +82,7 @@ export const PostFilter = ({
           return (
             <input
               key={filterOption.name}
-              className="text-input flex-1 body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className="text-input body-regular px-[20px] basis-[calc(33.33%-15px)] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               type="text"
               placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
