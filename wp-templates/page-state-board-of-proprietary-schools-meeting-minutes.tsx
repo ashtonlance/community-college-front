@@ -8,7 +8,7 @@ import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-
+import { convertToDate } from 'utils/dates'
 export default function StateBoardPropSchoolsMeetingMinutesPage({
   data,
   loading,
@@ -75,20 +75,26 @@ export default function StateBoardPropSchoolsMeetingMinutesPage({
       )
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort(
-        (a, b) =>
-          b.boardMeetingDetails?.date?.localeCompare(
-            a.boardMeetingDetails?.date
-          )
-      )
+    if (debouncedFilters.orderBy.order === 'ASC') {
+      result = result.sort((a, b) => {
+        const aDate = new Date(convertToDate(a.boardMeetingDetails?.date) || '')
+        const bDate = new Date(convertToDate(b.boardMeetingDetails?.date) || '')
+        if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+          console.error('Invalid Date')
+          return 0
+        }
+        return aDate.getTime() - bDate.getTime()
+      })
     } else {
-      result = result.sort(
-        (a, b) =>
-          a.boardMeetingDetails?.date?.localeCompare(
-            b.boardMeetingDetails?.date
-          )
-      )
+      result = result.sort((a, b) => {
+        const aDate = new Date(convertToDate(a.boardMeetingDetails?.date) || '')
+        const bDate = new Date(convertToDate(b.boardMeetingDetails?.date) || '')
+        if (isNaN(aDate.getTime()) || isNaN(bDate.getTime())) {
+          console.error('Invalid Date')
+          return 0
+        }
+        return bDate.getTime() - aDate.getTime()
+      })
     }
 
     setFilteredBoardMeetings([...result])

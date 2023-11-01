@@ -11,13 +11,16 @@ import blocks from 'wp-blocks'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
+
   useEffect(() => {
-    const handleRouteChange = url => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
+    if (process.env.NODE_ENV === 'production') {
+      const handleRouteChange = url => {
+        gtag.pageview(url)
+      }
+      router.events.on('routeChangeComplete', handleRouteChange)
+      return () => {
+        router.events.off('routeChangeComplete', handleRouteChange)
+      }
     }
   }, [router.events])
   return (

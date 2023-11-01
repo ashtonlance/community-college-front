@@ -110,8 +110,8 @@ export const PostFilter = ({
               )}
               {isSortBy && !isNameFilter && (
                 <>
-                  <option value="ASC">Ascending</option>
-                  <option value="DESC">Descending</option>
+                  <option value="ASC">Oldest</option>
+                  <option value="DESC">Newest</option>
                 </>
               )}
             </select>
