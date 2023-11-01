@@ -19,7 +19,7 @@ export type LayoutProps = {
 }
 
 export function Layout(props: LayoutProps) {
-  const title = props?.seo?.title || 'NextWord'
+  const title = props?.seo?.title || 'NCCCS'
   const metaDesc = props?.seo?.metaDesc || ''
   const canonical = props?.seo?.canonical || ''
   const schema = props?.seo?.schema || ''

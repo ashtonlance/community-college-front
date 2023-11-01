@@ -36,25 +36,21 @@ export default function BoardMembersPage({ data, loading, error }) {
     orderBy: { field: 'TITLE', order: 'ASC' },
   })
 
-  const appointments = useMemo(
-    () => [
-      ...new Set(
-        boardMembers.map(memo => memo.boardMember?.appointment).filter(Boolean)
-      ),
-    ],
-    [boardMembers]
-  )
+  const appointments = useMemo(() => {
+    const appointmentsSet = new Set(
+      boardMembers.map(memo => memo.boardMember?.appointment).filter(Boolean)
+    )
+    return Array.from(appointmentsSet).sort()
+  }, [boardMembers])
 
-  const expirations = useMemo(
-    () => [
-      ...new Set(
-        boardMembers
-          .map(memo => memo.boardMember?.termExpiration?.split('/')[2])
-          .filter(Boolean)
-      ),
-    ],
-    [boardMembers]
-  )
+  const expirations = useMemo(() => {
+    const expirationsSet = new Set(
+      boardMembers
+        .map(memo => memo.boardMember?.termExpiration?.split('/')[2])
+        .filter(Boolean)
+    )
+    return Array.from(expirationsSet).sort()
+  }, [boardMembers])
 
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredBoardMembers, setFilteredBoardMembers] = useState(boardMembers)
