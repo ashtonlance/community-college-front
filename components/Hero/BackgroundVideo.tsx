@@ -1,7 +1,12 @@
-import dynamic from 'next/dynamic'
 import { gql, useQuery } from '@apollo/client'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
-const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
+import Image from 'next/image'
+import poster from 'public/poster.jpg'
+import { useState } from 'react'
+const ReactPlayer = dynamic(() => import('react-player/lazy'), {
+  ssr: false,
+})
 
 const GET_BACKGROUND_VIDEO_FILE = gql`
   query GetVideoURLFromID($databaseId: ID!) {
@@ -13,25 +18,31 @@ const GET_BACKGROUND_VIDEO_FILE = gql`
 `
 
 export const BackgroundVideoURL = ({ url }: { url: string }) => {
+  const [showImage, setShowImage] = useState(false)
   return (
     <>
       <Head>
         <link rel="preconnect" href="https://youtube.com" />
       </Head>
-      <div className="absolute h-full w-full bg-navy top-0">
-        {/* <div className="relative h-full w-full "> */}
+      <div className="absolute top-0 h-full w-full bg-navy">
+        {showImage && (
+          <Image className="object-cover" src={poster.src} alt="" fill />
+        )}
         <ReactPlayer
           muted
           playing
           loop
           controls={false}
-          className="video-wrapper absolute !w-full !h-full top-[50%] left-[50%] translate-x-[-50%]	translate-y-[-50%]"
+          className="video-wrapper absolute left-[50%] top-[50%] !h-full !w-full translate-x-[-50%]	translate-y-[-50%]"
           url={url}
           width="100%"
           height="100%"
           playsinline
+          onError={e => {
+            console.log({ e })
+            setShowImage(true)
+          }}
         />
-        {/* </div> */}
       </div>
     </>
   )
