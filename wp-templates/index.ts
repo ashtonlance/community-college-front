@@ -35,6 +35,7 @@ import StateBoardPropSchoolsMeetingMinutesPage from './page-state-board-of-propr
 import PageDataDashboards from './page-data-dashboards'
 import SingleDataDashboard from './single-data-dashboards'
 import SingleStaff from './single-staff'
+import NewsTaxonomyPage from './taxonomy-news-tags'
 
 const templates = {
   'front-page': FrontPage,
@@ -78,6 +79,7 @@ const templates = {
   'page-data-dashboards': PageDataDashboards,
   'single-data-dashboards': SingleDataDashboard,
   'single-staff': SingleStaff,
+  'taxonomy-news-tags': NewsTaxonomyPage,
 }
 
 export default templates

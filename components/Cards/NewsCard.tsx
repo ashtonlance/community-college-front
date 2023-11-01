@@ -83,7 +83,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
       </div>
       <div className="col-span-8 flex flex-col gap-5 px-[40px] py-[40px] md:px-[20px] md:py-[14px] mdsm:p-[20px]">
         <div className="body-large font-bold text-darkGrey">
-          {card.newsCategories.nodes[0].name} • {''}
+          {card.newsCategories.nodes[0]?.name} • {''}
           {formatDate(card?.date)}
         </div>
         <Link
@@ -98,7 +98,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
           </div>
         )}
         <Link
-          aria-label={"Read about " + card.newsCategories.nodes[0].name}
+          aria-label={'Read about ' + card.newsCategories.nodes[0]?.name}
           className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
           href={card.uri ?? ''}
         >
