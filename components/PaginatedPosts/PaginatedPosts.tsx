@@ -85,6 +85,20 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
     return (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
   }, [posts, currentPage])
 
+  const resetFilters = () => {
+    const { wordpressNode, ...rest } = router.query
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { wordpressNode: wordpressNode },
+      },
+      undefined,
+      {
+        shallow: true,
+      }
+    )
+  }
+
   const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber)
 
@@ -110,41 +124,54 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {props.postType === 'annualReports' && <AnnualReportsHeading />}
       {props.postType === 'boardMeeting' && <BoardMeetingHeading />}
 
-      {items.map((item, index) =>
-        postType === 'colleges' ? (
-          <CollegesCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'numberedMemo' ? (
-          <NumberedMemos key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'staff' ? (
-          <StaffCards key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'programFinder' ? (
-          <ProgramCard key={`${item.uri}-${index}`} card={item} index={index} />
-        ) : postType === 'annualReports' ? (
-          <AnnualReports key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'news' ? (
-          <NewsCard
-            key={`${item.uri}-${index}`}
-            card={item}
-            currentPage={props.currentPage}
-            index={index}
-          />
-        ) : postType === 'boardMembers' ? (
-          <BoardMemberCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'events' ? (
-          <EventCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'schools' ? (
-          <SchoolCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'oppurtunities' ? (
-          <OpportunitiesCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'officers' ? (
-          <OfficerCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'boardMeeting' ? (
-          <BoardMeetingCard key={`${item.uri}-${index}`} card={item} />
-        ) : postType === 'dataDashboards' ? (
-          <DataDashboardCard key={`${item.uri}-${index}`} card={item} />
-        ) : (
-          <></>
-        )
+      {items.length === 0 ? (
+        <div className="col-span-12 flex w-full flex-col items-center justify-center gap-4 pb-12 pt-4 text-center">
+          <p className="h4">No results found.</p>
+          <button className="primary-btn gold" onClick={resetFilters}>
+            Reset Filters
+          </button>
+        </div>
+      ) : (
+        items.map((item, index) => {
+          return postType === 'colleges' ? (
+            <CollegesCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'numberedMemo' ? (
+            <NumberedMemos key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'staff' ? (
+            <StaffCards key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'programFinder' ? (
+            <ProgramCard
+              key={`${item.uri}-${index}`}
+              card={item}
+              index={index}
+            />
+          ) : postType === 'annualReports' ? (
+            <AnnualReports key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'news' ? (
+            <NewsCard
+              key={`${item.uri}-${index}`}
+              card={item}
+              currentPage={props.currentPage}
+              index={index}
+            />
+          ) : postType === 'boardMembers' ? (
+            <BoardMemberCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'events' ? (
+            <EventCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'schools' ? (
+            <SchoolCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'oppurtunities' ? (
+            <OpportunitiesCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'officers' ? (
+            <OfficerCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'boardMeeting' ? (
+            <BoardMeetingCard key={`${item.uri}-${index}`} card={item} />
+          ) : postType === 'dataDashboards' ? (
+            <DataDashboardCard key={`${item.uri}-${index}`} card={item} />
+          ) : (
+            <></>
+          )
+        })
       )}
 
       {items?.length > 0 && (

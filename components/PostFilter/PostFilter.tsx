@@ -11,20 +11,20 @@ export const PostFilter = ({
   const router = useRouter()
   const filterLength = Object.keys({ ...filters }).length - 1
 
-  let filterClass;
+  let filterClass
   switch (filterLength) {
     case 2:
       filterClass = 'basis-[calc(50%-15px)]'
-      break;
+      break
     case 3:
       filterClass = 'basis-[calc(33.33%-15px)]'
-      break;
+      break
     case 4:
       filterClass = 'basis-[calc(25%-15px)]'
-      break;
+      break
     case 5:
       filterClass = 'basis-[calc(20%-15px)]'
-      break;
+      break
     default:
       filterClass = 'basis-full'
   }
@@ -69,7 +69,7 @@ export const PostFilter = ({
             <select
               key={filterOption.name}
               className={cn(
-                `body-regular md:max-w-none max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
+                `body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
                 ${filterClass}
                 }`
               )}
