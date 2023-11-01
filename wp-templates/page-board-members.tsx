@@ -33,7 +33,7 @@ export default function BoardMembersPage({ data, loading, error }) {
   const [filters, setFilters] = useState({
     appointment: '',
     expiration: '',
-    orderBy: { field: 'TITLE', order: 'ASC' },
+    orderBy: { field: 'TITLE', order: 'DESC' },
   })
 
   const appointments = useMemo(() => {
@@ -187,7 +187,7 @@ BoardMembersPage.query = gql`
             terms: "Foundation"
           }
         }
-        orderby: { field: TITLE, order: ASC }
+        orderby: { field: TITLE, order: DESC }
       }
     ) {
       nodes {

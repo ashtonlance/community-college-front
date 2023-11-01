@@ -65,13 +65,17 @@ export const PostFilter = ({
         const filterName = camelToSentenceCase(filterOption.name)
         if (filterOption.type === 'select') {
           const isSortBy = filterName.toLowerCase() === 'sort by'
+          const isNameFilter =
+            filterOption.options.includes('Name') ||
+            filterOption.options.includes('Last Name')
+          const isEventsPage = router.asPath.includes('events')
           return (
             <select
               key={filterOption.name}
               className={cn(
                 `body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
                 ${filterClass}
-                }`
+                `
               )}
               onChange={e =>
                 handleFilterChange(
@@ -81,7 +85,7 @@ export const PostFilter = ({
                     : e.target.value
                 )
               }
-              value={filters[filterOption.name]}
+              defaultValue={isNameFilter || isEventsPage ? 'ASC' : 'DESC'}
             >
               <option className="capitalize" value="">
                 {typeof filterOption.options === 'string'
@@ -94,7 +98,13 @@ export const PostFilter = ({
                     {camelToSentenceCase(option)}
                   </option>
                 ))}
-              {isSortBy && (
+              {isSortBy && isNameFilter && (
+                <>
+                  <option value="ASC">A-Z</option>
+                  <option value="DESC">Z-A</option>
+                </>
+              )}
+              {isSortBy && !isNameFilter && (
                 <>
                   <option value="ASC">Ascending</option>
                   <option value="DESC">Descending</option>

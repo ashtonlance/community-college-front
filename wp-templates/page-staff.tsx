@@ -78,7 +78,7 @@ export default function StaffIndexPage({ data, loading, error }) {
       })
     }
 
-    if (debouncedFilters?.orderBy?.order === 'ASC') {
+    if (debouncedFilters?.orderBy?.order === 'DESC') {
       result = result.sort(
         (a, b) =>
           b.staffDetails?.staffName

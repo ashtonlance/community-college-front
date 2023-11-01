@@ -83,7 +83,7 @@ export default function PageEvents(props) {
       })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort(
         (a, b) => b.eventDetails?.date?.localeCompare(a.eventDetails?.date)
       )
