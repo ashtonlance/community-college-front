@@ -57,7 +57,7 @@ export default function SingleApprenticeshipOpp(props) {
             button_link: pageData?.opportunityDetails?.offeredBy?.email,
             button_label: 'Send An Email',
             hasCard: true,
-            type: 'fullWidth',
+            type: 'inset',
             emailLink: true,
           },
         }}
