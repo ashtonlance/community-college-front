@@ -51,8 +51,6 @@ export default function SingleProgram(props) {
     variables: { slug },
   })
 
-  console.log({ props })
-
   if (props.loading) {
     return <>Loading...</>
   }
@@ -209,7 +207,7 @@ SingleProgram.query = gql`
         programDetails
         description
       }
-      colleges {
+      colleges(first: 60) {
         nodes {
           uri
           title
