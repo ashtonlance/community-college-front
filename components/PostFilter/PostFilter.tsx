@@ -82,7 +82,7 @@ export const PostFilter = ({
           return (
             <input
               key={filterOption.name}
-              className="text-input flex-1 body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className="text-input md:flex-initial flex-1 body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
               type="text"
               placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
