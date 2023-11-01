@@ -425,6 +425,7 @@ ProgramFinder.query = gql`
           degreeTypes
           title
           description
+          about
         }
         colleges {
           nodes {

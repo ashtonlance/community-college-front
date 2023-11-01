@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { cn } from 'utils'
 import { FadeIn } from '@/components/FadeIn'
+import { programCardTruncate } from 'utils/stringHelpers'
 
 export const ProgramCard = ({ card, index }) => {
+  console.log({ card })
   const collegesLength = card?.colleges?.length
   return (
     <FadeIn
@@ -29,8 +31,7 @@ export const ProgramCard = ({ card, index }) => {
                 </div>
               ) : (
                 <div className="text-base text-darkGrey">
-                  Paragraph Regular description area. Lorem ipsum dolor sit
-                  amet, consectetur adipiscing elit vestibulum pulvinar.
+                  {programCardTruncate(card?.program?.about, 150)}
                 </div>
               )}
             </div>

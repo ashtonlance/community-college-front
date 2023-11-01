@@ -1,3 +1,5 @@
+import he from 'he'
+
 export const camelToSentenceCase = (str: string) => {
   const result = str.replace(/([A-Z])/g, ' $1')
   if (str === 'certificateassociateOfAppliedScience')
@@ -14,5 +16,23 @@ export const truncate = (str: string, num: number) => {
     return str
   }
   let subString = str.substr(0, num)
+  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...'
+}
+
+export const programCardTruncate = (str: string, num: number) => {
+  // Decode HTML entities
+  let decodedStr = he.decode(str)
+
+  // Remove all HTML tags
+  let cleanStr = decodedStr.replace(/<\/?[^>]+(>|$)/g, '')
+
+  // Remove the first instance of the word "About"
+  cleanStr = cleanStr.replace('About', '')
+
+  if (cleanStr.length <= num) {
+    return cleanStr
+  }
+
+  let subString = cleanStr.substr(0, num)
   return subString.substr(0, subString.lastIndexOf(' ')) + ' ...'
 }
