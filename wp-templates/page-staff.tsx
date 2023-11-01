@@ -185,7 +185,7 @@ StaffIndexPage.query = gql`
     }
 
     allStaff(
-      first: 200
+      first: 500
       where: { orderby: { field: STAFF_NAME, order: DESC } }
     ) {
       nodes {
