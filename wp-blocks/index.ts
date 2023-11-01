@@ -30,6 +30,7 @@ import { Form } from '../components/Form'
 import { MediaEmbed } from '../components/MediaEmbed'
 import { Location } from '../components/Location'
 import { AccordionDisplay } from '@/components/Accordion'
+import { EventCards } from '@/components/EventCards'
 
 type WordPressBlock = React.FC & {
   displayName?: string
@@ -72,6 +73,7 @@ const blocks = {
   MediaEmbed,
   Location,
   AccordionDisplay,
+  EventCards,
 }
 
 export default blocks
