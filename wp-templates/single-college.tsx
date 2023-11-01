@@ -197,7 +197,7 @@ export default function SingleCollege(props) {
             button_link: pageData?.collegeDetails?.linkToApply?.url,
             button_label: pageData?.collegeDetails?.linkToApply?.title,
             hasCard: true,
-            type: 'fullWidth',
+            type: 'inset',
           },
         }}
       />
