@@ -1,5 +1,8 @@
 export const camelToSentenceCase = (str: string) => {
+  console.log(str, 'str')
   const result = str.replace(/([A-Z])/g, ' $1')
+  if (str === 'certificateassociateOfAppliedScience')
+    return 'Associate of Applied Science'
   return result.charAt(0).toUpperCase() + result.slice(1)
 }
 
