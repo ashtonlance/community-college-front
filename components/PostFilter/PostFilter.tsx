@@ -87,11 +87,13 @@ export const PostFilter = ({
               }
               defaultValue={isNameFilter || isEventsPage ? 'ASC' : 'DESC'}
             >
-              <option className="capitalize" value="">
-                {typeof filterOption.options === 'string'
-                  ? filterOption.options
-                  : `Select ${getArticle(filterName)} ${filterName}`}
-              </option>
+              {!isNameFilter && (
+                <option className="capitalize" value="">
+                  {typeof filterOption.options === 'string'
+                    ? filterOption.options
+                    : `Select ${getArticle(filterName)} ${filterName}`}
+                </option>
+              )}
               {Array.isArray(filterOption.options) &&
                 filterOption.options.map(option => (
                   <option key={option} value={option}>
