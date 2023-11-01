@@ -3,6 +3,10 @@
   opacity: 0.5;
 }
 
+.inactive-arrow svg {
+  @apply text-darkBeige;
+}
+
 .tag-page .tag-wrapper .inactive-taxonomy-item p,
 .category-page .category-wrapper .inactive-taxonomy-item p,
 .resource-single-template p {
