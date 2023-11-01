@@ -7,7 +7,7 @@ export const StaffCardsHeading = () => {
       <h5 className="col-span-3 col-start-1 md:col-span-2">name</h5>
       <h5 className="col-span-2 col-start-4 md:col-start-3">job title</h5>
       <h5 className="col-span-2 col-start-6 md:col-start-4">organization</h5>
-      <h5 className="col-span-2 col-start-8 md:col-start-5">department</h5>
+      <h5 className="col-span-2 col-start-8 md:col-start-5">location</h5>
       <h5 className="col-span-2 col-start-10">phone</h5>
       <h5 className="col-span-1">contact</h5>
     </div>
