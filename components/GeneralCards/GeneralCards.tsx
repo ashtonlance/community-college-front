@@ -27,7 +27,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
   return (
     <div
       className={cn(
-        `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} p-0 sm:mx-auto sm:w-full`
+        `bg-${backgroundColor} module-spacing-top-${top} module-spacing-bottom-${bottom} sm:mx-auto sm:w-full`
       )}
     >
       <div className="mx-auto w-[90%] max-w-[1220px] flex flex-wrap justify-center gap-[20px] md:flex-col md:items-center">
