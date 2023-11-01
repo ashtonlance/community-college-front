@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
+import { cn } from 'utils'
 
 export const PostFilter = ({
   filters,
@@ -8,6 +9,25 @@ export const PostFilter = ({
   filtersToGenerateDropdown,
 }) => {
   const router = useRouter()
+  const filterLength = Object.keys({ ...filters }).length - 1
+
+  let filterClass;
+  switch (filterLength) {
+    case 2:
+      filterClass = 'basis-[calc(50%-15px)]'
+      break;
+    case 3:
+      filterClass = 'basis-[calc(33.33%-15px)]'
+      break;
+    case 4:
+      filterClass = 'basis-[calc(25%-15px)]'
+      break;
+    case 5:
+      filterClass = 'basis-[calc(20%-15px)]'
+      break;
+    default:
+      filterClass = 'basis-full'
+  }
 
   useEffect(() => {
     const newFilters = { ...filters }
@@ -48,7 +68,11 @@ export const PostFilter = ({
           return (
             <select
               key={filterOption.name}
-              className="body-regular max-w-[250px] flex-1 basis-[calc(33.33%-15px)] px-[20px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none md:flex-initial mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className={cn(
+                `body-regular md:max-w-none max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
+                ${filterClass}
+                }`
+              )}
               onChange={e =>
                 handleFilterChange(
                   isSortBy ? 'orderBy' : filterOption.name,
@@ -82,7 +106,11 @@ export const PostFilter = ({
           return (
             <input
               key={filterOption.name}
-              className="text-input body-regular basis-[calc(33.33%-15px)] px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px]"
+              className={cn(
+                `text-input body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
+                ${filterClass}
+                }`
+              )}
               type="text"
               placeholder={`Search by ${filterName ?? 'keyword'}`}
               onChange={e =>
