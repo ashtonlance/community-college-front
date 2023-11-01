@@ -36,6 +36,7 @@ import PageDataDashboards from './page-data-dashboards'
 import SingleDataDashboard from './single-data-dashboards'
 import SingleStaff from './single-staff'
 import NewsTaxonomyPage from './taxonomy-news-tags'
+import NewsTaxonomyCatPage from './taxonomy-news-categories'
 
 const templates = {
   'front-page': FrontPage,
@@ -80,6 +81,7 @@ const templates = {
   'single-data-dashboards': SingleDataDashboard,
   'single-staff': SingleStaff,
   'taxonomy-news-tags': NewsTaxonomyPage,
+  'taxonomy-news-categories': NewsTaxonomyCatPage,
 }
 
 export default templates
