@@ -25,6 +25,7 @@ export const BoardMemberHero = ({
   type = '',
 }) => {
   const router = useRouter()
+  console.log({ bgImg })
   const slug =
     type === 'Foundation'
       ? '/about-us/foundation/foundation-board-members/'

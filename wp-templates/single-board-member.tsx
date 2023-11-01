@@ -33,7 +33,10 @@ export default function SingleBoardMember(props) {
     >
       <BoardMemberHero
         heading={pageData?.title}
-        bgImg={pageData?.featuredImage?.node?.sourceUrl}
+        bgImg={
+          pageData?.featuredImage?.node?.sourceUrl ||
+          pageData?.boardMember?.image?.sourceUrl
+        }
         appointment={pageData?.boardMember?.appointment}
         termExpiration={pageData?.boardMember?.termExpiration}
         role={pageData?.boardMember?.role}
@@ -113,6 +116,9 @@ SingleBoardMember.query = gql`
         biography
         termExpiration
         committeeAssignments
+        image {
+          sourceUrl
+        }
       }
 
       boardMembersCategories {
