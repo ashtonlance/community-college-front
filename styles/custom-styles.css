@@ -51,10 +51,7 @@
 .sidebar-module .arrow-submit {
   stroke: #888888;
 }
-table td {
-  padding: 10px 20px;
-  border: 1.5px solid #ccc;
-}
+
 .gallery-images img {
   width: 100%;
   object-fit: cover;
@@ -117,12 +114,62 @@ table td {
   margin-bottom: 32px;
 }
 
-.wysiwyg table {
-  @apply rounded-xl border-spacing-0 border-grey max-w-full;
+table {
+  @apply rounded-xl border-grey max-w-full !border-separate	!border-spacing-0;
 }
 
-.wysiwyg tr:first-of-type {
+table td {
+  @apply border-t border-l border-darkGrey border-opacity-25 md:py-[10px] md:px-[15px] p-5 text-[14px] leading-[140%] text-darkGrey;
+}
+
+table td:last-of-type {
+  @apply border-r
+}
+
+table td img {
+  @apply !m-0;
+}
+
+table th {
+  @apply md:py-[10px] md:px-[15px] p-5 md:text-[12px] text-[14px] font-extrabold tracking-[0.72px];
+}
+
+table tr:first-child th {
+  @apply border-t border-l  border-darkGrey border-opacity-25;
+}
+
+table tr:first-child th:last-of-type {
+  @apply border-r;
+}
+
+table tr.even {
+  @apply bg-grey;
+}
+
+table tr:first-of-type {
   @apply bg-lightBlue font-extrabold text-navy uppercase;
+}
+
+table tr:last-child td {
+  @apply border-b;
+}
+
+table tr:last-child td:last-child {
+  @apply rounded-br-xl;
+}
+
+table tr:last-child td:first-child {
+  @apply rounded-bl-xl;
+}
+
+table tr:first-child th:first-child,
+table tr:first-child td:first-child {
+  @apply rounded-tl-xl;
+}
+
+table tr:first-child th:last-child,
+table tr:first-child td:last-child {
+  @apply rounded-tr-xl;
 }
 
 .wysiwyg p a,
