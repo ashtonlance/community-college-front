@@ -21,8 +21,6 @@ import {
   DataDashboardCard,
 } from '@/components/Cards'
 
-const PAGE_SIZE = 9
-
 type PostType =
   | 'numberedMemo'
   | 'colleges'
@@ -51,6 +49,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const prevPostsLength = useRef(posts?.length)
+  const PAGE_SIZE = postType === 'boardMembers' ? 12 : 9
 
   useEffect(() => {
     setCurrentPage(props.currentPage)
