@@ -15,7 +15,6 @@ export const EventCards = props => {
         } w-full`}
       >
         {cards?.map(card => {
-          console.log(card, 'card')
           return (
             <Card
               key={card?.post_title}
