@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import { cn } from 'utils'
-import bg from 'assets/imgs/angled-bg-menu.jpg'
-import Image from 'next/image'
 
 type MobileChildSubMenuProps = {
   subItems: any

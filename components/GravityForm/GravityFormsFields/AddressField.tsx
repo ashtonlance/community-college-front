@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import React from 'react'
+
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
 export const ADDRESS_FIELD_FIELDS = gql`

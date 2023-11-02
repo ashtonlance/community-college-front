@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import React from 'react'
+
 import useGravityForm, {
   ACTION_TYPES,
   FieldValue,

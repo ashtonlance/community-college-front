@@ -1,7 +1,6 @@
-import React from 'react'
+import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from 'next/image'
-import Autoplay from 'embla-carousel-autoplay'
 
 export const EmblaCarousel = ({ blocks }) => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])

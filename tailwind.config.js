@@ -74,6 +74,10 @@ module.exports = {
     'top-[207px]',
     'top-[150px]',
     'top-[192px]',
-    'top-[200px], top-[140px], top-[143px], top-[127px]',
+    'top-[200px]',
+    'top-[140px]',
+    'top-[143px]',
+    'top-[127px]',
+    { pattern: /(aa|ais)-./ },
   ],
 }

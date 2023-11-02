@@ -4,6 +4,7 @@ import 'faust.config'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { useEffect } from 'react'
+
 import 'styles/custom-styles.css'
 import 'styles/globals.css'
 import * as gtag from 'utils/gtag'

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
-import { MobileChildSubMenu } from '../MegaMenu/MobileChildSubMenu'
-import Link from 'next/link'
-import { Separator } from 'components/Separator'
-import bg from 'assets/imgs/angled-bg-menu.jpg'
 import ArrowLeft from 'assets/icons/arrow-forward-sharp-reverse.svg'
+import bg from 'assets/imgs/angled-bg-menu.jpg'
+import { Separator } from 'components/Separator'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import { MobileChildSubMenu } from '../MegaMenu/MobileChildSubMenu'
 
 const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
   return (
@@ -86,14 +86,15 @@ export const MobileSubmenu = ({ items }) => {
 
   const navigation = document.getElementById('topbar')
   // get header size dynamically to move main content below
-  const handleResize = () => {
+
+  const handleResize = useCallback(() => {
     setNavigationHeight(navigation.offsetHeight)
-  }
+  }, [navigation])
 
   useEffect(() => {
     setNavigationHeight(navigation.offsetHeight)
     window.addEventListener('resize', handleResize, false)
-  }, [navigation])
+  }, [navigation, handleResize])
 
   const menu = (
     <InternalMenu

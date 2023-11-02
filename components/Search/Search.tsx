@@ -1,19 +1,19 @@
 // @ts-nocheck
-import { useState, useEffect, useRef, useCallback } from 'react'
-import Close from '/assets/icons/close.svg'
-import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch } from 'react-instantsearch'
-import { MemoizedAutoComplete } from './Autocomplete'
 import { getAlgoliaResults } from '@algolia/autocomplete-js'
-import { Hit } from './Hit'
 import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query-suggestions'
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
+import { useDebounce } from '@uidotdev/usehooks'
+import algoliasearch from 'algoliasearch/lite'
 import {
+  clearAllBodyScrollLocks,
   disableBodyScroll,
   enableBodyScroll,
-  clearAllBodyScrollLocks,
 } from 'body-scroll-lock'
-import { useDebounce } from '@uidotdev/usehooks'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { InstantSearch } from 'react-instantsearch'
+import { MemoizedAutoComplete } from './Autocomplete'
+import { Hit } from './Hit'
+import Close from '/assets/icons/close.svg'
 
 import '@algolia/autocomplete-theme-classic'
 
@@ -89,9 +89,9 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   }, [])
 
   // get header size dynamically to move main content below
-  const handleResize = () => {
-    setNavigationHeight(navigation?.clientHeight)
-  }
+  const handleResize = useCallback(() => {
+    setNavigationHeight(navigation.clientHeight)
+  }, [navigation])
 
   useEffect(() => {
     if (navigation?.clientHeight > 190) {
@@ -100,7 +100,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       setNavigationHeight(140)
     }
     window.addEventListener('resize', handleResize, false)
-  }, [navigation])
+  }, [navigation, handleResize])
 
   useEffect(() => {
     if (!navigation) return

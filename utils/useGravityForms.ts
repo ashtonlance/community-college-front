@@ -1,5 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
-import React from 'react'
+import { createContext, createElement, useContext, useReducer } from 'react'
 
 import { FileUploadFieldValue as FileUpload } from 'generated/graphql'
 export interface FieldValue {
@@ -83,7 +82,7 @@ const GravityFormContext = createContext({
 })
 export function GravityFormProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, DEFAULT_STATE)
-  return React.createElement(
+  return createElement(
     GravityFormContext.Provider,
     // @ts-ignore
     { value: { state, dispatch } },

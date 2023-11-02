@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const SkeletonCard = () => {
   const card = `bg-stone flex flex w-full p-2 h-auto animate-pulse gap-8 mt-8`
   const cardImage = `w-[33%] overflow-hidden`

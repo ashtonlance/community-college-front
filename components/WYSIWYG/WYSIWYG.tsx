@@ -1,15 +1,14 @@
-import React from 'react'
-import { renderToString } from 'react-dom/server'
 import { Parser } from 'html-to-react'
+import { renderToString } from 'react-dom/server'
 
 type WYSIWYGProps = {
-  content?: string,
+  content?: string
   attributes?: {
-    data?:{
-      content?: string,
-      background_color?: string,
-      component_spacing_bottom_spacing?: string,
-      component_spacing_top_spacing?: string,
+    data?: {
+      content?: string
+      background_color?: string
+      component_spacing_bottom_spacing?: string
+      component_spacing_top_spacing?: string
     }
   }
   customClasses?: string
