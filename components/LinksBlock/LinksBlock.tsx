@@ -16,9 +16,9 @@ export const LinksBlock = ({ attributes }) => {
             key={val}
             className="mx-auto flex max-w-[1030px] grow flex-col gap-[10px] rounded-xl border border-lightBlue p-[40px]"
           >
-            <h5 className="mb-[32px] font-extrabold">
+            <h3 className="mb-[32px] font-extrabold h5">
               {attributes.data[`links_lists_${val}_link_list_label`]}
-            </h5>
+            </h3>
             <div className="grid-auto-flow-column grid grid-cols-3 md:grid-rows-5 sm:flex sm:flex-col">
               {[
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),

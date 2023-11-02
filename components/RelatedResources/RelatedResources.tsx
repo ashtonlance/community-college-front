@@ -114,7 +114,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
         className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
         <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
-          <h5>{heading}</h5>
+          <h3 className="h5">{heading}</h3>
         </div>
 
         <div

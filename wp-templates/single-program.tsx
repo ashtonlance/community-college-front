@@ -107,9 +107,9 @@ export default function SingleProgram(props) {
             className={`module-spacing-bottom-none module-spacing-top-none mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col`}
           >
             <div className="mx-auto flex max-w-[1030px] grow flex-col gap-[10px] rounded-xl border border-lightBlue p-[40px]">
-              <h5 className="mb-[32px] font-extrabold">
+              <h3 className="h5 mb-[32px] font-extrabold">
                 Colleges That Offer This Program
-              </h5>
+              </h3>
               <div
                 className={`grid grid-flow-row ${
                   pageData?.colleges?.nodes?.length <= 3

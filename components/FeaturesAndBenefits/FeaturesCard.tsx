@@ -31,9 +31,9 @@ export const FeaturesCard = ({
           <Image src={image?.url} width={400} height={200} alt={heading} />
         </div>
       )}
-      <h4 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px]`}>
+      <h3 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px] h4`}>
         {heading}
-      </h4>
+      </h3>
       <div
         className={`body-regular text-darkGrey ${getFeaturesCardStyle(
           cardStyle

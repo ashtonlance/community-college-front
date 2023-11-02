@@ -22,18 +22,18 @@ export const StatsBlock = ({ attributes }) => {
         <div className="z-10">
           {splitTitle.length > 1 ? (
             <div className="flex items-center gap-[15px]">
-              <h5 className="text-center text-[16px] font-bold leading-[150%] text-white  sm:text-[14px]">
+              <div className="h5 text-center text-[16px] font-bold leading-[150%] text-white  sm:text-[14px]">
                 {splitTitle[0]}
-              </h5>
+              </div>
               <Center className="" />
-              <h5 className="text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
+              <div className="h5 text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
                 {splitTitle[1]}
-              </h5>
+              </div>
             </div>
           ) : (
-            <h5 className="text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
+            <div className="h5 text-center text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
               {title}
-            </h5>
+            </div>
           )}
           {copy && (
             <div className="flex flex-col items-center">

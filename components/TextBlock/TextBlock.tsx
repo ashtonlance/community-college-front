@@ -24,7 +24,7 @@ export const TextBlock = ({ attributes }) => {
       >
         <div className="flex flex-wrap justify-center gap-[10px]">
           {aboveHeading ? (
-            <h5 className="mb-0">{aboveHeading}</h5>
+            <div className="h5 mb-0">{aboveHeading}</div>
           ) : (
             tags > 0 &&
             [...Array(tags).keys()].map(val => (
