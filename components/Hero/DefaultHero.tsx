@@ -1,14 +1,13 @@
-import { HeroPropsType } from './LandingHero'
-import Link from 'next/link'
-import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { useRouter } from 'next/router'
-import { unslugify } from 'utils/unslugify'
-import bg from '../../assets/imgs/angled-bg-defaultHero.png'
-import Phone from 'assets/icons/phone.svg'
 import Mail from 'assets/icons/mail.svg'
-import generateBreadcrumbs from '../../utils/breadcrumbs'
+import Phone from 'assets/icons/phone.svg'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { cn } from 'utils'
+import bg from '../../assets/imgs/angled-bg-defaultHero.png'
+import generateBreadcrumbs from '../../utils/breadcrumbs'
+import { HeroPropsType } from './LandingHero'
 
 export const DefaultHero = ({
   bgImg,
@@ -22,7 +21,6 @@ export const DefaultHero = ({
   email,
   isCollegeSingle,
 }: HeroPropsType) => {
-  console.log("isCollegeSingle", isCollegeSingle)
   const router = useRouter()
   const breadcrumbs = generateBreadcrumbs(router)
   return (
@@ -37,7 +35,11 @@ export const DefaultHero = ({
       <div
         className={cn(
           `wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center bg-cover md:w-full  
-          ${isCollegeSingle ? 'pb-[80px] md:pb-[60px] sm:pb-[40px]' : 'pb-[80px] md:pb-0'}
+          ${
+            isCollegeSingle
+              ? 'pb-[80px] md:pb-[60px] sm:pb-[40px]'
+              : 'pb-[80px] md:pb-0'
+          }
           `
         )}
       >
@@ -45,10 +47,14 @@ export const DefaultHero = ({
         <h1 className="default-hero-headline">{heading}</h1>
 
         {description && bgImg && (
-          <p 
+          <p
             className={cn(
               `body-large text-darkGrey  
-              ${isCollegeSingle ? 'font-bold mb-[24px]' : 'sm:mb-[32px] mb-[40px]'}
+              ${
+                isCollegeSingle
+                  ? 'mb-[24px] font-bold'
+                  : 'mb-[40px] sm:mb-[32px]'
+              }
               `
             )}
           >
@@ -64,13 +70,13 @@ export const DefaultHero = ({
           </div>
         )}
         {phone || email ? (
-          <div className="md:mb-8 mb-10 flex w-fit items-center gap-x-5">
+          <div className="mb-10 flex w-fit items-center gap-x-5 md:mb-8">
             {phone && (
               <div className="group flex items-center">
                 <Phone className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
                 <a
                   href={`tel:${phone}`}
-                  className="body-regular md:text-base text-lg font-bold text-darkGrey hover:text-navy tracking-[-0.16px]"
+                  className="body-regular text-lg font-bold tracking-[-0.16px] text-darkGrey hover:text-navy md:text-base"
                 >
                   {phone}
                 </a>
@@ -81,7 +87,7 @@ export const DefaultHero = ({
                 <Mail className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
                 <a
                   href={`mailto:${email}`}
-                  className="body-regular md:text-base text-lg font-bold text-darkGrey hover:text-navy tracking-[-0.16px]"
+                  className="body-regular text-lg font-bold tracking-[-0.16px] text-darkGrey hover:text-navy md:text-base"
                 >
                   Send An Email
                 </a>
@@ -91,7 +97,8 @@ export const DefaultHero = ({
         ) : null}
 
         {ctaURL && ctaLabel && (
-          <Link href={ctaURL} 
+          <Link
+            href={ctaURL}
             className={cn(
               `secondary-btn navy  
               ${isCollegeSingle ? 'mb-0' : 'mb-6'}
@@ -112,14 +119,14 @@ export const DefaultHero = ({
             src={bgImg}
             alt=""
             fill
-            className={`object-cover md:rounded-none rounded-bl-xl object-${bgPosition} z-0`}
+            className={`rounded-bl-xl object-cover md:rounded-none object-${bgPosition} z-0`}
             priority
           />
         </div>
       ) : (
         description && (
-          <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px] lg:h-auto h-full">
-            <p className="body-large text-darkGrey md:mb-[20px] lg:mt-0 mt-[56px]">
+          <div className="wrapper-default-inner-pages flex h-full w-[40%] flex-col items-baseline justify-center pl-0 lg:h-auto md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
+            <p className="body-large mt-[56px] text-darkGrey lg:mt-0 md:mb-[20px]">
               {description}
             </p>
           </div>

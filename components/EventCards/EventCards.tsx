@@ -1,5 +1,11 @@
 import { Card } from './Card'
 
+const extractDate = (input: string): string | null => {
+  const regex = /<p>(.*?)<\/p>/
+  const match = input.match(regex)
+  return match ? match[1] : null
+}
+
 export const EventCards = props => {
   const cards = props?.attributes?.data?.event
 
@@ -18,7 +24,7 @@ export const EventCards = props => {
           return (
             <Card
               key={card?.post_title + i}
-              date={card?.post_date}
+              date={extractDate(card?.post_content) || card?.post_date}
               title={card?.post_title}
               btnLink={`/events${card?.uri}`}
               btnText={'Read more'}
