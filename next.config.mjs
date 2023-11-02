@@ -10,6 +10,7 @@ const nextConfig = {
   images: {
     domains: [process.env.WP_IMAGES_URL],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 120,
   },
   experimental: {
     optimizeCss: true,
