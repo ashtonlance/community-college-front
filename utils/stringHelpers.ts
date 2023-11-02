@@ -1,4 +1,4 @@
-import he from 'he'
+import { decode } from 'html-entities'
 
 export const camelToSentenceCase = (str: string) => {
   const result = str.replace(/([A-Z])/g, ' $1')
@@ -15,13 +15,13 @@ export const truncate = (str: string, num: number) => {
   if (str.length <= num) {
     return str
   }
-  let subString = str.substr(0, num)
-  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...'
+  let subString = str.substring(0, num)
+  return subString.substring(0, subString.lastIndexOf(' ')) + ' ...'
 }
 
 export const programCardTruncate = (str: string, num: number) => {
   // Decode HTML entities
-  let decodedStr = he.decode(str)
+  let decodedStr = decode(str)
 
   // Remove all HTML tags
   let cleanStr = decodedStr.replace(/<\/?[^>]+(>|$)/g, '')
@@ -33,6 +33,6 @@ export const programCardTruncate = (str: string, num: number) => {
     return cleanStr
   }
 
-  let subString = cleanStr.substr(0, num)
-  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...'
+  let subString = cleanStr.substring(0, num)
+  return subString.substring(0, subString.lastIndexOf(' ')) + ' ...'
 }

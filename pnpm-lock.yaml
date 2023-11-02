@@ -113,9 +113,6 @@ dependencies:
   graphql:
     specifier: ^16.8.1
     version: 16.8.1
-  he:
-    specifier: ^1.2.0
-    version: 1.2.0
   html-entities:
     specifier: ^2.4.0
     version: 2.4.0
@@ -13255,6 +13252,7 @@ packages:
   /he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+    dev: true
 
   /header-case@2.0.4:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
