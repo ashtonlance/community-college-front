@@ -38,12 +38,12 @@ export const Pagination = (props: PaginationProps) => {
       <span
         className={`${
           currentPage <= 1 && 'inactive-arrow'
-        } flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-1`}
+        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-1`}
         onClick={() => {
           onPageClick(currentPage - 1)
         }}
       >
-        <Arrow className="h-8 w-8 rotate-180 text-navy" />
+        <Arrow className="h-8 w-8 rotate-180 text-navy group-hover:text-gold" />
       </span>
       <div className="flex max-w-[85%] flex-wrap gap-3 md:order-3 md:max-w-full md:pt-4">
         {showFirstPageLink && currentPage !== 1 && (
@@ -89,12 +89,12 @@ export const Pagination = (props: PaginationProps) => {
       <span
         className={`${
           currentPage >= totalPages && 'inactive-arrow'
-        } flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-2`}
+        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-2`}
         onClick={() => {
           onPageClick(currentPage + 1)
         }}
       >
-        <Arrow className="h-8 w-8 text-navy" />
+        <Arrow className="h-8 w-8 text-navy group-hover:text-gold" />
       </span>
     </div>
   )
