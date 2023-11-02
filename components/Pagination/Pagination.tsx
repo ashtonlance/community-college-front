@@ -34,18 +34,18 @@ export const Pagination = (props: PaginationProps) => {
   const pageNumbers = generatePageNumbers(currentPage, totalPages)
 
   return (
-    <div className="pagination col-span-3 flex w-full flex-wrap items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:pb-10 sm:pt-8">
+    <div className="pagination col-span-3 flex w-full flex-wrap items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:flex-nowrap sm:pb-10 sm:pt-8">
       <span
         className={`${
           currentPage <= 1 && 'inactive-arrow'
-        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-1`}
+        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 `}
         onClick={() => {
           onPageClick(currentPage - 1)
         }}
       >
         <Arrow className="h-8 w-8 rotate-180 text-navy group-hover:text-gold" />
       </span>
-      <div className="flex max-w-[85%] flex-wrap gap-3 md:order-3 md:max-w-full md:pt-4">
+      <div className="flex max-w-[85%] flex-wrap justify-center gap-3 md:max-w-full md:pt-4">
         {showFirstPageLink && currentPage !== 1 && (
           <span
             className="pagination-item"
@@ -89,7 +89,7 @@ export const Pagination = (props: PaginationProps) => {
       <span
         className={`${
           currentPage >= totalPages && 'inactive-arrow'
-        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 md:order-2`}
+        } group flex cursor-pointer items-center justify-center rounded-full bg-white p-4 `}
         onClick={() => {
           onPageClick(currentPage + 1)
         }}
