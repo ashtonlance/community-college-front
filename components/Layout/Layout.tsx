@@ -1,6 +1,6 @@
 import parse from 'html-react-parser'
 import Head from 'next/head'
-import { createRef, useCallback, useEffect, useState } from 'react'
+import { createRef, memo, useCallback, useEffect, useState } from 'react'
 import { cn } from 'utils/index'
 import { Footer } from '../Footer'
 import { Header, HeaderVariant } from '../Header'
@@ -31,6 +31,7 @@ export function Layout(props: LayoutProps) {
   const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar
   const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = createRef<HTMLDivElement>()
+  const MemoizedHeader = memo(Header)
 
   // get header size dynamically to move main content below
   const handleResize = useCallback(() => {
@@ -72,7 +73,7 @@ export function Layout(props: LayoutProps) {
         ></link>
         {fullHead}
       </Head>
-      <Header
+      <MemoizedHeader
         ref={navigation}
         menuItems={menuItems}
         utilityNavigation={utilityNavigation}

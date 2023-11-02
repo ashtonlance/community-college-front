@@ -120,7 +120,6 @@ export const Header = forwardRef(
 
     const handleUtilityNavigationClick = (e, item) => {
       if (item?.navItem?.url === '/businesses/') {
-        console.log(item)
         setCookie('ncccs-preferred-landing-page', 'employers', {
           path: '/',
         })

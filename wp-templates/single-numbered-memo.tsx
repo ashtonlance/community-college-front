@@ -1,12 +1,12 @@
+import { NumberedMemoHero } from '@/components/Hero/NumberedMemoHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
+import bg from 'assets/imgs/angled-bg-white.png'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { WYSIWYG } from '@/components/WYSIWYG'
-import { NumberedMemoHero } from '@/components/Hero/NumberedMemoHero'
-import SharePost from 'components/SharePost/SharePost'
 import { ResourceTags } from 'components/ResourceTags/ResourceTags'
-import bg from 'assets/imgs/angled-bg-white.png'
+import SharePost from 'components/SharePost/SharePost'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SingleNumberedMemo(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -104,13 +104,14 @@ SingleNumberedMemo.query = gql`
       }
     }
 
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
         }
       }
     }
+
     footer: menu(id: "Footer", idType: NAME) {
       menuItems(first: 200) {
         nodes {

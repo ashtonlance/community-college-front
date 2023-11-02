@@ -1,10 +1,11 @@
+import Stroke from 'assets/icons/stroke.svg'
 import { MegaMenu } from 'components/Header/MegaMenu'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { cn } from 'utils'
-import Stroke from 'assets/icons/stroke.svg'
 
-export const isCurrentPage = (url = '', asPath = '', isUtil = false) => {
+export const isCurrentPage = (urlRaw = '', asPath = '', isUtil = false) => {
+  let url = urlRaw
   // Check if the domain is in the url
   if (!url?.startsWith(process.env.NEXT_PUBLIC_SITE_URL)) {
     url = process.env.NEXT_PUBLIC_SITE_URL + url
@@ -24,6 +25,9 @@ export const isCurrentPage = (url = '', asPath = '', isUtil = false) => {
     if (url === '/' || url === 'http://localhost:3000/') {
       slugToMatch = 'students'
       return true
+    } else if (url.includes('data-dashboards')) {
+      slugToMatch = 'about-us/data-reporting/data-dashboards'
+      return url === slugToMatch
     } else {
       slugToMatch = pathParts[1]
     }
