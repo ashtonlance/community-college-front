@@ -1,14 +1,14 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-import { useRouter } from 'next/router'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function PagePublicInformationOfficers(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -27,21 +27,15 @@ export default function PagePublicInformationOfficers(props) {
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const [filters, setFilters] = useState({
-    county: router.query.county || '',
-    college: router.query.college || '',
-    keyword: router.query.keyword || '',
-    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
+    college: '',
+    keyword: '',
+    orderBy: { field: 'TITLE', order: 'DESC' },
   })
 
   const officers = useMemo(
     () => props?.data?.page?.publicInformationOfficers?.officers || [],
     [props?.data?.page?.publicInformationOfficers?.officers]
   )
-
-  const counties = useMemo(() => {
-    const counties = officers.map(officer => officer.county).filter(Boolean)
-    return [...new Set(counties)]
-  }, [officers])
 
   const colleges = useMemo(() => {
     const colleges = officers.map(officer => officer.college).filter(Boolean)
@@ -53,12 +47,6 @@ export default function PagePublicInformationOfficers(props) {
 
   const filterOfficers = useCallback(() => {
     let result = [...officers]
-
-    if (debouncedFilters.county) {
-      result = result.filter(
-        officer => officer?.county === debouncedFilters.county
-      )
-    }
 
     if (debouncedFilters.college) {
       result = result.filter(
@@ -74,7 +62,7 @@ export default function PagePublicInformationOfficers(props) {
       })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => b.name?.localeCompare(a.name))
     } else {
       result = result.sort((a, b) => a.name?.localeCompare(b.name))
@@ -85,7 +73,6 @@ export default function PagePublicInformationOfficers(props) {
     debouncedFilters.college,
     debouncedFilters.orderBy.order,
     debouncedFilters.keyword,
-    debouncedFilters.county,
     officers,
   ])
 
@@ -94,11 +81,6 @@ export default function PagePublicInformationOfficers(props) {
   }, [debouncedFilters, filterOfficers, router.query])
 
   const filtersToGenerateDropdown = [
-    {
-      name: 'county',
-      options: counties,
-      type: 'select',
-    },
     {
       name: 'college',
       options: colleges,
@@ -196,7 +178,7 @@ PagePublicInformationOfficers.query = gql`
       publicInformationOfficers {
         officers {
           college
-          county
+          title
           email
           name
         }

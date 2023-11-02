@@ -1,5 +1,5 @@
-import { cn } from 'utils/index'
 import Arrow from 'assets/icons/arrow-forward-sharp.svg'
+import { cn } from 'utils/index'
 
 type OfficerCardProps = {
   card: any
@@ -15,10 +15,12 @@ export const OfficerCard: React.FC<OfficerCardProps> = ({ card }) => {
       <div className="flex flex-1 flex-col">
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
           <div className="body-regular mb-3 flex items-center gap-x-2 font-bold text-darkGrey">
-            {card?.college && <span>{card?.college}</span>}•
-            {card?.title && <span>{card?.title}</span>}
+            {card?.college && <span>{card?.college}</span>}
           </div>
           <div className="h3 mb-5 font-serif text-[24px]">{card?.name}</div>
+          <div className="body-regular mb-3 flex items-center gap-x-2 font-bold text-darkGrey">
+            {card?.title}
+          </div>
           <a
             className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={`mailto:${card?.email}`}
