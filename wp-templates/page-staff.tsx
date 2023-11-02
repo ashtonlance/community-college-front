@@ -31,9 +31,9 @@ export default function StaffIndexPage({ data, loading, error }) {
   )
 
   const [filters, setFilters] = useState({
-    organization: router.query?.organization || '',
-    department: router.query?.department || '',
-    orderBy: router.query?.orderBy || { field: 'STAFF_NAME', order: 'DESC' },
+    organization: '',
+    department: '',
+    orderBy: { field: 'STAFF_NAME', order: 'DESC' },
   })
 
   const organizations = useMemo(

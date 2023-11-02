@@ -32,7 +32,7 @@ export default function FoundationBoardMembersPage({ data, loading, error }) {
 
   const [filters, setFilters] = useState({
     appointment: '',
-    orderBy: { field: 'TITLE', order: 'ASC' },
+    orderBy: { field: 'TITLE', order: 'DESC' },
   })
 
   const appointments = useMemo(() => {
@@ -65,7 +65,7 @@ export default function FoundationBoardMembersPage({ data, loading, error }) {
       )
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => {
         const aLastName = a.boardMember.name.split(' ').pop() || ''
         const bLastName = b.boardMember.name.split(' ').pop() || ''

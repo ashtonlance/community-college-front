@@ -75,7 +75,7 @@ export default function BoardMembersPage({ data, loading, error }) {
       )
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => {
         const aLastName = a.boardMember.name.split(' ').pop() || ''
         const bLastName = b.boardMember.name.split(' ').pop() || ''

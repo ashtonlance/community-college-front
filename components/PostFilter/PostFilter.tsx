@@ -85,7 +85,7 @@ export const PostFilter = ({
                     : e.target.value
                 )
               }
-              defaultValue={isNameFilter || isEventsPage ? 'ASC' : 'DESC'}
+              defaultValue={isNameFilter || isEventsPage ? 'DESC' : 'ASC'}
             >
               {!isNameFilter && (
                 <option className="capitalize" value="">
@@ -104,8 +104,8 @@ export const PostFilter = ({
                 ))}
               {isSortBy && isNameFilter && (
                 <>
-                  <option value="ASC">A-Z</option>
-                  <option value="DESC">Z-A</option>
+                  <option value="DESC">A-Z</option>
+                  <option value="ASC">Z-A</option>
                 </>
               )}
               {isSortBy && !isNameFilter && (
