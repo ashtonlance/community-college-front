@@ -12,7 +12,7 @@ export const NumberedMemoHero = ({
   categories,
 }) => {
   const router = useRouter()
-  const breadcrumbs = generateBreadcrumbs(router)
+  const breadcrumbs = generateBreadcrumbs(router, '/about-us/numbered-memos/')
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
@@ -36,7 +36,7 @@ export const NumberedMemoHero = ({
           <span>{date && date}</span>
         </div>
         {categories && (
-          <div className="body-regular mb-[10px] font-bold text-darkGrey flex gap-3">
+          <div className="body-regular mb-[10px] flex gap-3 font-bold text-darkGrey">
             {categories.map(category => (
               <span key={category}>{category?.name}</span>
             ))}
