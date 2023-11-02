@@ -1,10 +1,9 @@
-import { Header, HeaderVariant } from '../Header'
-import { Footer } from '../Footer'
-import Head from 'next/head'
-import { cn } from 'utils/index'
 import parse from 'html-react-parser'
-import { useEffect, useState } from 'react'
-import React from 'react'
+import Head from 'next/head'
+import { createRef, useCallback, useEffect, useState } from 'react'
+import { cn } from 'utils/index'
+import { Footer } from '../Footer'
+import { Header, HeaderVariant } from '../Header'
 
 export type LayoutProps = {
   menuItems?: any
@@ -31,11 +30,12 @@ export function Layout(props: LayoutProps) {
   const fullHead = props?.seo?.fullHead ? parse(props?.seo?.fullHead) : ''
   const hasAnnouncementBar = settings?.announcementBar?.showAnnouncementBar
   const [navigationHeight, setNavigationHeight] = useState(140)
-  const navigation = React.createRef<HTMLDivElement>()
+  const navigation = createRef<HTMLDivElement>()
+
   // get header size dynamically to move main content below
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setNavigationHeight(navigation?.current?.clientHeight)
-  }
+  }, [navigation])
 
   useEffect(() => {
     if (navigation?.current?.clientHeight > 190) {
@@ -44,7 +44,7 @@ export function Layout(props: LayoutProps) {
       setNavigationHeight(140)
     }
     window.addEventListener('resize', handleResize, false)
-  }, [navigation])
+  }, [navigation, handleResize])
 
   useEffect(() => {
     if (!navigation.current) return
