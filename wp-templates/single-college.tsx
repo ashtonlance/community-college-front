@@ -19,6 +19,9 @@ import {
 import { useEffect, useState } from 'react'
 import { FadeIn } from '@/components/FadeIn'
 import Link from 'next/link'
+import bg from '../assets/imgs/angled-bg-white.png'
+import Image from 'next/image'
+import Stroke from '../assets/icons/long-stroke.svg'
 
 const GET_PROGRAMS = gql`
   query GetPrograms($slug: [String]) {
@@ -68,6 +71,7 @@ export default function SingleCollege(props) {
   if (props.loading) {
     return <>Loading...</>
   }
+  console.log(pageData?.collegeDetails)
   return (
     <Layout
       pageClassName="college-single-page"
@@ -87,8 +91,8 @@ export default function SingleCollege(props) {
         ctaURL={pageData?.collegeDetails?.linkToWebsite?.url}
         isCollegeSingle={true}
       />
-      <div className="flex flex-wrap px-52 py-20 md:px-[100px] md:py-[60px] sm:p-10 ">
-        <div className="basis-1/2 md:basis-full">
+      <div className="flex bg-grey md:flex-wrap md:px-[60px] py-20 px-[100px] md:py-[60px] sm:p-10 sm:pb-6 md:pb-8 pb-10 md:gap-8">
+        <div className="basis-1/2 md:basis-full flex flex-col justify-center lg:p-0 pl-[105px] pr-[100px]">
           {pageData?.collegeDetails?.map ? (
             <>
               <div className="mb-[27px] flex items-center">
@@ -97,7 +101,7 @@ export default function SingleCollege(props) {
                   Physical Address
                 </span>
               </div>
-              <address className="h4 mb-10 max-w-[21ch] whitespace-pre-line not-italic">
+              <address className="h4 md:mb-8 mb-10 max-w-[21ch] whitespace-pre-line not-italic font-condensed md:text-2xl text-[28px] leading-[110%]">
                 <div className="w-full">
                   {pageData?.collegeDetails?.map?.streetNumber}{' '}
                   {pageData?.collegeDetails?.map?.streetName}
@@ -113,7 +117,7 @@ export default function SingleCollege(props) {
           {pageData?.collegeDetails?.mailingAddress ? (
             <>
               <div className="flex flex-col gap-y-[15px]">
-                <span className="h5 font-bold text-darkGrey">
+                <span className="h5 text-darkGrey">
                   Mailing Address
                 </span>
                 <address className="body-large whitespace-pre-wrap font-bold not-italic text-navy">
@@ -136,15 +140,38 @@ export default function SingleCollege(props) {
           />
         </div>
       </div>
+      <div 
+        className="flex sm:flex-col flex-row sm:p-10 md:px-[60px] px-[100px] sm:pt-[60px] md:pt-[100px] pt-[150px] sm:pb-[40px] md:pb-[80px] pb-[100px] sm:gap-8 gap-10"
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+      >
       {pageData?.collegeDetails?.aboutTheCollege ? (
         <WYSIWYG
+          customClasses="!p-0 !lg:pl-0 !pl-[105px]"
           attributes={{
             data: { content: pageData?.collegeDetails?.aboutTheCollege },
           }}
         />
       ) : null}
+      {pageData?.collegeDetails?.logo.mediaItemUrl ? (
+        <div className="w-auto sm:m-auto m-0">
+          <div className="p-5 rounded-xl border-2 border-darkGrey border-opacity-25 w-[183px]">
+          <Image
+            src={pageData?.collegeDetails?.logo?.mediaItemUrl}
+            alt={pageData?.collegeDetails?.logo?.altText}
+            fill
+            className={`!relative w-full`}
+            priority
+          />
+          </div>
+        </div>
+      ) : null}
+      </div>
       {pageData?.collegeDetails?.testimonial?.quote ? (
-        <div className="p-[100px] pt-0">
+        <div className="md:px-[60px] px-[100px] pt-0 md:pb-[60px] pb-[100px]">
           <Testimonial
             attributes={{
               data: {
@@ -162,8 +189,12 @@ export default function SingleCollege(props) {
       ) : null}
       <FadeIn>
         <div className="bg-grey">
-          <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
-            <Accordion className="w-full" type="single" collapsible>
+          <div className="flex flex-col items-center justify-center bg-grey px-[205px] lg:pt-[80px] lg:pb-[60px] py-[100px] text-center md:px-[60px] md:py-[60px] sm:px-10">
+
+              <h2 className='h3  text-center '>Programs We Offer</h2>
+              <Stroke className="my-6 h-[15px] max-w-full text-gold" />
+
+            <Accordion className="w-full mt-[20px]" type="single" collapsible>
               {Object.keys(programAreas).map((key, index) => (
                 <AccordionItem
                   className="bg-white"
@@ -253,6 +284,10 @@ SingleCollege.query = gql`
         faxNumber
         county
         collegeCode
+        logo {
+          altText
+          mediaItemUrl
+        }
         aboutTheCollege
         phoneNumber
         testimonial {

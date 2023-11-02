@@ -8,6 +8,7 @@ import bg from '../../assets/imgs/angled-bg-defaultHero.png'
 import Phone from 'assets/icons/phone.svg'
 import Mail from 'assets/icons/mail.svg'
 import generateBreadcrumbs from '../../utils/breadcrumbs'
+import { cn } from 'utils'
 
 export const DefaultHero = ({
   bgImg,
@@ -21,6 +22,7 @@ export const DefaultHero = ({
   email,
   isCollegeSingle,
 }: HeroPropsType) => {
+  console.log("isCollegeSingle", isCollegeSingle)
   const router = useRouter()
   const breadcrumbs = generateBreadcrumbs(router)
   return (
@@ -33,14 +35,23 @@ export const DefaultHero = ({
       }}
     >
       <div
-        className="wrapper-default-inner-pages flex w-[60%] flex-col
-      items-baseline justify-center bg-cover pb-[80px] md:w-full md:pb-0"
+        className={cn(
+          `wrapper-default-inner-pages flex w-[60%] flex-col items-baseline justify-center bg-cover md:w-full  
+          ${isCollegeSingle ? 'pb-[80px] md:pb-[60px] sm:pb-[40px]' : 'pb-[80px] md:pb-0'}
+          `
+        )}
       >
         <Breadcrumbs items={breadcrumbs} />
         <h1 className="default-hero-headline">{heading}</h1>
 
         {description && bgImg && (
-          <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">
+          <p 
+            className={cn(
+              `body-large text-darkGrey  
+              ${isCollegeSingle ? 'font-bold mb-[24px]' : 'sm:mb-[32px] mb-[40px]'}
+              `
+            )}
+          >
             {description}
           </p>
         )}
@@ -53,13 +64,13 @@ export const DefaultHero = ({
           </div>
         )}
         {phone || email ? (
-          <div className="mb-16 flex w-fit items-center gap-x-5">
+          <div className="md:mb-8 mb-10 flex w-fit items-center gap-x-5">
             {phone && (
               <div className="group flex items-center">
                 <Phone className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
                 <a
                   href={`tel:${phone}`}
-                  className="body-regular text-darkGrey hover:text-navy"
+                  className="body-regular md:text-base text-lg font-bold text-darkGrey hover:text-navy tracking-[-0.16px]"
                 >
                   {phone}
                 </a>
@@ -70,7 +81,7 @@ export const DefaultHero = ({
                 <Mail className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
                 <a
                   href={`mailto:${email}`}
-                  className="body-regular text-darkGrey hover:text-navy"
+                  className="body-regular md:text-base text-lg font-bold text-darkGrey hover:text-navy tracking-[-0.16px]"
                 >
                   Send An Email
                 </a>
@@ -80,7 +91,13 @@ export const DefaultHero = ({
         ) : null}
 
         {ctaURL && ctaLabel && (
-          <Link href={ctaURL} className={`secondary-btn navy mb-6`}>
+          <Link href={ctaURL} 
+            className={cn(
+              `secondary-btn navy  
+              ${isCollegeSingle ? 'mb-0' : 'mb-6'}
+              `
+            )}
+          >
             {ctaLabel}
           </Link>
         )}
@@ -95,7 +112,7 @@ export const DefaultHero = ({
             src={bgImg}
             alt=""
             fill
-            className={`object-cover rounded-bl-xl object-${bgPosition} z-0`}
+            className={`object-cover md:rounded-none rounded-bl-xl object-${bgPosition} z-0`}
             priority
           />
         </div>
