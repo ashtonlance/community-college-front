@@ -17,7 +17,7 @@ export const ContactBlock = ({ attributes }) => {
   return (
     <div
       className={cn(
-        `flex w-full flex-wrap justify-between bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden px-[205px] py-[100px] md:px-[100px] md:py-[60px] sm:p-10`
+        `flex w-full flex-wrap justify-between bg-${bgColor} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} overflow-hidden px-[205px] md:px-[100px] sm:p-10`
       )}
     >
       <div className="basis-1/3 overflow-hidden rounded-l-xl md:basis-full md:rounded-t-xl md:rounded-bl-none ">
@@ -26,23 +26,25 @@ export const ContactBlock = ({ attributes }) => {
             src={image?.url ?? ''}
             width={400}
             height={250}
-            className="max-h-[265px] object-cover"
+            className="max-h-[265px] object-cover w-full"
             alt={title}
           />
         ) : null}
       </div>
       <div
-        className={`flex w-full flex-col flex-wrap md:flex-col ${cardColor} basis-2/3 rounded-xl p-10 md:basis-full`}
+        className={`flex w-full flex-col flex-wrap md:flex-col ${cardColor} ${image?.url  ? `md:rounded-b-xl md:rounded-tr-none rounded-r-xl basis-2/3` : `rounded-xl basis-full`}  p-10 md:basis-full`}
       >
         <div className="h4 mb-5">{title}</div>
         <div className="body-regular mb-4 font-bold">{jobTitle}</div>
-        <a
-          href={`tel:${phoneNumber}`}
-          className="body-regular group mb-8 flex items-center hover:text-navy"
-        >
-          <Phone className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
-          {phoneNumber}
-        </a>
+        {phoneNumber ? (
+          <a
+            href={`tel:${phoneNumber}`}
+            className="body-regular group mb-8 flex items-center hover:text-navy"
+          >
+            <Phone className="mr-2 h-[18px] w-[18px] text-gold group-hover:text-navy" />
+            {phoneNumber}
+          </a>
+        ) : null}
         {link ? (
           // tertiary-btn
           <Link
