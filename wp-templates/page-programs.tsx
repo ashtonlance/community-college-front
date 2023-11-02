@@ -76,7 +76,6 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const { data, loading } = props
   const menuItems = data?.menu?.menuItems || []
   const programsIndex = data?.programIndex?.programsIndex || []
-  console.log(data, 'data')
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const footerMenuItems = data?.footer?.menuItems || []
@@ -213,13 +212,40 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   )
 }
 
-ProgramsArchive.variables = ({ uri }) => {
-  return { uri }
+function getFirstPathPart(slug: string | undefined): string {
+  if (!slug) {
+    return 'students'
+  }
+  console.log({ slug })
+  const parts = slug.split('/')
+  console.log(parts[1], 'parts 1')
+
+  if (parts.length > 0 && parts[1] === 'about-us') {
+    return 'system-office'
+  }
+
+  if (parts.length > 0 && parts[1] === 'college-faculty-staff') {
+    return 'college-faculty-and-staff'
+  }
+
+  return parts.length > 0 ? parts[1] : 'students'
+}
+
+ProgramsArchive.variables = (props, ctx) => {
+  const { databaseId } = props
+  let { uri } = props
+  let slug = getFirstPathPart(uri)
+  return {
+    databaseId,
+    slug,
+    uri,
+    asPreview: ctx?.asPreview,
+  }
 }
 
 ProgramsArchive.query = gql`
   ${Header.fragments.entry}
-  query ProgramsArchive($uri: ID!) {
+  query ProgramsArchive($uri: ID!, $slug: ID!) {
     programIndex: page(id: $uri, idType: URI) {
       seo {
         fullHead
@@ -262,7 +288,7 @@ ProgramsArchive.query = gql`
       }
     }
 
-    menu(id: "students", idType: SLUG) {
+    menu(id: $slug, idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

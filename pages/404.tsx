@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { Layout } from 'components/Layout'
-import { PreFooter } from 'components/PreFooter'
-import { Header } from 'components/Header'
 import { gql, useQuery } from '@apollo/client'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 const NOT_FOUND = gql`
   ${Header.fragments.entry}
-  query NotFound {
-    menu(id: "students", idType: SLUG) {
+  query NotFound($slug: ID!) {
+    menu(id: $slug, idType: SLUG) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment
@@ -44,8 +44,30 @@ const NOT_FOUND = gql`
   }
 `
 
+function getFirstPathPart(slug: string | undefined): string {
+  if (!slug) {
+    return 'students'
+  }
+  const parts = slug.split('/')
+
+  if (parts.length > 0 && parts[1] === 'about-us') {
+    return 'system-office'
+  }
+
+  if (parts.length > 0 && parts[1] === 'college-faculty-staff') {
+    return 'college-faculty-and-staff'
+  }
+
+  return parts.length > 0 ? parts[1] : 'students'
+}
+
 export default function Custom404() {
-  const { loading, error, data } = useQuery(NOT_FOUND)
+  const router = useRouter()
+  const slug = getFirstPathPart(router.asPath)
+
+  const { loading, error, data } = useQuery(NOT_FOUND, {
+    variables: { slug },
+  })
 
   if (loading) {
     return

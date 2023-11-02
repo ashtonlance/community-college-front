@@ -1,12 +1,11 @@
+import { AnnualReportHero } from '@/components/Hero/AnnualReportHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
+import bg from 'assets/imgs/angled-bg-white.png'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { WYSIWYG } from '@/components/WYSIWYG'
-import { AnnualReportHero } from '@/components/Hero/AnnualReportHero'
 import SharePost from 'components/SharePost/SharePost'
-import { ResourceTags } from 'components/ResourceTags/ResourceTags'
-import bg from 'assets/imgs/angled-bg-white.png'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SingleAnnualReport(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -95,7 +94,7 @@ SingleAnnualReport.query = gql`
       }
     }
 
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

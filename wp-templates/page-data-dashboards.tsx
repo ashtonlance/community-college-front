@@ -204,7 +204,7 @@ PageDataDashboards.query = gql`
         }
       }
     }
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

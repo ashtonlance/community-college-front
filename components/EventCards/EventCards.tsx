@@ -14,10 +14,10 @@ export const EventCards = props => {
             : 'grid grid-flow-row grid-cols-2 gap-[20px] md:grid-cols-1'
         } w-full`}
       >
-        {cards?.map(card => {
+        {cards?.map((card, i) => {
           return (
             <Card
-              key={card?.post_title}
+              key={card?.post_title + i}
               date={card?.post_date}
               title={card?.post_title}
               btnLink={`/events${card?.uri}`}
