@@ -114,6 +114,10 @@
   margin-bottom: 32px !important;
 }
 
+.wysiwyg iframe {
+  max-width: 100%;
+}
+
 table {
   @apply rounded-xl border-grey max-w-full !border-separate	!border-spacing-0;
 }

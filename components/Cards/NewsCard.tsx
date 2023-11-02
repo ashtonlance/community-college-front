@@ -1,9 +1,6 @@
+import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { cn } from 'utils/index'
-import Arrow from 'assets/icons/arrow-forward-sharp.svg'
-import Phone from 'assets/icons/phone.svg'
-import Location from 'assets/icons/location.svg'
 import { formatDate } from 'utils/dates'
 import { Button } from '../Button'
 
@@ -65,7 +62,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
       key={card}
       className="relative col-span-12 col-start-1 grid grid-flow-row grid-cols-12 grid-rows-1 overflow-hidden rounded-xl bg-white"
     >
-      <div className="col-span-4">
+      <div className="col-span-4 md:col-span-12">
         {card.featuredImage?.node?.sourceUrl ? (
           <Image
             src={card.featuredImage.node.sourceUrl}
