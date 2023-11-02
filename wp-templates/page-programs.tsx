@@ -1,14 +1,14 @@
+import { ProgramsAccordion } from '@/components/Accordion/ProgamsAccordion'
 import { CTABanner } from '@/components/CTABanner'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
+import { useDebounce } from '@uidotdev/usehooks'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useMemo, useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { useDebounce } from '@uidotdev/usehooks'
-import { ProgramsAccordion } from '@/components/Accordion/ProgamsAccordion'
 import { organizeProgramsByTaggedAreas } from 'utils/programsHelper'
-import { PostFilter } from '@/components/PostFilter'
 
 type ProgramsIndexProps = {
   data: {
@@ -76,6 +76,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const { data, loading } = props
   const menuItems = data?.menu?.menuItems || []
   const programsIndex = data?.programIndex?.programsIndex || []
+  console.log(data, 'data')
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []
   const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const footerMenuItems = data?.footer?.menuItems || []
@@ -177,7 +178,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
-      seo={programsIndex?.seo}
+      seo={data?.programIndex?.seo}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
@@ -220,6 +221,10 @@ ProgramsArchive.query = gql`
   ${Header.fragments.entry}
   query ProgramsArchive($uri: ID!) {
     programIndex: page(id: $uri, idType: URI) {
+      seo {
+        fullHead
+        title
+      }
       programsIndex {
         heroDescription
         heroTitle

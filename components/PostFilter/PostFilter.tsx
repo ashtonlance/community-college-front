@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
 import { cn } from 'utils'
+import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
 
 export const PostFilter = ({
   filters,
@@ -55,7 +55,7 @@ export const PostFilter = ({
       newQuery as Record<string, string>
     ).toString()
     setTimeout(() => {
-      window.history.replaceState(null, '', `?${queryString}`)
+      window.history.pushState(null, '', `?${queryString}`)
     }, 500)
   }
 
