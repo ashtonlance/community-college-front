@@ -14,8 +14,8 @@ export const NumberedMemoHero = ({
   const router = useRouter()
   const breadcrumbs = generateBreadcrumbs(
     router,
-    '/about-us/numbered-memos/',
-    'about-us/system-office/numbered-memos/'
+    '/about-us/numbered-memos',
+    '/about-us/system-office/numbered-memos'
   )
   return (
     <div
