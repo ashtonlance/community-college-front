@@ -1,15 +1,15 @@
+import { Button } from '@/components/Button'
 import { CTABanner } from '@/components/CTABanner'
+import { ProgramCard } from '@/components/Cards'
+import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { useMemo, useState, useEffect, useRef, useCallback } from 'react'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
-import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
-import { Button } from '@/components/Button'
 import { getDistance } from 'geolib'
 import { useRouter } from 'next/router'
-import { ProgramCard } from '@/components/Cards'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
+import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
 
 const getCoordinates = async zipCode => {
   try {
@@ -108,7 +108,7 @@ export const ProgramFinder = props => {
 
       const queryString = new URLSearchParams(newQuery)
       if (queryString) {
-        window.history.replaceState(null, '', `?${queryString.toString()}`)
+        window.history.pushState(null, '', `?${queryString.toString()}`)
       }
     },
     [router.query]
