@@ -30,11 +30,11 @@ export const PlainMenu = ({
   // get header size dynamically to move main content below
 
   const handleResize = useCallback(() => {
-    setNavigationHeight(navigation.clientHeight)
+    setNavigationHeight(navigation?.clientHeight)
   }, [navigation])
 
   useEffect(() => {
-    if (navigation.clientHeight > 190) {
+    if (navigation?.clientHeight > 190) {
       setNavigationHeight(200)
     } else {
       setNavigationHeight(140)

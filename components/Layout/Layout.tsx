@@ -47,7 +47,7 @@ export function Layout(props: LayoutProps) {
   }, [navigation, handleResize])
 
   useEffect(() => {
-    if (!navigation.current) return
+    if (!navigation?.current) return
     const resizeObserver = new ResizeObserver(() => {
       if (navigation?.current?.clientHeight > 190) {
         setNavigationHeight(192)
@@ -55,7 +55,7 @@ export function Layout(props: LayoutProps) {
         setNavigationHeight(140)
       }
     })
-    resizeObserver.observe(navigation.current)
+    resizeObserver.observe(navigation?.current)
     return () => resizeObserver.disconnect() // clean up
   }, [navigation, navigationHeight])
 

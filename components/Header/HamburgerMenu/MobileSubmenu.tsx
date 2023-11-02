@@ -87,11 +87,11 @@ export const MobileSubmenu = ({ items }) => {
   // get header size dynamically to move main content below
 
   const handleResize = useCallback(() => {
-    setNavigationHeight(navigation.offsetHeight)
+    setNavigationHeight(navigation?.offsetHeight)
   }, [navigation])
 
   useEffect(() => {
-    setNavigationHeight(navigation.offsetHeight)
+    setNavigationHeight(navigation?.offsetHeight)
     window.addEventListener('resize', handleResize, false)
   }, [navigation, handleResize])
 

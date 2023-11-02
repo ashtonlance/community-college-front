@@ -2,7 +2,6 @@
 import { getAlgoliaResults } from '@algolia/autocomplete-js'
 import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query-suggestions'
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
-import { useDebounce } from '@uidotdev/usehooks'
 import algoliasearch from 'algoliasearch/lite'
 import {
   clearAllBodyScrollLocks,
@@ -72,16 +71,6 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
   const [navigationHeight, setNavigationHeight] = useState(140)
   const [navigation, setNavigation] = useState(null)
 
-  const [searchValue, setSearchValue] = useState('')
-  const debouncedSearchTerm = useDebounce(searchValue, 500)
-  const setSearchValueCallback = useCallback(
-    (value: string) => {
-      console.log('value', value)
-      setSearchValue(value)
-    },
-    [setSearchValue]
-  )
-
   const ref = useRef(null)
 
   useEffect(() => {
@@ -90,7 +79,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
 
   // get header size dynamically to move main content below
   const handleResize = useCallback(() => {
-    setNavigationHeight(navigation.clientHeight)
+    setNavigationHeight(navigation?.clientHeight)
   }, [navigation])
 
   useEffect(() => {
@@ -217,7 +206,6 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
               searchOpened={searchOpened}
               openOnFocus={true}
               autoFocus={true}
-              setSearchValue={setSearchValueCallback}
               getSources={({ query }) => [
                 {
                   sourceId: 'wp_searchable_posts_query_suggestions',
