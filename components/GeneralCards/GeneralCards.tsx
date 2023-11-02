@@ -69,6 +69,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                   {attributes.data[`card_${card}_button_url`] &&  attributes.data[`card_${card}_button_label`] ? (
                     <div className="mt-auto">
                     <Link
+                      aria-label={"Learn more about " + attributes.data[`card_${card}_heading`]}
                       className="secondary-btn outline-btn navy mx-auto py-[14px] mt-8"
                       href={attributes.data[`card_${card}_button_url`]}
                     >
