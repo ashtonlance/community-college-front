@@ -7,12 +7,31 @@ type PaginationProps = {
   onPageClick: (page: number) => void
 }
 
+const generatePageNumbers = (currentPage: number, totalPages: number) => {
+  let startPage = Math.max(currentPage - 4, 1)
+  let endPage = Math.min(startPage + 5, totalPages)
+
+  if (endPage - startPage < 5) {
+    startPage = Math.max(endPage - 5, 1)
+  }
+
+  return Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i
+  )
+}
+
 export const Pagination = (props: PaginationProps) => {
   const total = props.totalItems
   const pageSize = props.pageSize
   const onPageClick = props.onPageClick
   const currentPage = props.currentPage
   const totalPages = Math.ceil(total / pageSize)
+
+  const showFirstPageLink = currentPage >= 6
+  const showLastPageLink = currentPage <= totalPages - 6
+
+  const pageNumbers = generatePageNumbers(currentPage, totalPages)
 
   return (
     <div className="pagination col-span-3 flex w-full flex-wrap items-center justify-between pb-[100px] pt-[60px] md:pb-[60px] md:pt-[40px] sm:pb-10 sm:pt-8">
@@ -27,21 +46,46 @@ export const Pagination = (props: PaginationProps) => {
         <Arrow className="h-8 w-8 rotate-180 text-navy" />
       </span>
       <div className="flex max-w-[85%] flex-wrap gap-3 md:order-3 md:max-w-full md:pt-4">
-        {Array.from({ length: totalPages }).map((_, i) => (
+        {showFirstPageLink && currentPage !== 1 && (
           <span
-            key={i}
-            className={`pagination-item ${
-              currentPage === i + 1 && 'bg-white text-navy'
-            }`}
+            className="pagination-item"
             onClick={() => {
-              onPageClick(i + 1)
+              onPageClick(1)
             }}
           >
-            {i + 1}
+            1
+          </span>
+        )}
+        {showFirstPageLink && currentPage >= 7 && (
+          <span className="pagination-item">...</span>
+        )}
+        {pageNumbers.map(pageNumber => (
+          <span
+            key={pageNumber}
+            className={`pagination-item ${
+              currentPage === pageNumber && 'bg-white text-navy'
+            }`}
+            onClick={() => {
+              onPageClick(pageNumber)
+            }}
+          >
+            {pageNumber}
           </span>
         ))}
+        {showLastPageLink && currentPage <= totalPages - 5 && (
+          <span className="pagination-item">...</span>
+        )}
+        {showLastPageLink && currentPage !== totalPages && (
+          <span
+            className="pagination-item"
+            onClick={() => {
+              onPageClick(totalPages)
+            }}
+          >
+            {totalPages}
+          </span>
+        )}
       </div>
-
       <span
         className={`${
           currentPage >= totalPages && 'inactive-arrow'
