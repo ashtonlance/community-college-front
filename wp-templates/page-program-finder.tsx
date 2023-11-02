@@ -11,15 +11,18 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
 
-const getCoordinates = async zipCode => {
+const getCoordinates = async (zipCode: string) => {
   try {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
     )
     const data = await response.json()
+    const usLocation = data?.results.find((result: any) =>
+      result.formatted_address.includes('USA')
+    )
     return {
-      latitude: data?.results[0]?.geometry?.location?.lat,
-      longitude: data?.results[0]?.geometry?.location?.lng,
+      latitude: usLocation?.geometry?.location?.lat,
+      longitude: usLocation?.geometry?.location?.lng,
     }
   } catch (error) {
     console.error('Error fetching coordinates:', error)

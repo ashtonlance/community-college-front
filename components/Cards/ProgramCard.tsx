@@ -1,10 +1,9 @@
+import { FadeIn } from '@/components/FadeIn'
 import Link from 'next/link'
 import { cn } from 'utils'
-import { FadeIn } from '@/components/FadeIn'
 import { programCardTruncate } from 'utils/stringHelpers'
 
 export const ProgramCard = ({ card, index }) => {
-  console.log({ card })
   const collegesLength = card?.colleges?.length
   return (
     <FadeIn
