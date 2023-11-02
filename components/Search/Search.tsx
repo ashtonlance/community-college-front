@@ -7,16 +7,12 @@ import { MemoizedAutoComplete } from './Autocomplete'
 import { getAlgoliaResults } from '@algolia/autocomplete-js'
 import { Hit } from './Hit'
 import { createQuerySuggestionsPlugin } from '@algolia/autocomplete-plugin-query-suggestions'
-import {
-  createLocalStorageRecentSearchesPlugin,
-  search,
-} from '@algolia/autocomplete-plugin-recent-searches'
+import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches'
 import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock'
-import { useRouter } from 'next/router'
 import { useDebounce } from '@uidotdev/usehooks'
 
 import '@algolia/autocomplete-theme-classic'
@@ -61,15 +57,6 @@ export const querySuggestionsPlugin = createQuerySuggestionsPlugin({
       },
       templates: {
         ...source.templates,
-        // item(params) {
-        //   const { item, html } = params
-        //   return html`<a
-        //     className="aa-ItemLink"
-        //     href="https://google.com?q=${item.query}"
-        //   >
-        //     ${source.templates.item(params).props.children}
-        //   </a>`
-        // },
       },
     }
   },
@@ -227,6 +214,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
         >
           <div className="flex w-full bg-white px-8">
             <MemoizedAutoComplete
+              searchOpened={searchOpened}
               openOnFocus={true}
               autoFocus={true}
               setSearchValue={setSearchValueCallback}

@@ -33,7 +33,6 @@ export function Hit({ hit, components }) {
 }
 
 export const PlainHit: React.FC<PlainHitProps> = ({ hit }) => {
-  console.log(hit, 'hit')
   const urlWithoutDomain = hit?.permalink?.replace(
     'https://ncccsstg.wpengine.com',
     ''

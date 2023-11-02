@@ -19,6 +19,7 @@ export function Autocomplete(props) {
   const [searchValue, _setSearchValue] = useState('')
   const router = useRouter()
   const searchValueRef = useRef(searchValue)
+  const searchOpened = props.searchOpened || false
 
   const setSearchValue = useCallback(value => {
     searchValueRef.current = value
@@ -57,7 +58,7 @@ export function Autocomplete(props) {
 
   useEffect(() => {
     const handleEnterKey = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
+      if (event.key === 'Enter' && searchOpened && searchValue) {
         router.push(`/search?query=${searchValue}`) // use ref
       }
     }
