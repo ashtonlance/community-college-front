@@ -59,7 +59,7 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
       <div
         className={`w-full bg-grey ${
           !isEmbed
-            ? 'px-[100px] pb-[60px] md:px-[60px] md:py-[40px] sm:px-5 sm:py-0'
+            ? 'px-[100px] pb-[60px] md:px-[60px] md:py-[40px] sm:px-5 sm:pt-0'
             : null
         }`}
       >
