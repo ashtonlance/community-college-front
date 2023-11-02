@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { cn } from 'utils'
-
+import useWindowDimensions from 'utils/hooks/useWindowDimensions'
 type MobileChildSubMenuProps = {
   subItems: any
   classes?: string
@@ -12,15 +12,22 @@ export const MobileChildSubMenu = ({
   classes = '',
   handleActiveItem,
 }: MobileChildSubMenuProps) => {
+  const { width } = useWindowDimensions()
+  let wrapperClasses
+
+  if (width < 1080) {
+    wrapperClasses = `top-[110px] left-0 absolute w-full`
+  } else {
+    wrapperClasses = `semi-modal`
+  }
   return (
-    <div className="semi-modal bg-transparent">
+    <div className={wrapperClasses}>
       <div
-        // onMouseLeave={() => handleActiveItem('')}
         className={cn(
           `mega-menu relative h-[100px] py-[40px] md:top-[65px] md:min-h-[170px] ${classes} bg-transparent`
         )}
       >
-        <div className="z-10 mx-auto flex w-full max-w-[1600px] items-center justify-between">
+        <div className="z-30 mx-auto flex w-full max-w-[1600px] items-center justify-between">
           <div className="flex flex-1 justify-around md:mt-[24px] md:flex-col md:gap-[14px] sm:mt-0">
             {subItems?.map((subItem, i) => {
               return (

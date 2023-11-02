@@ -55,7 +55,7 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
   if (activeMenu?.label !== '') {
     if (activeMenu?.children.length >= 1) {
       content = (
-        <div className="internal-menu-mobile z-10 min-h-[90px] w-full text-left md:min-h-[80px]">
+        <div className="internal-menu-mobile min-h-[90px] w-full text-left md:min-h-[100dvh]">
           <Link
             href={activeMenu?.url ?? ''}
             className="links-mobile-nav text-white"
@@ -74,7 +74,6 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
     } else if (activeMenu?.children.length < 1) {
       router.push(activeMenu.url)
     } else {
-      console.log(activeMenu, 'activeMenu')
     }
   }
   return content
@@ -109,7 +108,7 @@ export const MobileSubmenu = ({ items }) => {
       style={{
         top: `${navigationHeight}px`,
       }}
-      className="semi-modal"
+      className="semi-modal h-[100dvh] overflow-y-scroll"
     >
       <Image
         className="pointer-events-none object-fill object-center"
@@ -119,7 +118,7 @@ export const MobileSubmenu = ({ items }) => {
         loading="eager"
         priority
       />
-      <div className="mobile-submenu top-0 z-30 bg-transparent">
+      <div className="mobile-submenu top-0 bg-transparent">
         {activeMenu && (
           <div
             onClick={() => setActiveMenu(null)}
