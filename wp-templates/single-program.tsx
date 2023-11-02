@@ -104,7 +104,7 @@ export default function SingleProgram(props) {
           }}
         >
           <div
-            className={`module-spacing-bottom-none module-spacing-top-none mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px]  md:flex-col`}
+            className={`module-spacing-bottom-none module-spacing-top-none mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col`}
           >
             <div className="mx-auto flex max-w-[1030px] grow flex-col gap-[10px] rounded-xl border border-lightBlue p-[40px]">
               <h5 className="mb-[32px] font-extrabold">

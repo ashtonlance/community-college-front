@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import Arrow from 'assets/icons/angled-arrow.svg'
+
 export const LinksBlock = ({ attributes }) => {
   const linkList = attributes?.data?.links_lists
-  const topSpacing = attributes?.data?.margins_top_spacing;
+  const topSpacing = attributes?.data?.margins_top_spacing
   const bottomSpacing = attributes?.data?.margins_bottom_spacing
 
-
   return (
-    <div className={`mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}>
+    <div
+      className={`mx-auto flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
+    >
       {linkList > 0 &&
         [...Array(linkList).keys()].map(val => (
           <div
@@ -17,7 +19,7 @@ export const LinksBlock = ({ attributes }) => {
             <h5 className="mb-[32px] font-extrabold">
               {attributes.data[`links_lists_${val}_link_list_label`]}
             </h5>
-            <div className="grid grid-flow-col grid-rows-3 md:grid-rows-5 sm:flex sm:flex-col">
+            <div className="grid-auto-flow-column grid grid-cols-3 md:grid-rows-5 sm:flex sm:flex-col">
               {[
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),
               ].map(num => (
