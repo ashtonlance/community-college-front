@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
   }, [router.events])
   return (
     <>
-      <Script id="userback">
+      <Script id="userback" strategy="lazyOnload">
         {`
             window.Userback = window.Userback || {};
             Userback.access_token = '34593|84993|TvSQkuVWCDW8KnB5Bc3bs1Pi7';

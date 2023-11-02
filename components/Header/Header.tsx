@@ -1,25 +1,27 @@
 import { gql } from '@apollo/client'
-import Link from 'next/link'
-import Image from 'next/image'
-import LogoTall from 'assets/imgs/site-logo.svg'
 import LogoShort from 'assets/imgs/ncccs-short.svg'
-import { Search } from 'components/Search'
-import { NavigationItem } from './NavigationItem'
-import { forwardRef, useState } from 'react'
-import { HamburgerMenu } from './HamburgerMenu'
-import useScrollPosition from 'utils/hooks/useScrollPosition'
-import dynamic from 'next/dynamic'
-import useWindowDimensions from 'utils/hooks/useWindowDimensions'
-import { decode } from 'html-entities'
-import { useRouter } from 'next/router'
-import { cn } from 'utils'
-import { isCurrentPage } from './NavigationItem'
+import LogoTall from 'assets/imgs/site-logo.svg'
 import { AnnouncementBar } from 'components/AnnouncementBar'
+import { Search } from 'components/Search'
+import { decode } from 'html-entities'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { forwardRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { cn } from 'utils'
+import useScrollPosition from 'utils/hooks/useScrollPosition'
+import useWindowDimensions from 'utils/hooks/useWindowDimensions'
+import { HamburgerMenu } from './HamburgerMenu'
+import { NavigationItem, isCurrentPage } from './NavigationItem'
 
 const Logo = ({ scrolled }) => {
-  const NCCCSLogo = scrolled ? LogoShort : LogoTall
   const { width } = useWindowDimensions()
+  let NCCCSLogo
+  if (width > 768) {
+    NCCCSLogo = scrolled ? LogoShort : LogoTall
+  } else {
+    NCCCSLogo = LogoShort
+  }
   return (
     <div className="flex flex-col items-center justify-center md:w-max">
       <Link href="/" className="cursor-pointer">
@@ -155,7 +157,7 @@ export const Header = forwardRef(
         ) : null}
         <div className="mx-auto flex w-full justify-between bg-navy">
           <div className="flex w-full items-center justify-between">
-            <div className="xl:px-0 mx-auto flex w-full max-w-[1700px] items-center justify-between px-4 md:px-6 sm:px-0">
+            <div className="mx-auto flex w-full max-w-[1700px] items-center justify-between px-4 xl:px-0 md:px-6 sm:px-0">
               {utilityNavigation && (
                 <>
                   <div className="flex h-full items-center justify-center md:w-full md:justify-between">
