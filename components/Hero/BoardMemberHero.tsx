@@ -1,13 +1,11 @@
-import { HeroPropsType } from './LandingHero'
-import Link from 'next/link'
-import Image from 'next/image'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import { useRouter } from 'next/router'
-import bg from '../../assets/imgs/angled-bg-defaultHero.png'
-import Phone from 'assets/icons/phone.svg'
 import Mail from 'assets/icons/mail.svg'
-import generateBreadcrumbs from '../../utils/breadcrumbs'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { formatDateLong } from 'utils/dates'
+import bg from '../../assets/imgs/angled-bg-defaultHero.png'
+import generateBreadcrumbs from '../../utils/breadcrumbs'
 
 export const BoardMemberHero = ({
   bgImg = '',
@@ -29,7 +27,9 @@ export const BoardMemberHero = ({
     type === 'Foundation'
       ? '/about-us/foundation/foundation-board-members/'
       : '/about-us/state-board/board-members/'
-  const breadcrumbs = generateBreadcrumbs(router, slug)
+  const urlToMatch =
+    type === 'Foundation' ? '/about-us/foundation' : '/about-us/board-members'
+  const breadcrumbs = generateBreadcrumbs(router, slug, urlToMatch)
   return (
     <div
       className={`md:pb-0] relative flex h-fit py-[80px] md:h-fit md:flex-col sm:items-center sm:justify-center`}

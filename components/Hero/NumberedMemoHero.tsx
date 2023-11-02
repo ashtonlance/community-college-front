@@ -12,7 +12,11 @@ export const NumberedMemoHero = ({
   categories,
 }) => {
   const router = useRouter()
-  const breadcrumbs = generateBreadcrumbs(router, '/about-us/numbered-memos/')
+  const breadcrumbs = generateBreadcrumbs(
+    router,
+    '/about-us/numbered-memos/',
+    'about-us/system-office/numbered-memos/'
+  )
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}

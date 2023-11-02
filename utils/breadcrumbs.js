@@ -1,6 +1,6 @@
 import { unslugify } from 'utils/unslugify'
 
-export default function generateBreadcrumbs(router, custom) {
+export default function generateBreadcrumbs(router, custom, urlToMatch) {
   // Remove any query parameters, as those aren't included in breadcrumbs
   const asPathWithoutQuery = router.asPath.split('?')[0]
 
@@ -19,7 +19,12 @@ export default function generateBreadcrumbs(router, custom) {
     // The title will just be the route string for now
     const title = unslugify(subpath)
     href === '/colleges' ? (href = '/students/what-we-offer/colleges/') : ''
-    custom ? (href = custom) : ''
+    if (custom && urlToMatch) {
+      if (href === urlToMatch) {
+        href = custom
+      }
+    }
+    // custom ? (href = custom) : ''
     return { href, title }
   })
 
