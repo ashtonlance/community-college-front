@@ -1,14 +1,14 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-import { useRouter } from 'next/router'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function PageDataDashboards(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -29,7 +29,7 @@ export default function PageDataDashboards(props) {
   const [filters, setFilters] = useState({
     category: router.query.category || '',
     keyword: router.query.keyword || '',
-    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
+    orderBy: router.query.orderBy || { field: 'TITLE', order: 'DESC' },
   })
 
   const handleFilterChange = useCallback(
@@ -101,7 +101,7 @@ export default function PageDataDashboards(props) {
       })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort(
         (a, b) =>
           b?.dataDashboardDetails?.title?.localeCompare(
@@ -240,7 +240,7 @@ PageDataDashboards.query = gql`
 
     dataDashboards(
       first: 150
-      where: { orderby: { field: TITLE, order: ASC } }
+      where: { orderby: { field: TITLE, order: DESC } }
     ) {
       nodes {
         date
