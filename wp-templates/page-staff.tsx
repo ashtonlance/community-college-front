@@ -119,7 +119,7 @@ export default function StaffIndexPage({ data, loading, error }) {
       type: 'select',
     },
     {
-      name: 'department',
+      name: 'location',
       options: departments,
       type: 'select',
     },
