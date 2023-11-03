@@ -44,7 +44,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
             {card.newsCategories.nodes[0]?.name} • {''}
             {formatDate(card?.date)}
           </div>
-          <div className="h2 text-white">{card?.title}d</div>
+          <div className="h2 text-white">{card?.title}</div>
           <div className="body-large text-white ">
             {card?.newsDetail?.excerpt}
           </div>
