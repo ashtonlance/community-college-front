@@ -110,7 +110,7 @@
   display: none;
 }
 
-.wysiwyg h2, h3, h4, h5 {
+.wysiwyg h2, .wysiwyg h3, .wysiwyg h4, .wysiwyg h5 {
   margin-bottom: 32px !important;
 }
 
