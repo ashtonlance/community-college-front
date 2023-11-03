@@ -15,7 +15,7 @@ export const Testimonial = ({ attributes }) => {
     <FadeIn>
       <div className={`h-fit w-full bg-${color}`}>
         <div
-          className={`relative mx-auto flex max-w-[1240px] flex-col items-center justify-center module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
+          className={`relative p-10 mx-auto flex max-w-[1240px] flex-col items-center justify-center module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
         >
           <div className="relative mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-solid border-lightBlue bg-white px-[60px] py-[40px] text-center md:w-full md:p-[40px]">
             <Image

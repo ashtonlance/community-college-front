@@ -35,7 +35,7 @@ export const AccordionDisplay = props => {
   return (
     <div className={`bg-${color}`}>
       <div
-        className={`px-52 pb-[100px] module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
+        className={`sm:p-10 md:p-[60px] px-52 pb-[100px] module-spacing-top-${spaceBottom} module-spacing-bottom-${spaceTop}`}
       >
         <Accordion type="single" collapsible>
           {accordionItems}
