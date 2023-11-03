@@ -1,13 +1,13 @@
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
 import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function FoundationBoardMembersPage({ data, loading, error }) {
   const router = useRouter()
@@ -67,14 +67,14 @@ export default function FoundationBoardMembersPage({ data, loading, error }) {
 
     if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => {
-        const aLastName = a.boardMember.name.split(' ').pop() || ''
-        const bLastName = b.boardMember.name.split(' ').pop() || ''
+        const aLastName = a.boardMember?.name?.split(' ').pop() || ''
+        const bLastName = b.boardMember?.name?.split(' ').pop() || ''
         return bLastName.localeCompare(aLastName)
       })
     } else {
       result = result.sort((a, b) => {
-        const aLastName = a.boardMember.name.split(' ').pop() || ''
-        const bLastName = b.boardMember.name.split(' ').pop() || ''
+        const aLastName = a.boardMember?.name?.split(' ').pop() || ''
+        const bLastName = b.boardMember?.name?.split(' ').pop() || ''
         return aLastName.localeCompare(bLastName)
       })
     }
