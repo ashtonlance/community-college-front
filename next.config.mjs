@@ -23,9 +23,6 @@ async function fetchWordPressRedirects() {
     }),
   })
   const { data } = await resp.json()
-  console.log({ data })
-
-  console.log('raw', data?.redirection?.redirects)
 
   if (!Array.isArray(data?.redirection?.redirects)) {
     return []
