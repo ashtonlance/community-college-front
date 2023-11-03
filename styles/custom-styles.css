@@ -176,6 +176,10 @@ table tr:first-child td:last-child {
   @apply rounded-tr-xl;
 }
 
+table td a {
+  @apply text-navy hover:text-darkBeige transition-colors;
+}
+
 .wysiwyg p a,
 .wysiwyg li a  {
   @apply text-navy underline underline-offset-2 hover:text-darkBeige transition-colors;
