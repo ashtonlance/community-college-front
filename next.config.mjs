@@ -1,5 +1,49 @@
 import { withFaust } from '@faustwp/core'
 import withBundleAnalyzer from '@next/bundle-analyzer'
+
+async function fetchWordPressRedirects() {
+  const resp = await fetch('https://ncccsstg.wpengine.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+        {
+          redirection {
+            redirects {
+              type
+              origin
+              target
+              code
+            }
+          }
+        }
+      `,
+    }),
+  })
+  const { data } = await resp.json()
+  console.log({ data })
+
+  console.log('raw', data?.redirection?.redirects)
+
+  if (!Array.isArray(data?.redirection?.redirects)) {
+    return []
+  }
+
+  let redirects = data.redirection.redirects
+    .filter(redirection => redirection.type === 'url')
+    .map(redirection => ({
+      source: redirection.origin,
+      destination: redirection.target,
+      permanent: redirection.code === 301 ? true : false,
+    }))
+
+  console.log('redirects', redirects)
+
+  return redirects
+}
+
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -41,6 +85,10 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i
 
     return config
+  },
+  async redirects() {
+    const wordPressRedirects = await fetchWordPressRedirects()
+    return wordPressRedirects
   },
 }
 
