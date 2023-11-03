@@ -148,7 +148,7 @@ export default function SingleCollege(props) {
       >
         {pageData?.collegeDetails?.aboutTheCollege ? (
           <WYSIWYG
-            customClasses="!p-0 !lg:pl-0 !pl-[105px]"
+            customClasses="!p-0"
             attributes={{
               data: { content: pageData?.collegeDetails?.aboutTheCollege },
             }}
