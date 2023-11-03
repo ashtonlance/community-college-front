@@ -156,7 +156,7 @@ export default function SingleCollege(props) {
         ) : null}
         {pageData?.collegeDetails?.logo?.mediaItemUrl ? (
           <div className="m-0 w-auto sm:m-auto">
-            <div className="w-[183px] rounded-xl border-2 border-darkGrey border-opacity-25 p-5">
+            <div className="md:w-[183px] w-[275px] rounded-xl border-2 border-darkGrey border-opacity-25 p-5">
               <Image
                 src={pageData?.collegeDetails?.logo?.mediaItemUrl}
                 alt={pageData?.collegeDetails?.logo?.altText}
