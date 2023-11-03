@@ -1,13 +1,13 @@
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
 import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function NumberedMemosPage({ data, loading, error }) {
   const router = useRouter()
@@ -127,11 +127,11 @@ export default function NumberedMemosPage({ data, loading, error }) {
   }
 
   const filtersToGenerateDropdown = [
-    {
-      name: 'category',
-      options: categories,
-      type: 'select',
-    },
+    // {
+    //   name: 'category',
+    //   options: categories,
+    //   type: 'select',
+    // },
     {
       name: 'year',
       options: years,
