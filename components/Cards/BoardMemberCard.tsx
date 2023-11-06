@@ -44,7 +44,7 @@ export const BoardMemberCard: React.FC<BoardMemberCardProps> = ({ card }) => {
           />
           <Link
             aria-label={"Read about " + card.boardMember?.name}
-            className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+            className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.uri || '/'}
           >
             Read Bio
