@@ -19,9 +19,9 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
   const content = props?.attributes?.data?.content || ''
   const bgColor = props?.attributes?.data?.background_color || ''
   const bottomSpacing =
-    props?.attributes?.data?.component_spacing_bottom_spacing || ''
+    props?.attributes?.data?.component_spacing_bottom_spacing || 'medium'
   const topSpacing =
-    props?.attributes?.data?.component_spacing_top_spacing || ''
+    props?.attributes?.data?.component_spacing_top_spacing || 'medium'
 
   const parser = new (Parser as any)()
   const reactElement = parser.parse(content)
