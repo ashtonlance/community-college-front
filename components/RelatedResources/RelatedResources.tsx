@@ -113,17 +113,18 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
       <div
         className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
-        <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
-          <h3 className="h5">{heading}</h3>
-        </div>
-
+        {heading ? (
+          <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
+            <h3 className="h5">{heading}</h3>
+          </div>
+        ) : null}
         <div
           className={cn(
             `grid gap-[20px] ${items == 1 && 'grid-cols-1'} ${
               items == 2 && 'grid-cols-2'
             } ${
               items > 2 && 'grid-cols-3'
-            } w-full grid-flow-row md:grid-cols-2 sm:grid-cols-1`
+            } w-full grid-flow-row md:grid-cols-1`
           )}
         >
           {postIds.map((id, i) => (
