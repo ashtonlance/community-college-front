@@ -88,7 +88,7 @@ export const Button = ({
         target={target}
         onClick={onClick}
       >
-        {content} 3
+        {content}
         {arrow && (
           <ArrowRight
             className="h-5 w-5 text-gold group-hover:text-navy"
