@@ -96,7 +96,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({
         )}
         <Link
           aria-label={'Read about ' + card.newsCategories.nodes[0]?.name}
-          className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+          className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
           href={card.uri ?? ''}
         >
           Read More

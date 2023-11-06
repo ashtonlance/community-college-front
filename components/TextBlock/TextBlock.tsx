@@ -53,7 +53,7 @@ export const TextBlock = ({ attributes }) => {
         {ctaURL && ctaLabel && (
           <Link
             href={ctaURL}
-            className="secondary-btn outline-btn navy mx-auto mt-[40px] sm:mt-[24px] py-[14px]"
+            className="secondary-btn outline-btn navy mx-auto mt-[40px] sm:mt-[24px]"
           >
             {ctaLabel}
           </Link>

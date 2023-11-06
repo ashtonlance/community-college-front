@@ -80,7 +80,7 @@
     @apply font-sans text-[14px] font-normal leading-[140%] text-lightBlue hover:text-white
   }
   .primary-btn {
-    @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-extrabold leading-[100%] tracking-[0.36px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
+    @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-bold leading-[100%] tracking-[0.36px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
   }
   .primary-btn.navy {
     @apply bg-navy text-white hover:bg-gold hover:text-navy;
