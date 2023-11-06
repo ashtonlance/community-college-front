@@ -51,7 +51,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({ card }) => {
           />
           <Link
             aria-label={"Learn more about " + card?.schoolDetails?.website?.title}
-            className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+            className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.schoolDetails?.website?.url ?? ''}
             target={card?.schoolDetails?.website?.target || '_self'}
           >

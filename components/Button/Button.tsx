@@ -1,4 +1,5 @@
 import ArrowRight from '../../assets/icons/arrow-forward-sharp-reverse.svg'
+import ArrowRightLarge from '../../assets/icons/arrow-right-large.svg'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
@@ -29,6 +30,7 @@ export const Button = ({
 
   if (isButton) {
     return (
+      <>
       <button
         className={`button flex w-fit items-center justify-center gap-[11px] ${classes} group`}
         ref={ref}
@@ -37,12 +39,15 @@ export const Button = ({
       >
         {content}
         {arrow && (
-          <ArrowRight
-            className="h-5 w-5 text-gold group-hover:text-navy"
+          <>
+          <ArrowRightLarge
+            className="h-5 w-5 text-gold group-hover:text-navy transition-colors"
             alt=""
           />
+        </>
         )}
       </button>
+    </>
     )
   }
 
@@ -83,7 +88,7 @@ export const Button = ({
         target={target}
         onClick={onClick}
       >
-        {content}
+        {content} 3
         {arrow && (
           <ArrowRight
             className="h-5 w-5 text-gold group-hover:text-navy"

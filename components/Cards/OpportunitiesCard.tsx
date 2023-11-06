@@ -30,7 +30,7 @@ export const OpportunitiesCard: React.FC<OpportunityCardProps> = ({ card }) => {
           </Link>
           <Link
             aria-label={"Learn more about " + card?.title}
-            className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+            className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.uri ?? ''}
           >
             Learn More

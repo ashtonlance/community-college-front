@@ -22,7 +22,7 @@ export const OfficerCard: React.FC<OfficerCardProps> = ({ card }) => {
             {card?.title}
           </div>
           <a
-            className="group flex items-center gap-x-2 font-condensed text-lg font-extrabold tracking-[-0.18px] text-darkGrey hover:text-navy"
+            className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={`mailto:${card?.email}`}
           >
             Send An Email
