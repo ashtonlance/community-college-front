@@ -14,6 +14,8 @@ export const ContactBlock = ({ attributes }) => {
   const phoneNumber = attributes?.data?.phone_number || ''
   const title = attributes?.data?.title || ''
   const cardColor = bgColor === 'white' ? 'bg-grey' : 'bg-white'
+  const image_position = attributes?.data?.image_position || ''
+
   return (
     <div
       className={cn(
@@ -26,7 +28,9 @@ export const ContactBlock = ({ attributes }) => {
             src={image?.url ?? ''}
             width={400}
             height={250}
-            className="max-h-[265px] object-cover w-full"
+            className={cn(
+              `sm:h-[200px] md:h-[350px] h-[265px] md:max-h-none max-h-[265px] object-cover w-full object-${image_position}`
+            )}
             alt={title}
           />
         ) : null}
