@@ -20,7 +20,7 @@ export const TextBlock = ({ attributes }) => {
       className={`h-fit w-full module-color-${colorModule} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
-        className={`mx-auto flex max-w-[1030px] flex-col items-center justify-center py-[80px] md:px-[100px] sm:p-[40px]`}
+        className={`mx-auto flex max-w-[1030px] flex-col items-center justify-center md:px-[100px] sm:p-[40px]`}
       >
         <div className="flex flex-wrap justify-center gap-[10px]">
           {aboveHeading ? (

@@ -19,12 +19,13 @@ export const LinksBlock = ({ attributes }) => {
             <h3 className="mb-[32px] font-extrabold h5">
               {attributes.data[`links_lists_${val}_link_list_label`]}
             </h3>
-            <div className="grid-auto-flow-column grid grid-cols-3 md:grid-rows-5 sm:flex sm:flex-col">
+            <div className="grid-auto-flow-column grid grid-cols-3 md:grid-rows-auto sm:flex sm:flex-col gap-[5px]">
               {[
                 ...Array(attributes.data[`links_lists_${val}_items`]).keys(),
               ].map(num => (
+                
                 <Link
-                  className="sub-nav mb-[12px] flex items-center gap-[7px] text-darkGrey hover:text-navy"
+                  className="sub-nav has-arrow mb-[12px] text-darkGrey hover:text-navy"
                   key={num}
                   href={
                     attributes.data[`links_lists_${val}_items_${num}_link_url`]
@@ -35,8 +36,8 @@ export const LinksBlock = ({ attributes }) => {
                       `links_lists_${val}_items_${num}_link_label`
                     ]
                   }
-                  <Arrow className="text-gold" />
-                </Link>
+              
+                </Link>                  
               ))}
             </div>
           </div>
