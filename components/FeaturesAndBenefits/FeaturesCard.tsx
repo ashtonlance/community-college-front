@@ -53,7 +53,7 @@ export const FeaturesCard = ({
 
           {optionalLink && (
             <Link
-              className="mt-[30px] group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
+              className={`${alignment === 'center' ? 'justify-center' : 'justify-start'} mt-[30px] group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy`}
               href={optionalLink.url}
             >
               {optionalLink.title}

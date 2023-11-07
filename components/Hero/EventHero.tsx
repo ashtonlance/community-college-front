@@ -60,7 +60,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
         )}
 
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="default-hero-headline">{heading}</h1>
+        <h1 className="default-hero-headline sm:text-[42px] text-[48px]">{heading}</h1>
 
         {description && bgImg && (
           <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">

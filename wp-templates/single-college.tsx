@@ -82,6 +82,7 @@ export default function SingleCollege(props) {
       settings={settings}
     >
       <DefaultHero
+        smallHeading={true}
         heading={pageData?.title}
         bgImg={pageData?.featuredImage?.node?.sourceUrl}
         description={pageData?.collegeDetails?.county}

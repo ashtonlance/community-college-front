@@ -31,6 +31,7 @@ export default function SingleProgramArea(props) {
       settings={settings}
     >
       <DefaultHero
+        smallHeading={true}
         heading={pageData?.title}
         bgImg={pageData?.featuredImage?.node?.sourceUrl}
         description={pageData?.programAreaDetails?.description}

@@ -34,6 +34,7 @@ export default function SingleStaff(props) {
       settings={settings}
     >
       <DefaultHero
+        smallHeading={true}
         heading={pageData?.title}
         bgImg={pageData?.featuredImage?.node?.sourceUrl}
         email={pageData?.staffDetails?.email}

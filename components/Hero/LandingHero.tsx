@@ -9,6 +9,7 @@ export type HeroPropsType = {
   bgImg?: string
   subheading?: string
   description?: string
+  smallHeading?: boolean
   heading: string
   ctaLabel?: string
   ctaURL?: string
@@ -73,7 +74,7 @@ export const LandingHero = ({
         {subheading && (
           <div className="flex items-center gap-[15px]">
             <h2
-              className={`text-[16px] font-bold leading-[150%] sm:text-[14px] ${
+              className={`h5 ${
                 emptyBg ? 'text-darkGrey' : 'text-white'
               }`}
             >

@@ -27,7 +27,7 @@ export const AnnualReportHero = ({
       items-baseline justify-center bg-cover pb-[80px] md:w-full md:pb-0"
       >
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="default-hero-headline">{heading}</h1>
+        <h1 className="default-hero-headline sm:text-[42px] text-[48px]">{heading}</h1>
       </div>
       <div className="wrapper-default-inner-pages flex w-[40%] flex-col items-baseline justify-center pl-0 md:w-full md:pl-[60px] md:pt-0 sm:pl-[40px]">
         <div className="body-large mb-[24px] flex gap-3 font-bold text-darkGrey">

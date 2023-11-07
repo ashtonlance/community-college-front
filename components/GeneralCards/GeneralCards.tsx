@@ -59,7 +59,7 @@ export const GeneralCards = ({ attributes }: GeneralCardsProps) => {
                         `flex flex-col sm:p-0 md:p-10 px-10 py-[50px] flex-1`
                       )}
                   >
-                  <h3>{attributes.data[`card_${card}_heading`]}</h3>
+                  <h3 className="md:mb-[15px] mb-[20px]">{attributes.data[`card_${card}_heading`]}</h3>
                   <div
                     className="body-large text-gmt-500"
                     dangerouslySetInnerHTML={{
