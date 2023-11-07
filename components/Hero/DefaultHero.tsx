@@ -13,6 +13,7 @@ export const DefaultHero = ({
   bgImg,
   subheading,
   description,
+  smallHeading,
   heading,
   ctaLabel,
   ctaURL,
@@ -44,7 +45,19 @@ export const DefaultHero = ({
         )}
       >
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="default-hero-headline">{heading}</h1>
+        <h1
+          className={cn(
+            `default-hero-headline  
+            ${
+              smallHeading
+                ? 'sm:text-[42px] text-[48px]'
+                : 'sm:text-[42px] md:text-[48px] text-[72px]'
+            }
+            `
+          )}
+        >
+          {heading}
+        </h1>
 
         {description && bgImg && (
           <p

@@ -13,7 +13,7 @@
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
   }
   .default-hero-headline{
-    @apply font-serif font-normal text-[48px] sm:text-[42px] leading-[110%] tracking-[-0.48px] sm:tracking-[-0.42px]  text-navy antialiased mb-[32px] md:mb-[24px];
+    @apply font-serif font-normal leading-[110%] tracking-[-0.48px] sm:tracking-[-0.42px]  text-navy antialiased mb-[32px] md:mb-[24px];
   }
   .landing-hero-headline {
     @apply font-serif font-normal text-[88px] md:text-[72px] sm:text-[48px] leading-[110%] tracking-[-1.76px] md:tracking-[-1.44px]  sm:tracking-[-0.48px]  text-white antialiased;  }

@@ -59,7 +59,7 @@ export const ApprenticeshipHero = ({
         )}
 
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="default-hero-headline">{heading}</h1>
+        <h1 className="default-hero-headline sm:text-[42px] text-[48px]">{heading}</h1>
 
         {ctaURL && ctaLabel && (
           <Link href={ctaURL} className={`secondary-btn navy`}>
