@@ -112,7 +112,7 @@ export default function SingleProgram(props) {
                 Colleges That Offer This Program
               </h3>
               <div
-                className={`grid grid-flow-row ${
+                className={`grid grid-flow-row gap-[5px] ${
                   pageData?.colleges?.nodes?.length <= 3
                     ? 'grid-cols-1'
                     : 'grid-cols-3'
@@ -121,12 +121,11 @@ export default function SingleProgram(props) {
                 {pageData?.colleges?.nodes?.map(college => {
                   return (
                     <Link
-                      className="sub-nav body-regular col-span-1 mb-[12px] flex max-w-fit items-center gap-[7px] pr-8 font-normal text-darkGrey hover:text-navy"
+                      className="sub-nav has-arrow body-regular col-span-1 mb-[12px] max-w-fit font-normal text-darkGrey hover:text-navy"
                       key={college?.uri}
                       href={college?.uri ?? ''}
                     >
                       {unslugify(college?.slug)}
-                      <Arrow className="text-gold" />
                     </Link>
                   )
                 })}
