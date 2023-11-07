@@ -31,7 +31,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
 
   const autoplay = useRef(
     Autoplay(
-      { delay: 3000, stopOnInteraction: false },
+      { delay: 7500, stopOnInteraction: false, jump: true, playOnInit:false},
       // @ts-expect-error
       embla => embla.parentElement
     )
@@ -90,19 +90,19 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
 
   return (
     <FadeIn>
-      <div className={`w-full p-[100px] md:p-[60px] sm:p-[40px] ${bgColorCard == 'grey' ? "bg-grey" : "bg-white"}`}>
       <div
-        className={`module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} relative ${bgColorCard == 'grey' ? "bg-grey" : "bg-white"}`}
+        className={`module-spacing-top-${marginTop} module-spacing-bottom-${marginBottom} px-[100px] md:px-[60px] sm:px-[40px]  ${bgColorCard == 'grey' ? "bg-grey" : "bg-white"}`}
       >
+
+        <div
+          className={`${bgColorCard == 'grey' ? "bg-white" : "bg-grey"} max-w-[1240px] mx-auto rounded-xl flex relative flex-col items-center justify-center px-[105px] py-[60px] text-center md:w-full sm:p-[32px] md:py-[40px] md:px-[50px]`}
+        >
         <Image
           src={`${bgColorCard == 'grey' ? bgWhite.src : bgGrey.src}`}
           fill
           alt="background"
           className="object-fill rounded-[12px]"
         />
-        <div
-          className={`${bgColorCard == 'grey' ? "bg-white" : "bg-grey"} mx-auto flex w-[90%] max-w-[1220px] flex-col items-center justify-center p-[80px] text-center md:w-full md:px-[32px] sm:p-[40px]`}
-        >
           <div className="max-w-full overflow-hidden" ref={emblaRef}>
             <div className="flex w-full gap-[20px]">
               {baseChildren.props.children}
@@ -122,7 +122,6 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
             ))}
           </div>
         </div>
-      </div>
       </div>
     </FadeIn>
   )
