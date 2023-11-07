@@ -36,7 +36,7 @@ async function fetchWordPressRedirects() {
       permanent: redirection.code === 301 ? true : false,
     }))
 
-  console.log('redirects', redirects)
+  // console.log('redirects', redirects)
 
   return redirects
 }

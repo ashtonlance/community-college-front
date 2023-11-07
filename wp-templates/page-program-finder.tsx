@@ -381,7 +381,7 @@ ProgramFinder.query = gql`
       }
     }
 
-    colleges(where: { orderby: { field: TITLE, order: ASC } }, first: 60) {
+    colleges(where: { orderby: { field: TITLE, order: ASC } }, first: 100) {
       nodes {
         title
         uri
@@ -430,7 +430,7 @@ ProgramFinder.query = gql`
           description
           about
         }
-        colleges {
+        colleges(first: 100) {
           nodes {
             slug
           }
