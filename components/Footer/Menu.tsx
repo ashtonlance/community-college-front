@@ -17,13 +17,13 @@ export const Menu = ({ subItems, classlist = '', label = '' }) => {
       >
         <Link href={url ?? ''}>{label}</Link>
       </h4>
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col md:gap-[4px] gap-y-2">
         {children?.map((subItem, i) => {
           return (
             <Link
               key={subItem?.label}
               href={subItem.url || ''}
-              className="cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:text-center md:text-[11px] sm:text-[8px]"
+              className="cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:text-center md:text-[11px] md:max-w-none max-w-[90%]"
             >
               {subItem.label}
             </Link>
