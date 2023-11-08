@@ -30,7 +30,7 @@ export const Footer = ({ menuItems, footerNavigation }) => {
     node => node.label === 'Utility Menu'
   )
   return (
-    <div className="grid-rows-auto relative grid grid-cols-12 px-[100px] py-[80px] text-white md:gap-y-[40px] md:p-[60px] sm:gap-y-0 sm:px-[32px] sm:py-[48px]">
+    <div className="grid-rows-auto relative grid grid-cols-12 px-[100px] py-[80px] text-white md:gap-y-[40px] sm:gap-y-0 sm:px-[40px] md:px-[60px] md:py-[60px]">
       <div className="col-start-1 col-end-3 md:col-span-12 sm:mb-[25px]">
         <Image
           className="pointer-events-none -z-10 bg-navy object-fill object-center"
@@ -52,7 +52,7 @@ export const Footer = ({ menuItems, footerNavigation }) => {
             <p className="mb-[20px] text-[14px] font-normal leading-[140%] text-white hover:text-lightBlue">
               <a href="tel:(919) 807-7100">(919) 807-7100</a>
             </p>
-            <div className="flex justify-center gap-x-5">
+            <div className="flex md:justify-center justify-between md:gap-x-5">
               <Link href="/">
                 <Facebook
                   alt=""
@@ -88,32 +88,32 @@ export const Footer = ({ menuItems, footerNavigation }) => {
         </div>
       </div>
       <Menu
-        classlist="order-1 md:mt-0 sm:mb-[12px] col-start-4 col-end-6 md:col-start-1 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
+        classlist="order-1 md:mt-0 sm:mb-[12px] mb-0 col-start-4 col-end-6 md:col-start-1 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
         subItems={studentMenu}
         label={studentMenu[0]?.label}
       />
       <Menu
-        classlist="order-1 md:mt-0 sm:mb-[12px] col-start-6 col-end-8 md:col-start-5 md:col-span-4 sm:col-start-1 sm:col-span-12 footer-links-headline"
+        classlist="order-1 md:mt-0 sm:mb-[12px] mb-0 col-start-6 col-end-8 md:col-start-5 md:col-span-4 sm:col-start-1 sm:col-span-12 footer-links-headline"
         subItems={facultyAndStaffMenu}
         label={facultyAndStaffMenu[0]?.label}
       />
       <Menu
-        classlist="order-1 md:mt-0 sm:mb-[12px] col-start-8 col-end-10 md:col-start-10 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
+        classlist="order-1 md:mt-0 sm:mb-[12px] mb-0 col-start-8 col-end-10 md:col-start-10 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
         subItems={employerMenu}
         label={employerMenu[0]?.label}
       />
       <Menu
-        classlist="order-1 md:mt-0 sm:mb-[12px] col-start-10 col-end-12 md:col-start-2 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
+        classlist="order-1 md:mt-0 sm:mb-[12px] mb-0 col-start-10 col-end-12 md:col-start-2 md:col-span-3 sm:col-start-1 sm:col-span-12 footer-links-headline"
         subItems={systemOfficeMenu}
         label={systemOfficeMenu[0]?.label}
       />
-      <div className="footer-links-headline order-2 col-start-12 md:col-span-3 md:col-start-9 sm:col-span-12 sm:col-start-1 sm:mb-[12px]">
+      <div className="footer-links-headline order-2 col-start-12 md:col-span-3 md:col-start-9 sm:col-span-12 sm:col-start-1 mb-0">
         <div className="flex flex-col gap-y-5 md:gap-y-3 sm:gap-y-2">
           {utilityMenu[0]?.children?.map((item, i) => {
             return (
               <Link
                 key={item?.label + i}
-                className="font-condensed text-lg text-white hover:text-lightBlue md:text-center sm:text-[15px]"
+                className="font-condensed leading-[110%] text-lg text-white hover:text-lightBlue md:text-center sm:text-[15px]"
                 href={item?.url || ''}
               >
                 {item?.label}
