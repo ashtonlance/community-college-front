@@ -53,31 +53,31 @@ export const Footer = ({ menuItems, footerNavigation }) => {
               <a href="tel:(919) 807-7100">(919) 807-7100</a>
             </p>
             <div className="flex md:justify-center justify-between md:gap-x-5">
-              <Link href="/">
+              <Link href="https://www.facebook.com/NCCommunityColleges">
                 <Facebook
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href="/">
+              <Link href="https://twitter.com/NCCommColleges">
                 <Twitter
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href="/">
+              <Link href="https://youtube.com/@n.c.communitycollegesystem8788?si=uQdLUXggpkT6R0S7">
                 <Youtube
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href="/">
+              <Link href="https://www.linkedin.com/company/105557/admin/feed/posts/">
                 <Linkedin
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href="/">
+              <Link href="https://www.instagram.com/nccommunitycolleges/">
                 <Instagram
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"

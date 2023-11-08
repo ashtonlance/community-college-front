@@ -13,7 +13,7 @@ type FrontPageProps = {
 export default function FrontPage(props: FrontPageProps) {
   const menuItems = props.data?.menu?.menuItems || []
   const homePageData = props.data?.nodeByUri as Page
-  const preFooterContent = props.data?.menus?.nodes[0] || []
+  const preFooterContent = props.data?.menus?.nodes[0]
   const blocks = homePageData && [...homePageData?.blocks]
   const utilityNavigation =
     props.data?.settings?.utilityNavigation?.navigationItems
@@ -22,6 +22,7 @@ export default function FrontPage(props: FrontPageProps) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}

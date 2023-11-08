@@ -158,7 +158,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
   const backgroundColor = props.backgroundColor
   return (
     <div
-      className={`flex w-full ${backgroundColor} overflow-hidden rounded-xl`}
+      className={`flex sm:flex-col flex-row w-full ${backgroundColor} overflow-hidden rounded-xl`}
     >
       {imgUrl ? (
         <Image
@@ -166,7 +166,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
           alt={title}
           height={191}
           width={210}
-          className="object-cover object-center"
+          className="object-cover object-center sm:w-full w-[210px] h-auto sm:h-[300px]"
         />
       ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">

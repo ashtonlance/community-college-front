@@ -114,7 +114,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
         className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
         {heading ? (
-          <div className="my-[40px] flex flex-col items-center sm:my-[32px]">
+          <div className="mb-[60px] md:mb-[50px] flex flex-col items-center sm:mb-[32px]">
             <h3 className="h5">{heading}</h3>
           </div>
         ) : null}

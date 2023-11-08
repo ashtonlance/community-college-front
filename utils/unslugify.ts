@@ -11,3 +11,6 @@ export const unslugify = slug =>
       /\w\S*/g,
       text => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
     )
+    .replace(
+      'Mcd', 'McD'
+    )

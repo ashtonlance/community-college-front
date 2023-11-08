@@ -17,7 +17,7 @@ export const TextBlock = ({ attributes }) => {
 
   return (
     <div
-      className={`h-fit w-full module-color-${colorModule} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
+      className={`h-fit w-full bg-${colorModule} module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
     >
       <div
         className={`mx-auto flex max-w-[1030px] flex-col items-center justify-center md:px-[100px] sm:p-[40px]`}

@@ -7,10 +7,14 @@ export const getLabelFromCategory = category => {
 
   const labelCategoryMap = {
     webinar: 'Watch Video',
-    news: 'Read Article',
+    news: 'Read More',
     article: 'Read Article',
     'case-study': 'Read Case Study',
     report: 'Get Report',
+    event: 'View Event',
+    colleges: 'View College',
+    programs: 'View Program',
+    staff: 'View Staff Member'
   }
 
   return labelCategoryMap[key] || 'Read Article'
