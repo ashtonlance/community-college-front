@@ -40,21 +40,25 @@ export const ProgramCard = ({ card, index }) => {
                   Offered At:
                 </div>
               ) : null}
-              {card?.colleges?.slice(0, 3).map((college, i) => (
-                <div key={i} className="body-regular text-[14px] text-darkGrey">
-                  {college.distance ? (
-                    <span className="my-1">
-                      <Link
-                        href={college.uri ?? ''}
-                        className="body-regular w-full font-bold text-navy hover:text-darkBeige"
-                      >
-                        {college.title}
-                      </Link>{' '}
-                      <div>{Math.ceil(college.distance)}mi. away</div>
-                    </span>
-                  ) : null}
-                </div>
-              ))}
+              {collegesLength > 0 &&
+                card?.colleges?.slice(0, 3).map((college, i) => (
+                  <div
+                    key={i}
+                    className="body-regular text-[14px] text-darkGrey"
+                  >
+                    {college.distance ? (
+                      <span className="my-1">
+                        <Link
+                          href={college.uri ?? ''}
+                          className="body-regular w-full font-bold text-navy hover:text-darkBeige"
+                        >
+                          {college.title}
+                        </Link>{' '}
+                        <div>{Math.ceil(college.distance)}mi. away</div>
+                      </span>
+                    ) : null}
+                  </div>
+                ))}
               {collegesLength > 0 && !card?.colleges[0]?.distance && (
                 <div className="body-regular text-[14px] text-darkGrey">
                   {`Offered at ${collegesLength} college${

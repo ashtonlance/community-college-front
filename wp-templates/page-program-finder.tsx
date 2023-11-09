@@ -195,26 +195,36 @@ export const ProgramFinder = props => {
 
   useEffect(() => {
     if (isReady) {
-      const { programArea, radius, zipCode, widget } = router.query
+      const {
+        programArea = '',
+        radius = '',
+        zipCode = '',
+        widget = false,
+      } = router.query
       const newValues = {
         programArea: programArea,
         radius: radius,
         zipCode: zipCode,
       }
       const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
-        if (programArea && radius && zipCode && widget === 'true') {
-          setInputValues(newValues)
-          if (zipCode.length === 5) {
-            const coordinates = await getCoordinates(zipCode)
-            setZipCodeCoordinates(coordinates)
+        if (widget === 'true') {
+          if (programArea && radius && zipCode) {
+            setInputValues(newValues)
+            if (zipCode.length === 5) {
+              const coordinates = await getCoordinates(zipCode)
+              setZipCodeCoordinates(coordinates)
+            }
+            handleSetFilters(newValues)
+            setShouldFilter(true)
+          } else {
+            // If other query parameters are empty, set all programs as filteredPrograms
+            setFilteredPrograms(programs)
           }
-          handleSetFilters(newValues)
-          setShouldFilter(true)
         }
       }
       fetchCoordinates(programArea, radius, zipCode, widget)
     }
-  }, [isReady])
+  }, [isReady, handleSetFilters, programs, router.query])
 
   const ctaAttributes = {
     data: {
