@@ -6,7 +6,6 @@ import {
 } from '@react-google-maps/api'
 import { useState, memo, useCallback, useMemo } from 'react'
 import { FadeIn } from '@/components/FadeIn'
-import { UsersConnectionSearchColumnEnum } from 'generated/graphql'
 
 const MapInternal = GoogleMap as any
 
