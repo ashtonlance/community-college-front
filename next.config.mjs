@@ -55,6 +55,7 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
+    largePageDataBytes: 1024 * 1024 * 2,
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports

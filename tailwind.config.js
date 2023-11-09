@@ -78,6 +78,5 @@ module.exports = {
     'top-[140px]',
     'top-[143px]',
     'top-[127px]',
-    { pattern: /(aa|ais)-./ },
   ],
 }
