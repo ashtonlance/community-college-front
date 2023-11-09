@@ -3,6 +3,7 @@ import useGravityForm from '../../utils/useGravityForms'
 import GravityFormsField from './GravityFormsField'
 import Image from 'next/image'
 import arrowright from '../../assets/icons/arrow-right.svg'
+import ArrowRightLarge from '../../assets/icons/arrow-right-large.svg'
 import { getApolloClient } from 'utils/apollo-faust'
 import { validateEmail } from 'utils/validations'
 import { FadeIn } from 'components/FadeIn'
@@ -89,16 +90,16 @@ const ArrowButton = () => {
 
 const DefaultButton = ({ loading, form, disclaimer = null }) => {
   return (
-    <div className="submit-gravity-form flex gap-[40px]">
+    <div className="submit-gravity-form flex gap-[40px] sm:mt-[12px] mt-5">
       <button
         type="submit"
-        className={`primary-btn group outline navy`}
+        className={`primary-btn group navy`}
         disabled={loading}
         aria-label="Submit form"
       >
         {' '}
         {form?.button?.text || 'Submit'}
-        <Arrow className="text-gold group-hover:text-white" />
+        <ArrowRightLarge className="text-gold group-hover:text-white transition-colors" />
       </button>
       {disclaimer && <p className="p-small text-white">{disclaimer}</p>}
     </div>
