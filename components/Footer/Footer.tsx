@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Menu } from './Menu'
 
-export const Footer = ({ footerNavigation, socialLinks }) => {
+export const Footer = ({ menuItems, footerNavigation, socialLinks }) => {
   const studentMenu = footerNavigation?.filter(
     node => node.label === 'Students'
   )
