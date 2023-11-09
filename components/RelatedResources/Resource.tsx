@@ -1,9 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
-import Link from 'next/link'
-import { formatDate } from '../../utils/dates'
-import { getLabelFromCategory } from 'utils/getButtonLabels'
-import Image from 'next/image'
 import Arrow from 'assets/icons/arrow-forward-sharp.svg'
+import Image from 'next/image'
+import Link from 'next/link'
+import { getLabelFromCategory } from 'utils/getButtonLabels'
+import { formatDate } from '../../utils/dates'
 
 const GET_POST = gql`
   query GetPost($resourceId: ID!) {
@@ -158,7 +158,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
   const backgroundColor = props.backgroundColor
   return (
     <div
-      className={`flex sm:flex-col flex-row w-full ${backgroundColor} overflow-hidden rounded-xl`}
+      className={`flex w-full flex-row sm:flex-col ${backgroundColor} overflow-hidden rounded-xl`}
     >
       {imgUrl ? (
         <Image
@@ -166,7 +166,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
           alt={title}
           height={191}
           width={210}
-          className="object-cover object-center sm:w-full w-[210px] h-auto sm:h-[300px]"
+          className="h-auto w-[210px] object-cover object-center sm:h-[300px] sm:w-full"
         />
       ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
@@ -179,7 +179,7 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>
 
         <Link
-          aria-label={"Read article about " + title}
+          aria-label={'Read article about ' + title}
           className="group flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
           href={postUrl}
         >
@@ -194,6 +194,11 @@ export const ResourcePresentational = (props: ResourcePresentationalType) => {
 export const Resource = ({ resourceId, backgroundColor = 'bg-white' }) => {
   const { loading, error, data } = useQuery(GET_POST, {
     variables: { resourceId },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
   if (loading) {
     return

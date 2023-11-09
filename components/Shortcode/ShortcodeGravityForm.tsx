@@ -1,5 +1,5 @@
-import { GravityForm } from 'components/GravityForm/GravityForm'
 import { gql, useQuery } from '@apollo/client'
+import { GravityForm } from 'components/GravityForm/GravityForm'
 
 const GET_GRAVITY_FORM = gql`
   ${GravityForm.fragments.entry}
@@ -13,6 +13,11 @@ const GET_GRAVITY_FORM = gql`
 export const ShortcodeGravityForm = ({ ID }) => {
   const { loading, error, data } = useQuery(GET_GRAVITY_FORM, {
     variables: { ID },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
 
   if (loading) {

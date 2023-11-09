@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
+import { NewsletterInput } from 'components/NewsletterBanner'
 import { Resource } from 'components/ResourcesSidebar/Resource'
 import { ResourcesSidebarMobile } from './ResourceSidebarMobile'
-import { NewsletterInput } from 'components/NewsletterBanner'
 
 const GET_RESOURCE = gql`
   query GetResources {
@@ -41,7 +41,13 @@ type ResourcesSidebarProps = {
 }
 
 export const ResourcesSidebar = (props: ResourcesSidebarProps) => {
-  const { loading, error, data } = useQuery(GET_RESOURCE)
+  const { loading, error, data } = useQuery(GET_RESOURCE, {
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  })
   const tags = data?.tags?.nodes
   const categories = data?.categories?.nodes
   const popularResources = data?.popularPosts?.nodes

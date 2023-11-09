@@ -33,7 +33,13 @@ export const NewsletterBanner = (props: NewsletterProps) => {
 }
 
 export const NewsletterInput = ({ customClasses = '' }) => {
-  const { loading, error, data } = useQuery(GET_NEWSLETTER_FORM)
+  const { loading, error, data } = useQuery(GET_NEWSLETTER_FORM, {
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  })
 
   if (loading) {
     return

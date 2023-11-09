@@ -59,6 +59,11 @@ export default function SingleCollege(props) {
   const slug = router?.query?.wordpressNode[1]
   const { data: programs } = useQuery(GET_PROGRAMS, {
     variables: { slug },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
   const [programAreas, setProgramAreas] = useState([])
 
@@ -157,7 +162,7 @@ export default function SingleCollege(props) {
         ) : null}
         {pageData?.collegeDetails?.logo?.mediaItemUrl ? (
           <div className="m-0 w-auto sm:m-auto">
-            <div className="md:w-[183px] w-[275px] rounded-xl border-2 border-darkGrey border-opacity-25 p-5">
+            <div className="w-[275px] rounded-xl border-2 border-darkGrey border-opacity-25 p-5 md:w-[183px]">
               <Image
                 src={pageData?.collegeDetails?.logo?.mediaItemUrl}
                 alt={pageData?.collegeDetails?.logo?.altText}

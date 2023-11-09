@@ -15,7 +15,13 @@ const GET_PROGRAM_AREAS = gql`
 `
 
 export const ProgramFinderForm = ({ heading = '' }) => {
-  const { data } = useQuery(GET_PROGRAM_AREAS)
+  const { data } = useQuery(GET_PROGRAM_AREAS, {
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  })
   const router = useRouter()
 
   const [inputValues, setInputValues] = useState({

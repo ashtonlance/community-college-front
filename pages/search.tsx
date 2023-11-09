@@ -1,11 +1,11 @@
+import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { INSTANT_SEARCH_INDEX_NAME, searchClient } from '@/components/Search'
+import { PlainHit } from '@/components/Search/Hit'
 import { gql, useQuery } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { useRouter } from 'next/router'
-import { PlainHit } from '@/components/Search/Hit'
 import { Hits, InstantSearch, Pagination, SearchBox } from 'react-instantsearch'
-import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 const GET_SEARCH = gql`
@@ -48,7 +48,13 @@ const GET_SEARCH = gql`
 `
 
 export default function Search() {
-  const { loading, error, data } = useQuery(GET_SEARCH)
+  const { loading, error, data } = useQuery(GET_SEARCH, {
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  })
   const menuItems = data?.menu?.menuItems || []
   const utilityNavigation = data?.settings?.utilityNavigation?.navigationItems
   const hierarchicalMenuItems = flatListToHierarchical(menuItems as any) || []

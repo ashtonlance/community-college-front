@@ -1,14 +1,13 @@
+import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql, useQuery } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { DefaultHero } from '@/components/Hero/DefaultHero'
-import { WYSIWYG } from '@/components/WYSIWYG'
 import Link from 'next/link'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { unslugify } from 'utils/unslugify'
-import Arrow from 'assets/icons/angled-arrow.svg'
-import bg from '/assets/imgs/angled-bg-defaultHero.png'
 import bgFlip from '/assets/imgs/angled-bg-defaultHero-flip.png'
+import bg from '/assets/imgs/angled-bg-defaultHero.png'
 
 const GET_RELATED_PROGRAMS = gql`
   query GetRelatedPrograms($slug: [String]) {
@@ -49,6 +48,11 @@ export default function SingleProgram(props) {
     data: relatedPrograms,
   } = useQuery(GET_RELATED_PROGRAMS, {
     variables: { slug },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
 
   if (props.loading) {

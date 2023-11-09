@@ -1,11 +1,11 @@
-import { Resource, ResourcePresentational } from './Resource'
-import Image from 'next/image'
-import separator from '../../assets/imgs/separator.svg'
 import { gql, useQuery } from '@apollo/client'
-import { formatDate } from '../../utils/dates'
-import { getLabelFromCategory } from 'utils/getButtonLabels'
 import { MarginSizesType } from 'components/TestimonialSlider'
+import Image from 'next/image'
 import { cn } from 'utils'
+import { getLabelFromCategory } from 'utils/getButtonLabels'
+import separator from '../../assets/imgs/separator.svg'
+import { formatDate } from '../../utils/dates'
+import { Resource, ResourcePresentational } from './Resource'
 
 type RelatedResourcesProps = {
   attributes?: {
@@ -55,6 +55,11 @@ export const RelatedResourcesByTaxonomy = (
   const resourceIDs = props.categories
   const { loading, error, data } = useQuery(GET_RESOURCES_BY_TAXONOMY, {
     variables: { resourceIDs },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
 
   if (loading) {
@@ -114,7 +119,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
         className={`mx-auto flex w-[90%] max-w-[1220px] flex-col items-center module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} `}
       >
         {heading ? (
-          <div className="mb-[60px] md:mb-[50px] flex flex-col items-center sm:mb-[32px]">
+          <div className="mb-[60px] flex flex-col items-center md:mb-[50px] sm:mb-[32px]">
             <h3 className="h5">{heading}</h3>
           </div>
         ) : null}
@@ -122,9 +127,7 @@ export const RelatedResources = (props: RelatedResourcesProps) => {
           className={cn(
             `grid gap-[20px] ${items == 1 && 'grid-cols-1'} ${
               items == 2 && 'grid-cols-2'
-            } ${
-              items > 2 && 'grid-cols-3'
-            } w-full grid-flow-row md:grid-cols-1`
+            } ${items > 2 && 'grid-cols-3'} w-full grid-flow-row md:grid-cols-1`
           )}
         >
           {postIds.map((id, i) => (

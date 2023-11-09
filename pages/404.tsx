@@ -67,6 +67,11 @@ export default function Custom404() {
 
   const { loading, error, data } = useQuery(NOT_FOUND, {
     variables: { slug },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
 
   if (loading) {
