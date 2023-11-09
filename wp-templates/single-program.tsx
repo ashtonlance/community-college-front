@@ -42,11 +42,9 @@ export default function SingleProgram(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const slug = pageData?.taggedProgramAreas?.nodes[0]?.slug || []
-  const {
-    loading,
-    error,
-    data: relatedPrograms,
-  } = useQuery(GET_RELATED_PROGRAMS, {
+  const socialLinks = props.data?.footer?.prefooter || []
+
+  const { data: relatedPrograms } = useQuery(GET_RELATED_PROGRAMS, {
     variables: { slug },
     context: {
       fetchOptions: {
@@ -66,6 +64,7 @@ export default function SingleProgram(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <DefaultHero
         smallHeading={true}
@@ -238,6 +237,13 @@ SingleProgram.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

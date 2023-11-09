@@ -1,12 +1,12 @@
+import { EventHero } from '@/components/Hero/EventHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
+import bg from 'assets/imgs/angled-bg-white.png'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { WYSIWYG } from '@/components/WYSIWYG'
-import SharePost from 'components/SharePost/SharePost'
 import { ResourceTags } from 'components/ResourceTags/ResourceTags'
-import bg from 'assets/imgs/angled-bg-white.png'
-import { EventHero } from '@/components/Hero/EventHero'
+import SharePost from 'components/SharePost/SharePost'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SingleEvent(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -19,18 +19,20 @@ export default function SingleEvent(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData.eventsTags?.nodes || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
   }
   return (
     <Layout
-      pageClassName="single-numbered-memo-page"
+      pageClassName="single-event"
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <EventHero
         heading={pageData.title}
@@ -127,6 +129,13 @@ SingleEvent.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

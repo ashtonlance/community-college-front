@@ -17,7 +17,7 @@ export default function SingleAnnualReport(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
-  // const tags = pageData.numberedMemoCategories?.nodes
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -30,6 +30,7 @@ export default function SingleAnnualReport(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <AnnualReportHero
         heading={pageData.annualReport.title}
@@ -106,6 +107,13 @@ SingleAnnualReport.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

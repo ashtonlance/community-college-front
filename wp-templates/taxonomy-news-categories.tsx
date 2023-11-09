@@ -1,15 +1,13 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
-import { useDebounce } from '@uidotdev/usehooks'
-import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { unslugify } from 'utils/unslugify'
 
 export default function NewsTaxonomyCatPage({
@@ -30,6 +28,7 @@ export default function NewsTaxonomyCatPage({
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const newsItems = useMemo(
     () => data?.newsItems?.nodes || [],
@@ -144,6 +143,7 @@ export default function NewsTaxonomyCatPage({
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         <DefaultHero heading={`Posts tagged: ${unslugify(slug)}`} />
@@ -237,6 +237,13 @@ NewsTaxonomyCatPage.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

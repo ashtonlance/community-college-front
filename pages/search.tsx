@@ -24,6 +24,13 @@ const GET_SEARCH = gql`
           ...NavigationMenuFragment
         }
       }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
+      }
     }
     settings {
       siteSettings {
@@ -62,6 +69,7 @@ export default function Search() {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialMedia = data?.footer?.prefooter || []
   const seo = {
     metaDesc: '',
     canonical: '',
@@ -87,6 +95,7 @@ export default function Search() {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialMedia}
     >
       <DefaultHero heading="Search Results" />
       <div className="flex justify-center border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">

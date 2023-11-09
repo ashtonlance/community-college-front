@@ -1,14 +1,14 @@
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
 import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { convertToDate } from 'utils/dates'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 export default function StateBoardPropSchoolsMeetingMinutesPage({
   data,
   loading,
@@ -28,6 +28,7 @@ export default function StateBoardPropSchoolsMeetingMinutesPage({
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const boardMeetings = useMemo(
     () => data?.boardMeetings?.nodes || [],
@@ -138,6 +139,7 @@ export default function StateBoardPropSchoolsMeetingMinutesPage({
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -234,6 +236,13 @@ StateBoardPropSchoolsMeetingMinutesPage.query = gql`
           label
           url
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

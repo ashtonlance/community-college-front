@@ -1,14 +1,14 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-import { useRouter } from 'next/router'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 export default function PageEvents(props) {
   const menuItems = props.data?.menu?.menuItems || []
   const pageData = props.data?.page
@@ -20,11 +20,11 @@ export default function PageEvents(props) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
   const footerMenuItems = props.data?.footer?.menuItems || []
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   const [filters, setFilters] = useState({
     audience: '',
@@ -134,6 +134,7 @@ export default function PageEvents(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -192,6 +193,13 @@ PageEvents.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

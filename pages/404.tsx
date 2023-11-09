@@ -21,6 +21,13 @@ const NOT_FOUND = gql`
           ...NavigationMenuFragment
         }
       }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
+      }
     }
     settings {
       siteSettings {
@@ -88,12 +95,15 @@ export default function Custom404() {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="flex h-screen flex-col items-center justify-center gap-[20px]">
         <h1>404</h1>

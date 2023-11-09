@@ -15,6 +15,7 @@ export type LayoutProps = {
   utilityNavigation?: any
   footerNavigation?: any
   settings?: any
+  socialLinks?: any
 }
 
 export function Layout(props: LayoutProps) {
@@ -32,6 +33,7 @@ export function Layout(props: LayoutProps) {
   const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = createRef<HTMLDivElement>()
   const MemoizedHeader = memo(Header)
+  const socialLinks = props?.socialLinks || []
 
   // get header size dynamically to move main content below
   const handleResize = useCallback(() => {
@@ -95,7 +97,11 @@ export function Layout(props: LayoutProps) {
       >
         {props.children}
       </main>
-      <Footer footerNavigation={footerNavigation} menuItems={props.menuItems} />
+      <Footer
+        socialLinks={socialLinks}
+        footerNavigation={footerNavigation}
+        menuItems={props.menuItems}
+      />
     </>
   )
 }

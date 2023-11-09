@@ -1,10 +1,10 @@
+import { CTABanner } from '@/components/CTABanner'
+import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
-import { WYSIWYG } from '@/components/WYSIWYG'
-import { CTABanner } from '@/components/CTABanner'
 
 export default function SingleApprenticeshipOpp(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -16,6 +16,7 @@ export default function SingleApprenticeshipOpp(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -28,6 +29,7 @@ export default function SingleApprenticeshipOpp(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <ApprenticeshipHero
         heading={pageData?.title}
@@ -113,6 +115,13 @@ SingleApprenticeshipOpp.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

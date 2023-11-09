@@ -1,13 +1,13 @@
+import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
 import { useRouter } from 'next/router'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function BoardMembersPage({ data, loading, error }) {
   const router = useRouter()
@@ -24,6 +24,7 @@ export default function BoardMembersPage({ data, loading, error }) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const boardMembers = useMemo(
     () => data?.boardMembers?.nodes || [],
@@ -131,6 +132,7 @@ export default function BoardMembersPage({ data, loading, error }) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -228,6 +230,13 @@ BoardMembersPage.query = gql`
           label
           url
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

@@ -1,4 +1,3 @@
-import { gql, useQuery } from '@apollo/client'
 import Facebook from 'assets/icons/icon-facebook.svg'
 import Instagram from 'assets/icons/icon-instagram.svg'
 import Linkedin from 'assets/icons/icon-linkedin.svg'
@@ -10,21 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Menu } from './Menu'
 
-const GET_FOOTER_LINKS = gql`
-  query GET_FOOTER_LINKS {
-    menu(id: "Footer", idType: NAME) {
-      prefooter {
-        facebook
-        x
-        youtube
-        linkedin
-        instagram
-      }
-    }
-  }
-`
-
-export const Footer = ({ menuItems, footerNavigation }) => {
+export const Footer = ({ footerNavigation, socialLinks }) => {
   const studentMenu = footerNavigation?.filter(
     node => node.label === 'Students'
   )
@@ -44,16 +29,6 @@ export const Footer = ({ menuItems, footerNavigation }) => {
   const utilityMenu = footerNavigation?.filter(
     node => node.label === 'Utility Menu'
   )
-
-  const { data } = useQuery(GET_FOOTER_LINKS, {
-    context: {
-      fetchOptions: {
-        method: 'GET',
-      },
-    },
-  })
-
-  const links = data?.menu?.prefooter || []
   return (
     <div className="grid-rows-auto relative grid grid-cols-12 px-[100px] py-[80px] text-white md:gap-y-[40px] md:px-[60px] md:py-[60px] sm:gap-y-0 sm:px-[40px]">
       <div className="col-start-1 col-end-3 md:col-span-12 sm:mb-[25px]">
@@ -78,31 +53,31 @@ export const Footer = ({ menuItems, footerNavigation }) => {
               <a href="tel:(919) 807-7100">(919) 807-7100</a>
             </p>
             <div className="flex justify-between md:justify-center md:gap-x-5">
-              <Link href={links?.facebook ?? '/'} target="_blank">
+              <Link href={socialLinks?.facebook ?? '/'} target="_blank">
                 <Facebook
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href={links?.x ?? '/'} target="_blank">
+              <Link href={socialLinks?.x ?? '/'} target="_blank">
                 <Twitter
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href={links?.youtube ?? '/'} target="_blank">
+              <Link href={socialLinks?.youtube ?? '/'} target="_blank">
                 <Youtube
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href={links?.linkedin ?? '/'} target="_blank">
+              <Link href={socialLinks?.linkedin ?? '/'} target="_blank">
                 <Linkedin
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"
                 />
               </Link>
-              <Link href={links?.instagram ?? '/'} target="_blank">
+              <Link href={socialLinks?.instagram ?? '/'} target="_blank">
                 <Instagram
                   alt=""
                   className="h-5 w-5 text-gold hover:text-lightBlue"

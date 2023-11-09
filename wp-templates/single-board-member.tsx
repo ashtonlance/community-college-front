@@ -1,11 +1,10 @@
+import { BoardMemberHero } from '@/components/Hero/BoardMemberHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
+import bg from 'assets/imgs/angled-bg-white.png'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { WYSIWYG } from '@/components/WYSIWYG'
-import SharePost from 'components/SharePost/SharePost'
-import bg from 'assets/imgs/angled-bg-white.png'
-import { BoardMemberHero } from '@/components/Hero/BoardMemberHero'
 
 export default function SingleBoardMember(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -19,17 +18,20 @@ export default function SingleBoardMember(props) {
   const settings = props.data?.settings?.siteSettings || []
   const boardMemberType =
     props.data?.boardMember?.boardMembersCategories?.nodes[0]?.name
+  const socialLinks = props.data?.footer?.prefooter || []
+
   if (props.loading) {
     return <>Loading...</>
   }
   return (
     <Layout
-      pageClassName="single-numbered-memo-page"
+      pageClassName="single-board-member"
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <BoardMemberHero
         heading={pageData?.title}
@@ -140,6 +142,13 @@ SingleBoardMember.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

@@ -1,9 +1,9 @@
+import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { ApprenticeshipHero } from '@/components/Hero/ApprenticeshipHero'
-import { WYSIWYG } from '@/components/WYSIWYG'
 
 export default function SingleDataDashboard(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -16,6 +16,8 @@ export default function SingleDataDashboard(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const embedParams = pageData?.dataDashboardDetails
+  const socialLinks = props.data?.footer?.prefooter || []
+
   const {
     elementHeight = '',
     elementWidth = '',
@@ -32,12 +34,13 @@ export default function SingleDataDashboard(props) {
 
   return (
     <Layout
-      pageClassName="college-single-page"
+      pageClassName="single-data-dashboard"
       menuItems={hierarchicalMenuItems}
       seo={pageData?.seo}
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <ApprenticeshipHero
         heading={pageData?.title}
@@ -102,6 +105,13 @@ SingleDataDashboard.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

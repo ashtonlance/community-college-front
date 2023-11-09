@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
-import { ResourceTopicHero } from 'components/ResourcesHero/ResourcesTopicHero'
-import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { ResourceTopicHero } from 'components/ResourcesHero/ResourcesTopicHero'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { useRouter } from 'next/router'
 
 type TagProps = {
@@ -20,6 +19,9 @@ type TagProps = {
     }
     menu: {
       menuItems: {}
+    }
+    footer: {
+      prefooter: {}
     }
   }
   loading: boolean
@@ -39,9 +41,10 @@ export default function Tag(props: TagProps) {
     const tagName = props.data?.nodeByUri?.name
     const tagSlug = props.data?.nodeByUri?.slug
     const tagContent = props.data?.nodeByUri?.description
+    const socialLinks = props.data?.footer?.prefooter || []
 
     return (
-      <Layout menuItems={menuItems} seo={seo}>
+      <Layout menuItems={menuItems} seo={seo} socialLinks={socialLinks}>
         <div className="tag-page flex justify-end border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
           <div className="wrapper-default-inner-pages w-[70%] md:w-full">
             <ResourceTopicHero title={tagName} content={tagContent} />
@@ -99,6 +102,13 @@ Tag.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
   }

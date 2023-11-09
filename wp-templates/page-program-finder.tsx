@@ -35,7 +35,7 @@ export const ProgramFinder = props => {
   const router = useRouter()
   const { isReady } = router
   const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+  const socialLinks = data?.footer?.prefooter || []
 
   const menuItems = useMemo(
     () => flatListToHierarchical(data?.menu?.menuItems) || [],
@@ -249,6 +249,7 @@ export const ProgramFinder = props => {
       utilityNavigation={utilityNavigation}
       footerNavigation={footerMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <ProgramFinderHero
         heading={programFinderIndex?.programFinderDetails?.title}
@@ -472,6 +473,13 @@ ProgramFinder.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

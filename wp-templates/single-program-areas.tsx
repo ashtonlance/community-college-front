@@ -1,10 +1,10 @@
+import { DefaultHero } from '@/components/Hero/DefaultHero'
+import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { DefaultHero } from '@/components/Hero/DefaultHero'
-import { WYSIWYG } from '@/components/WYSIWYG'
 import Link from 'next/link'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SingleProgramArea(props) {
   const menuItems = props.data?.menu?.menuItems || []
@@ -17,6 +17,7 @@ export default function SingleProgramArea(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const relatedPrograms = props.data?.relatedPrograms?.nodes || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -29,6 +30,7 @@ export default function SingleProgramArea(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <DefaultHero
         smallHeading={true}
@@ -146,6 +148,13 @@ SingleProgramArea.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

@@ -24,6 +24,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const numberedMemos = useMemo(
     () => data?.numberedMemos?.nodes || [],
@@ -156,6 +157,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -245,6 +247,13 @@ NumberedMemosPage.query = gql`
           label
           url
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

@@ -30,6 +30,7 @@ type CollegesIndexProps = {
     }
     footer: {
       menuItems: {}
+      prefooter: {}
     }
     settings: {
       siteSettings: {
@@ -71,6 +72,8 @@ export default function CollegesArchive(props: CollegesIndexProps) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
+
   const colleges = useMemo(
     () => data?.colleges?.nodes || [],
     [data?.colleges?.nodes]
@@ -180,6 +183,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         <DefaultHero
@@ -289,6 +293,13 @@ CollegesArchive.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

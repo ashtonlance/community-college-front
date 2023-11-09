@@ -1,20 +1,19 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
-import { useDebounce } from '@uidotdev/usehooks'
-import { useRouter } from 'next/router'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
+import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function NewsPage({ data, loading, error }) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
-
   const menuItems = data?.menu?.menuItems || []
   const pageData = data?.page
   const preFooterContent = data?.menus?.nodes[0]
@@ -25,6 +24,7 @@ export default function NewsPage({ data, loading, error }) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const newsItems = useMemo(
     () => data?.newsItems?.nodes || [],
@@ -139,6 +139,7 @@ export default function NewsPage({ data, loading, error }) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -224,6 +225,13 @@ NewsPage.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

@@ -25,6 +25,7 @@ export default function PageApprenticeshipOpportunities(props) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+  const socialLinks = props.data?.footer?.prefooter || []
 
   const [filters, setFilters] = useState({
     programArea: router.query.programArea || '',
@@ -164,6 +165,7 @@ export default function PageApprenticeshipOpportunities(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -222,6 +224,13 @@ PageApprenticeshipOpportunities.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

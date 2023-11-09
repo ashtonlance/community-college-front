@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
+import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SystemOfficePage(props) {
@@ -17,6 +17,7 @@ export default function SystemOfficePage(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -30,6 +31,7 @@ export default function SystemOfficePage(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <>
         {blocks && (
@@ -76,6 +78,13 @@ SystemOfficePage.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
 

@@ -19,6 +19,7 @@ export default function SingleNumberedMemo(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData.numberedMemoCategories?.nodes
+  const socialLinks = props.data?.footer?.prefooter || []
 
   if (props.loading) {
     return <>Loading...</>
@@ -31,6 +32,7 @@ export default function SingleNumberedMemo(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <NumberedMemoHero
         heading={pageData.numberedMemo.subject}
@@ -117,6 +119,13 @@ SingleNumberedMemo.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

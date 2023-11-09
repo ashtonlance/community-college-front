@@ -28,6 +28,7 @@ type ProgramsIndexProps = {
     }
     footer: {
       menuItems: {}
+      prefooter: {}
     }
     settings: {
       siteSettings: {
@@ -82,6 +83,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
+  const socialLinks = data?.footer?.prefooter || []
 
   const programs = useMemo(
     () => data?.programs?.nodes || [],
@@ -181,6 +183,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <DefaultHero
         heading={programsIndex?.heroTitle}
@@ -300,6 +303,13 @@ ProgramsArchive.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

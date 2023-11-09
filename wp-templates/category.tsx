@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
-import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
-import { PreFooter } from 'components/PreFooter'
 import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { ResourcesTypeHero } from 'components/ResourcesHero/ResourcesTypeHero'
 import { ResourcesSidebar } from 'components/ResourcesSidebar/ResourcesSidebar'
-import { PaginatedPosts } from 'components/PaginatedPosts/PaginatedPosts'
 import { useRouter } from 'next/router'
 
 type CategoryProps = {
@@ -18,6 +17,9 @@ type CategoryProps = {
     }
     menu: {
       menuItems: {}
+    }
+    footer: {
+      prefooter: {}
     }
   }
   loading: boolean
@@ -33,11 +35,11 @@ export default function Category(props: CategoryProps) {
     const seo = props.data?.nodeByUri?.seo
     const preFooterContent = props.data?.menus.nodes[0]
     const { page } = router.query
-    const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
     const categoryName = props.data?.nodeByUri?.name
+    const socialLinks = props.data?.footer?.prefooter || []
 
     return (
-      <Layout menuItems={menuItems} seo={seo}>
+      <Layout menuItems={menuItems} seo={seo} socialLinks={socialLinks}>
         <div className="category-page flex justify-end border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
           <div className="wrapper-default-inner-pages w-[70%] md:w-full">
             <ResourcesTypeHero
@@ -101,6 +103,13 @@ Category.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
   }

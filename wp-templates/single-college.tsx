@@ -54,6 +54,7 @@ export default function SingleCollege(props) {
   const hierarchicalFooterMenuItems =
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
+  const socialLinks = props.data?.footer?.prefooter || []
 
   const router = useRouter()
   const slug = router?.query?.wordpressNode[1]
@@ -85,6 +86,7 @@ export default function SingleCollege(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <DefaultHero
         smallHeading={true}
@@ -314,6 +316,13 @@ SingleCollege.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {

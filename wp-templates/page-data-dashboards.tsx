@@ -25,6 +25,7 @@ export default function PageDataDashboards(props) {
   const router = useRouter()
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+  const socialLinks = props.data?.footer?.prefooter || []
 
   const [filters, setFilters] = useState({
     category: router.query.category || '',
@@ -158,6 +159,7 @@ export default function PageDataDashboards(props) {
       utilityNavigation={utilityNavigation}
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
+      socialLinks={socialLinks}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -216,6 +218,13 @@ PageDataDashboards.query = gql`
         nodes {
           ...NavigationMenuFragment
         }
+      }
+      prefooter {
+        facebook
+        x
+        youtube
+        linkedin
+        instagram
       }
     }
     settings {
