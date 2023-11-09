@@ -11,7 +11,5 @@ export default setConfig({
   templates: templates,
   experimentalPlugins: [new UploadPlugin(), new ApolloClientOptionsPlugin()],
   possibleTypes,
-  useGETForQueries: true,
   usePersistedQueries: true,
-  // experimentalToolbar: true,
 })
