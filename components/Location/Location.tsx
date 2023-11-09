@@ -16,7 +16,15 @@ export const Location = ({ attributes }) => {
       <div className="flex w-[50%] flex-col md:mx-auto sm:w-full">
         <div className="h5 mb-[27px] flex items-center text-darkGrey">
           <LocationIcon className="mr-[10px] h-[22px] w-[22px] text-gold" />
-          {title}
+          {directionsLink ? (
+            <a
+              target="_blank"
+              href={directionsLink}
+              className="h5 text-darkGrey hover:text-navy"
+            >
+              {title}
+            </a>
+          ) : <>{title}</>}
         </div>
         <address
           className="address-h4 mb-10 not-italic"
@@ -24,21 +32,13 @@ export const Location = ({ attributes }) => {
         ></address>
         {mailingAddress ? (
           <div className="mb-[15px]">
-            <div className="h5 mb-[15px]">Mailing Address</div>
+            <div className="h5 mb-[15px] text-darkGrey">Mailing Address</div>
             <address
               className="address-body not-italic"
               dangerouslySetInnerHTML={{ __html: mailingAddress }}
             ></address>
           </div>
         ) : null}
-        {directionsLink && (
-          <Link
-            href={directionsLink}
-            className="secondary-btn w-fit bg-navy text-white hover:text-navy"
-          >
-            Get Directions
-          </Link>
-        )}
       </div>
       <div
         className="map aspect-[2.49/1] w-[50%] overflow-hidden rounded-xl lg:max-h-[321px] sm:max-h-[300px] sm:w-full"
