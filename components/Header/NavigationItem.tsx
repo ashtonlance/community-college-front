@@ -53,7 +53,7 @@ export const NavigationItem = ({
             onClick={e => handleActiveItem(e, item.id)}
             href={item?.url || ''}
             className={cn(`
-            main-nav group flex cursor-pointer flex-col items-center justify-center gap-2 pr-[30px]
+            main-nav group relative flex cursor-pointer flex-col items-center justify-center gap-2 pr-[30px]
             ${dropdownOpened ? 'active' : ''} ${
               transparentMode && 'text-white hover:text-black'
             }`)}
@@ -63,7 +63,7 @@ export const NavigationItem = ({
             <Stroke
               alt=""
               className={cn(
-                `pointer-events-none ml-4 h-[10px] min-h-[10px] w-[135%] text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
+                `pointer-events-none absolute -bottom-4 ml-4 h-[10px] min-h-[10px] w-[135%] max-w-full text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
                   isCurrentPage(item.url, router.asPath)
                     ? 'text-lightBlue opacity-100'
                     : ''
@@ -79,7 +79,7 @@ export const NavigationItem = ({
             viewBox="0 0 10 10"
             fill="none"
             className={cn(
-              `absolute right-[16px] top-[40%] transform-gpu text-navy transition duration-150 group-hover:top-[42%] ${
+              `absolute right-[16px] top-[55%] transform-gpu text-navy transition duration-150 group-hover:top-[58%] ${
                 dropdownOpened ? 'rotate-180' : ''
               }`
             )}
@@ -107,7 +107,7 @@ export const NavigationItem = ({
         suppressHydrationWarning
         onMouseOver={() => handleActiveItem(item.id)}
         className={cn(`
-      no-child main-nav group flex cursor-pointer justify-center gap-2
+      no-child main-nav group relative flex cursor-pointer justify-center gap-2
       
     ${transparentMode ? 'text-white hover:text-black' : ''}
     `)}
@@ -118,7 +118,7 @@ export const NavigationItem = ({
       <Stroke
         alt=""
         className={cn(
-          `h-[10px] min-h-[10px] w-full text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
+          `absolute -bottom-4 h-[10px] min-h-[10px] w-full text-gold opacity-0 transition-all duration-150 ease-in-out group-hover:opacity-100 ${
             isCurrentPage(item.url, router.asPath)
               ? 'text-lightBlue opacity-100'
               : ''
