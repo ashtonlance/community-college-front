@@ -6,6 +6,7 @@ import {
 } from '@react-google-maps/api'
 import { useState, memo, useCallback, useMemo } from 'react'
 import { FadeIn } from '@/components/FadeIn'
+import { UsersConnectionSearchColumnEnum } from 'generated/graphql'
 
 const MapInternal = GoogleMap as any
 
@@ -84,14 +85,14 @@ export const Map = ({ coordinates = [], zoom = 7, isEmbed = false }) => {
               >
                 {activeMarker === index ? (
                   <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                    <div className="flex max-w-[250px] flex-col gap-2">
-                      <a href={coordinate.uri} className="h5">{coordinate.name}</a>
-                      <div className="body-regular max-w-[75%] text-navy">
-                        {coordinate.streetAddress}
+                    <div className="flex max-w-[250px] flex-col gap-2 p-3">
+                      <a href={coordinate?.uri} className="h5 md:text-[16px] text-[18px] font-bold tracking-[-0.16px] capitalize">{coordinate?.name}</a>
+                      <div className="body-regular max-w-[75%] text-[14px] leading-[140%] text-darkGrey">
+                        {coordinate?.streetAddress.replace(", USA", "")}
                       </div>
                       <a
                         href={`tel:${coordinate?.phoneNumber}`}
-                        className="body-regular text-darkGrey hover:text-navy"
+                        className="body-regular text-[14px] leading-[140%] text-darkGrey hover:text-navy"
                       >
                         {coordinate?.phoneNumber}
                       </a>
