@@ -59,6 +59,7 @@ export const Button = ({
     const buttonLink = attributes.data.button_link['url']
     const alignment = attributes.data.button_alignment
     const buttonColor = attributes.data.button_background || 'navy'
+    const buttonType = attributes.data.button_type
     const target = attributes.data.button_link['target']
     return (
       <div>
@@ -68,7 +69,7 @@ export const Button = ({
         >
           <Link
             href={buttonLink}
-            className={`${buttonColor} ${classes}`}
+            className={`${buttonType}-btn ${buttonColor}`}
             suppressHydrationWarning
             target={target}
           >
