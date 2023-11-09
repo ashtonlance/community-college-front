@@ -45,7 +45,14 @@ export const Footer = ({ menuItems, footerNavigation }) => {
     node => node.label === 'Utility Menu'
   )
 
-  const { data } = useQuery(GET_FOOTER_LINKS)
+  const { data } = useQuery(GET_FOOTER_LINKS, {
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  })
+
   const links = data?.menu?.prefooter || []
   return (
     <div className="grid-rows-auto relative grid grid-cols-12 px-[100px] py-[80px] text-white md:gap-y-[40px] md:px-[60px] md:py-[60px] sm:gap-y-0 sm:px-[40px]">

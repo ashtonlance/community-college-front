@@ -51,6 +51,11 @@ export const BackgroundVideoURL = ({ url }: { url: string }) => {
 export const BackgroundVideoFile = ({ databaseId }) => {
   const { loading, error, data } = useQuery(GET_BACKGROUND_VIDEO_FILE, {
     variables: { databaseId },
+    context: {
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
   })
 
   if (loading) {
