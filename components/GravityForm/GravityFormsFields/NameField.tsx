@@ -59,7 +59,7 @@ export default function NameField({ field, fieldErrors }) {
   return (
     <fieldset
       id={htmlId}
-      className={`gfield flex w-full justify-between gap-4 md:flex-col gfield-${type} ${cssClass}`.trim()}
+      className={`gfield flex w-full justify-between md:flex-col gfield-${type} ${cssClass}`.trim()}
     >
       {prefixInput ? (
         <>
@@ -89,7 +89,7 @@ export default function NameField({ field, fieldErrors }) {
         const isHidden = input?.isHidden || false
         if (isHidden) return null
         return (
-          <div className="gfield gfield-name-input basis-[48%]" key={key}>
+          <div className="gfield gfield-name-input sm:basis-full md:basis-[calc(50%-7.5px)] basis-[calc(50%-10px)]" key={key}>
             <label htmlFor={`input_${formId}_${id}_${key}`}>
               {inputLabel}{' '}
               {isRequired ? <span className="pl-1 text-rust">*</span> : null}

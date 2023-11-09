@@ -40,7 +40,7 @@ export default function SelectField({ field, fieldErrors }) {
         {isRequired ? <span className="text-rust">*</span> : null}
       </label>
       <select
-        className="p-regular w-full rounded  px-[20px] py-[14px] text-navy accent-navy focus-within:outline-lightBlue focus:outline-lightBlue focus:ring-lightBlue active:outline-lightBlue"
+        className="p-regular w-full rounded-[8px]  px-[20px] py-[14px] text-navy accent-navy focus-within:outline-lightBlue focus:outline-lightBlue focus:ring-lightBlue active:outline-lightBlue"
         name={String(id)}
         id={htmlId}
         required={Boolean(isRequired)}

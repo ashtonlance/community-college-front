@@ -48,7 +48,7 @@ export default function EmailField({ field, fieldErrors }) {
   const value = fieldValue?.emailValues?.value || DEFAULT_VALUE
 
   return (
-    <div className={`gfield gfield-${type} ${cssClass} basis-[48%]`.trim()}>
+    <div className={`gfield gfield-${type} ${cssClass} sm:basis-full md:basis-[calc(50%-7.5px)] basis-[calc(50%-10px)]`.trim()}>
       <label htmlFor={htmlId} className="gfield_label">
         {label}
         {isRequired ? <span className="text-rust pl-1">*</span> : null}

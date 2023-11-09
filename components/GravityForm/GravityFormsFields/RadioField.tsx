@@ -44,7 +44,7 @@ export default function RadioField({ field, fieldErrors }) {
         const text = input?.text || ''
         const inputValue = input?.value || ''
         return (
-          <div className="mb-2 flex items-center" key={inputValue}>
+          <div className="sm:mb-3 mb-[10px] flex items-center" key={inputValue}>
             <input
               className="h-5 w-5 !rounded-full !p-0 accent-navy focus-within:outline-lightBlue"
               type="radio"
@@ -54,7 +54,7 @@ export default function RadioField({ field, fieldErrors }) {
               onChange={handleChange}
             />
             <label
-              className="p-label body-regular ml-3 text-navy"
+              className="p-label body-regular ml-3 text-navy mb-0"
               htmlFor={`choice_${formId}_${id}_${value}`}
             >
               {text}

@@ -83,7 +83,7 @@
     @apply font-sans text-[14px] font-normal leading-[140%] text-lightBlue hover:text-white
   }
   .primary-btn {
-    @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-bold leading-[100%] tracking-[0.36px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
+    @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-bold leading-[100%] tracking-[0.6px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
   }
   .primary-btn.navy {
     @apply bg-navy text-white hover:bg-gold hover:text-navy;
@@ -189,22 +189,32 @@
   .gfield {
     @apply  text-[14px] rounded-lg mb-[20px];
   }
+
+  fieldset.gfield {
+    @apply mb-0;
+  }
+
+  fieldset.gfield.gfield-RADIO,
+  fieldset.gfield.gfield-CHECKBOX {
+    @apply sm:mb-[8px] mb-[10px] sm:basis-full md:basis-[calc(50%-7.5px)] basis-[calc(50%-10px)];
+  }
+
   .gfield input,
   .gfield textarea,
   input
    {
-    @apply py-[14px] px-[20px] border-[#51525533] border-2 text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px];
+    @apply sm:py-[12px] sm:px-[14px] py-[14px] px-[20px] border-[#51525533] border-2 text-navy placeholder:text-darkBeige active:placeholder:text-navy active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[8px];
   }
 
   .gfield select,
   select {
-    @apply border-[#51525533] active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[5px] px-[20px] py-[14px];
+    @apply border-[#51525533] border-2 active:outline-transparent focus-visible:outline-transparent focus:ring-transparent focus-within:ring-transparent focus:border-lightBlue rounded-[8px] sm:px-[14px] px-[20px] sm:py-[12px] py-[14px];
   }
 
   .gfield legend,
   .gfield label:not(.p-label),
   label {
-    @apply body-large font-bold text-darkGrey mb-[10px];
+    @apply block body-large font-bold text-darkGrey sm:mb-[8px] mb-[10px];
   }
 
   .newsletter-banner .gfield-EMAIL,
