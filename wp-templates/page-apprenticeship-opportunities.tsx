@@ -1,14 +1,14 @@
-import { gql } from '@apollo/client'
-import { Header } from 'components/Header'
-import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { PreFooter } from 'components/PreFooter'
-import { Layout } from 'components/Layout'
-import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { PostFilter } from '@/components/PostFilter'
-import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
-import { useRouter } from 'next/router'
+import { PostFilter } from '@/components/PostFilter'
+import { gql } from '@apollo/client'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { useDebounce } from '@uidotdev/usehooks'
+import { Header } from 'components/Header'
+import { Layout } from 'components/Layout'
+import { PreFooter } from 'components/PreFooter'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function PageApprenticeshipOpportunities(props) {
   const menuItems = props.data?.menu?.menuItems || []
