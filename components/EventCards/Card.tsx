@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { BackgroundColorType } from 'components/TestimonialSlider'
 import Arrow from 'assets/icons/arrow-forward-sharp.svg'
-import { formatDateLong } from 'utils/dates'
+import { BackgroundColorType } from 'components/TestimonialSlider'
+import Image from 'next/image'
+import Link from 'next/link'
+import { formatDate } from 'utils/dates'
 
 type EventCardType = {
   date?: string
@@ -39,7 +39,7 @@ export const Card = ({
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
         <div className="flex items-center justify-center gap-[10px] text-darkGrey">
           <p className="body-regular font-bold text-darkGrey">
-            {formatDateLong(date)}
+            {formatDate(date)}
           </p>
         </div>
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>

@@ -24,7 +24,7 @@ export const EventCards = props => {
           return (
             <Card
               key={card?.post_title + i}
-              date={extractDate(card?.post_content) || card?.post_date}
+              date={extractDate(card?.post_content) ?? ''}
               title={card?.post_title}
               btnLink={`/events${card?.uri}`}
               btnText={'Read more'}

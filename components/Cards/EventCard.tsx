@@ -1,8 +1,8 @@
+import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import { formatDateLong } from 'utils/dates'
 import { cn } from 'utils/index'
-import Arrow from 'assets/icons/arrow-forward-sharp.svg'
-import { formatDate } from 'utils/dates'
 type EventCardProps = {
   card: any
 }
@@ -35,7 +35,7 @@ export const EventCard: React.FC<EventCardProps> = ({ card }) => {
               card.eventDetails?.date && <div> • </div>}
             {card.eventDetails?.date && (
               <div className="body-regular font-bold text-darkGrey">
-                {formatDate(card.eventDetails?.date)}
+                {formatDateLong(card.eventDetails?.date)}
               </div>
             )}
           </div>
@@ -45,12 +45,6 @@ export const EventCard: React.FC<EventCardProps> = ({ card }) => {
           >
             {card?.title}
           </Link>
-          {/* <div
-            className="body-regular mb-[10px] text-darkGrey"
-            dangerouslySetInnerHTML={{
-              __html: card?.boardMember?.committeeAssignments,
-            }}
-          /> */}
           <Link
             className="group mx-auto flex items-center gap-x-2 font-condensed text-lg font-bold tracking-[-0.18px] text-darkGrey hover:text-navy"
             href={card?.uri || '/'}
