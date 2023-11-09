@@ -1,25 +1,25 @@
-import { Pagination } from '@/components/Pagination'
-import { useRouter } from 'next/router'
-import { useEffect, useState, useMemo, useRef } from 'react'
 import {
-  CollegesCard,
-  NumberedMemos,
-  NumberedMemosHeading,
-  ProgramCard,
   AnnualReports,
   AnnualReportsHeading,
-  StaffCards,
-  StaffCardsHeading,
-  NewsCard,
-  BoardMemberCard,
-  EventCard,
-  SchoolCard,
-  OpportunitiesCard,
-  OfficerCard,
   BoardMeetingCard,
   BoardMeetingHeading,
+  BoardMemberCard,
+  CollegesCard,
   DataDashboardCard,
+  EventCard,
+  NewsCard,
+  NumberedMemos,
+  NumberedMemosHeading,
+  OfficerCard,
+  OpportunitiesCard,
+  ProgramCard,
+  SchoolCard,
+  StaffCards,
+  StaffCardsHeading,
 } from '@/components/Cards'
+import { Pagination } from '@/components/Pagination'
+import { useRouter } from 'next/router'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 type PostType =
   | 'numberedMemo'
@@ -50,7 +50,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const prevPostsLength = useRef(posts?.length)
   const PAGE_SIZE = postType === 'boardMembers' ? 12 : 9
-
+  console.log({ posts })
   useEffect(() => {
     setCurrentPage(props.currentPage)
   }, [props.currentPage])
@@ -82,7 +82,9 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const items = useMemo(() => {
     const offset = (currentPage - 1) * PAGE_SIZE
     return (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
-  }, [posts, currentPage])
+  }, [posts, currentPage, PAGE_SIZE])
+
+  console.log({ items })
 
   const resetFilters = () => {
     const { wordpressNode, ...rest } = router.query
@@ -123,7 +125,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {props.postType === 'annualReports' && <AnnualReportsHeading />}
       {props.postType === 'boardMeeting' && <BoardMeetingHeading />}
 
-      {items.length === 0 ? (
+      {items.length === 0 && postType !== 'programFinder' ? (
         <div className="col-span-12 flex w-full flex-col items-center justify-center gap-4 pb-12 pt-4 text-center">
           <p className="h4">No results found.</p>
           <button className="primary-btn gold" onClick={resetFilters}>

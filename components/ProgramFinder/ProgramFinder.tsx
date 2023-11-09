@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react'
-import { useQuery, gql } from '@apollo/client'
-import { useRouter } from 'next/router'
 import { Button } from '@/components/Button'
+import { gql, useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+import { useCallback, useState } from 'react'
 import bg from '/public/angles/angled-bg_finder_grey.jpg'
 
 const GET_PROGRAM_AREAS = gql`
@@ -14,7 +14,7 @@ const GET_PROGRAM_AREAS = gql`
   }
 `
 
-export const ProgramFinderForm = () => {
+export const ProgramFinderForm = ({ heading = '' }) => {
   const { data } = useQuery(GET_PROGRAM_AREAS)
   const router = useRouter()
 
@@ -43,9 +43,9 @@ export const ProgramFinderForm = () => {
       }}
     >
       <div className="mb-10 flex-1 basis-full text-center">
-        <span className="h2 mb-0">Discover your new career</span>
+        <span className="h2 mb-0">{heading}</span>
       </div>
-      <div className="flex sm:flex-col sm:gap-y-5 flex-1 basis-full items-center gap-x-[20px]">
+      <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-col sm:gap-y-5">
         <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
           I&apos;m Interested In
         </label>
@@ -74,7 +74,7 @@ export const ProgramFinderForm = () => {
           })}
         </select>
       </div>
-      <div className="flex flex-1 sm:flex-col sm:gap-y-5 sm:basis-full basis-[48%] items-center gap-x-[20px]">
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-5">
         <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
           Within
         </label>
@@ -94,13 +94,13 @@ export const ProgramFinderForm = () => {
           <option value={100}>100</option>
         </select>
       </div>
-      <div className="flex flex-1 sm:flex-col sm:gap-y-5 sm:basis-full basis-[48%] items-center gap-x-[20px]">
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-5">
         <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
           Of
         </label>
         <input
           id="zipCode"
-          className="text-input sm:w-full w-[150px]"
+          className="text-input w-[150px] sm:w-full"
           type="text"
           pattern="[0-9]*"
           placeholder="Zip Code"

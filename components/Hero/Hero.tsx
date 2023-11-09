@@ -1,7 +1,7 @@
+import dynamic from 'next/dynamic'
 import { DefaultHero } from './DefaultHero'
 import { LandingHero } from './LandingHero'
 import { ScrollIndicator } from './ScrollIndicator'
-import dynamic from 'next/dynamic'
 
 const ProgramFinder = dynamic(() =>
   import('@/components/ProgramFinder').then(mod => mod.ProgramFinderForm)
@@ -23,6 +23,7 @@ type HeroAttributesProps = {
       background_video_file_or_url?: string
       background_video_uploaded?: number
       show_program_finder?: string
+      program_finder_heading?: string
     }
   }
 }
@@ -40,13 +41,14 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
   const description = attributes.data.description
   const position = attributes.data.background_image_position
   const showProgramFinder = attributes?.data?.show_program_finder || 'false'
-
+  const programFinderHeading =
+    attributes?.data?.program_finder_heading || 'Discover your new career'
   if (videoType == 'file') {
     bgVideo = attributes?.data?.background_video_uploaded
   } else if (videoType == 'url') {
     bgVideo = attributes?.data?.background_video_url
   }
-
+  console.log({ attributes })
   switch (heroType) {
     case 'landing':
       const emptyBg = !bgImg && (!bgColor || bgColor == 'grey') && !bgVideo
@@ -71,7 +73,9 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
             <ScrollIndicator emptyBg={emptyBg} />
           </div>
 
-          {showProgramFinder === 'true' && <ProgramFinder />}
+          {showProgramFinder === 'true' && (
+            <ProgramFinder heading={programFinderHeading} />
+          )}
         </>
       )
     case 'default':

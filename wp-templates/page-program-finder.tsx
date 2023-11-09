@@ -1,6 +1,6 @@
 import { Button } from '@/components/Button'
 import { CTABanner } from '@/components/CTABanner'
-import { ProgramCard } from '@/components/Cards'
+import { ProgramCard } from '@/components/Cards/ProgramCard'
 import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
@@ -33,8 +33,10 @@ const getCoordinates = async (zipCode: string) => {
 export const ProgramFinder = props => {
   const { data, loading } = props
   const router = useRouter()
-  const { isReady, query } = useRouter()
-  const params = query?.params || []
+  const { isReady } = router
+  const { page } = router.query
+  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+
   const menuItems = useMemo(
     () => flatListToHierarchical(data?.menu?.menuItems) || [],
     [data?.menu?.menuItems]
@@ -87,7 +89,7 @@ export const ProgramFinder = props => {
   const [zipCodeCoordinates, setZipCodeCoordinates] = useState(null)
   const [filteredPrograms, setFilteredPrograms] = useState([])
   const [shouldFilter, setShouldFilter] = useState(false)
-
+  const [isFromWidget, setIsFromWidget] = useState(false)
   const inputValuesRef = useRef(inputValues)
 
   useEffect(() => {
@@ -218,7 +220,7 @@ export const ProgramFinder = props => {
             setShouldFilter(true)
           } else {
             // If other query parameters are empty, set all programs as filteredPrograms
-            setFilteredPrograms(programs)
+            setIsFromWidget(true)
           }
         }
       }
@@ -343,16 +345,26 @@ export const ProgramFinder = props => {
             {filteredPrograms.length === 1 ? 'Result' : 'Results'}
           </div>
         </div>
-      ) : (
-        shouldFilter && (
-          <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
-            <div className="flex flex-col gap-6 sm:gap-5">
-              <div className="h2 mb-0">No results found.</div>
-              <p>Please adjust your selected filter and try again.</p>
-            </div>
+      ) : shouldFilter ? (
+        <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
+          <div className="flex flex-col gap-6 sm:gap-5">
+            <div className="h2 mb-0">No results found.</div>
+            <p>Please adjust your selected filter and try again.</p>
           </div>
-        )
-      )}
+        </div>
+      ) : isFromWidget ? (
+        <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
+          <div className="flex flex-col gap-6 sm:gap-5">
+            <div className="h2 mb-0">No filters selected.</div>
+            <p>Please use the filters above.</p>
+            <Button
+              content="See All Programs"
+              linkto={'/students/what-we-offer/programs/'}
+              classes="primary-btn gold mx-auto"
+            />
+          </div>
+        </div>
+      ) : null}
       <div className=" bg-grey">
         <div className="mx-auto grid max-w-[1440px] grid-cols-3 gap-5 px-[100px] pb-20 pt-0 md:grid-cols-2 md:px-[60x] sm:grid-cols-1 sm:px-[40px]">
           {filteredPrograms.map((item, index) => (
