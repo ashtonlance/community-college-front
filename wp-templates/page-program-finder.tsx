@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button'
 import { CTABanner } from '@/components/CTABanner'
+import { ProgramCard } from '@/components/Cards'
 import { ProgramFinderHero } from '@/components/Hero/ProgramFinderHero'
-import { PaginatedPosts } from '@/components/PaginatedPosts'
 import { gql } from '@apollo/client'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
@@ -33,7 +33,8 @@ const getCoordinates = async (zipCode: string) => {
 export const ProgramFinder = props => {
   const { data, loading } = props
   const router = useRouter()
-  const { isReady } = router
+  const { isReady, query } = useRouter()
+  const params = query?.params || []
   const menuItems = useMemo(
     () => flatListToHierarchical(data?.menu?.menuItems) || [],
     [data?.menu?.menuItems]
@@ -63,9 +64,6 @@ export const ProgramFinder = props => {
     () => data?.colleges?.nodes || [],
     [data?.colleges?.nodes]
   )
-
-  const { page } = router.query
-  const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
 
   const combined = useMemo(() => {
     return programs.map(program => {
@@ -357,14 +355,9 @@ export const ProgramFinder = props => {
       )}
       <div className=" bg-grey">
         <div className="mx-auto grid max-w-[1440px] grid-cols-3 gap-5 px-[100px] pb-20 pt-0 md:grid-cols-2 md:px-[60x] sm:grid-cols-1 sm:px-[40px]">
-          <PaginatedPosts
-            currentPage={currentPage}
-            postType="programFinder"
-            posts={filteredPrograms}
-          />
-          {/* {filteredPrograms.map((item, index) => (
+          {filteredPrograms.map((item, index) => (
             <ProgramCard key={index} card={item} index={index} />
-          ))} */}
+          ))}
         </div>
       </div>
       <CTABanner attributes={ctaAttributes} />
