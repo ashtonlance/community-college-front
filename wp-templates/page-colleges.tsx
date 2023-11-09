@@ -1,16 +1,16 @@
 import { CTABanner } from '@/components/CTABanner'
+import { CollegesCard } from '@/components/Cards'
 import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { Map } from '@/components/Map'
 import { PaginatedPosts } from '@/components/PaginatedPosts'
+import { PostFilter } from '@/components/PostFilter'
 import { gql } from '@apollo/client'
+import { useDebounce } from '@uidotdev/usehooks'
 import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { useRouter } from 'next/router'
-import { useMemo, useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
-import { useDebounce } from '@uidotdev/usehooks'
-import { PostFilter } from '@/components/PostFilter'
-import { CollegesCard } from '@/components/Cards'
 
 type CollegesIndexProps = {
   data: {
@@ -90,7 +90,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     zipCode: '',
     county: '',
     keyword: '',
-    orderBy: { field: 'TITLE', order: 'ASC' },
+    orderBy: { field: 'TITLE', order: 'DESC' },
   })
 
   const debouncedFilters = useDebounce(filters, 500)
@@ -124,7 +124,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       )
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => b.title.localeCompare(a.title))
     } else {
       result = result.sort((a, b) => a.title.localeCompare(b.title))
@@ -246,7 +246,7 @@ CollegesArchive.query = gql`
       }
     }
 
-    colleges(where: { orderby: { field: TITLE, order: ASC } }, first: 60) {
+    colleges(where: { orderby: { field: TITLE, order: DESC } }, first: 100) {
       nodes {
         title
         uri
