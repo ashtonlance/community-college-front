@@ -48,7 +48,6 @@ export const Hero = ({ attributes }: HeroAttributesProps) => {
   } else if (videoType == 'url') {
     bgVideo = attributes?.data?.background_video_url
   }
-  console.log({ attributes })
   switch (heroType) {
     case 'landing':
       const emptyBg = !bgImg && (!bgColor || bgColor == 'grey') && !bgVideo
