@@ -7,7 +7,7 @@
     @apply font-sans antialiased;
   }
   p {
-    @apply text-[16px] font-normal leading-[150%] text-darkGrey font-sans antialiased;
+    @apply text-[16px] font-medium leading-[150%] text-darkGrey font-sans antialiased;
   }
   h1, .h1 {
     @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased font-normal;
