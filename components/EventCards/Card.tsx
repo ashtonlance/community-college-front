@@ -2,7 +2,6 @@ import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 import { BackgroundColorType } from 'components/TestimonialSlider'
 import Image from 'next/image'
 import Link from 'next/link'
-import { formatDate } from 'utils/dates'
 
 type EventCardType = {
   date?: string
@@ -38,9 +37,7 @@ export const Card = ({
       ) : null}
       <div className="flex flex-col items-start justify-center gap-[10px] p-[40px] sm:p-[32px]">
         <div className="flex items-center justify-center gap-[10px] text-darkGrey">
-          <p className="body-regular font-bold text-darkGrey">
-            {formatDate(date)}
-          </p>
+          <p className="body-regular font-bold text-darkGrey">{date}</p>
         </div>
         <h4 className="mb-[24px] sm:mb-0">{title}</h4>
 
