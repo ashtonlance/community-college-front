@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Separator from 'assets/imgs/separator.svg'
 
 export const Menu = ({ subItems, classlist = '', label = '' }) => {
   const url = subItems[0]?.url
@@ -15,15 +14,18 @@ export const Menu = ({ subItems, classlist = '', label = '' }) => {
             : 'sub-nav mb-[20px] font-condensed text-lg text-white hover:text-lightBlue md:mb-[12px] md:text-center sm:mb-[8px]'
         }`}
       >
-        <Link href={url ?? ''}>{label}</Link>
+        <Link href={url ?? ''} prefetch={false}>
+          {label}
+        </Link>
       </h4>
-      <div className="flex flex-col md:gap-[4px] gap-y-2">
+      <div className="flex flex-col gap-y-2 md:gap-[4px]">
         {children?.map((subItem, i) => {
           return (
             <Link
               key={subItem?.label}
               href={subItem.url || ''}
-              className="cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:text-center md:text-[11px] md:max-w-none max-w-[90%]"
+              className="max-w-[90%] cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:max-w-none md:text-center md:text-[11px]"
+              prefetch={false}
             >
               {subItem.label}
             </Link>
