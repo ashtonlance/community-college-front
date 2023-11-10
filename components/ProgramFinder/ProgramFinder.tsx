@@ -30,7 +30,84 @@ export const ProgramFinderForm = ({ heading = '' }) => {
     zipCode: '',
   })
 
-  const programAreas = data?.programAreas?.nodes || []
+  const programAreas = data?.programAreas?.nodes || [
+    {
+      __typename: 'ProgramArea',
+      title: 'Animals & Environment',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Arts & Media',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Beauty & Personal Care',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Business & Leadership',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'College Entrance Prep',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Dual Enrollment (CCP)',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Education & Teaching',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Engineering & Construction',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Finish High School',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Healthcare & Medicine',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Hospitality & Food',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Languages',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Law & Public Safety',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Science & Research',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Sports & Recreation',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Tech & Computers',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Trades & Mechanics',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'Transport & Logistics',
+    },
+    {
+      __typename: 'ProgramArea',
+      title: 'University Transfer',
+    },
+  ]
 
   const handleSubmit = useCallback(() => {
     const queryString = new URLSearchParams(inputValues).toString()
