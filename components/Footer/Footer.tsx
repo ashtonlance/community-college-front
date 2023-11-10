@@ -53,36 +53,46 @@ export const Footer = ({ menuItems, footerNavigation, socialLinks }) => {
               <a href="tel:(919) 807-7100">(919) 807-7100</a>
             </p>
             <div className="flex justify-between md:justify-center md:gap-x-5">
-              <Link href={socialLinks?.facebook ?? '/'} target="_blank">
-                <Facebook
-                  alt=""
-                  className="h-5 w-5 text-gold hover:text-lightBlue"
-                />
-              </Link>
-              <Link href={socialLinks?.x ?? '/'} target="_blank">
-                <Twitter
-                  alt=""
-                  className="h-5 w-5 text-gold hover:text-lightBlue"
-                />
-              </Link>
-              <Link href={socialLinks?.youtube ?? '/'} target="_blank">
-                <Youtube
-                  alt=""
-                  className="h-5 w-5 text-gold hover:text-lightBlue"
-                />
-              </Link>
-              <Link href={socialLinks?.linkedin ?? '/'} target="_blank">
-                <Linkedin
-                  alt=""
-                  className="h-5 w-5 text-gold hover:text-lightBlue"
-                />
-              </Link>
-              <Link href={socialLinks?.instagram ?? '/'} target="_blank">
-                <Instagram
-                  alt=""
-                  className="h-5 w-5 text-gold hover:text-lightBlue"
-                />
-              </Link>
+              {socialLinks?.facebook && (
+                <Link href={socialLinks?.facebook} target="_blank">
+                  <Facebook
+                    alt=""
+                    className="h-5 w-5 text-gold hover:text-lightBlue"
+                  />
+                </Link>
+              )}
+              {socialLinks?.twitter && (
+                <Link href={socialLinks?.twitter} target="_blank">
+                  <Twitter
+                    alt=""
+                    className="h-5 w-5 text-gold hover:text-lightBlue"
+                  />
+                </Link>
+              )}
+              {socialLinks?.youtube && (
+                <Link href={socialLinks?.youtube} target="_blank">
+                  <Youtube
+                    alt=""
+                    className="h-5 w-5 text-gold hover:text-lightBlue"
+                  />
+                </Link>
+              )}
+              {socialLinks?.linkedin && (
+                <Link href={socialLinks?.linkedin} target="_blank">
+                  <Linkedin
+                    alt=""
+                    className="h-5 w-5 text-gold hover:text-lightBlue"
+                  />
+                </Link>
+              )}
+              {socialLinks?.instagram && (
+                <Link href={socialLinks?.instagram} target="_blank">
+                  <Instagram
+                    alt=""
+                    className="h-5 w-5 text-gold hover:text-lightBlue"
+                  />
+                </Link>
+              )}
             </div>
           </div>
         </div>
