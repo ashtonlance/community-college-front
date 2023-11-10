@@ -18,7 +18,7 @@
     "test": "jest",
     "chromatic": "npx chromatic --project-token=chpt_6f7a3ec9598be62",
     "analyze": "ANALYZE=true npm run build",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm && npx faust telemetry enable"
   },
   "dependencies": {
     "@alexanderjeurissen/use-storybook": "^2.0.5",
