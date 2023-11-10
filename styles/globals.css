@@ -193,7 +193,9 @@
   fieldset.gfield {
     @apply mb-0;
   }
-
+  form .error-message {
+    @apply my-5;
+  }
   .gfield.gfield-RADIO,
   .gfield.gfield-CHECKBOX,
   .gfield.gfield-TEXT {

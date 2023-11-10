@@ -16,7 +16,7 @@ export const AccordionDisplay = props => {
     let content = props?.attributes.data[`accordion_${i}_content`]
     let heading = props?.attributes.data[`accordion_${i}_heading`]
     accordionItems.push(
-      <AccordionItem key={`item-${i}`} value={`item-${i}`}>
+      <AccordionItem key={`item-${i}`} value={`item-${i}`} color={`${color}`}>
         <AccordionTrigger>{heading}</AccordionTrigger>
         <AccordionContent>
           {typeof content === 'string' ? (
