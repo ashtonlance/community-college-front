@@ -3,7 +3,8 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion'
 
 import { cn } from 'utils'
 
-import bg from '/public/angles/angled-bg_blue-white-btm.jpg'
+import bgWhite from '/public/angles/angled-bg_blue-white-btm.jpg'
+import bgGrey from '/public/angles/angled-bg_blue-grey-btm.jpg'
 
 const Accordion = AccordionPrimitive.Root
 Accordion.displayName = 'nextword/accordion'
@@ -15,10 +16,9 @@ const AccordionItem = React.forwardRef<
   // @ts-ignore
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn('mb-5 rounded-xl bg-white px-8 py-5', className)}
+    className={cn('mb-5 rounded-xl px-8 py-5', className)}
     style={{
-      backgroundColor: '#fff',
-      backgroundImage: `url(${bg.src})`,
+      backgroundImage: `${props.color === 'white' ? `url(${bgGrey.src})` : `url(${bgWhite.src})`}`,
       backgroundSize: 'cover',
     }}
     {...props}
