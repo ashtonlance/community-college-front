@@ -316,7 +316,7 @@ export const ProgramFinder = props => {
               type="text"
               pattern="[0-9]*"
               placeholder="Zip Code"
-              value={inputValues.zipCode}
+              value={inputValues.zipCode ?? ''}
               onChange={e =>
                 setInputValues({ ...inputValues, zipCode: e.target.value })
               }

@@ -51,10 +51,11 @@ export const ProgramFinderHero = ({ description, heading }: HeroPropsType) => {
         <h1 className="h1 mb-6 text-center">{heading}</h1>
 
         {description && (
-          <p
+          <div
             className="[*&>p]:body-large max-w-[820px] sm:mb-[32px] [*&>p]:text-center [*&>p]:text-darkGrey"
             dangerouslySetInnerHTML={{ __html: description }}
-          ></p>
+            suppressHydrationWarning
+          ></div>
         )}
       </div>
     </div>
