@@ -61,8 +61,8 @@ export const Footer = ({ menuItems, footerNavigation, socialLinks }) => {
                   />
                 </Link>
               )}
-              {socialLinks?.twitter && (
-                <Link href={socialLinks?.twitter} target="_blank">
+              {socialLinks?.x && (
+                <Link href={socialLinks?.x} target="_blank">
                   <Twitter
                     alt=""
                     className="h-5 w-5 text-gold hover:text-lightBlue"
