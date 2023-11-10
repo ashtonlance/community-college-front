@@ -1,8 +1,8 @@
-import { HeroPropsType } from './LandingHero'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useRouter } from 'next/router'
 import { unslugify } from 'utils/unslugify'
 import bg from '../../assets/imgs/angled-bg-defaultHero.png'
+import { HeroPropsType } from './LandingHero'
 
 export const ProgramFinderHero = ({ description, heading }: HeroPropsType) => {
   const router = useRouter()
@@ -51,9 +51,10 @@ export const ProgramFinderHero = ({ description, heading }: HeroPropsType) => {
         <h1 className="h1 mb-6 text-center">{heading}</h1>
 
         {description && (
-          <p className="body-large max-w-[820px] text-center text-darkGrey sm:mb-[32px]">
-            {description}
-          </p>
+          <p
+            className="body-large [*&>p]:body-large max-w-[820px] text-center text-darkGrey sm:mb-[32px]"
+            dangerouslySetInnerHTML={{ __html: description }}
+          ></p>
         )}
       </div>
     </div>
