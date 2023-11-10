@@ -7,27 +7,27 @@
     @apply font-sans antialiased;
   }
   p {
-    @apply text-[16px] font-medium leading-[150%] text-darkGrey font-sans antialiased;
+    @apply text-[16px] font-normal leading-[150%] text-darkGrey font-sans antialiased;
   }
   h1, .h1 {
-    @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased;
+    @apply text-[88px] md:text-[72px] sm:text-[50px] leading-[110%] tracking-[-1.76px] text-navy font-serif antialiased font-normal;
   }
   .default-hero-headline{
-    @apply font-serif font-normal leading-[110%] tracking-[-0.48px] sm:tracking-[-0.42px]  text-navy antialiased mb-[32px] md:mb-[24px];
+    @apply font-serif font-normal leading-[110%] tracking-[-1.44px] sm:tracking-[-0.42px] md:tracking-[-0.48px] text-navy antialiased mb-[32px] md:mb-[24px];
   }
   .landing-hero-headline {
     @apply font-serif font-normal text-[88px] md:text-[72px] sm:text-[48px] leading-[110%] tracking-[-1.76px] md:tracking-[-1.44px]  sm:tracking-[-0.48px]  text-white antialiased;  }
   h2, .h2 {
-    @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] text-navy font-serif antialiased;
+    @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] sm:tracking-[-0.34px] md:tracking-[-0.88px] text-navy font-serif antialiased font-normal;
   }
   h3, .h3 {
-    @apply text-[34px] sm:text-[28px] font-normal leading-[120%] tracking-[-0.34px] sm:tracking-[-0.28px] text-navy font-serif antialiased;
+    @apply text-[34px] sm:text-[28px] font-normal leading-[120%] tracking-[-0.34px] sm:tracking-[-0.24px] md:tracking-[-0.28px] text-navy font-serif antialiased;
   }
   h4, .h4 {
-    @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] text-navy font-condensed antialiased;
+    @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] sm:tracking-[-0.24px] text-navy font-condensed antialiased;
   }
   h5, .h5 {
-    @apply text-[15px] sm:text-[14px] leading-[100%] tracking-[0.96px] text-navy font-sans uppercase antialiased font-extrabold;
+    @apply text-[15px] sm:text-[14px] leading-[100%] sm:tracking-[0.84px] tracking-[0.96px] text-navy font-sans uppercase antialiased font-extrabold;
   }
   ul li {
     @apply list-disc list-inside text-darkGrey font-sans antialiased;

@@ -52,7 +52,7 @@ export const ApprenticeshipHero = ({
       >
         {subheading && (
           <div className="mb-[32px] flex items-center gap-[15px]">
-            <h2 className="text-[16px] font-bold leading-[150%] text-white sm:text-[14px]">
+            <h2 className="text-[16px] leading-[150%] text-white sm:text-[14px]">
               {subheading}
             </h2>
           </div>

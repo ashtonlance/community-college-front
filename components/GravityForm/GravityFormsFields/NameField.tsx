@@ -59,7 +59,7 @@ export default function NameField({ field, fieldErrors }) {
   return (
     <fieldset
       id={htmlId}
-      className={`gfield flex w-full justify-between md:flex-col gfield-${type} ${cssClass}`.trim()}
+      className={`gfield flex flex-wrap w-full justify-between md:flex-col gfield-${type} ${cssClass}`.trim()}
     >
       {prefixInput ? (
         <>

@@ -24,7 +24,7 @@ export const ResourcesSinglePageHero = (props: ResourcesSinglePageProps) => {
           </span>
         </p>
 
-        <h1 className="mb-[32px] text-[46px] font-bold leading-[115%] sm:text-[38px] sm:leading-[110%] ">
+        <h1 className="mb-[32px] text-[46px] leading-[115%] sm:text-[38px] sm:leading-[110%] ">
           {props.title}
         </h1>
         <div
