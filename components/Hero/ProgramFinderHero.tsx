@@ -52,7 +52,7 @@ export const ProgramFinderHero = ({ description, heading }: HeroPropsType) => {
 
         {description && (
           <p
-            className="body-large [*&>p]:body-large max-w-[820px] text-center text-darkGrey sm:mb-[32px]"
+            className="[*&>p]:body-large max-w-[820px] sm:mb-[32px] [*&>p]:text-center [*&>p]:text-darkGrey"
             dangerouslySetInnerHTML={{ __html: description }}
           ></p>
         )}
