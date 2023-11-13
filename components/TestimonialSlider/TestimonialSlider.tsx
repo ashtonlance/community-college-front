@@ -31,7 +31,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
 
   const autoplay = useRef(
     Autoplay(
-      { delay: 7500, stopOnInteraction: false, jump: true, playOnInit:false},
+      { delay: 7500, stopOnInteraction: false, jump: true},
       // @ts-expect-error
       embla => embla.parentElement
     )
@@ -117,7 +117,7 @@ export const TestimonialSlider = ({ attributes }: TestimonialSliderProps) => {
                     : 'h-2 w-2 bg-beige'
                 } rounded-full`}
                 key={index}
-                onClick={() => scrollTo(index as any)}
+                onClick={() => embla.scrollTo(index)}
               />
             ))}
           </div>
