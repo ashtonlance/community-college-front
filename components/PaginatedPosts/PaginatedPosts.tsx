@@ -50,7 +50,6 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const prevPostsLength = useRef(posts?.length)
   const PAGE_SIZE = postType === 'boardMembers' ? 12 : 9
-  console.log({ posts })
   useEffect(() => {
     setCurrentPage(props.currentPage)
   }, [props.currentPage])
@@ -83,8 +82,6 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
     const offset = (currentPage - 1) * PAGE_SIZE
     return (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
   }, [posts, currentPage, PAGE_SIZE])
-
-  console.log({ items })
 
   const resetFilters = () => {
     const { wordpressNode, ...rest } = router.query
@@ -126,7 +123,7 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       {props.postType === 'boardMeeting' && <BoardMeetingHeading />}
 
       {items.length === 0 && postType !== 'programFinder' ? (
-        <div className="col-span-12 flex w-full flex-col items-center justify-center gap-4 pb-12 pt-4 text-center">
+        <div className="col-span-12 flex min-h-[25vh] w-full flex-col items-center justify-center gap-4 pb-12 pt-4 text-center">
           <p className="h4">No results found.</p>
           <button className="primary-btn gold" onClick={resetFilters}>
             Reset Filters
