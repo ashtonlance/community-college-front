@@ -81,8 +81,6 @@ export const ProgramFinder = props => {
     })
   }, [programs, colleges])
 
-  console.log({ combined })
-
   const [inputValues, setInputValues] = useState(() => ({
     programArea: router.query.programArea || '',
     radius: router.query.radius || '',
