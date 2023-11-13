@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Arrow from 'assets/icons/angled-arrow.svg'
 import Image from 'next/image'
 import bgWhite from "../../assets/imgs/angledbgwhite-bmt.png"
-import bgGrey from "../../assets/imgs/angledbggrey-bmt.png"
+import bgGrey from "../../assets/imgs/angledbggrey-bmt2.png"
 
 export const LinksBlock = ({ attributes }) => {
   const linkList = attributes?.data?.links_lists
