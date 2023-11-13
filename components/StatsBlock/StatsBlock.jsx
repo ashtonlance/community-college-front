@@ -42,14 +42,14 @@ export const StatsBlock = ({ attributes }) => {
               <p className="body-large text-center text-white max-w-[730px]">{copy}</p>
             </div>
           )}
-          <div className="flex flex-wrap md:justify-center justify-start gap-[100px] sm:flex-col sm:gap-[20px] md:gap-[40px]">
+          <div className="flex flex-wrap md:justify-center justify-start gap-[100px] sm:flex-col sm:gap-[20px] md:gap-[50px]">
             {items > 0 &&
               [...Array(items).keys()].map(val => (
                 <div
                   key={val}
                   className="flex flex-1 flex-col items-center gap-[12px]"
                 >
-                  <h3 className="home-h1 sm:text-[76px] text-[92px] mb-[20px] text-lightBlue font-condensed sm:mb-0 mt-0">
+                  <h3 className="home-h1 sm:text-[76px] text-[92px] mb-[20px] text-lightBlue font-condensed sm:mb-0 mt-0 text-center">
                     {attributes.data[`stats_${val}_number`]}
                   </h3>
                   <span className="text-white max-w-[300px] text-center font-bold sm:text-[24px] text-[28px] leading-[110%] tracking-[-0.28px]">
