@@ -33,7 +33,7 @@ export default function StaffIndexPage({ data, loading, error }) {
 
   const [filters, setFilters] = useState({
     organization: '',
-    department: '',
+    location: '',
     orderBy: { field: 'STAFF_NAME', order: 'DESC' },
   })
 
@@ -70,11 +70,11 @@ export default function StaffIndexPage({ data, loading, error }) {
       })
     }
 
-    if (debouncedFilters?.department) {
+    if (debouncedFilters?.location) {
       result = result.filter(memo => {
         return (
           memo.staffDetails.location.toLowerCase() ===
-          debouncedFilters.department.toLowerCase()
+          debouncedFilters.location.toLowerCase()
         )
       })
     }
