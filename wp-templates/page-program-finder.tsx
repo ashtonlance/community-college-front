@@ -376,7 +376,15 @@ export const ProgramFinder = props => {
         </div>
       ) : isFromWidget ? (
         <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
-          <div className="flex flex-col gap-6 sm:gap-5"></div>
+          <div className="flex flex-col gap-6 sm:gap-5">
+            <div className="h2 mb-0">No filters selected.</div>
+            <p>Please use the filters above.</p>
+            <Button
+              content="See All Programs"
+              linkto={'/students/what-we-offer/programs/'}
+              classes="primary-btn gold mx-auto"
+            />
+          </div>
         </div>
       ) : null}
       <div className=" bg-grey">
