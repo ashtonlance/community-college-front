@@ -64,7 +64,7 @@ export default function StaffIndexPage({ data, loading, error }) {
       result = result.filter(memo => {
         return memo.staffDetails.organizations.find(
           organization =>
-            organization.name.toLowerCase() ===
+            organization?.name?.toLowerCase() ===
             debouncedFilters.organization.toLowerCase()
         )
       })
@@ -73,7 +73,7 @@ export default function StaffIndexPage({ data, loading, error }) {
     if (debouncedFilters?.location) {
       result = result.filter(memo => {
         return (
-          memo.staffDetails.location.toLowerCase() ===
+          memo?.staffDetails?.location?.toLowerCase() ===
           debouncedFilters.location.toLowerCase()
         )
       })
