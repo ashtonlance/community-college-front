@@ -88,7 +88,7 @@ export function Layout(props: LayoutProps) {
         style={{
           marginTop: `${navigationHeight}px`,
         }}
-        className={cn(`flex min-h-screen flex-col ${
+        className={cn(`flex flex-col ${
           hasAnnouncementBar === '1'
             ? 'show-announcement-bar'
             : 'hide-announcement-bar'
