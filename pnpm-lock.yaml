@@ -113,9 +113,6 @@ dependencies:
   graphql:
     specifier: ^16.8.1
     version: 16.8.1
-  html-entities:
-    specifier: ^2.4.0
-    version: 2.4.0
   html-react-parser:
     specifier: ^3.0.15
     version: 3.0.15(react@18.2.0)
@@ -13306,6 +13303,7 @@ packages:
 
   /html-entities@2.4.0:
     resolution: {integrity: sha512-igBTJcNNNhvZFRtm8uA6xMY6xYleeDwn3PeBCkDz7tHttv4F2hsDI2aPgNERWzvRcNYHNT3ymRaQzllmXj4YsQ==}
+    dev: true
 
   /html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import Close from 'assets/icons/close.svg'
-import { useCookies } from 'react-cookie'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 
 type AnnouncementBarProps = {
   announcementBar?: {
@@ -34,32 +34,37 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = props => {
   return (
     <AnimatePresence>
       {!isDismissed ? (
-        //@ts-ignore
-        <motion.div
-          suppressHydrationWarning
-          key="announcement-bar"
-          initial={{ opacity: 1, height: 'auto' }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className={`body-regular flex w-full items-center justify-between border-b-[1px] border-[#51525540] bg-lightBlue text-center`}
-        >
-          {announcementBarLink ? (
-            <Link href={announcementBarLink} target='_blank' className="announcement-bar-content">
-              {announcementBarText}
-            </Link>
-          ) : (
-            <span className="announcement-bar-content">
-              {announcementBarText}
-            </span>
-          )}
-
-          <span
-            onClick={handleDismiss}
-            className="group flex h-full min-h-[56px] max-w-[38px] basis-1/12 cursor-pointer flex-col items-center justify-center bg-[#beddec] p-2 hover:bg-navy"
+        <LazyMotion features={domAnimation}>
+          <m.div
+            suppressHydrationWarning
+            key="announcement-bar"
+            initial={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className={`body-regular flex w-full items-center justify-between border-b-[1px] border-[#51525540] bg-lightBlue text-center`}
           >
-            <Close className="mx-auto text-navy group-hover:text-white" />
-          </span>
-        </motion.div>
+            {announcementBarLink ? (
+              <Link
+                href={announcementBarLink}
+                target="_blank"
+                className="announcement-bar-content"
+              >
+                {announcementBarText}
+              </Link>
+            ) : (
+              <span className="announcement-bar-content">
+                {announcementBarText}
+              </span>
+            )}
+
+            <span
+              onClick={handleDismiss}
+              className="group flex h-full min-h-[56px] max-w-[38px] basis-1/12 cursor-pointer flex-col items-center justify-center bg-[#beddec] p-2 hover:bg-navy"
+            >
+              <Close className="mx-auto text-navy group-hover:text-white" />
+            </span>
+          </m.div>
+        </LazyMotion>
       ) : null}
     </AnimatePresence>
   )

@@ -2,14 +2,28 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "components/*": ["components/*"],
-      "api/*": ["pages/api/*"],
-      "utils/*": ["utils/*"],
-      "pages/*": ["pages/*"]
+      "@/components/*": [
+        "components/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "api/*": [
+        "pages/api/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "pages/*": [
+        "pages/*"
+      ]
     },
     "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -23,6 +37,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/FadeIn/features.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

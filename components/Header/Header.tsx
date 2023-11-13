@@ -3,7 +3,6 @@ import LogoShort from 'assets/imgs/ncccs-short.svg'
 import LogoTall from 'assets/imgs/site-logo.svg'
 import { AnnouncementBar } from 'components/AnnouncementBar'
 import { Search } from 'components/Search'
-import { decode } from 'html-entities'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { forwardRef, useState } from 'react'
@@ -13,6 +12,17 @@ import useScrollPosition from 'utils/hooks/useScrollPosition'
 import useWindowDimensions from 'utils/hooks/useWindowDimensions'
 import { HamburgerMenu } from './HamburgerMenu'
 import { NavigationItem, isCurrentPage } from './NavigationItem'
+
+function decodeHtml(html: string): string {
+  if (typeof window === 'undefined') {
+    // We are in server-side rendering, return the string as is
+    return html
+  }
+
+  var txt = document.createElement('textarea')
+  txt.innerHTML = html
+  return txt.value
+}
 
 const Logo = ({ scrolled }) => {
   const { width } = useWindowDimensions()
@@ -51,7 +61,7 @@ const UtilityItem = ({ item, onClick }) => {
       `)}
       href={item?.navItem?.url || ''}
     >
-      {decode(item?.navItem?.title)}
+      {decodeHtml(item?.navItem?.title)}
     </Link>
   )
 }

@@ -1,4 +1,13 @@
-import { decode } from 'html-entities'
+function decodeHtml(html: string): string {
+  if (typeof window === 'undefined') {
+    // We are in server-side rendering, return the string as is
+    return html
+  }
+
+  var txt = document.createElement('textarea')
+  txt.innerHTML = html
+  return txt.value
+}
 
 export const camelToSentenceCase = (str: string) => {
   const result = str.replace(/([A-Z])/g, ' $1')
@@ -21,7 +30,7 @@ export const truncate = (str: string, num: number) => {
 
 export const programCardTruncate = (str: string, num: number) => {
   // Decode HTML entities
-  let decodedStr = decode(str)
+  let decodedStr = decodeHtml(str)
 
   // Remove all HTML tags
   let cleanStr = decodedStr.replace(/<\/?[^>]+(>|$)/g, '')
