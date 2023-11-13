@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 type EventCardType = {
+  backgroundColor?: string,
   date?: string
   location?: string
   title?: string
@@ -18,6 +19,7 @@ type EventCardType = {
 }
 
 export const Card = ({
+  backgroundColor,
   date,
   title,
   btnLink,
@@ -25,7 +27,7 @@ export const Card = ({
   image,
 }: EventCardType) => {
   return (
-    <div className={`flex w-full overflow-hidden rounded-xl bg-grey`}>
+    <div className={`flex w-full overflow-hidden rounded-xl ${backgroundColor ? backgroundColor : 'bg-grey'}`}>
       {image ? (
         <Image
           src={image}
