@@ -20,6 +20,7 @@ const getCoordinates = async (zipCode: string) => {
     const usLocation = data?.results.find((result: any) =>
       result.formatted_address.includes('USA')
     )
+    console.log({ usLocation })
     return {
       latitude: usLocation?.geometry?.location?.lat,
       longitude: usLocation?.geometry?.location?.lng,
@@ -80,6 +81,8 @@ export const ProgramFinder = props => {
     })
   }, [programs, colleges])
 
+  console.log({ combined })
+
   const [inputValues, setInputValues] = useState(() => ({
     programArea: router.query.programArea || '',
     radius: router.query.radius || '',
@@ -90,6 +93,8 @@ export const ProgramFinder = props => {
   const [filteredPrograms, setFilteredPrograms] = useState([])
   const [shouldFilter, setShouldFilter] = useState(false)
   const [isFromWidget, setIsFromWidget] = useState(false)
+  const [closestCollege, setClosestCollege] = useState(null)
+  const [closestDistance, setClosestDistance] = useState<number | null>(null)
   const inputValuesRef = useRef(inputValues)
 
   useEffect(() => {
@@ -123,6 +128,8 @@ export const ProgramFinder = props => {
     coordinates => {
       if (shouldFilter && coordinates) {
         let result = [...combined] // Use the combined list instead of colleges
+        let closestCollege = null
+        let closestDistance = Infinity
 
         if (inputValuesRef.current.programArea) {
           result = result.filter(program => {
@@ -151,6 +158,13 @@ export const ProgramFinder = props => {
                   const radiusInMeters =
                     inputValuesRef.current.radius * 1609.334
                   const withinRadius = distance <= radiusInMeters
+
+                  if (distance < closestDistance) {
+                    closestDistance = distance
+                    closestCollege = college
+                    setClosestDistance(distance / 1609.334) // Convert distance to miles
+                  }
+
                   return {
                     ...college,
                     distance: distance / 1609.334, // Convert distance to miles
@@ -168,6 +182,7 @@ export const ProgramFinder = props => {
             .filter(program => program.colleges.length > 0)
         }
         setFilteredPrograms([...result])
+        setClosestCollege(closestCollege)
         setShouldFilter(false)
         if (!result.length) {
           setShouldFilter(true)
@@ -349,21 +364,21 @@ export const ProgramFinder = props => {
       ) : shouldFilter ? (
         <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
           <div className="flex flex-col gap-6 sm:gap-5">
-            <div className="h2 mb-0">No results found.</div>
+            <div className="h2 mb-0">
+              No results found within the selected radius.
+            </div>
+            {closestCollege && (
+              <p>
+                The closest college is {closestCollege?.title} at{' '}
+                {Math.ceil(closestDistance)} miles away.
+              </p>
+            )}
             <p>Please adjust your selected filter and try again.</p>
           </div>
         </div>
       ) : isFromWidget ? (
         <div className="flex items-center justify-center bg-grey px-[205px] py-[60px] text-center md:px-[60px] md:py-10 sm:px-10 sm:py-5">
-          <div className="flex flex-col gap-6 sm:gap-5">
-            <div className="h2 mb-0">No filters selected.</div>
-            <p>Please use the filters above.</p>
-            <Button
-              content="See All Programs"
-              linkto={'/students/what-we-offer/programs/'}
-              classes="primary-btn gold mx-auto"
-            />
-          </div>
+          <div className="flex flex-col gap-6 sm:gap-5"></div>
         </div>
       ) : null}
       <div className=" bg-grey">
