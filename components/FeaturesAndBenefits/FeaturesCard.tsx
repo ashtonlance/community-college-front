@@ -28,7 +28,7 @@ export const FeaturesCard = ({
     >
       {image?.url && (
         <div className="mb-[20px]">
-          <Image src={image?.url} width={400} height={200} alt={heading} />
+          <Image className="w-full sm:h-[200px] md:h-[350px] h-[300px] object-cover object" src={image?.url} width={400} height={200} alt={heading} />
         </div>
       )}
       <h3 className={`${getFeaturesCardStyle(cardStyle)} mb-[20px] h4`}>
