@@ -2,6 +2,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useRouter } from 'next/router'
 import bg from '../../assets/imgs/angled-bg-defaultHero.png'
 import generateBreadcrumbs from '../../utils/breadcrumbs'
+import { formatDate } from 'utils/dates'
 
 export const NumberedMemoHero = ({
   heading,
@@ -37,7 +38,7 @@ export const NumberedMemoHero = ({
         <div className="body-large mb-[24px] flex gap-3 font-bold text-darkGrey">
           <span>{number && number}</span>
           <span>{number && date && '•'}</span>
-          <span>{date && date}</span>
+          <span>{formatDate(date) && formatDate(date)}</span>
         </div>
         {categories && (
           <div className="body-regular mb-[10px] flex gap-3 font-bold text-darkGrey">

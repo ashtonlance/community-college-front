@@ -148,7 +148,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
       type: 'select',
     },
   ]
-console.log("filteredMemos", filteredMemos)
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
