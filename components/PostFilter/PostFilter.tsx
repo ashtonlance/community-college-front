@@ -73,7 +73,7 @@ export const PostFilter = ({
             <select
               key={filterOption.name}
               className={cn(
-                `body-regular max-w-[250px] flex-1 px-[20px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
+                `body-regular post-filter max-w-[250px] flex-1 pl-[20px] pr-[30px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:pl-[14px] mdsm:py-[12px] 
                 ${filterClass}
                 `
               )}
@@ -118,20 +118,22 @@ export const PostFilter = ({
           )
         } else if (filterOption.type === 'input') {
           return (
-            <input
+              <input
               key={filterOption.name}
-              className={cn(
-                `text-input body-regular px-[20px] py-[14px] md:w-[48%] mdsm:w-full mdsm:px-[14px] mdsm:py-[12px] 
+                className={cn(
+                  `text-input post-filter body-regular rounded-[8px] pl-[20px] pr-[30px] py-[14px] md:w-[48%] mdsm:w-full mdsm:pl-[14px] mdsm:py-[12px] 
                 ${filterClass}
                 }`
-              )}
-              type="text"
-              placeholder={`Search by ${filterName ?? 'keyword'}`}
-              onChange={e =>
-                handleFilterChange(filterOption.name, e.target.value)
-              }
-              value={filters[filterOption.name]}
-            />
+                )}
+                type="text"
+                placeholder={`Search by ${filterName ?? 'keyword'}`}
+                onChange={e =>
+                  handleFilterChange(filterOption.name, e.target.value)
+                }
+                value={filters[filterOption.name]}
+              />
+ 
+   
           )
         }
         return null
