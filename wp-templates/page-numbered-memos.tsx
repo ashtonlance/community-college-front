@@ -83,6 +83,9 @@ export default function NumberedMemosPage({ data, loading, error }) {
       result = result.filter(memo =>
         memo.numberedMemo.subject
           .toLowerCase()
+          .includes(debouncedFilters.keyword.toLowerCase()) ||
+        memo.numberedMemo.memoFrom
+          .toLowerCase()
           .includes(debouncedFilters.keyword.toLowerCase())
       )
     }
