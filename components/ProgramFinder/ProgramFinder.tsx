@@ -127,7 +127,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
         sizes="100vw"
       />
       <div className="mb-10 flex-1 basis-full text-center">
-        <span className="h2 mb-0">{heading}</span>I
+        <span className="h2 mb-0">{heading}</span>
       </div>
       <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-col sm:gap-y-5">
         <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
