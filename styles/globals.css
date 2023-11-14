@@ -21,7 +21,7 @@
     @apply text-[50px] sm:text-[34px] leading-[115%] sm:leading-[110%] tracking-[-1px] sm:tracking-[-0.34px] md:tracking-[-0.88px] text-navy font-serif antialiased font-normal;
   }
   h3, .h3 {
-    @apply text-[34px] sm:text-[28px] font-normal leading-[120%] tracking-[-0.34px] sm:tracking-[-0.24px] md:tracking-[-0.28px] text-navy font-serif antialiased;
+    @apply text-[38px] sm:text-[24px] md:text-[28px] font-normal leading-[120%] tracking-[-0.34px] sm:tracking-[-0.24px] md:tracking-[-0.28px] text-navy font-serif antialiased;
   }
   h4, .h4 {
     @apply text-[28px] sm:text-[26px] font-bold leading-[110%] sm:leading-[115%] tracking-[-0.28px] sm:tracking-[-0.24px] text-navy font-condensed antialiased;
