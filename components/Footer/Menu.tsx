@@ -24,7 +24,7 @@ export const Menu = ({ subItems, classlist = '', label = '' }) => {
             <Link
               key={subItem?.label}
               href={subItem.url || ''}
-              className="max-w-[90%] cursor-pointer font-sans text-[12px] font-normal leading-[140%] text-lightBlue hover:text-white md:max-w-none md:text-center md:text-[11px]"
+              className="max-w-[90%] cursor-pointer font-sans text-[12px] font-medium leading-[140%] text-lightBlue hover:text-white md:max-w-none md:text-center md:text-[11px]"
               prefetch={false}
             >
               {subItem.label}
