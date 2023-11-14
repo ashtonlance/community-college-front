@@ -42,6 +42,13 @@ export const BackgroundVideoURL = ({ url }: { url: string }) => {
             console.log({ e })
             setShowImage(true)
           }}
+          config={{
+            youtube: {
+              embedOptions: {
+                host: 'https://www.youtube-nocookie.com',
+              },
+            },
+          }}
         />
       </div>
     </>
