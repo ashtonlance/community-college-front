@@ -117,13 +117,13 @@ export const Footer = ({ menuItems, footerNavigation, socialLinks }) => {
         subItems={systemOfficeMenu}
         label={systemOfficeMenu[0]?.label}
       />
-      <div className="footer-links-headline order-2 col-start-12 mb-0 md:col-span-3 md:col-start-9 sm:col-span-12 sm:col-start-1">
+      <div className="footer-links-headline order-2 col-start-12 md:mt-[20px] mt-0 mb-0 md:col-span-3 md:col-start-9 sm:col-span-12 sm:col-start-1">
         <div className="flex flex-col gap-y-5 md:gap-y-3 sm:gap-y-2">
           {utilityMenu[0]?.children?.map((item, i) => {
             return (
               <Link
                 key={item?.label + i}
-                className="font-condensed text-lg leading-[110%] text-white hover:text-lightBlue md:text-center sm:text-[15px]"
+                className="font-condensed text-lg leading-[110%] text-white hover:text-lightBlue md:text-center md:text-[16px]"
                 href={item?.url || ''}
               >
                 {item?.label}
