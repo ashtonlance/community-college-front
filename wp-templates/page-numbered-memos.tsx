@@ -81,14 +81,16 @@ export default function NumberedMemosPage({ data, loading, error }) {
 
     if (debouncedFilters.keyword) {
       result = result.filter(memo =>
-        memo.numberedMemo.subject
-          .toLowerCase()
+        memo.numberedMemo?.subject?.toLowerCase()
           .includes(debouncedFilters.keyword.toLowerCase()) ||
-        memo.numberedMemo.memoFrom
-          .toLowerCase()
+        memo.numberedMemo?.memoFrom?.toLowerCase()
+          .includes(debouncedFilters.keyword.toLowerCase()) || 
+        memo.numberedMemo?.body?.toLowerCase()
           .includes(debouncedFilters.keyword.toLowerCase())
       )
     }
+
+    
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort((a, b) => {
