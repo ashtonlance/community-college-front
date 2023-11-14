@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button'
 import { gql, useQuery } from '@apollo/client'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useCallback, useState } from 'react'
 import bg from '/public/angles/angled-bg_finder_grey.jpg'
@@ -117,16 +118,16 @@ export const ProgramFinderForm = ({ heading = '' }) => {
   }, [inputValues, router])
 
   return (
-    <div
-      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:-mt-[9%] md:max-w-[90%] md:p-8"
-      style={{
-        backgroundImage: `url(${bg.src})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'bottom',
-      }}
-    >
+    <div className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] overflow-hidden rounded-lg bg-grey px-[100px] py-20 md:-mt-[9%] md:max-w-[90%] md:p-8">
+      <Image
+        src={bg.src}
+        alt=""
+        className="-z-10 object-cover object-bottom"
+        fill
+        sizes="100vw"
+      />
       <div className="mb-10 flex-1 basis-full text-center">
-        <span className="h2 mb-0">{heading}</span>
+        <span className="h2 mb-0">{heading}</span>I
       </div>
       <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-col sm:gap-y-5">
         <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
