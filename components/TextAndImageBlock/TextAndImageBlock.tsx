@@ -1,20 +1,9 @@
 import Image from 'next/image'
-import { getHeadingTag } from '../../utils/headingType'
-import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
-import { BackgroundVideoURL } from '../Hero/BackgroundVideo'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import { getYouTubeId } from 'utils/embed'
-
-const GET_MEDIA_FILE = gql`
-  query GetMediaURLFromID($mediaID: ID!) {
-    mediaItem(id: $mediaID, idType: DATABASE_ID) {
-      id
-      sourceUrl
-      link
-    }
-  }
-`
+import { getHeadingTag } from '../../utils/headingType'
+import { FadeIn } from '../FadeIn'
 
 export const TextAndImageBlock = ({ attributes }) => {
   const title = attributes.data.title
@@ -34,52 +23,61 @@ export const TextAndImageBlock = ({ attributes }) => {
   const id = getYouTubeId(video)
 
   return (
-    <div
-      className={`px-[100px] md:px-[60px] bg-${bgColor} sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
-    >
+    <FadeIn>
       <div
-        className={`mx-auto flex w-full max-w-[1220px] gap-[80px] ${imgPosition.includes('right') && 'flex-row-reverse'
-          } md:h-fit md:flex-col md:gap-[60px]`}
+        className={`px-[100px] md:px-[60px] bg-${bgColor} sm:px-[40px] module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}
       >
-        {videoOrImage === 'image' ? (
-          <div
-            className="sm:h-[300px] md:h-[400px] h-[440px] w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center"
-            style={{ backgroundImage: `url(${image.url})` }}
-          ></div>
-        ) : (
-          <div className="h-full w-[50%] self-center rounded-[12px] bg-cover md:w-full bg-center">
-            <LiteYouTubeEmbed
-              id={id}
-              title={'video'}
-              noCookie={true}
-              playlist={false}
-            />
-          </div>
-        )}
+        <div
+          className={`mx-auto flex w-full max-w-[1220px] gap-[80px] ${
+            imgPosition.includes('right') && 'flex-row-reverse'
+          } md:h-fit md:flex-col md:gap-[60px]`}
+        >
+          {videoOrImage === 'image' ? (
+            <div className="relative h-[440px] w-[50%] self-center rounded-[12px] md:h-[400px] md:w-full sm:h-[300px]">
+              <Image
+                src={image.url}
+                alt=""
+                className="rounded-[12px] object-cover"
+                fill
+              />
+            </div>
+          ) : (
+            <div className="h-full w-[50%] self-center rounded-[12px] md:w-full">
+              <LiteYouTubeEmbed
+                id={id}
+                title={'video'}
+                noCookie={true}
+                playlist={false}
+              />
+            </div>
+          )}
 
-        <div className="flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full wysiwyg">
-          {title ? (
-            <p className="body-large mb-[32px] font-bold text-navy">{title}</p>
-          ) : null}
-          {headingContent ? (
-            <span className="mb-[32px]">{heading}</span>
-          ) : null}
-          <div
-            className="body-regular text-darkGrey"
-            dangerouslySetInnerHTML={{ __html: text }}
-          />
-          {linkUrl && linkTitle ? (
-            <Link
-              target="_blank"
-              className="secondary-btn outline-btn navy mt-[40px]"
-              href={linkUrl ?? ''}
-            >
-              {linkTitle}
-            </Link>
-          ) : null}
+          <div className="wysiwyg flex w-[50%] flex-col justify-center md:mx-auto md:w-[90%] sm:w-full">
+            {title ? (
+              <p className="body-large mb-[32px] font-bold text-navy">
+                {title}
+              </p>
+            ) : null}
+            {headingContent ? (
+              <span className="mb-[32px]">{heading}</span>
+            ) : null}
+            <div
+              className="body-regular text-darkGrey"
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
+            {linkUrl && linkTitle ? (
+              <Link
+                target="_blank"
+                className="secondary-btn outline-btn navy mt-[40px]"
+                href={linkUrl ?? ''}
+              >
+                {linkTitle}
+              </Link>
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+    </FadeIn>
   )
 }
 
