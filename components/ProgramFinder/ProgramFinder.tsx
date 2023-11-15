@@ -118,17 +118,18 @@ export const ProgramFinderForm = ({ heading = '' }) => {
 
   return (
     <div
-      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center gap-5 gap-x-[15px] rounded-lg bg-grey px-[100px] py-20 md:-mt-[9%] md:max-w-[90%] md:p-8"
+      className="relative z-10 mx-auto -mt-[290px] flex max-w-[1030px] flex-wrap items-stretch justify-center sm:gap-[12px] gap-5 rounded-lg bg-grey md:-mt-[9%] md:max-w-[90%] sm:px-8 md:px-[60px] md:pt-[53px] pt-[73px] px-[100px] sm:pb-[40px] md:pb-[60px] pb-[80px]"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: 'cover',
         backgroundPosition: 'bottom',
       }}
     >
-      <div className="mb-10 flex-1 basis-full text-center">
+      <div className="absolute text-navy md:text-[11px] text-[12px] font-sans font-bold top-0 px-[14px] py-[6px] bg-gold rounded-b-[8px]">Program Finder</div>
+      <div className="sm:mb-[30px] md:mb-[14px] mb-5 flex-1 basis-full text-center">
         <span className="h2 mb-0">{heading}</span>
       </div>
-      <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-col sm:gap-y-5">
+      <div className="flex flex-1 basis-full items-center gap-x-[20px] sm:flex-col sm:gap-y-[12px]">
         <label htmlFor="programArea" className="h5 mb-0 whitespace-nowrap">
           I&apos;m Interested In
         </label>
@@ -157,7 +158,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           })}
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-5">
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
         <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
           Within
         </label>
@@ -177,13 +178,13 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           <option value={100}>100</option>
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-5">
+      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
         <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
           Of
         </label>
         <input
           id="zipCode"
-          className="text-input w-[150px] sm:w-full"
+          className="text-input w-[150px] sm:w-full rounded-[8px]"
           type="text"
           pattern="[0-9]*"
           placeholder="Zip Code"
@@ -197,7 +198,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
         onClick={handleSubmit}
         content={'Search Programs'}
         arrow
-        classes="primary-btn navy mt-10"
+        classes="primary-btn navy sm:mt-6 mt-5"
         isButton
       />
     </div>
