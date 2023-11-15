@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { cn } from 'utils'
 import angles from 'assets/imgs/bg-angles-blue.png'
+import Image from 'next/image'
+import Link from 'next/link'
+import { cn } from 'utils'
 import { BackgroundVideoFile, BackgroundVideoURL } from './BackgroundVideo'
 
 export type HeroPropsType = {
@@ -22,6 +22,7 @@ export type HeroPropsType = {
   link?: string
   isCollegeSingle?: boolean
   showProgramFinder?: string
+  type?: string
 }
 
 export const LandingHero = ({
@@ -73,11 +74,7 @@ export const LandingHero = ({
       <div className="landing-hero-text relative z-10 ml-[15%] mr-[30%] flex w-[55%] flex-col md:mx-[100px] md:w-full sm:mx-[40px]">
         {subheading && (
           <div className="flex items-center gap-[15px]">
-            <h2
-              className={`h5 ${
-                emptyBg ? 'text-darkGrey' : 'text-white'
-              }`}
-            >
+            <h2 className={`h5 ${emptyBg ? 'text-darkGrey' : 'text-white'}`}>
               {subheading}
             </h2>
           </div>

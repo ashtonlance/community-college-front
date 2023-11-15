@@ -21,9 +21,26 @@ export const DefaultHero = ({
   phone,
   email,
   isCollegeSingle,
+  type,
 }: HeroPropsType) => {
   const router = useRouter()
-  const breadcrumbs = generateBreadcrumbs(router)
+  let slug = ''
+  let urlToMatch = ''
+
+  switch (type) {
+    case 'program-area':
+      slug = '/students/what-we-offer/programs/'
+      urlToMatch = '/program-areas'
+      break
+    // Add more cases as needed
+    case 'board-meeting':
+      slug = '/about-us/state-board/state-board-meeting-minutes'
+      urlToMatch = '/about-us/board-meetings'
+      break
+    default:
+      break
+  }
+  const breadcrumbs = generateBreadcrumbs(router, slug, urlToMatch)
   return (
     <div
       className={`relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
@@ -50,8 +67,8 @@ export const DefaultHero = ({
             `default-hero-headline  
             ${
               smallHeading
-                ? 'sm:text-[42px] text-[48px]'
-                : 'sm:text-[42px] md:text-[48px] text-[72px]'
+                ? 'text-[48px] sm:text-[42px]'
+                : 'text-[72px] md:text-[48px] sm:text-[42px]'
             }
             `
           )}

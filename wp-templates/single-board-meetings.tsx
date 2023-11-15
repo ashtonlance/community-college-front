@@ -1,4 +1,4 @@
-import { NumberedMemoHero } from '@/components/Hero/NumberedMemoHero'
+import { DefaultHero } from '@/components/Hero/DefaultHero'
 import { WYSIWYG } from '@/components/WYSIWYG'
 import { gql } from '@apollo/client'
 import bg from 'assets/imgs/angled-bg-white.png'
@@ -6,6 +6,7 @@ import { Header } from 'components/Header'
 import { Layout } from 'components/Layout'
 import { ResourceTags } from 'components/ResourceTags/ResourceTags'
 import SharePost from 'components/SharePost/SharePost'
+import { formatDate } from 'utils/dates'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function SingleBoardMeeting(props) {
@@ -34,13 +35,10 @@ export default function SingleBoardMeeting(props) {
       settings={settings}
       socialLinks={socialLinks}
     >
-      <NumberedMemoHero
+      <DefaultHero
         heading={pageData.boardMeetingDetails.title}
-        number={''}
-        date={pageData.boardMeetingDetails.date}
-        from={''}
-        to={''}
-        categories={tags}
+        description={formatDate(pageData.boardMeetingDetails.date)}
+        type="board-meeting"
       />
       <div className="bg-grey">
         {pageData?.boardMeetingDetails?.details && (
@@ -97,7 +95,7 @@ SingleBoardMeeting.query = gql`
       }
     }
 
-    menu(id: "students", idType: SLUG) {
+    menu(id: "System Office", idType: NAME) {
       menuItems(first: 200) {
         nodes {
           ...NavigationMenuFragment

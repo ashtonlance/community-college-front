@@ -37,6 +37,7 @@ export default function SingleProgramArea(props) {
         heading={pageData?.title}
         bgImg={pageData?.featuredImage?.node?.sourceUrl}
         description={pageData?.programAreaDetails?.description}
+        type="program-area"
       />
       {pageData?.programAreaDetails?.about ? (
         <WYSIWYG
