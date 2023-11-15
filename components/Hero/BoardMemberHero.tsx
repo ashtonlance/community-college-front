@@ -32,7 +32,7 @@ export const BoardMemberHero = ({
   const breadcrumbs = generateBreadcrumbs(router, slug, urlToMatch)
   return (
     <div
-      className={`md:pb-0] relative flex h-fit py-[80px] md:h-fit md:flex-col sm:items-center sm:justify-center`}
+      className={`md:pb-0 relative flex h-fit md:h-fit md:flex-col sm:items-center sm:justify-center`}
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundPosition: 'center',

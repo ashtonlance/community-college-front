@@ -45,8 +45,8 @@ export default function SingleBoardMember(props) {
         type={boardMemberType}
         email={pageData?.boardMember?.email}
       />
-      <div className="bg-grey">
-        <div className="flex gap-[40px] px-[205px] md:flex-wrap md:gap-8 md:px-[100px] sm:px-10">
+      <div className="bg-grey md:pt-[60px] pt-[100px]">
+        <div className="flex gap-[40px] px-[205px] md:flex-wrap md:gap-8 md:px-[100px] sm:px-10 sm:pb-[40px] md:pb-[50px] pb-[60px]">
           {pageData?.boardMember?.biography && (
             <div className="w-[60%] md:w-full">
               <div className="h2">About</div>
