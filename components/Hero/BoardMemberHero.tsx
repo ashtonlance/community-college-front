@@ -28,7 +28,9 @@ export const BoardMemberHero = ({
       ? '/about-us/foundation/foundation-board-members/'
       : '/about-us/state-board/board-members/'
   const urlToMatch =
-    type === 'Foundation' ? '/about-us/foundation' : '/about-us/board-members'
+    type === 'Foundation'
+      ? '/about-us/board-members'
+      : '/about-us/board-members'
   const breadcrumbs = generateBreadcrumbs(router, slug, urlToMatch)
   return (
     <div
@@ -52,7 +54,9 @@ export const BoardMemberHero = ({
         )}
 
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="default-hero-headline sm:text-[42px] text-[48px]">{heading}</h1>
+        <h1 className="default-hero-headline text-[48px] sm:text-[42px]">
+          {heading}
+        </h1>
 
         {description && bgImg && (
           <p className="body-large mb-[40px] text-darkGrey sm:mb-[32px]">
