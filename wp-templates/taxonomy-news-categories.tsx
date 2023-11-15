@@ -95,9 +95,13 @@ export default function NewsTaxonomyCatPage({
     }
 
     if (debouncedFilters.orderBy.order === 'DESC') {
-      result = result.sort((a, b) => b?.date?.localeCompare(a?.date))
+      result = result.sort(
+        (a, b) => new Date(b?.date).getTime() - new Date(a?.date).getTime()
+      )
     } else {
-      result = result.sort((a, b) => a?.date?.localeCompare(b?.date))
+      result = result.sort(
+        (a, b) => new Date(a?.date).getTime() - new Date(b?.date).getTime()
+      )
     }
 
     setFilteredNewsItems([...result])

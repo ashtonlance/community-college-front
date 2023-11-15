@@ -69,11 +69,12 @@ export const PostFilter = ({
             filterOption.options.includes('Name') ||
             filterOption.options.includes('Last Name')
           const isEventsPage = router.asPath.includes('events')
+          const isAnnualReportsPage = router.asPath.includes('annual-reporting')
           return (
             <select
               key={filterOption.name}
               className={cn(
-                `body-regular post-filter max-w-[250px] flex-1 pl-[20px] pr-[30px] py-[14px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:pl-[14px] mdsm:py-[12px] 
+                `body-regular post-filter max-w-[250px] flex-1 py-[14px] pl-[20px] pr-[30px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:py-[12px] mdsm:pl-[14px] 
                 ${filterClass}
                 `
               )}
@@ -85,7 +86,11 @@ export const PostFilter = ({
                     : e.target.value
                 )
               }
-              defaultValue={isNameFilter || isEventsPage ? 'DESC' : 'ASC'}
+              defaultValue={
+                isNameFilter || isEventsPage || isAnnualReportsPage
+                  ? 'DESC'
+                  : 'ASC'
+              }
             >
               {!isNameFilter && (
                 <option className="capitalize" value="">
@@ -118,22 +123,20 @@ export const PostFilter = ({
           )
         } else if (filterOption.type === 'input') {
           return (
-              <input
+            <input
               key={filterOption.name}
-                className={cn(
-                  `text-input post-filter body-regular rounded-[8px] pl-[20px] pr-[30px] py-[14px] md:w-[48%] mdsm:w-full mdsm:pl-[14px] mdsm:py-[12px] 
+              className={cn(
+                `text-input post-filter body-regular rounded-[8px] py-[14px] pl-[20px] pr-[30px] md:w-[48%] mdsm:w-full mdsm:py-[12px] mdsm:pl-[14px] 
                 ${filterClass}
                 }`
-                )}
-                type="text"
-                placeholder={`Search by ${filterName ?? 'keyword'}`}
-                onChange={e =>
-                  handleFilterChange(filterOption.name, e.target.value)
-                }
-                value={filters[filterOption.name]}
-              />
- 
-   
+              )}
+              type="text"
+              placeholder={`Search by ${filterName ?? 'keyword'}`}
+              onChange={e =>
+                handleFilterChange(filterOption.name, e.target.value)
+              }
+              value={filters[filterOption.name]}
+            />
           )
         }
         return null

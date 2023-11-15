@@ -7,6 +7,7 @@ import { Layout } from 'components/Layout'
 import { PreFooter } from 'components/PreFooter'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { formatDate } from 'utils/dates'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 
 export default function AnnualReportsPage({ data, loading, error }) {
@@ -24,6 +25,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+
   const annualReports = useMemo(
     () => data?.annualReportingPlans?.nodes || [],
     [data?.annualReportingPlans?.nodes]
@@ -33,7 +35,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
     category: '',
     year: '',
     keyword: '',
-    orderBy: { field: 'DATE', order: 'ASC' },
+    orderBy: { field: 'DATE', order: 'DESC' },
   })
 
   const years = useMemo(
@@ -76,11 +78,15 @@ export default function AnnualReportsPage({ data, loading, error }) {
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort(
-        (a, b) => b.annualReport.dueDate?.localeCompare(a.annualReport.dueDate)
+        (a, b) =>
+          new Date(b.annualReport.dueDate).getTime() -
+          new Date(formatDate(a.annualReport.dueDate)).getTime()
       )
     } else {
       result = result.sort(
-        (a, b) => a.annualReport.dueDate?.localeCompare(b.annualReport.dueDate)
+        (a, b) =>
+          new Date(a.annualReport.dueDate).getTime() -
+          new Date(formatDate(b.annualReport.dueDate)).getTime()
       )
     }
 
@@ -95,7 +101,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
 
   useEffect(() => {
     filterAnnualReports()
-  }, [debouncedFilters, annualReports])
+  }, [debouncedFilters, annualReports, filterAnnualReports])
 
   if (loading) {
     return <>Loading...</>
@@ -174,8 +180,8 @@ AnnualReportsPage.query = gql`
     }
 
     annualReportingPlans(
-      first: 100
-      where: { orderby: { field: DATE, order: ASC } }
+      first: 200
+      where: { orderby: { field: DUE_DATE, order: DESC } }
     ) {
       nodes {
         annualReport {
