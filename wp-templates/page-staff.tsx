@@ -32,7 +32,7 @@ export default function StaffIndexPage({ data, loading, error }) {
   )
 
   const [filters, setFilters] = useState({
-    organization: '',
+    department: '',
     location: '',
     orderBy: { field: 'STAFF_NAME', order: 'DESC' },
   })
@@ -60,12 +60,12 @@ export default function StaffIndexPage({ data, loading, error }) {
   const filterNumberedMemos = useCallback(() => {
     let result = [...staffIndex]
 
-    if (debouncedFilters?.organization) {
+    if (debouncedFilters?.department) {
       result = result.filter(memo => {
         return memo.staffDetails.organizations.find(
           organization =>
             organization?.name?.toLowerCase() ===
-            debouncedFilters.organization.toLowerCase()
+            debouncedFilters.department.toLowerCase()
         )
       })
     }
@@ -115,7 +115,7 @@ export default function StaffIndexPage({ data, loading, error }) {
 
   const filtersToGenerateDropdown = [
     {
-      name: 'organization',
+      name: 'department',
       options: organizations,
       type: 'select',
     },
