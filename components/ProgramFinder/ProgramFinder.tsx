@@ -122,7 +122,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
        <Image
          src={bg.src}
          alt=""
-         className="-z-10 object-cover object-bottom"
+         className="-z-10 object-cover object-bottom rounded-lg"
          fill
          sizes="100vw"
        />
