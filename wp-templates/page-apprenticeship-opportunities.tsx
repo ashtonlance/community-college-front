@@ -31,7 +31,7 @@ export default function PageApprenticeshipOpportunities(props) {
     programArea: router.query.programArea || '',
     zipCode: router.query.zipCode || '',
     keyword: router.query.keyword || '',
-    orderBy: router.query.orderBy || { field: 'TITLE', order: 'ASC' },
+    orderBy: router.query.orderBy || { field: 'TITLE', order: 'DESC' },
   })
 
   const handleFilterChange = useCallback(
@@ -113,7 +113,7 @@ export default function PageApprenticeshipOpportunities(props) {
       })
     }
 
-    if (debouncedFilters.orderBy.order === 'DESC') {
+    if (debouncedFilters.orderBy.order === 'ASC') {
       result = result.sort((a, b) => b.title?.localeCompare(a.title))
     } else {
       result = result.sort((a, b) => a.title?.localeCompare(b.title))
@@ -254,7 +254,7 @@ PageApprenticeshipOpportunities.query = gql`
     }
     apprenticeshipOpportunities(
       first: 100
-      where: { orderby: { field: TITLE, order: ASC } }
+      where: { orderby: { field: TITLE, order: DESC } }
     ) {
       nodes {
         title
