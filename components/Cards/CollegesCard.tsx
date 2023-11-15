@@ -30,7 +30,7 @@ export const CollegesCard: React.FC<GeneralCardProps> = ({ card }) => {
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
           <Link
-            className="h3 mb-5 text-[28px] hover:text-darkBeige"
+            className="h3 mb-5 font-bold text-[28px] hover:text-darkBeige"
             href={card?.uri || '/'}
           >
             {card.collegeDetails?.name}
