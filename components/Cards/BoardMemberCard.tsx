@@ -31,7 +31,7 @@ export const BoardMemberCard: React.FC<BoardMemberCardProps> = ({ card }) => {
             </div>
           )}
           <Link
-            className="h3 mb-[15px] font-condensed text-[24px] hover:text-darkBeige"
+            className="h3 mb-[15px] font-condensed text-[24px] hover:text-darkBeige font-bold"
             href={card?.uri || '/'}
           >
             {card.boardMember?.name}          

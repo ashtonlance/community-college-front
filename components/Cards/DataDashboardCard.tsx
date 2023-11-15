@@ -23,7 +23,7 @@ export const DataDashboardCard: React.FC<OpportunityCardProps> = ({ card }) => {
             </div>
           )}
           <Link
-            className="h3 mb-5 font-serif text-[24px] hover:text-darkBeige"
+            className="h3 mb-5 font-bold font-serif text-[24px] hover:text-darkBeige"
             href={card?.uri ?? ''}
           >
             {card?.dataDashboardDetails?.title}

@@ -19,7 +19,7 @@ export const ProgramCard = ({ card, index }) => {
           <div className="flex flex-1 flex-col justify-between bg-white p-10">
             <Link
               href={card?.uri ?? ''}
-              className="h3 mb-5 text-[28px] group-hover:text-darkBeige"
+              className="h3 mb-5 font-bold text-[28px] group-hover:text-darkBeige"
             >
               {card?.title}
             </Link>
