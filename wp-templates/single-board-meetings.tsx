@@ -21,6 +21,7 @@ export default function SingleBoardMeeting(props) {
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData?.numberedMemoCategories?.nodes || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -34,6 +35,7 @@ export default function SingleBoardMeeting(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         heading={pageData.boardMeetingDetails.title}
@@ -76,6 +78,7 @@ SingleBoardMeeting.query = gql`
   query GetSingleBoardMeeting($databaseId: ID!) {
     boardMeeting(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       link
       seo {

@@ -20,6 +20,7 @@ export default function SingleEvent(props) {
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData.eventsTags?.nodes || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -33,6 +34,7 @@ export default function SingleEvent(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <EventHero
         heading={pageData.title}
@@ -80,6 +82,7 @@ SingleEvent.query = gql`
   query GetSingleEvent($databaseId: ID!) {
     event(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       link
       seo {

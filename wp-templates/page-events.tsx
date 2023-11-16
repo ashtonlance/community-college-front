@@ -25,6 +25,7 @@ export default function PageEvents(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const [filters, setFilters] = useState({
     audience: '',
@@ -135,6 +136,7 @@ export default function PageEvents(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -170,6 +172,7 @@ PageEvents.query = gql`
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
+      databaseId
       title
       blocks
       seo {

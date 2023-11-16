@@ -25,6 +25,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const numberedMemos = useMemo(
     () => data?.numberedMemos?.nodes || [],
@@ -80,17 +81,19 @@ export default function NumberedMemosPage({ data, loading, error }) {
     }
 
     if (debouncedFilters.keyword) {
-      result = result.filter(memo =>
-        memo.numberedMemo?.subject?.toLowerCase()
-          .includes(debouncedFilters.keyword.toLowerCase()) ||
-        memo.numberedMemo?.memoFrom?.toLowerCase()
-          .includes(debouncedFilters.keyword.toLowerCase()) || 
-        memo.numberedMemo?.body?.toLowerCase()
-          .includes(debouncedFilters.keyword.toLowerCase())
+      result = result.filter(
+        memo =>
+          memo.numberedMemo?.subject
+            ?.toLowerCase()
+            .includes(debouncedFilters.keyword.toLowerCase()) ||
+          memo.numberedMemo?.memoFrom
+            ?.toLowerCase()
+            .includes(debouncedFilters.keyword.toLowerCase()) ||
+          memo.numberedMemo?.body
+            ?.toLowerCase()
+            .includes(debouncedFilters.keyword.toLowerCase())
       )
     }
-
-    
 
     if (debouncedFilters.orderBy.order === 'DESC') {
       result = result.sort((a, b) => {
@@ -163,6 +166,7 @@ export default function NumberedMemosPage({ data, loading, error }) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -194,6 +198,7 @@ NumberedMemosPage.query = gql`
   query numberedMemos($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
+      databaseId
       slug
       status
       title

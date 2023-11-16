@@ -25,6 +25,7 @@ export default function NewsPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const newsItems = useMemo(
     () => data?.newsItems?.nodes || [],
@@ -144,6 +145,7 @@ export default function NewsPage({ data, loading, error }) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -179,6 +181,7 @@ NewsPage.query = gql`
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
+      databaseId
       title
       blocks
       seo {

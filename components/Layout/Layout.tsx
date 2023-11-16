@@ -16,6 +16,7 @@ export type LayoutProps = {
   footerNavigation?: any
   settings?: any
   socialLinks?: any
+  databaseId?: number
 }
 
 export function Layout(props: LayoutProps) {
@@ -34,6 +35,31 @@ export function Layout(props: LayoutProps) {
   const navigation = createRef<HTMLDivElement>()
   const MemoizedHeader = memo(Header)
   const socialLinks = props?.socialLinks || []
+  const databaseId = props?.databaseId || ''
+  const editUrl = `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-admin/post.php?post=${databaseId}&action=edit`
+
+  const [showEditUrl, setShowEditUrl] = useState(false)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === 'e') {
+        setShowEditUrl(!showEditUrl)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [showEditUrl])
+
+  const editLinkRef = createRef<HTMLAnchorElement>()
+
+  useEffect(() => {
+    if (showEditUrl && editLinkRef.current) {
+      editLinkRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [showEditUrl, editLinkRef])
 
   // get header size dynamically to move main content below
   const handleResize = useCallback(() => {
@@ -102,6 +128,18 @@ export function Layout(props: LayoutProps) {
         footerNavigation={footerNavigation}
         menuItems={props.menuItems}
       />
+      {showEditUrl && (
+        <div className="flex justify-center py-4">
+          <a
+            ref={editLinkRef}
+            className="text-2xl text-navy underline hover:text-darkGrey"
+            target="_blank"
+            href={editUrl}
+          >
+            Edit this page in WordPress
+          </a>
+        </div>
+      )}
     </>
   )
 }

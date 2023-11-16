@@ -20,6 +20,7 @@ export default function SingleNumberedMemo(props) {
   const settings = props.data?.settings?.siteSettings || []
   const tags = pageData.numberedMemoCategories?.nodes
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -33,6 +34,7 @@ export default function SingleNumberedMemo(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <NumberedMemoHero
         heading={pageData.numberedMemo.subject}
@@ -78,6 +80,7 @@ SingleNumberedMemo.query = gql`
   query GetProgramArea($databaseId: ID!) {
     numberedMemo(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       link
       seo {

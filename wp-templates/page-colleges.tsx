@@ -73,6 +73,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = data?.collegeIndex?.databaseId
 
   const colleges = useMemo(
     () => data?.colleges?.nodes || [],
@@ -184,6 +185,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         <DefaultHero
@@ -235,6 +237,7 @@ CollegesArchive.query = gql`
   ${Header.fragments.entry}
   query CollegesArchive($uri: ID!) {
     collegeIndex: page(id: $uri, idType: URI) {
+      databaseId
       collegeIndex {
         heroDescription
         heroTitle

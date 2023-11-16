@@ -17,6 +17,7 @@ export default function SingleStaff(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -30,6 +31,7 @@ export default function SingleStaff(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         smallHeading={true}
@@ -86,6 +88,7 @@ SingleStaff.query = gql`
   query GetSingleStaff($databaseId: ID!) {
     staff(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       link
       seo {

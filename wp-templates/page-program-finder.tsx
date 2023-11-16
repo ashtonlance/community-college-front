@@ -35,8 +35,8 @@ export const ProgramFinder = props => {
   const { data, loading } = props
   const router = useRouter()
   const { isReady } = router
-  const { page } = router.query
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = data?.page?.databaseId
 
   const menuItems = useMemo(
     () => flatListToHierarchical(data?.menu?.menuItems) || [],
@@ -263,6 +263,7 @@ export const ProgramFinder = props => {
       footerNavigation={footerMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <ProgramFinderHero
         heading={programFinderIndex?.programFinderDetails?.title}
@@ -407,6 +408,7 @@ ProgramFinder.query = gql`
   ${Header.fragments.entry}
   query ProgramFinder($uri: ID!) {
     programFinderIndex: page(id: $uri, idType: URI) {
+      databaseId
       seo {
         fullHead
         title

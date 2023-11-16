@@ -55,6 +55,7 @@ export default function SingleCollege(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const router = useRouter()
   const slug = router?.query?.wordpressNode[1]
@@ -87,6 +88,7 @@ export default function SingleCollege(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         smallHeading={true}
@@ -253,6 +255,7 @@ SingleCollege.query = gql`
   query GetCollege($databaseId: ID!) {
     college(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       seo {
         fullHead

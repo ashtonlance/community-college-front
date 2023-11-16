@@ -43,6 +43,7 @@ export default function SingleProgram(props) {
   const settings = props.data?.settings?.siteSettings || []
   const slug = pageData?.taggedProgramAreas?.nodes[0]?.slug || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const { data: relatedPrograms } = useQuery(GET_RELATED_PROGRAMS, {
     variables: { slug },
@@ -65,6 +66,7 @@ export default function SingleProgram(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         smallHeading={true}
@@ -194,6 +196,7 @@ SingleProgram.query = gql`
   query GetProgram($databaseId: ID!) {
     program(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       seo {
         fullHead

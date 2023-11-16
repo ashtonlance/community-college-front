@@ -84,6 +84,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = data?.programIndex?.databaseId || []
 
   const programs = useMemo(
     () => data?.programs?.nodes || [],
@@ -184,6 +185,7 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         heading={programsIndex?.heroTitle}
@@ -250,6 +252,7 @@ ProgramsArchive.query = gql`
   ${Header.fragments.entry}
   query ProgramsArchive($uri: ID!, $slug: ID!) {
     programIndex: page(id: $uri, idType: URI) {
+      databaseId
       seo {
         fullHead
         title

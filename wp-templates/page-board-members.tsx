@@ -25,6 +25,7 @@ export default function BoardMembersPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const boardMembers = useMemo(
     () => data?.boardMembers?.nodes || [],
@@ -133,6 +134,7 @@ export default function BoardMembersPage({ data, loading, error }) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -164,6 +166,7 @@ BoardMembersPage.query = gql`
   query boardMembers($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
+      databaseId
       slug
       status
       title

@@ -25,6 +25,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const annualReports = useMemo(
     () => data?.annualReportingPlans?.nodes || [],
@@ -133,6 +134,7 @@ export default function AnnualReportsPage({ data, loading, error }) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -163,6 +165,7 @@ AnnualReportsPage.variables = ({ uri, id }) => {
 AnnualReportsPage.query = gql`
   query AnnualReports($id: ID!) {
     page(id: $id, idType: ID) {
+      databaseId
       id
       slug
       status

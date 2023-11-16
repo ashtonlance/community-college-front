@@ -25,6 +25,7 @@ export default function StaffIndexPage({ data, loading, error }) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = data?.settings?.siteSettings || []
   const socialLinks = data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const staffIndex = useMemo(
     () => data?.allStaff?.nodes || [],
@@ -140,6 +141,7 @@ export default function StaffIndexPage({ data, loading, error }) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -171,6 +173,7 @@ StaffIndexPage.query = gql`
   query staffIndex($uri: ID!) {
     page(id: $uri, idType: URI) {
       id
+      databaseId
       slug
       status
       title

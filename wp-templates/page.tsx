@@ -18,6 +18,7 @@ export default function Page(props) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -32,6 +33,7 @@ export default function Page(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <>
         {blocks && (
@@ -77,6 +79,7 @@ Page.query = gql`
   query Page($databaseId: ID!, $asPreview: Boolean = false, $slug: ID!) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
+      databaseId
       title
       blocks
       seo {

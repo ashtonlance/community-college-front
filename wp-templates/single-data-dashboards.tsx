@@ -17,6 +17,7 @@ export default function SingleDataDashboard(props) {
   const settings = props.data?.settings?.siteSettings || []
   const embedParams = pageData?.dataDashboardDetails
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const {
     elementHeight = '',
@@ -41,6 +42,7 @@ export default function SingleDataDashboard(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <ApprenticeshipHero
         heading={pageData?.title}
@@ -77,6 +79,7 @@ SingleDataDashboard.query = gql`
   query GetApprenticeshipOpp($databaseId: ID!) {
     dataDashboard(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       seo {
         fullHead

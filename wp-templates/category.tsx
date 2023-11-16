@@ -11,6 +11,7 @@ type CategoryProps = {
     nodeByUri: {
       name: string
       seo: {}
+      databaseId: number
     }
     menus: {
       nodes: {}
@@ -34,12 +35,17 @@ export default function Category(props: CategoryProps) {
     const menuItems = props.data?.menu?.menuItems || []
     const seo = props.data?.nodeByUri?.seo
     const preFooterContent = props.data?.menus.nodes[0]
-    const { page } = router.query
     const categoryName = props.data?.nodeByUri?.name
     const socialLinks = props.data?.footer?.prefooter || []
+    const databaseId = props.data?.nodeByUri?.databaseId
 
     return (
-      <Layout menuItems={menuItems} seo={seo} socialLinks={socialLinks}>
+      <Layout
+        menuItems={menuItems}
+        seo={seo}
+        socialLinks={socialLinks}
+        databaseId={databaseId}
+      >
         <div className="category-page flex justify-end border-t-[1.5px] border-t-gmt-200 md:flex-col md:overflow-hidden">
           <div className="wrapper-default-inner-pages w-[70%] md:w-full">
             <ResourcesTypeHero
@@ -80,6 +86,7 @@ Category.query = gql`
     nodeByUri(uri: $uri) {
       ... on Category {
         id
+        databaseId
         name
         seo {
           metaDesc

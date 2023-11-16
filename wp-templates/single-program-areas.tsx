@@ -18,6 +18,7 @@ export default function SingleProgramArea(props) {
   const settings = props.data?.settings?.siteSettings || []
   const relatedPrograms = props.data?.relatedPrograms?.nodes || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   if (props.loading) {
     return <>Loading...</>
@@ -31,6 +32,7 @@ export default function SingleProgramArea(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <DefaultHero
         smallHeading={true}
@@ -103,6 +105,7 @@ SingleProgramArea.query = gql`
   query GetProgramArea($databaseId: ID!, $slug: [String]) {
     programArea(id: $databaseId, idType: DATABASE_ID) {
       id
+      databaseId
       title
       seo {
         fullHead

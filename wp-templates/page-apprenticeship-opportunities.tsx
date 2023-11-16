@@ -26,6 +26,7 @@ export default function PageApprenticeshipOpportunities(props) {
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = pageData?.databaseId
 
   const [filters, setFilters] = useState({
     programArea: router.query.programArea || '',
@@ -166,6 +167,7 @@ export default function PageApprenticeshipOpportunities(props) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       <div className="h-full bg-grey">
         {blocks && (
@@ -201,6 +203,7 @@ PageApprenticeshipOpportunities.query = gql`
   query Page($databaseId: ID!, $asPreview: Boolean = false) {
     page(id: $databaseId, idType: DATABASE_ID, asPreview: $asPreview) {
       id
+      databaseId
       title
       blocks
       seo {

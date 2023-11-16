@@ -23,6 +23,8 @@ export default function FrontPage(props: FrontPageProps) {
     flatListToHierarchical(footerMenuItems as any) || []
   const settings = props.data?.settings?.siteSettings || []
   const socialLinks = props.data?.footer?.prefooter || []
+  const databaseId = homePageData?.databaseId
+
   return (
     <Layout
       menuItems={hierarchicalMenuItems}
@@ -31,6 +33,7 @@ export default function FrontPage(props: FrontPageProps) {
       footerNavigation={hierarchicalFooterMenuItems}
       settings={settings}
       socialLinks={socialLinks}
+      databaseId={databaseId}
     >
       {blocks && <WordPressBlocksViewer blocks={blocks} />}
       {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
@@ -44,6 +47,7 @@ FrontPage.query = gql`
     nodeByUri(uri: "/") {
       ... on Page {
         id
+        databaseId
         title
         blocks
         seo {
