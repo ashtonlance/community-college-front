@@ -20,10 +20,12 @@ export const PostFilter = ({
       filterClass = 'basis-[calc(33.33%-15px)]'
       break
     case 4:
-      filterClass = 'sm:basis-full md:basis-[calc(50%-15px)] basis-[calc(25%-15px)]'
+      filterClass =
+        'sm:basis-full md:basis-[calc(50%-15px)] basis-[calc(25%-15px)]'
       break
     case 5:
-      filterClass = 'sm:basis-full md:basis-[calc(50%-15px)] basis-[calc(20%-15px)]'
+      filterClass =
+        'sm:basis-full md:basis-[calc(50%-15px)] basis-[calc(20%-15px)]'
       break
     default:
       filterClass = 'basis-full'
@@ -102,7 +104,7 @@ export const PostFilter = ({
               {Array.isArray(filterOption.options) &&
                 filterOption.options.map(option => (
                   <option key={option} value={option}>
-                    {typeof option === 'string'
+                    {filterName === 'Degree Type'
                       ? camelToSentenceCase(option)
                       : option}
                   </option>

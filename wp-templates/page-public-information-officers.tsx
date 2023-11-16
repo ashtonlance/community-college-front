@@ -44,6 +44,8 @@ export default function PagePublicInformationOfficers(props) {
     return [...new Set(colleges)]
   }, [officers])
 
+  console.log({ colleges })
+
   const debouncedFilters = useDebounce(filters, 500)
   const [filteredOfficers, setFilteredOfficers] = useState(officers)
 

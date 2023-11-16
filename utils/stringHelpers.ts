@@ -9,13 +9,16 @@ function decodeHtml(html: string): string {
   return txt.value
 }
 
-export const camelToSentenceCase = (str: string) => {
-  const result = str.replace(/([A-Z])/g, ' $1')
+export const camelToSentenceCase = (str: string): string => {
+  // Split the string on hyphen first to avoid breaking hyphenated words
+  const words = str.split('-')
+  const result = words
+    .map(word => word.replace(/([A-Z][a-z]+)/g, ' $1').trim())
+    .join('-')
   if (str === 'certificateassociateOfAppliedScience')
     return 'Associate of Applied Science'
   return result.charAt(0).toUpperCase() + result.slice(1)
 }
-
 export const getArticle = (str: string) => {
   return ['a', 'e', 'i', 'o', 'u'].includes(str[0].toLowerCase()) ? 'an' : 'a'
 }
