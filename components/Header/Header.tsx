@@ -179,6 +179,7 @@ export const Header = forwardRef(
                           onClick={e => handleUtilityNavigationClick(e, item)}
                           key={item?.navItem?.title}
                           item={item}
+                          customClasses=''                        
                         />
                       ))}
                   </div>
@@ -190,6 +191,7 @@ export const Header = forwardRef(
                           onClick={e => handleUtilityNavigationClick(e, item)}
                           key={item?.navItem?.title}
                           item={item}
+                          customClasses=''
                         />
                       ))}
 
