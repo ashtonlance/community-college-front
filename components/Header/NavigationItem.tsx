@@ -22,14 +22,22 @@ export const isCurrentPage = (urlRaw = '', asPath = '', isUtil = false) => {
   } else if (pathParts[2] !== '/' && !isUtil) {
     slugToMatch = pathParts[2]
   } else if (isUtil) {
-    if (url === '/' || url === 'http://localhost:3000/') {
+    if (
+      url === '/' ||
+      url === 'http://localhost:3000/' ||
+      url === process.env.NEXT_PUBLIC_SITE_URL
+    ) {
       slugToMatch = 'students'
       return true
     } else if (url.includes('data-dashboards')) {
       slugToMatch = 'about-us/data-reporting/data-dashboards'
       return url === slugToMatch
+    } else if (pathParts[1] === 'colleges') {
+      slugToMatch = 'students'
+      return url.includes(slugToMatch)
     } else {
       slugToMatch = pathParts[1]
+      return url === slugToMatch
     }
   }
   return asPath !== '/' && url.includes(slugToMatch)
