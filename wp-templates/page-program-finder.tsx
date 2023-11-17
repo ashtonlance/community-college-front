@@ -270,17 +270,17 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-[15px] py-10 md:flex-wrap md:pb-8 md:pt-5 sm:pt-[10px]">
-          <div className="flex flex-1 basis-full items-center gap-x-[20px] md:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center sm:gap-[15px] gap-5 py-10 lg:flex-wrap md:pb-8 md:pt-5 sm:pt-[10px]">
+          <div className="flex flex-1 lg:basis-full basis-auto	 items-center gap-x-[20px] sm:flex-wrap">
             <label
               htmlFor="programArea"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 md:text-center"
             >
               I&apos;m Interested In
             </label>
             <select
               id="programArea"
-              className="h-[52px] w-[229px] text-darkBeige  md:w-full sm:h-auto"
+              className="h-[52px] w-[229px] text-darkBeige  lg:w-full sm:h-auto"
               value={inputValues.programArea}
               onChange={e =>
                 setInputValues({ ...inputValues, programArea: e.target.value })
@@ -294,16 +294,16 @@ export const ProgramFinder = props => {
               ))}
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] md:basis-full md:flex-wrap">
+          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full lg:basis-[calc(50%-10px)] basis-auto sm:flex-wrap">
             <label
               htmlFor="radius"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:w-full md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 sm:w-full md:text-center"
             >
               Within
             </label>
             <select
               id="radius"
-              className="h-full w-[200px] text-darkBeige md:h-auto md:w-full"
+              className="h-full w-[200px] text-darkBeige md:h-auto lg:w-full"
               value={inputValues.radius}
               onChange={e =>
                 setInputValues({ ...inputValues, radius: e.target.value })
@@ -317,16 +317,16 @@ export const ProgramFinder = props => {
               <option value={100}>100</option>
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] md:basis-full md:flex-wrap">
+          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full lg:basis-[calc(50%-10px)] basis-auto sm:flex-wrap">
             <label
               htmlFor="zipCode"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto md:mb-3 md:w-full md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 sm:w-full md:text-center"
             >
               Of
             </label>
             <input
               id="zipCode"
-              className="text-input w-[150px] sm:h-auto sm:w-full"
+              className="text-input w-[150px] sm:h-auto lg:w-full rounded-[8px]"
               type="text"
               pattern="[0-9]*"
               placeholder="Zip Code"
@@ -336,20 +336,22 @@ export const ProgramFinder = props => {
               }
             />
           </div>
-          <Button
-            onClick={async () => {
-              if (inputValues?.zipCode?.length === 5) {
-                const coordinates = await getCoordinates(inputValues.zipCode)
-                setZipCodeCoordinates(coordinates)
-              }
-              handleSetFilters(inputValues)
-              setShouldFilter(true)
-            }}
-            content={'Search'}
-            arrow
-            classes="primary-btn navy sm:basis-full"
-            isButton
-          />
+          <div className="md:basis-full flex items-center justify-center basis-auto">
+            <Button
+              onClick={async () => {
+                if (inputValues?.zipCode?.length === 5) {
+                  const coordinates = await getCoordinates(inputValues.zipCode)
+                  setZipCodeCoordinates(coordinates)
+                }
+                handleSetFilters(inputValues)
+                setShouldFilter(true)
+              }}
+              content={'Search'}
+              arrow
+              classes="primary-btn navy sm:w-full lg:mt-5"
+              isButton
+            />
+          </div>
         </div>
       </div>
       {filteredPrograms.length > 0 ? (
