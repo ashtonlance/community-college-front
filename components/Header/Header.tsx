@@ -45,7 +45,7 @@ const Logo = ({ scrolled }) => {
   )
 }
 
-const UtilityItem = ({ item, onClick }) => {
+export const UtilityItem = ({ item, onClick, customClasses }) => {
   const router = useRouter()
   return (
     <Link
@@ -57,7 +57,9 @@ const UtilityItem = ({ item, onClick }) => {
             ? 'bg-gold text-navy'
             : ''
         }
-        
+        ${
+          customClasses
+        }
       `)}
       href={item?.navItem?.url || ''}
     >
@@ -222,6 +224,7 @@ export const Header = forwardRef(
 
           <div className="hamburguer-wrapper relative hidden h-[50px] w-[50px] items-center justify-center rounded-[3px] px-[31px] py-[22px] hover:bg-gmt-200 md:right-[110px] md:flex sm:right-[90px]">
             <HamburgerMenu
+              utilityNavigation={utilityNavigation}
               menuItems={menuItems}
               bgTransparent={displayTransparentMode}
               isOpen={hamburgerMenuOpened}
