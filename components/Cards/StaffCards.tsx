@@ -18,7 +18,7 @@ export const StaffCards = ({ card }) => {
   return (
     <div className="col-span-12 col-start-1 grid grid-flow-row grid-cols-12 items-center gap-[20px] rounded-[12px] bg-white px-[24px] py-[20px] md:grid-cols-6 md:gap-0  mdsm:grid-cols-4 mdsm:p-[20px]">
       <div className="footer-links-headline col-span-2 col-start-1 mb-0 text-justify font-condensed text-[24px] text-navy hover:text-navy md:row-span-3 md:mb-[5px] md:text-[20px] mdsm:col-span-6 mdsm:row-auto">
-        {staffDetail.staffName}
+        <span className="whitespace-nowrap">{staffDetail.staffName}</span>
         <br></br>
         <div className="body-small mt-[5px] hidden max-w-[75%] font-bold leading-normal text-darkGrey md:block mdsm:hidden">
           {staffDetail.jobTitle}

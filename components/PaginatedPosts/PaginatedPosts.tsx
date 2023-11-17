@@ -49,7 +49,8 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(props.currentPage)
   const prevPostsLength = useRef(posts?.length)
-  const PAGE_SIZE = postType === 'boardMembers' ? 12 : 9
+  const PAGE_SIZE =
+    postType === 'staff' ? 20 : postType === 'boardMembers' ? 12 : 9
   useEffect(() => {
     setCurrentPage(props.currentPage)
   }, [props.currentPage])

@@ -81,27 +81,21 @@ export default function StaffIndexPage({ data, loading, error }) {
     }
 
     if (debouncedFilters?.orderBy?.order === 'ASC') {
-      result = result.sort(
-        (a, b) =>
-          b.staffDetails?.staffName
-            ?.slice(b.staffDetails.staffName.lastIndexOf(' ') + 1)
-            .localeCompare(
-              a.staffDetails?.staffName?.slice(
-                a.staffDetails.staffName.lastIndexOf(' ') + 1
-              )
-            )
-      )
+      result = result.sort((a, b) => {
+        const aName = a.staffDetails?.staffName?.split(',')[0]
+        const bName = b.staffDetails?.staffName?.split(',')[0]
+        return bName
+          ?.slice(bName.lastIndexOf(' ') + 1)
+          .localeCompare(aName?.slice(aName.lastIndexOf(' ') + 1))
+      })
     } else {
-      result = result.sort(
-        (a, b) =>
-          a.staffDetails?.staffName
-            ?.slice(a.staffDetails.staffName.lastIndexOf(' ') + 1)
-            .localeCompare(
-              b.staffDetails?.staffName?.slice(
-                b.staffDetails.staffName.lastIndexOf(' ') + 1
-              )
-            )
-      )
+      result = result.sort((a, b) => {
+        const aName = a.staffDetails?.staffName?.split(',')[0]
+        const bName = b.staffDetails?.staffName?.split(',')[0]
+        return aName
+          ?.slice(aName.lastIndexOf(' ') + 1)
+          .localeCompare(bName?.slice(bName.lastIndexOf(' ') + 1))
+      })
     }
     setFilteredStaff([...result])
   }, [debouncedFilters, staffIndex])
