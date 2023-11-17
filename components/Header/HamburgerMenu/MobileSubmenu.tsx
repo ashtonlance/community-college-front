@@ -6,47 +6,73 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { MobileChildSubMenu } from '../MegaMenu/MobileChildSubMenu'
+import { UtilityItem } from '../Header'
 
-const TopLevelMenu = ({ items, setActiveMenuAs, classes }) => {
+
+const TopLevelMenu = ({ items, setActiveMenuAs, classes, utilityNavigation }) => {
   return (
-    <div
-      className={`z-10 flex w-full flex-col items-start justify-center text-white ${classes}`}
-    >
-      {items &&
-        items?.map(item => (
-          <div
-            onClick={() => setActiveMenuAs(item)}
-            key={item.id}
-            className={`links-mobile-nav flex w-full items-center justify-between border-b-2 border-lightBlue
-              ${item.label === 'Events' ? 'hide-border order-6' : ''}
-              `}
+    <>
+      <div
+        className={`z-10 flex w-full flex-col items-start justify-center text-white ${classes}`}
+      >
+        {items &&
+          items?.map(item => (
+            <div
+              onClick={() => setActiveMenuAs(item)}
+              key={item.id}
+              className={`links-mobile-nav flex w-full items-center justify-between border-b-2 border-lightBlue
+                ${item.label === 'Events' ? 'hide-border order-6' : ''}
+                `}
+            >
+              <div className=""> {item.label} </div>
+              {item?.children?.length > 0 && (
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.24264 9.24264L7.48528 5L3.24264 0.757359"
+                    stroke="#E1AF00"
+                    strokeWidth="2"
+                  />
+                </svg>
+              )}
+            </div>
+          ))}
+      </div>
+
+      <div className="w-full mt-10">
+        <div className="flex h-full items-center justify-between	">
+          {utilityNavigation
+            .slice(4)
+            ?.map(item => (
+              <UtilityItem
+                customClasses="px-0 w-auto hover:bg-transparent bg-transparent text-white hover:text-white"
+                onClick={e => { }}
+                key={item?.navItem?.title}
+                item={item}
+              />
+            ))}
+          <Link
+            className="utility-item-btn px-0 w-auto hover:bg-transparent bg-transparent text-white hover:text-white"
+            href="/about-us/system-office/contact/"
           >
-            <div className=""> {item.label} </div>
-            {item?.children?.length > 0 && (
-              <svg
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.24264 9.24264L7.48528 5L3.24264 0.757359"
-                  stroke="#E1AF00"
-                  strokeWidth="2"
-                />
-              </svg>
-            )}
-          </div>
-        ))}
-    </div>
+            Contact
+          </Link>
+        </div>
+      </div>
+    </>
   )
 }
 
-const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
+const InternalMenu = ({ activeMenu, items, setActiveMenu, utilityNavigation }) => {
   const router = useRouter()
   let content = (
     <TopLevelMenu
+      utilityNavigation={utilityNavigation}
       classes="top-[90px]"
       items={items}
       setActiveMenuAs={setActiveMenu}
@@ -79,7 +105,7 @@ const InternalMenu = ({ activeMenu, items, setActiveMenu }) => {
   return content
 }
 
-export const MobileSubmenu = ({ items }) => {
+export const MobileSubmenu = ({ items, utilityNavigation }) => {
   const [activeMenu, setActiveMenu] = useState(null)
   const [navigationHeight, setNavigationHeight] = useState(null)
 
@@ -97,6 +123,7 @@ export const MobileSubmenu = ({ items }) => {
 
   const menu = (
     <InternalMenu
+      utilityNavigation={utilityNavigation}
       activeMenu={activeMenu}
       items={items}
       setActiveMenu={setActiveMenu}

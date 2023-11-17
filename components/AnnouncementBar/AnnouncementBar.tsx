@@ -59,7 +59,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = props => {
 
             <span
               onClick={handleDismiss}
-              className="group flex h-full min-h-[56px] max-w-[38px] basis-1/12 cursor-pointer flex-col items-center justify-center bg-[#beddec] p-2 hover:bg-navy"
+              className="group flex h-full min-h-[56px] max-w-[38px] basis-1/12 cursor-pointer flex-col items-center justify-center bg-[#beddec] p-3 hover:bg-navy"
             >
               <Close className="mx-auto text-navy group-hover:text-white" />
             </span>

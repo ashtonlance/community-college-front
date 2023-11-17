@@ -48,7 +48,7 @@
     @apply text-[82px] md:text-[62px] sm:text-[50px] font-extrabold leading-[110%] tracking-[-0.02em] text-black font-sans my-[32px];
   }
   .body-large {
-    @apply text-[18px] sm:text-[16px] font-normal leading-[160%] sm:leading-[150%] text-navy font-sans;
+    @apply text-[18px] sm:text-[16px] font-medium leading-[160%] sm:leading-[150%] text-navy font-sans;
   }
   .body-regular {
     @apply text-[16px] sm:text-[14px] font-medium leading-[150%] sm:leading-[140%] text-navy font-sans;

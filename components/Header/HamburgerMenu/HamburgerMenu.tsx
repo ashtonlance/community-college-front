@@ -1,6 +1,7 @@
 import { MobileSubmenu } from './MobileSubmenu'
 
 export type HamburgerMenuProps = {
+  utilityNavigation: any
   menuItems: any
   bgTransparent: boolean
   isOpen: boolean
@@ -8,6 +9,7 @@ export type HamburgerMenuProps = {
 }
 
 export const HamburgerMenu = ({
+  utilityNavigation,
   menuItems,
   bgTransparent,
   isOpen,
@@ -107,7 +109,7 @@ export const HamburgerMenu = ({
           )}
         </div>
       )}
-      {isOpen && <MobileSubmenu items={menuItems} />}
+      {isOpen && <MobileSubmenu items={menuItems} utilityNavigation={utilityNavigation}/>}
     </div>
   )
 }
