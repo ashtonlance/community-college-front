@@ -159,7 +159,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           })}
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
+      <div className="flex flex-1 basis-[calc(50%-20px)] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
         <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
           Within
         </label>
@@ -179,7 +179,7 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           <option value={100}>100</option>
         </select>
       </div>
-      <div className="flex flex-1 basis-[48%] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
+      <div className="flex flex-1 basis-[calc(50%-20px)] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
         <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
           Of
         </label>
@@ -195,13 +195,15 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           }
         />
       </div>
-      <Button
-        onClick={handleSubmit}
-        content={'Search Programs'}
-        arrow
-        classes="primary-btn navy sm:mt-6 mt-5"
-        isButton
-      />
+      <div className="basis-[100%] flex items-center justify-center">
+        <Button
+          onClick={handleSubmit}
+          content={'Search Programs'}
+          arrow
+          classes="primary-btn navy sm:mt-6 mt-5"
+          isButton
+        />
+      </div>
     </div>
   )
 }
