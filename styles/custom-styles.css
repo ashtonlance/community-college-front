@@ -150,6 +150,10 @@ table tr.even {
   @apply bg-grey;
 }
 
+table tr.odd {
+  @apply bg-white;
+}
+
 table tr:first-of-type {
   @apply bg-lightBlue font-extrabold text-navy uppercase;
 }
