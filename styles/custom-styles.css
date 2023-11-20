@@ -272,6 +272,14 @@ table td a {
   margin-right: auto;
 }
 
+ul > li > ul {
+   @apply ml-4;
+}
+
+ul li ul li {
+  @apply list-[circle];
+}
+
 .yt-lite {
   background-color: #000;
   position: relative;
