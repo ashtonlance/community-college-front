@@ -280,6 +280,10 @@ ul li ul li {
   @apply list-[circle];
 }
 
+.accordion-content a {
+  @apply hover:text-navy;
+}
+
 .yt-lite {
   background-color: #000;
   position: relative;

@@ -151,7 +151,7 @@ const AccordionContent = React.forwardRef<
         {isChildrenObject ? (
           children
         ) : (
-          <div dangerouslySetInnerHTML={{ __html: children as string }} />
+          <div className="accordion-content" dangerouslySetInnerHTML={{ __html: children as string }} />
         )}
       </div>
     </AccordionPrimitive.Content>
