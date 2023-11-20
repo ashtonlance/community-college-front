@@ -213,7 +213,7 @@ export const Header = forwardRef(
               transparentScrolledMode
                 ? 'px-[32px] py-[16px] md:px-[24px] md:py-[20px] '
                 : 'px-[32px] py-[24px] md:p-[24px] md:pl-[40px]'
-            } transition-padding relative mx-auto flex h-fit w-full max-w-[1700px] items-center justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
+            } transition-padding relative mx-auto flex h-fit w-full max-w-[1700px] sm:items-center items-start justify-between bg-transparent duration-200 sm:py-[10px] sm:pl-[24px] sm:pr-[20px]`
           )}
         >
           <Logo scrolled={transparentScrolledMode} />

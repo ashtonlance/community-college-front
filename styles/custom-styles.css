@@ -272,6 +272,18 @@ table td a {
   margin-right: auto;
 }
 
+ul > li > ul {
+   @apply ml-4;
+}
+
+ul li ul li {
+  @apply list-[circle];
+}
+
+.accordion-content a {
+  @apply hover:text-navy;
+}
+
 .yt-lite {
   background-color: #000;
   position: relative;
