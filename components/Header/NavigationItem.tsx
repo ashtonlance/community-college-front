@@ -55,7 +55,7 @@ export const NavigationItem = ({
   const navigationElement = hasDropdownItems ? (
     <>
       {item?.children?.length > 0 && (
-        <div className="group flex h-[50px] flex-col items-center justify-center gap-[6px]">
+        <div className="group flex flex-col items-center justify-center gap-[6px]">
           <Link
             suppressHydrationWarning
             onClick={e => handleActiveItem(e, item.id)}
