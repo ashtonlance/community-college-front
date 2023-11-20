@@ -82,9 +82,12 @@ export default function CollegesArchive(props: CollegesIndexProps) {
 
   const { page } = router.query
   const currentPage = parseInt((Array.isArray(page) ? page[0] : page) || '1')
+
   const counties = useMemo(
     () =>
-      [...new Set(colleges.map(college => college.collegeDetails.county))]
+      [...new Set(colleges.flatMap(college => {
+        return college.collegeDetails.county.split(', ')
+      }))]
         .sort()
         .filter(Boolean),
     [colleges]
@@ -116,7 +119,7 @@ export default function CollegesArchive(props: CollegesIndexProps) {
 
     if (debouncedFilters.county) {
       result = result.filter(
-        college => college.collegeDetails.county === debouncedFilters.county
+        college => college.collegeDetails.county.includes(debouncedFilters.county) 
       )
     }
 
