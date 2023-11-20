@@ -195,7 +195,7 @@ export const Header = forwardRef(
                         />
                       ))}
 
-                    <span className="search-wrapper-icon flex h-[45px] items-center bg-lightBlue px-[20px] py-[14px] font-condensed text-navy hover:bg-gmt-200 md:hidden md:h-[50px] md:w-[50px] md:justify-center md:p-0">
+                    <span className="search-wrapper-icon flex items-center bg-lightBlue font-condensed text-navy hover:bg-gmt-200 md:hidden md:w-[50px] md:justify-center md:p-0">
                       <Search
                         transparentMode={displayTransparentMode}
                         searchOpened={setSearchOpened}

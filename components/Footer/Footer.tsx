@@ -46,10 +46,10 @@ export const Footer = ({ menuItems, footerNavigation, socialLinks }) => {
             <Logo className="mx-auto" />
           </div>
           <div className="md:flex md:w-[40%] md:flex-col md:items-center md:justify-center md:text-center sm:w-full">
-            <address className="mb-[15px] max-w-[200px] text-[14px] font-normal not-italic leading-[140%] text-white">
+            <address className="mb-[15px] max-w-[200px] text-[14px] font-medium not-italic leading-[140%] text-white">
               200 West Jones Street Raleigh, North Carolina 27603
             </address>
-            <p className="mb-[20px] text-[14px] font-normal leading-[140%] text-white hover:text-lightBlue">
+            <p className="mb-[20px] text-[14px] leading-[140%] text-white hover:text-lightBlue">
               <a href="tel:(919) 807-7100">(919) 807-7100</a>
             </p>
             <div className="flex justify-between md:justify-center md:gap-x-5">
