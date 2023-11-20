@@ -79,7 +79,7 @@ export const DynamicNavigationMenu = ({
       menuItems?.map(item => {
         return (
           <div
-            className="relative flex items-center justify-center"
+            className="relative flex justify-center self-start"
             key={item.id}
           >
             <NavigationItem

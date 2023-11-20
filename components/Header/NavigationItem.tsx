@@ -110,7 +110,7 @@ export const NavigationItem = ({
       )}
     </>
   ) : (
-    <div className="group flex h-[50px] flex-col items-center justify-center gap-y-[6px]">
+    <div className="group flex flex-col justify-center gap-y-[6px]">
       <Link
         suppressHydrationWarning
         onMouseOver={() => handleActiveItem(item.id)}
