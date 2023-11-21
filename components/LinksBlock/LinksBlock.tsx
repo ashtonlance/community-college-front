@@ -16,7 +16,7 @@ export const LinksBlock = ({ attributes }) => {
           src={`${bgColor == 'grey' ? bgGrey.src : bgWhite.src}`}
           fill
           alt="background"
-          className="object-fill !h-auto bottom-0 !top-auto"
+          className="object-fill !h-auto bottom-0 !top-auto max-h-full"
         />
       <div
         className={`mx-auto relative flex w-[90%] max-w-[1220px] justify-between gap-[20px] md:flex-col module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing}`}

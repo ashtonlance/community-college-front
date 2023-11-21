@@ -132,7 +132,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
 
   return (
     <div
-      className="flex items-center gap-[10px] hover:cursor-pointer "
+      className="flex items-center gap-[10px] hover:cursor-pointer w-full h-full"
       ref={ref}
     >
       <div
@@ -190,9 +190,12 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       </div>
 
       <div
+        style={{
+          top: `${navigationHeight}px`,
+        }}
         className={`${
           searchBarActive ? 'semi-modal' : 'hidden'
-        } top-[${navigationHeight}px]`}
+        }`}
       >
         <InstantSearch
           searchClient={searchClient}

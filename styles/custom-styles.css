@@ -406,7 +406,11 @@ z-index: 1000;
 }
 
 .aa-Autocomplete {
-  @apply bg-white py-9 px-24 md:py-4 md:px-8;
+  @apply bg-white py-9 sm:pl-0 px-24 md:py-4 md:px-8;
+}
+
+.aa-Autocomplete > button {
+  @apply w-full border-none text-[16px] font-bold;
 }
 
 .aa-Form {

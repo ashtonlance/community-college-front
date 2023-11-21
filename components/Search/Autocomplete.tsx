@@ -73,7 +73,7 @@ export function Autocomplete(props) {
   return (
     <>
       <div className="w-full" ref={containerRef} />
-      <button onClick={() => router.push(`/search?query=${searchValue}`)}>
+      <button className="mr-24 md:mr-8 font-medium" onClick={() => router.push(`/search?query=${searchValue}`)}>
         Search
       </button>
     </>
