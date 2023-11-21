@@ -15,6 +15,7 @@ import { Quote } from '../components/Quote'
 import { Shortcode } from '../components/Shortcode'
 import { TextBlock } from '../components/TextBlock'
 import { TextAndImageBlock } from '../components/TextAndImageBlock'
+import { TextAndMediaSlider } from '../components/TextAndMediaSlider'
 import { LinksBlock } from '../components/LinksBlock'
 import { StatsBlock } from '../components/StatsBlock'
 import { Testimonial } from '../components/Testimonial'
@@ -58,6 +59,7 @@ const blocks = {
   GeneralCards,
   RelatedResources,
   TextAndImageBlock,
+  TextAndMediaSlider,
   ContactBlock,
   FeaturesAndBenefits,
   TestimonialSlider,
