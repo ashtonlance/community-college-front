@@ -43,7 +43,7 @@ export const MobileChildSubMenu = ({
                     return (
                       <Link
                         href={subItemChild?.url || ''}
-                        className="links-sub-nav flex font-sans text-sm font-normal capitalize leading-[100%] text-lightBlue"
+                        className="links-sub-nav flex font-sans text-sm font-medium capitalize leading-[100%] text-lightBlue"
                         key={subItemChild?.label + i}
                       >
                         {subItemChild?.label}

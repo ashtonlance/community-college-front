@@ -80,7 +80,10 @@
     @apply cursor-pointer text-[22px] font-bold tracking-[-0.22px] leading-[110%] font-condensed text-white hover:text-lightBlue;
   }
   .links-child-nav{
-    @apply font-sans text-[14px] font-normal leading-[140%] text-lightBlue hover:text-white
+    @apply font-sans text-[14px] font-medium mb-1 leading-[140%] text-lightBlue hover:text-white;
+  }
+  .links-child-nav:last-of-type{
+    @apply mb-0;
   }
   .primary-btn {
     @apply w-fit flex items-center gap-2 justify-center transition-colors border-none cursor-pointer uppercase text-[20px] rounded-lg hover:bg-white hover:text-navy sm:text-[18px] font-bold leading-[100%] tracking-[0.6px] font-condensed py-[16px] px-[24px] sm:py-[14px] sm:px-[22px];
