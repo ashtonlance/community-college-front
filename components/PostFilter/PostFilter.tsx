@@ -56,9 +56,9 @@ export const PostFilter = ({
     const queryString = new URLSearchParams(
       newQuery as Record<string, string>
     ).toString()
-    setTimeout(() => {
-      window.history.pushState(null, '', `?${queryString}`)
-    }, 250)
+    // setTimeout(() => {
+    window.history.pushState(null, '', `?${queryString}`)
+    // }, 250)
   }
 
   return (

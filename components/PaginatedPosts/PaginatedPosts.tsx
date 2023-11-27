@@ -19,7 +19,7 @@ import {
 } from '@/components/Cards'
 import { Pagination } from '@/components/Pagination'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 
 type PostType =
   | 'numberedMemo'
@@ -44,7 +44,7 @@ type PaginatedPostsProps = {
   postType?: PostType
 }
 
-export const PaginatedPosts = (props: PaginatedPostsProps) => {
+export const PaginatedPosts = memo((props: PaginatedPostsProps) => {
   const { postType, posts } = props
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(props.currentPage)
@@ -59,13 +59,15 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const currentQueryParams = window.location.search
-
-      if (prevQueryParams.current !== currentQueryParams) {
+      const url = new URL(window.location.href)
+      const params = new URLSearchParams(url.search)
+      params.delete('page')
+      const currentQueryParams = params.toString()
+      if (
+        prevQueryParams.current &&
+        prevQueryParams.current !== currentQueryParams
+      ) {
         setCurrentPage(1)
-
-        // Create a URL object with the current full URL
-        const url = new URL(window.location.href)
 
         // Get the current query parameters
         const params = new URLSearchParams(url.search)
@@ -82,12 +84,12 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       prevPostsLength.current = posts?.length
       prevQueryParams.current = currentQueryParams
     }
-  }, [posts?.length])
+  }, [posts?.length, currentPage])
 
+  const offset = (currentPage - 1) * PAGE_SIZE
   const items = useMemo(() => {
-    const offset = (currentPage - 1) * PAGE_SIZE
     return (posts && posts.slice(offset, offset + PAGE_SIZE)) || []
-  }, [posts, currentPage, PAGE_SIZE])
+  }, [posts, offset])
 
   const resetFilters = () => {
     const { wordpressNode, ...rest } = router.query
@@ -188,4 +190,6 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
       )}
     </>
   )
-}
+})
+
+PaginatedPosts.displayName = 'PaginatedPosts'
