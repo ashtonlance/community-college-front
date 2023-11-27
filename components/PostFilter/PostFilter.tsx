@@ -58,7 +58,7 @@ export const PostFilter = ({
     ).toString()
     setTimeout(() => {
       window.history.pushState(null, '', `?${queryString}`)
-    }, 0)
+    }, 250)
   }
 
   return (
