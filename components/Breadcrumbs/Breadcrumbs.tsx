@@ -24,15 +24,13 @@ export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
               <Link
                 href={crumb.href}
                 key={i}
-                className={`font-bold hover:text-navy ${
-                  isSecondToLastItem ? 'text-navy' : 'text-darkBeige'
-                }`}
+                className={`text-darkBeige font-bold hover:text-navy`}
               >
                 {crumb.title.replace('And', '&')}
               </Link>
               {/* separator */}
               {!isSecondToLastItem && (
-                <span className="font-bold text-beige"> / </span>
+                <span className="font-bold text-beige pl-2">/</span>
               )}
             </span>
           )
