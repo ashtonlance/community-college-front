@@ -75,6 +75,7 @@ export const PostFilter = ({
           return (
             <select
               key={filterOption.name}
+              value={filters[filterOption.name]}
               className={cn(
                 `body-regular post-filter max-w-[250px] flex-1 py-[14px] pl-[20px] pr-[30px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:py-[12px] mdsm:pl-[14px] 
                 ${filterClass}

@@ -55,28 +55,33 @@ export const PaginatedPosts = (props: PaginatedPostsProps) => {
     setCurrentPage(props.currentPage)
   }, [props.currentPage])
 
+  const prevQueryParams = useRef('')
+
   useEffect(() => {
-    if (prevPostsLength.current !== posts?.length) {
-      setCurrentPage(1)
+    if (typeof window !== 'undefined') {
+      const currentQueryParams = window.location.search
 
-      // Create a URL object with the current full URL
-      const url = new URL(window.location.href)
+      if (prevQueryParams.current !== currentQueryParams) {
+        setCurrentPage(1)
 
-      // Get the current query parameters
-      const params = new URLSearchParams(url.search)
+        // Create a URL object with the current full URL
+        const url = new URL(window.location.href)
 
-      // Update the 'page' parameter
-      params.set('page', String(currentPage))
+        // Get the current query parameters
+        const params = new URLSearchParams(url.search)
 
-      // Generate the new URL
-      const newUrl = `${url.pathname}?${params.toString()}`
+        // Update the 'page' parameter
+        params.set('page', String(currentPage))
 
-      router.push(newUrl, null, {
-        shallow: true,
-      })
+        // Generate the new URL
+        const newUrl = `${url.pathname}?${params.toString()}`
+
+        window.history.pushState({}, '', newUrl)
+      }
+
+      prevPostsLength.current = posts?.length
+      prevQueryParams.current = currentQueryParams
     }
-
-    prevPostsLength.current = posts?.length
   }, [posts?.length])
 
   const items = useMemo(() => {
