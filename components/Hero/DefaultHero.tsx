@@ -30,7 +30,7 @@ export const DefaultHero = ({
   switch (type) {
     case 'program-area':
       slug = '/students/what-we-offer/programs/'
-      urlToMatch = '/program-areas'
+      urlToMatch = '/students/what-we-offer/program-areas'
       break
     // Add more cases as needed
     case 'board-meeting':
