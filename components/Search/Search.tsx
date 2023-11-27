@@ -136,7 +136,7 @@ export const Search = ({ transparentMode, searchOpened }: SearchProps) => {
       ref={ref}
     >
       <div
-        className="flex items-center gap-[10px] hover:cursor-pointer font-medium px-[20px] py-[14px] leading-none"
+        className="flex items-center gap-[10px] hover:cursor-pointer font-medium px-[20px] py-[14px] leading-tight"
         onClick={toggleSearchBar}
       >
         {'Search'}

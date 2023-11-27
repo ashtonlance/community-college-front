@@ -51,7 +51,7 @@ export const UtilityItem = ({ item, onClick, customClasses }) => {
     <Link
       onClick={e => onClick(e, item)}
       key={item?.navItem?.title}
-      className={cn(`utility-item-btn
+      className={cn(`utility-item-btn leading-tight
         ${
           isCurrentPage(item?.navItem?.url, router.asPath, true)
             ? 'bg-gold text-navy'
