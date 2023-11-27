@@ -75,7 +75,14 @@ export const PostFilter = ({
           return (
             <select
               key={filterOption.name}
-              value={filters[filterOption.name]}
+              value={
+                isSortBy
+                  ? filters['orderBy']?.order ??
+                    (isNameFilter || isEventsPage || isAnnualReportsPage
+                      ? 'DESC'
+                      : 'ASC')
+                  : filters[filterOption.name] ?? ''
+              }
               className={cn(
                 `body-regular post-filter max-w-[250px] flex-1 py-[14px] pl-[20px] pr-[30px] text-darkBeige md:w-[48%] md:max-w-none mdsm:w-full mdsm:py-[12px] mdsm:pl-[14px] 
                 ${filterClass}
@@ -88,11 +95,6 @@ export const PostFilter = ({
                     ? { field: 'NAME', order: e.target.value }
                     : e.target.value
                 )
-              }
-              defaultValue={
-                isNameFilter || isEventsPage || isAnnualReportsPage
-                  ? 'DESC'
-                  : 'ASC'
               }
             >
               {!isNameFilter && (
