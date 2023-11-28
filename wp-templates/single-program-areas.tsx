@@ -59,7 +59,7 @@ export default function SingleProgramArea(props) {
             src={bgFlip.src}
             fill
             alt="background"
-            className="object-fill h-auto z-[-1]"
+            className="object-fill !h-auto bottom-0 max-h-full z-[-1]"
           />
           <div className="p-[100px] md:p-[60px] sm:p-[40px] ">
             <h2 className="h3 mb-10 flex items-center gap-3">
