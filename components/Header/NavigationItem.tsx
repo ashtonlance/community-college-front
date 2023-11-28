@@ -31,13 +31,21 @@ export const isCurrentPage = (urlRaw = '', asPath = '', isUtil = false) => {
       return true
     } else if (url.includes('data-dashboards')) {
       slugToMatch = '/about-us/data-reporting/data-dashboards-page/'
-      return asPath.includes(slugToMatch) || asPath.includes('/about-us/resources/data-dashboards/')
+      return (
+        asPath !== '/' &&
+        (asPath.includes(slugToMatch) ||
+          asPath.includes('/about-us/resources/data-dashboards/'))
+      )
     } else if (pathParts[1] === 'colleges') {
       slugToMatch = 'students'
-      return url.includes(slugToMatch)
+      return asPath !== '/' && url.includes(slugToMatch)
     } else {
       slugToMatch = pathParts[1]
-      return url.includes(slugToMatch) && !asPath.includes('data-dashboards')
+      return (
+        asPath !== '/' &&
+        url.includes(slugToMatch) &&
+        !asPath.includes('data-dashboards')
+      )
     }
   }
   return asPath !== '/' && url.includes(slugToMatch)

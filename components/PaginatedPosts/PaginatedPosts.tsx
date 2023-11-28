@@ -44,7 +44,9 @@ type PaginatedPostsProps = {
   postType?: PostType
 }
 
-export const PaginatedPosts = memo((props: PaginatedPostsProps) => {
+export const PaginatedPosts = memo(function PaginatedPosts(
+  props: PaginatedPostsProps
+) {
   const { postType, posts } = props
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(props.currentPage)

@@ -18,11 +18,13 @@ export const TwoColumnMenu = ({
   classes,
   handleActiveItem,
   parentItem,
-  activeItem,
 }: TwoColumnMenuProps) => {
   const [navigationHeight, setNavigationHeight] = useState(140)
   const navigation = document.getElementById('topbar')
-
+  const calloutItem = subItems.find(
+    subItem => subItem.menuCallout?.isThisACallout === true
+  )
+  console.log({ calloutItem })
   // get header size dynamically to move main content below
   const handleResize = useCallback(() => {
     setNavigationHeight(navigation?.clientHeight)
@@ -35,6 +37,9 @@ export const TwoColumnMenu = ({
       setNavigationHeight(140)
     }
     window.addEventListener('resize', handleResize, false)
+    return () => {
+      window.removeEventListener('resize', handleResize, false)
+    }
   }, [navigation, handleResize])
 
   const ref: MutableRefObject<HTMLDivElement> = useClickAway(e => {
@@ -102,13 +107,19 @@ export const TwoColumnMenu = ({
 
           <div className="flex w-[35%] flex-col items-center justify-center gap-8 pl-[80px] text-center md:hidden">
             <span className="h3 text-white">
-              Need help finding the right program?
+              {calloutItem?.menuCallout?.heading ??
+                'Need help finding the right program?'}
             </span>
             <Link
-              href="/students/what-we-offer/program-finder/"
+              href={
+                calloutItem?.menuCallout?.link?.url ??
+                '/students/what-we-offer/program-finder/'
+              }
               className="secondary-btn gold"
+              target={calloutItem?.menuCallout?.link?.target ?? '_self'}
             >
-              Use Our Program Finder
+              {calloutItem?.menuCallout?.link?.title ??
+                'Use Our Program Finder'}
             </Link>
           </div>
         </div>

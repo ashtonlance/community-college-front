@@ -3,11 +3,7 @@ import { useEffect } from 'react'
 import { cn } from 'utils'
 import { camelToSentenceCase, getArticle } from 'utils/stringHelpers'
 
-export const PostFilter = ({
-  filters,
-  setFilters,
-  filtersToGenerateDropdown,
-}) => {
+export function PostFilter({ filters, setFilters, filtersToGenerateDropdown }) {
   const router = useRouter()
   const filterLength = Object.keys({ ...filters }).length - 1
 

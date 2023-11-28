@@ -1,9 +1,9 @@
+import Image from 'next/image'
 import { useState } from 'react'
 import arrowdown from '../../assets/icons/arrow-down.svg'
-import Image from 'next/image'
 import { AboutFooter } from './AboutFooter'
-import { ServicesFooter } from './ServicesFooter'
 import { ResourcesFooter } from './ResourcesFooter'
+import { ServicesFooter } from './ServicesFooter'
 
 const SubmenuFooter = ({ activeMenu }) => {
   switch (activeMenu?.label) {
