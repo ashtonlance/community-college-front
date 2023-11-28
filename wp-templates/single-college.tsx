@@ -58,7 +58,7 @@ export default function SingleCollege(props) {
   const databaseId = pageData?.databaseId
 
   const router = useRouter()
-  const slug = router?.query?.wordpressNode[1]
+  const slug = router?.query?.wordpressNode[3]
   const { data: programs } = useQuery(GET_PROGRAMS, {
     variables: { slug },
     context: {
@@ -67,6 +67,7 @@ export default function SingleCollege(props) {
       },
     },
   })
+  console.log(programs)
   const [programAreas, setProgramAreas] = useState([])
 
   useEffect(() => {
