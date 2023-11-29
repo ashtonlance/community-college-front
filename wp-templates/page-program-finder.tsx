@@ -124,86 +124,81 @@ export const ProgramFinder = props => {
 
   const filterColleges = useCallback(
     coordinates => {
-      if (shouldFilter && coordinates) {
-        let result = [...combined] // Use the combined list instead of colleges
-        let closestCollege = null
-        let closestDistance = Infinity
+      let result = [...combined] // Use the combined list instead of colleges
+      let closestCollege = null
+      let closestDistance = Infinity
 
-        if (inputValuesRef.current.programArea) {
-          result = result.filter(program => {
-            return program.taggedProgramAreas.nodes.some(
-              node => node.name === inputValuesRef.current.programArea
-            )
+      if (inputValuesRef.current.programArea) {
+        result = result.filter(program => {
+          return program.taggedProgramAreas.nodes.some(
+            node => node.name === inputValuesRef.current.programArea
+          )
+        })
+      }
+
+      if (
+        inputValuesRef.current.zipCode &&
+        inputValuesRef.current.radius &&
+        inputValuesRef.current.zipCode.length === 5 &&
+        coordinates
+      ) {
+        result = result
+          .map(program => {
+            const colleges = program.colleges
+              .map(college => {
+                const collegeLatitude = college.collegeDetails.map.latitude
+                const collegeLongitude = college.collegeDetails.map.longitude
+                const distance = getDistance(
+                  { latitude: collegeLatitude, longitude: collegeLongitude },
+                  coordinates
+                )
+                const radiusInMeters = inputValuesRef.current.radius * 1609.334
+                const withinRadius = distance <= radiusInMeters
+
+                if (distance < closestDistance) {
+                  closestDistance = distance
+                  closestCollege = college
+                  setClosestDistance(distance / 1609.334) // Convert distance to miles
+                }
+
+                return {
+                  ...college,
+                  distance: distance / 1609.334, // Convert distance to miles
+                  withinRadius,
+                }
+              })
+              .filter(college => college.withinRadius)
+              .sort((a, b) => a.distance - b.distance) // Sort colleges by distance
+
+            return {
+              ...program,
+              colleges,
+            }
           })
-        }
-
-        if (
-          inputValuesRef.current.zipCode &&
-          inputValuesRef.current.radius &&
-          inputValuesRef.current.zipCode.length === 5 &&
-          coordinates
-        ) {
-          result = result
-            .map(program => {
-              const colleges = program.colleges
-                .map(college => {
-                  const collegeLatitude = college.collegeDetails.map.latitude
-                  const collegeLongitude = college.collegeDetails.map.longitude
-                  const distance = getDistance(
-                    { latitude: collegeLatitude, longitude: collegeLongitude },
-                    coordinates
-                  )
-                  const radiusInMeters =
-                    inputValuesRef.current.radius * 1609.334
-                  const withinRadius = distance <= radiusInMeters
-
-                  if (distance < closestDistance) {
-                    closestDistance = distance
-                    closestCollege = college
-                    setClosestDistance(distance / 1609.334) // Convert distance to miles
-                  }
-
-                  return {
-                    ...college,
-                    distance: distance / 1609.334, // Convert distance to miles
-                    withinRadius,
-                  }
-                })
-                .filter(college => college.withinRadius)
-                .sort((a, b) => a.distance - b.distance) // Sort colleges by distance
-
-              return {
-                ...program,
-                colleges,
-              }
-            })
-            .filter(program => program.colleges.length > 0)
-        }
-        setFilteredPrograms([...result])
-        setClosestCollege(closestCollege)
-        setShouldFilter(false)
-        if (!result.length) {
-          setShouldFilter(true)
-        }
-      } else {
-        throw new Error('Missing coordinates')
+          .filter(program => program.colleges.length > 0)
+      }
+      setFilteredPrograms([...result])
+      setClosestCollege(closestCollege)
+      setShouldFilter(false)
+      if (!result.length) {
+        setShouldFilter(true)
       }
     },
     [combined, shouldFilter]
   )
 
   useEffect(() => {
-    if (shouldFilter && zipCodeCoordinates) {
+    if (shouldFilter) {
       filterColleges(zipCodeCoordinates)
     }
   }, [shouldFilter, zipCodeCoordinates, filterColleges])
 
   useEffect(() => {
-    const { programArea, radius, zipCode } = router.query
+    const { programArea = '', radius = '', zipCode = '' } = router.query
     const newValues = {
-      programArea: programArea,
-      radius: radius,
-      zipCode: zipCode,
+      programArea: programArea || '',
+      radius: radius || '',
+      zipCode: zipCode || '',
     }
     setInputValues(newValues)
   }, [router.query])
@@ -270,11 +265,11 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center sm:gap-[15px] gap-5 py-10 lg:flex-wrap md:pb-8 md:pt-5 sm:pt-[10px]">
-          <div className="flex flex-1 lg:basis-full basis-auto	 items-center gap-x-[20px] sm:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-5 py-10 lg:flex-wrap md:pb-8 md:pt-5 sm:gap-[15px] sm:pt-[10px]">
+          <div className="flex flex-1 basis-auto items-center	 gap-x-[20px] lg:basis-full sm:flex-wrap">
             <label
               htmlFor="programArea"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3"
             >
               I&apos;m Interested In
             </label>
@@ -294,16 +289,16 @@ export const ProgramFinder = props => {
               ))}
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full lg:basis-[calc(50%-10px)] basis-auto sm:flex-wrap">
+          <div className="flex flex-1 basis-auto items-center gap-x-[20px] lg:basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
             <label
               htmlFor="radius"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 sm:w-full md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3 sm:w-full"
             >
               Within
             </label>
             <select
               id="radius"
-              className="h-full w-[200px] text-darkBeige md:h-auto lg:w-full"
+              className="h-full w-[200px] text-darkBeige lg:w-full md:h-auto"
               value={inputValues.radius}
               onChange={e =>
                 setInputValues({ ...inputValues, radius: e.target.value })
@@ -317,16 +312,16 @@ export const ProgramFinder = props => {
               <option value={100}>100</option>
             </select>
           </div>
-          <div className="flex flex-1 items-center gap-x-[20px] sm:basis-full lg:basis-[calc(50%-10px)] basis-auto sm:flex-wrap">
+          <div className="flex flex-1 basis-auto items-center gap-x-[20px] lg:basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
             <label
               htmlFor="zipCode"
-              className="h5 mb-0 whitespace-nowrap md:mx-auto sm:mb-3 sm:w-full md:text-center"
+              className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3 sm:w-full"
             >
               Of
             </label>
             <input
               id="zipCode"
-              className="text-input w-[150px] sm:h-auto lg:w-full rounded-[8px]"
+              className="text-input w-[150px] rounded-[8px] lg:w-full sm:h-auto"
               type="text"
               pattern="[0-9]*"
               placeholder="Zip Code"
@@ -336,7 +331,7 @@ export const ProgramFinder = props => {
               }
             />
           </div>
-          <div className="md:basis-full flex items-center justify-center basis-auto">
+          <div className="flex basis-auto items-center justify-center md:basis-full">
             <Button
               onClick={async () => {
                 if (inputValues?.zipCode?.length === 5) {
