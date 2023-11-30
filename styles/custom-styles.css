@@ -119,7 +119,7 @@
 }
 
 table {
-  @apply rounded-xl border-grey max-w-full !border-separate	!border-spacing-0;
+  @apply rounded-xl border-grey max-w-full !border-separate	!border-spacing-0 sm:!w-full w-auto;
 }
 
 table td {
@@ -146,16 +146,16 @@ table tr:first-child th:last-of-type {
   @apply border-r;
 }
 
+table tr:first-of-type {
+  @apply bg-lightBlue sm:font-medium font-extrabold sm:text-darkGrey text-navy sm:normal-case uppercase;
+}
+
 table tr.even {
   @apply bg-grey;
 }
 
 table tr.odd {
   @apply bg-white;
-}
-
-table tr:first-of-type {
-  @apply bg-lightBlue font-extrabold text-navy uppercase;
 }
 
 table tr:last-child td {
