@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const SELECT_FIELD_FIELDS = gql`
   fragment SelectFieldFields on SelectField {
@@ -40,7 +41,11 @@ export default function SelectField({ field, fieldErrors }) {
         {isRequired ? <span className="text-rust">*</span> : null}
       </label>
       <select
-        className="p-regular w-full rounded-[8px]  px-[20px] py-[14px] text-navy accent-navy focus-within:outline-lightBlue focus:outline-lightBlue focus:ring-lightBlue active:outline-lightBlue"
+        className={cn(
+          `p-regular w-full rounded-[8px]  px-[20px] py-[14px] text-navy accent-navy focus-within:outline-lightBlue focus:outline-lightBlue focus:ring-lightBlue active:outline-lightBlue ${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         name={String(id)}
         id={htmlId}
         required={Boolean(isRequired)}
@@ -75,7 +80,7 @@ export default function SelectField({ field, fieldErrors }) {
       ) : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

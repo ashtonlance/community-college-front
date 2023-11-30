@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { cn } from 'utils'
 
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
@@ -57,6 +58,11 @@ export default function AddressField({ field, fieldErrors }) {
         return (
           <div key={key}>
             <input
+              className={cn(
+                `${
+                  fieldErrors?.length ? '!border-[#C05325]' : null
+                }`
+              )}
               type="text"
               name={String(key)}
               id={`input_${formId}_${id}_${key}`}
@@ -72,7 +78,7 @@ export default function AddressField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

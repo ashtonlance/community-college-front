@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const RADIO_FIELD_FIELDS = gql`
   fragment RadioFieldFields on RadioField {
@@ -46,7 +47,11 @@ export default function RadioField({ field, fieldErrors }) {
         return (
           <div className="sm:mb-3 mb-[10px] flex items-center" key={inputValue}>
             <input
-              className="h-5 w-5 !rounded-full !p-0 accent-navy focus-within:outline-lightBlue"
+              className={cn(
+                `h-5 w-5 !rounded-full !p-0 accent-navy focus-within:outline-lightBlue ${
+                  fieldErrors?.length ? '!border-[#C05325]' : null
+                }`
+              )}
               type="radio"
               name={String(id)}
               id={`choice_${formId}_${id}_${inputValue}`}
@@ -65,7 +70,7 @@ export default function RadioField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

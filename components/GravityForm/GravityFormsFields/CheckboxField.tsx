@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const CHECKBOX_FIELD_FIELDS = gql`
   fragment CheckboxFieldFields on CheckboxField {
@@ -58,7 +59,11 @@ export default function CheckboxField({ field, fieldErrors }) {
       {checkboxInputs.map(({ id: inputId, text, value }) => (
         <div className="sm:mb-3 mb-[10px] flex items-center" key={inputId}>
           <input
-            className="h-5 w-5 !rounded !p-0 accent-navy focus-within:outline-lightBlue"
+            className={cn(
+              `h-5 w-5 !rounded !p-0 accent-navy focus-within:outline-lightBlue ${
+                fieldErrors?.length ? '!border-[#C05325]' : null
+              }`
+            )}
             type="checkbox"
             name={String(inputId)}
             id={`input_${formId}_${id}_${inputId}`}
@@ -76,7 +81,7 @@ export default function CheckboxField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))
