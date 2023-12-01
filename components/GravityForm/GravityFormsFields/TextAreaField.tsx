@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-
+import { cn } from 'utils'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 
 export const TEXT_AREA_FIELD_FIELDS = gql`
@@ -28,7 +28,11 @@ export default function TextAreaField({ field, fieldErrors }) {
         {isRequired ? <span className="pl-1 text-rust">*</span> : null}
       </label>
       <textarea
-        className="h-52 w-full text-navy"
+        className={cn(
+          `h-52 w-full text-navy ${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         placeholder={placeholder || ''}
         name={String(id)}
         id={htmlId}
@@ -53,7 +57,7 @@ export default function TextAreaField({ field, fieldErrors }) {
       ) : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

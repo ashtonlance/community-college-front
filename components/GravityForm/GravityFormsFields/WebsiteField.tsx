@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const WEBSITE_FIELD_FIELDS = gql`
   fragment WebsiteFieldFields on WebsiteField {
@@ -34,6 +35,11 @@ export default function WebsiteField({ field, fieldErrors }) {
     <div className={`gfield gfield-${type} ${cssClass}`.trim()}>
       <label htmlFor={htmlId}>{label}</label>
       <input
+        className={cn(
+          `${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         type="url"
         name={String(id)}
         id={htmlId}
@@ -54,7 +60,7 @@ export default function WebsiteField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

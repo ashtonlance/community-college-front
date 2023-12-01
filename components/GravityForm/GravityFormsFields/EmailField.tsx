@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-
+import { cn } from 'utils'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 import { useEffect } from 'react'
 
@@ -54,7 +54,11 @@ export default function EmailField({ field, fieldErrors }) {
         {isRequired ? <span className="text-rust pl-1">*</span> : null}
       </label>
       <input
-        className="p-regular placeholder:text-sky w-full border-[1.5px] px-[22px] py-[14px]"
+        className={cn(
+          `p-regular placeholder:text-sky w-full border-[1.5px] px-[22px] py-[14px] ${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         type="email"
         name={String(id)}
         id={htmlId}
@@ -78,7 +82,7 @@ export default function EmailField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

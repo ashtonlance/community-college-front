@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 import { MultiSelect } from 'react-multi-select-component'
+import { cn } from 'utils'
 
 export const MULTI_SELECT_FIELD_FIELDS = gql`
   fragment MultiSelectFieldFields on MultiSelectField {
@@ -51,7 +52,11 @@ export default function MultiSelectField({ field, fieldErrors }) {
 
   return (
     <div
-      className={`gfield gfield-${type} ${cssClass} secondary-btn p-regular text-emerald mx-auto w-full max-w-[400px] border-[1.5px] border-black`.trim()}
+      className={cn(
+        `gfield gfield-${type} ${cssClass} secondary-btn p-regular text-emerald mx-auto w-full max-w-[400px] border-[1.5px] border-black ${
+          fieldErrors?.length ? '!border-[#C05325]' : null
+        }`
+      )}
     >
       <label htmlFor={htmlId}>{label}</label>
       <MultiSelect
@@ -68,7 +73,7 @@ export default function MultiSelectField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

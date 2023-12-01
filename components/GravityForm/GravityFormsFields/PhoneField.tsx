@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const PHONE_FIELD_FIELDS = gql`
   fragment PhoneFieldFields on PhoneField {
@@ -37,6 +38,11 @@ export default function PhoneField({ field, fieldErrors }) {
         {isRequired ? <span className="text-rust">*</span> : null}
       </label>
       <input
+        className={cn(
+          `${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         type="tel"
         name={String(id)}
         id={htmlId}
@@ -57,7 +63,7 @@ export default function PhoneField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

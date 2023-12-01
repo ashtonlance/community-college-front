@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { cn } from 'utils'
 
 export const TEXT_FIELD_FIELDS = gql`
   fragment TextFieldFields on TextField {
@@ -91,7 +92,11 @@ export default function TextField({ field, fieldErrors }) {
       <input
         type="text"
         name={String(id)}
-        className="p-regular placeholder:text-sky w-full border-[1.5px] border-black"
+        className={cn(
+          `p-regular placeholder:text-sky w-full border-[1.5px] border-black ${
+            fieldErrors?.length ? '!border-[#C05325]' : null
+          }`
+        )}
         id={htmlId}
         required={Boolean(isRequired)}
         placeholder={placeholder}
@@ -110,7 +115,7 @@ export default function TextField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

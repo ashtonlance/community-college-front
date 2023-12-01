@@ -232,6 +232,7 @@ function GravityFormsFormInternal({
   } else {
     return (
       <form
+        noValidate
         method="post"
         onSubmit={handleSubmit}
         className={`flex flex-wrap justify-between ${customClasses}`}

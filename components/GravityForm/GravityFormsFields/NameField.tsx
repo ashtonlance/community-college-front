@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useGravityForm, { ACTION_TYPES } from '../../../utils/useGravityForms'
+import { cn } from 'utils'
 
 export const NAME_FIELD_FIELDS = gql`
   fragment NameFieldFields on NameField {
@@ -38,7 +39,6 @@ export default function NameField({ field, fieldErrors }) {
   const { state, dispatch } = useGravityForm()
   const fieldValue = state.find(fieldValue => fieldValue.id === id)
   const nameValues = fieldValue?.nameValues || DEFAULT_VALUE
-
   const prefixInput = inputs?.find(input => input?.key === 'prefix')
   const otherInputs = inputs?.filter(input => input?.key !== 'prefix') || []
 
@@ -64,11 +64,17 @@ export default function NameField({ field, fieldErrors }) {
       {prefixInput ? (
         <>
           <select
+            className={cn(
+              `${
+                fieldErrors?.length ? '!border-[#C05325]' : null
+              }`
+            )}
             name={String(prefixInput.key).toLocaleLowerCase()}
             id={`input_${formId}_${id}_${prefixInput.key}`}
             autoComplete={AUTOCOMPLETE_ATTRIBUTES.prefix}
             value={nameValues.prefix || ''}
             onChange={handleChange}
+            required={Boolean(isRequired)}
           >
             <option value=""></option>
             {prefixInput.choices?.map(choice => (
@@ -95,7 +101,11 @@ export default function NameField({ field, fieldErrors }) {
               {isRequired ? <span className="pl-1 text-rust">*</span> : null}
             </label>
             <input
-              className="w-full"
+              className={cn(
+                `w-full ${
+                  fieldErrors?.length ? '!border-[#C05325]' : null
+                }`
+              )}
               type="text"
               name={String(key).toLowerCase()}
               id={`input_${formId}_${id}_${key}`}
@@ -103,6 +113,7 @@ export default function NameField({ field, fieldErrors }) {
               autoComplete={AUTOCOMPLETE_ATTRIBUTES[key]}
               value={nameValues?.[key.toLowerCase()] || ''}
               onChange={handleChange}
+              required={Boolean(isRequired)}
             />
           </div>
         )
@@ -110,7 +121,7 @@ export default function NameField({ field, fieldErrors }) {
       {description ? <p className="field-description">{description}</p> : null}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))

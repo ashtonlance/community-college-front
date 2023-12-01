@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { cn } from 'utils'
 
 import useGravityForm, {
   ACTION_TYPES,
@@ -61,7 +62,11 @@ export default function FileUploadField({ field, fieldErrors }) {
       <legend className="text-emerald my-2">{label}</legend>
       <div className="field" data-id={id} data-type={type}>
         <input
-          className="secondary-btn p-regular text-emerald w-full !px-0 lowercase"
+          className={cn(
+            `secondary-btn p-regular text-emerald w-full !px-0 lowercase ${
+              fieldErrors?.length ? '!border-[#C05325]' : null
+            }`
+          )}
           id={htmlId}
           name={field.label}
           type="file"
@@ -113,7 +118,7 @@ export default function FileUploadField({ field, fieldErrors }) {
       )}
       {fieldErrors?.length
         ? fieldErrors.map(fieldError => (
-            <p key={fieldError.id} className="error-message">
+            <p key={fieldError.id} className="sr-only error-message">
               {fieldError.message}
             </p>
           ))
