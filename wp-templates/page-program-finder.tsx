@@ -218,7 +218,7 @@ export const ProgramFinder = props => {
       }
       const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
         if (widget === 'true') {
-          if (programArea && radius && zipCode) {
+          if (programArea) {
             setInputValues(newValues)
             if (zipCode.length === 5) {
               const coordinates = await getCoordinates(zipCode)
