@@ -85,8 +85,36 @@ export default function SingleProgram(props) {
             }}
           />
         </div>
+      ) : null}      
+      {settings.showCommonCareersDisclaimer && pageData?.program?.programDetails ? (
+        <div
+        style={{
+          backgroundImage: `url(${bgFlip.src})`,
+          backgroundPosition: 'top',
+          backgroundSize: 'cover',
+        }}
+        >
+          <div className={`bg- wysiwyg body-regular px-52 md:px-[100px] md:py-[60px] sm:p-10`}>
+            <h3>{settings?.programDetailsHeader}</h3>    
+          </div>
+          <WYSIWYG
+            customClasses="pb-8"
+            attributes={{
+              data: { content: settings.careerDisclaimerText,
+              component_spacing_top_spacing: 'sm'},
+            }}
+          />
+          <WYSIWYG
+            attributes={{
+              data: { content: pageData?.program?.programDetails,
+                component_spacing_top_spacing: 'sm' 
+              },
+            }}
+          />
+        </div>
       ) : null}
-      {pageData?.program?.programDetails ? (
+
+      {!settings.showCommonCareersDisclaimer && pageData?.program?.programDetails ? (
         <div
           style={{
             backgroundImage: `url(${bgFlip.src})`,
@@ -256,6 +284,9 @@ SingleProgram.query = gql`
           showAnnouncementBar
           announcementBarLink
         }
+        showCommonCareersDisclaimer
+        programDetailsHeader
+        careerDisclaimerText
       }
 
       utilityNavigation {
