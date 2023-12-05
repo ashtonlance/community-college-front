@@ -86,7 +86,7 @@ export default function SingleProgram(props) {
           />
         </div>
       ) : null}      
-      {settings.showCommonCareersDisclaimer && pageData?.program?.programDetails ? (
+      {pageData?.program?.programDetails ? (
         <div
         style={{
           backgroundImage: `url(${bgFlip.src})`,
@@ -114,21 +114,6 @@ export default function SingleProgram(props) {
         </div>
       ) : null}
 
-      {!settings.showCommonCareersDisclaimer && pageData?.program?.programDetails ? (
-        <div
-          style={{
-            backgroundImage: `url(${bgFlip.src})`,
-            backgroundPosition: 'top',
-            backgroundSize: 'cover',
-          }}
-        >
-          <WYSIWYG
-            attributes={{
-              data: { content: pageData?.program?.programDetails },
-            }}
-          />
-        </div>
-      ) : null}
       {pageData?.colleges?.nodes?.length ? (
         <div
           style={{
@@ -284,7 +269,6 @@ SingleProgram.query = gql`
           showAnnouncementBar
           announcementBarLink
         }
-        showCommonCareersDisclaimer
         programDetailsHeader
         careerDisclaimerText
       }
