@@ -34,9 +34,12 @@ export const formatDateLong = (date: string | number | Date): string | null => {
   return null
 }
 
-export const convertToDate = dateString => {
+export const convertToDate = (dateString: string | null): Date | null => {
   //  Convert a "dd/MM/yyyy" string into a Date object
-  let d = dateString.split('/')
-  let dat = new Date(d[2] + '/' + d[1] + '/' + d[0])
-  return dat
+  if (dateString) {
+    let d = dateString.split('/')
+    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0])
+    return dat
+  }
+  return null
 }
