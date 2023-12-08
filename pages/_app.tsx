@@ -1,5 +1,6 @@
 import { WordPressBlocksProvider } from '@faustwp/blocks'
 import { FaustProvider } from '@faustwp/core'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import 'faust.config'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
@@ -68,6 +69,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} key={router.asPath} />
         </WordPressBlocksProvider>
       </FaustProvider>
+      <SpeedInsights />
     </>
   )
 }
