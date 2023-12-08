@@ -1,6 +1,5 @@
 import { withFaust } from '@faustwp/core'
 import withBundleAnalyzer from '@next/bundle-analyzer'
-import million from 'million/compiler'
 
 async function fetchWordPressRedirects() {
   const resp = await fetch('https://ncccsstg.wpengine.com/graphql', {
@@ -91,7 +90,4 @@ const nextConfig = {
   },
 }
 
-export default million.next(bundleAnalyzer(withFaust(nextConfig)), {
-  auto: false,
-  mute: true,
-})
+export default bundleAnalyzer(withFaust(nextConfig))
