@@ -14,7 +14,7 @@ export const BoardMeetingHeading = () => {
 
 export const BoardMeetingCard = ({ card }) => {
   const date = formatDate(card?.boardMeetingDetails?.date || card?.title)
-  console.log(card)
+
   return (
     <div className="col-span-12 col-start-1 grid grid-flow-row grid-cols-12 items-center gap-[20px] rounded-[12px] bg-white px-[24px] py-[20px] md:grid-cols-6 md:px-[20px] md:py-[14px] mdsm:grid-cols-4 mdsm:p-[20px]">
       <Link
