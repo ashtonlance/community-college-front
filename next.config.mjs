@@ -92,6 +92,6 @@ const nextConfig = {
 }
 
 export default million.next(bundleAnalyzer(withFaust(nextConfig)), {
-  auto: true,
+  auto: false,
   mute: true,
 })
