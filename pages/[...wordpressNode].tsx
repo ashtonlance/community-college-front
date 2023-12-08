@@ -7,7 +7,7 @@ export default function Page(props) {
 export function getStaticProps(ctx) {
   return getWordPressProps({
     ctx,
-    revalidate: 600, // In seconds
+    revalidate: 300, // In seconds
   })
 }
 export async function getStaticPaths() {
