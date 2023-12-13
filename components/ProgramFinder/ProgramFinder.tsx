@@ -2,8 +2,9 @@ import { Button } from '@/components/Button'
 import { gql, useQuery } from '@apollo/client'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import bg from '/public/angles/angled-bg_finder_grey.jpg'
+import { usePlacesWidget } from "react-google-autocomplete";
 
 const GET_PROGRAM_AREAS = gql`
   query GetPrograms {
@@ -28,8 +29,28 @@ export const ProgramFinderForm = ({ heading = '' }) => {
   const [inputValues, setInputValues] = useState({
     programArea: '',
     radius: '',
-    zipCode: '',
+    address: '',
   })
+
+  const inputValuesRef = useRef(inputValues)
+
+  useEffect(() => {
+    inputValuesRef.current = inputValues
+  }, [inputValues])
+
+  const { ref: autocompleteRef } = usePlacesWidget({
+    apiKey: process.env.NEXT_PUBLIC_GEOCODE_KEY,
+    options: {
+      types: [],
+      fields: ["formatted_address"],
+      componentRestrictions: { country: "us" },
+    },
+    onPlaceSelected: (place) => {
+      if (place?.formatted_address) {
+        setInputValues({ ...inputValuesRef.current, address: place.formatted_address });
+      }
+    }
+  });
 
   const programAreas = data?.programAreas?.nodes || [
     {
@@ -159,7 +180,8 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           })}
         </select>
       </div>
-      <div className="flex flex-1 basis-[calc(50%-20px)] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
+      <div className="flex flex-1 basis-[calc(35%-20px)] items-center gap-x-[20px] sm:basis-full mdsm:basis-full md:basis-[14rem] sm:flex-col sm:gap-y-[12px]">
+      {/* mdsm:basis-full md:basis-[12rem]  */}
         <label htmlFor="radius" className="h5 mb-0 whitespace-nowrap">
           Within
         </label>
@@ -179,19 +201,20 @@ export const ProgramFinderForm = ({ heading = '' }) => {
           <option value={100}>100</option>
         </select>
       </div>
-      <div className="flex flex-1 basis-[calc(50%-20px)] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
-        <label htmlFor="zipCode" className="h5 mb-0 whitespace-nowrap">
+      <div className="flex flex-1 basis-[calc(65%-20px)] items-center gap-x-[20px] sm:basis-full sm:flex-col sm:gap-y-[12px]">
+        <label htmlFor="address" className="h5 mb-0 whitespace-nowrap">
           Of
         </label>
         <input
-          id="zipCode"
+          id="address"
           className="text-input w-[150px] sm:w-full rounded-[8px]"
           type="text"
           pattern="[0-9]*"
-          placeholder="Zip Code"
-          value={inputValues.zipCode}
+          placeholder="111 Example Lane, Ste 3, Greensboro, NC 27410"
+          value={inputValues.address}
+          ref={autocompleteRef}
           onChange={e =>
-            setInputValues({ ...inputValues, zipCode: e.target.value })
+            setInputValues({ ...inputValues, address: e.target.value })
           }
         />
       </div>

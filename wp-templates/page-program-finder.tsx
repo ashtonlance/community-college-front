@@ -10,11 +10,14 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { flatListToHierarchical } from 'utils/flatListToHierarchical'
 import { capitalize, organizeProgramsByTaggedAreas } from 'utils/programsHelper'
+import { usePlacesWidget } from "react-google-autocomplete";
 
-const getCoordinates = async (zipCode: string) => {
+const MIN_ADDRESS_LENGTH = 5;
+
+const getCoordinates = async (address: string) => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.NEXT_PUBLIC_GEOCODE_KEY}`
     )
     const data = await response.json()
     const usLocation = data?.results.find((result: any) =>
@@ -84,10 +87,11 @@ export const ProgramFinder = props => {
   const [inputValues, setInputValues] = useState(() => ({
     programArea: router.query.programArea || '',
     radius: router.query.radius || '',
-    zipCode: router.query.zipCode || '',
+    // Check for zipCode as well in case someone is using an older saved URL
+    address: router.query.address || router.query.zipCode || '',
   }))
 
-  const [zipCodeCoordinates, setZipCodeCoordinates] = useState(null)
+  const [addressCoordinates, setAddressCoordinates] = useState(null)
   const [filteredPrograms, setFilteredPrograms] = useState([])
   const [shouldFilter, setShouldFilter] = useState(false)
   const [isFromWidget, setIsFromWidget] = useState(false)
@@ -103,6 +107,20 @@ export const ProgramFinder = props => {
     () => organizeProgramsByTaggedAreas(programs),
     [programs]
   )
+
+  const { ref: autocompleteRef } = usePlacesWidget({
+    apiKey: process.env.NEXT_PUBLIC_GEOCODE_KEY,
+    options: {
+      types: [],
+      fields: ["formatted_address"],
+      componentRestrictions: { country: "us" },
+    },
+    onPlaceSelected: (place) => {
+      if (place?.formatted_address) {
+        setInputValues({ ...inputValuesRef.current, address: place.formatted_address });
+      }
+    }
+  });
 
   const handleSetFilters = useCallback(
     newFilters => {
@@ -137,9 +155,9 @@ export const ProgramFinder = props => {
       }
 
       if (
-        inputValuesRef.current.zipCode &&
+        inputValuesRef.current.address &&
         inputValuesRef.current.radius &&
-        inputValuesRef.current.zipCode.length === 5 &&
+        inputValuesRef.current.address.length >= MIN_ADDRESS_LENGTH &&
         coordinates
       ) {
         result = result
@@ -189,16 +207,16 @@ export const ProgramFinder = props => {
 
   useEffect(() => {
     if (shouldFilter) {
-      filterColleges(zipCodeCoordinates)
+      filterColleges(addressCoordinates)
     }
-  }, [shouldFilter, zipCodeCoordinates, filterColleges])
+  }, [shouldFilter, addressCoordinates, filterColleges])
 
   useEffect(() => {
-    const { programArea = '', radius = '', zipCode = '' } = router.query
+    const { programArea = '', radius = '', address = '' } = router.query
     const newValues = {
       programArea: programArea || '',
       radius: radius || '',
-      zipCode: zipCode || '',
+      address: address || '',  
     }
     setInputValues(newValues)
   }, [router.query])
@@ -208,21 +226,21 @@ export const ProgramFinder = props => {
       const {
         programArea = '',
         radius = '',
-        zipCode = '',
+        address = '',
         widget = false,
       } = router.query
       const newValues = {
         programArea: programArea,
         radius: radius,
-        zipCode: zipCode,
+        address: address,
       }
-      const fetchCoordinates = async (programArea, radius, zipCode, widget) => {
+      const fetchCoordinates = async (programArea, radius, address, widget) => {
         if (widget === 'true') {
           if (programArea) {
             setInputValues(newValues)
-            if (zipCode.length === 5) {
-              const coordinates = await getCoordinates(zipCode)
-              setZipCodeCoordinates(coordinates)
+            if (address.length >= MIN_ADDRESS_LENGTH) {
+              const coordinates = await getCoordinates(address)
+              setAddressCoordinates(coordinates)
             }
             handleSetFilters(newValues)
             setShouldFilter(true)
@@ -232,7 +250,7 @@ export const ProgramFinder = props => {
           }
         }
       }
-      fetchCoordinates(programArea, radius, zipCode, widget)
+      fetchCoordinates(programArea, radius, address, widget)
     }
   }, [isReady, handleSetFilters, programs, router.query])
 
@@ -265,8 +283,8 @@ export const ProgramFinder = props => {
         description={programFinderIndex?.programFinderDetails?.description}
       />
       <div className="bg-grey">
-        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-5 py-10 lg:flex-wrap md:pb-8 md:pt-5 sm:gap-[15px] sm:pt-[10px]">
-          <div className="flex flex-1 basis-auto items-center	 gap-x-[20px] lg:basis-full sm:flex-wrap">
+        <div className="wrapper-default-inner-pages mx-auto flex items-stretch justify-center gap-5 py-10 flex-wrap md:pb-8 md:pt-5 sm:gap-[15px] sm:pt-[10px]">
+          <div className="flex flex-1 basis-full items-center	 gap-x-[20px] lg:basis-full sm:flex-wrap">
             <label
               htmlFor="programArea"
               className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3"
@@ -275,7 +293,7 @@ export const ProgramFinder = props => {
             </label>
             <select
               id="programArea"
-              className="h-[52px] w-[229px] text-darkBeige  lg:w-full sm:h-auto"
+              className="h-[52px] w-[229px] text-darkBeige w-full sm:h-auto"
               value={inputValues.programArea}
               onChange={e =>
                 setInputValues({ ...inputValues, programArea: e.target.value })
@@ -289,7 +307,7 @@ export const ProgramFinder = props => {
               ))}
             </select>
           </div>
-          <div className="flex flex-1 basis-auto items-center gap-x-[20px] lg:basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
+          <div className="flex flex-1 basis-auto items-center gap-x-[20px] basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
             <label
               htmlFor="radius"
               className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3 sm:w-full"
@@ -298,7 +316,7 @@ export const ProgramFinder = props => {
             </label>
             <select
               id="radius"
-              className="h-full w-[200px] text-darkBeige lg:w-full md:h-auto"
+              className="h-full w-[200px] text-darkBeige w-full md:h-auto"
               value={inputValues.radius}
               onChange={e =>
                 setInputValues({ ...inputValues, radius: e.target.value })
@@ -312,31 +330,32 @@ export const ProgramFinder = props => {
               <option value={100}>100</option>
             </select>
           </div>
-          <div className="flex flex-1 basis-auto items-center gap-x-[20px] lg:basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
+          <div className="flex flex-1 basis-auto items-center gap-x-[20px] basis-[calc(50%-10px)] sm:basis-full sm:flex-wrap">
             <label
-              htmlFor="zipCode"
+              htmlFor="address"
               className="h5 mb-0 whitespace-nowrap md:mx-auto md:text-center sm:mb-3 sm:w-full"
             >
               Of
             </label>
             <input
-              id="zipCode"
-              className="text-input w-[150px] rounded-[8px] lg:w-full sm:h-auto"
+              id="address"
+              className="text-input w-[150px] rounded-[8px] w-full sm:h-auto"
               type="text"
               pattern="[0-9]*"
-              placeholder="Zip Code"
-              value={inputValues.zipCode ?? ''}
+              placeholder="111 Example Lane, Ste 3, Greensboro, NC 27410"
+              value={inputValues.address ?? ''}
               onChange={e =>
-                setInputValues({ ...inputValues, zipCode: e.target.value })
+                setInputValues({ ...inputValues, address: e.target.value })
               }
+              ref={autocompleteRef}
             />
           </div>
-          <div className="flex basis-auto items-center justify-center md:basis-full">
+          <div className="flex basis-auto items-center justify-center basis-full">
             <Button
               onClick={async () => {
-                if (inputValues?.zipCode?.length === 5) {
-                  const coordinates = await getCoordinates(inputValues.zipCode)
-                  setZipCodeCoordinates(coordinates)
+                if (inputValues?.address?.length >= MIN_ADDRESS_LENGTH) {
+                  const coordinates = await getCoordinates(inputValues.address as string)
+                  setAddressCoordinates(coordinates)
                 }
                 handleSetFilters(inputValues)
                 setShouldFilter(true)
