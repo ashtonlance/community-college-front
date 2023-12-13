@@ -215,7 +215,7 @@ NumberedMemosPage.query = gql`
     }
 
     numberedMemos(
-      first: 1200
+      first: 200
       where: { orderby: { field: DATE, order: DESC } }
     ) {
       nodes {
