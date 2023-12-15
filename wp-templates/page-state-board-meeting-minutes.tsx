@@ -187,7 +187,7 @@ StateBoardMeetingMinutesPage.query = gql`
     }
 
     boardMeetings(
-      first: 200
+      first: 1000
       where: {
         taxQuery: {
           taxArray: {
@@ -207,7 +207,6 @@ StateBoardMeetingMinutesPage.query = gql`
         }
         boardMeetingDetails {
           date
-          details
           location
           title
         }
