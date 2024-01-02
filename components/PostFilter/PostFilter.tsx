@@ -68,6 +68,8 @@ export function PostFilter({ filters, setFilters, filtersToGenerateDropdown }) {
             filterOption.options.includes('Last Name')
           const isEventsPage = router.asPath.includes('events')
           const isAnnualReportsPage = router.asPath.includes('annual-reporting')
+          const labels = filterOption.labels;
+
           return (
             <select
               key={filterOption.name}
@@ -101,11 +103,9 @@ export function PostFilter({ filters, setFilters, filtersToGenerateDropdown }) {
                 </option>
               )}
               {Array.isArray(filterOption.options) &&
-                filterOption.options.map(option => (
+                filterOption.options.map((option, index) => (
                   <option key={option} value={option}>
-                    {filterName === 'Degree Type'
-                      ? camelToSentenceCase(option)
-                      : option}
+                    {labels?.[index] || option}
                   </option>
                 ))}
               {isSortBy && isNameFilter && (

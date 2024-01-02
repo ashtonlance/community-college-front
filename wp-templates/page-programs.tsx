@@ -91,21 +91,12 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
     [data?.programs?.nodes]
   )
 
-  const degreeTypes = useMemo(() => {
-    const degreeTypesSet = new Set(
-      programs.reduce((acc: string[], program: Program) => {
-        if (program.program && program.program.degreeTypes) {
-          return [...acc, ...program.program.degreeTypes]
-        }
-        return acc
-      }, [])
-    )
+  const degreeTypeChoices = useMemo(() => {
+    const degreeTypeChoices = programsIndex?.degreeTypeChoices || [];
+    const degreeTypeChoicesSorted = [...degreeTypeChoices].sort((a, b) => a.label.localeCompare(b.label));
 
-    // Convert the Set back to an array and sort it
-    const sortedDegreeTypes = Array.from(degreeTypesSet).sort()
-
-    return sortedDegreeTypes
-  }, [programs])
+    return degreeTypeChoicesSorted;
+  }, [programsIndex])
 
   const [filters, setFilters] = useState({
     degreeType: '',
@@ -164,7 +155,8 @@ export default function ProgramsArchive(props: ProgramsIndexProps) {
   const filtersToGenerateDropdown = [
     {
       name: 'degreeType',
-      options: degreeTypes,
+      options: degreeTypeChoices.map(choice => choice.value),
+      labels: degreeTypeChoices.map(choice => choice.label),
       type: 'select',
     },
     {
@@ -258,6 +250,10 @@ ProgramsArchive.query = gql`
         title
       }
       programsIndex {
+        degreeTypeChoices {
+          value
+          label
+        }
         heroDescription
         heroTitle
         cta {
