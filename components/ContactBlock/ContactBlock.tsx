@@ -5,7 +5,7 @@ import Arrow from 'assets/icons/arrow-forward-sharp.svg'
 import Phone from 'assets/icons/phone.svg'
 
 export const ContactBlock = ({ attributes }) => {
-  const bgColor = attributes.data.background_color
+  const bgColor = attributes?.data?.background_color || ''
   const bottomSpacing = attributes?.data?.component_spacing_bottom_spacing || ''
   const topSpacing = attributes?.data?.component_spacing_top_spacing || ''
   const image = attributes?.data?.image || ''
