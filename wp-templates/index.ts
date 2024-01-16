@@ -34,6 +34,7 @@ import SingleProgramArea from './single-program-areas'
 import SingleStaff from './single-staff'
 import NewsTaxonomyCatPage from './taxonomy-news-categories'
 import NewsTaxonomyPage from './taxonomy-news-tags'
+import StateBoardCodePage from './page-state-board-code'
 
 const templates = {
   'front-page': FrontPage,
@@ -76,6 +77,7 @@ const templates = {
   'single-staff': SingleStaff,
   'taxonomy-news-tags': NewsTaxonomyPage,
   'taxonomy-news-categories': NewsTaxonomyCatPage,
+  'page-state-board-code': StateBoardCodePage
 }
 
 export default templates
