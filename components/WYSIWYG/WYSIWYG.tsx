@@ -11,7 +11,8 @@ type WYSIWYGProps = {
       background_color?: string
       component_spacing_bottom_spacing?: string
       component_spacing_top_spacing?: string
-    }
+    },
+    className?: string
   }
   customClasses?: string
 }
@@ -24,6 +25,8 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
     component_spacing_bottom_spacing: bottomSpacing = 'medium',
     component_spacing_top_spacing: topSpacing = 'medium',
   } = attributes?.data || {}
+
+  const editorCustomClasses = attributes?.className || '';
 
   const parser = useMemo(() => new (Parser as any)(), [])
   const reactElement = useMemo(() => parser.parse(content), [parser, content])
@@ -128,7 +131,7 @@ export const WYSIWYG: React.FC<WYSIWYGProps> = props => {
   return (
     <div
       ref={wysiwyg}
-      className={`bg-${bgColor} ${customClasses} wysiwyg body-regular px-52 module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
+      className={`bg-${bgColor} ${editorCustomClasses} ${customClasses} wysiwyg body-regular px-52 module-spacing-bottom-${bottomSpacing}  module-spacing-top-${topSpacing} md:px-[100px] md:py-[60px] sm:p-10`}
       dangerouslySetInnerHTML={{ __html: reactHtml }}
     />
   )

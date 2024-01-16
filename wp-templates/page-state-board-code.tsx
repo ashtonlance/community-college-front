@@ -43,7 +43,7 @@ export default function StateBoardCodePage(props) {
         )}
         {preFooterContent && <PreFooter preFooterContent={preFooterContent} />}
       </>
-      <div className="px-52 md:px-[100px] sm:p-10 mb-5">
+      <div className="px-52 md:px-[100px] sm:px-10 mb-5">
         <StateCodePDF></StateCodePDF>
       </div>
     </Layout>
