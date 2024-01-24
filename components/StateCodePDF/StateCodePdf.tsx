@@ -35,7 +35,7 @@ export const StateCodePDF = () => {
         <div>
             <Accordion type="single" collapsible>
                 <AccordionItem key="state-code-outline" value="state-code-outline">
-                    <AccordionTrigger>Outline</AccordionTrigger>
+                    <AccordionTrigger toggleBtnAdjacent={true}>Outline</AccordionTrigger>
                     
                     <AccordionContent>
                         <StateCodeOutline baseUrl={baseUrl}></StateCodeOutline>

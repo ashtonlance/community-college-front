@@ -12,12 +12,14 @@ export const AccordionDisplay = props => {
   const spaceBottom =
     props?.attributes?.data?.margins_bottom_spacing || 'medium'
   const accordionItems = []
+  const toggleBtnAdjacent = props?.attributes?.data?.toggle_btn_adjacent || false;
+
   for (let i = 0; i < items; i++) {
     let content = props?.attributes.data[`accordion_${i}_content`]
     let heading = props?.attributes.data[`accordion_${i}_heading`]
     accordionItems.push(
       <AccordionItem key={`item-${i}`} value={`item-${i}`} color={`${color}`}>
-        <AccordionTrigger>{heading}</AccordionTrigger>
+        <AccordionTrigger toggleBtnAdjacent={toggleBtnAdjacent}>{heading}</AccordionTrigger>
         <AccordionContent>
           {typeof content === 'string' ? (
             content

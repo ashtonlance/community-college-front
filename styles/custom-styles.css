@@ -492,3 +492,7 @@ z-index: 1000;
  .aa-ItemContentSubtitleCategory {
   @apply text-navy;
  }
+
+.state-code-outline {
+  text-decoration: underline;
+}

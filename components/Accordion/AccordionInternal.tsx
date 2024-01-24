@@ -50,13 +50,14 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'h4 text-left flex w-full flex-1 items-center justify-between transition-all [&[data-state=open]>div>svg>rect]:rotate-180',
-        className
+        'h4 text-left flex w-full flex-1 items-center transition-all [&[data-state=open]>div>svg>rect]:rotate-180',
+        className,
+        props.toggleBtnAdjacent ? '' : 'justify-between'
       )}
       {...props}
     >
       {children}
-      <div className="flex flex-col items-center justify-center rounded-full bg-grey p-3">
+      <div className={`flex flex-col items-center justify-center rounded-full bg-grey p-3 ${props.toggleBtnAdjacent ? 'ml-3' : ''}`}>
         <svg
           className="shrink-0 fill-navy"
           width="16"

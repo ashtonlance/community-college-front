@@ -22,7 +22,7 @@ export const StateCodeOutline = ({baseUrl}) => {
     }
 
     return (
-<ul>
+<ul className="state-code-outline">
         <li><Link href={sectionKeyToUrl('')}>State Board of Community Colleges Code (SBCCC)</Link> 
                 <ul>
                         <li><Link href={sectionKeyToUrl('title-1-community-colleges')}>TITLE
