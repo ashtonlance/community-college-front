@@ -237,6 +237,7 @@ PageEvents.query = gql`
         eventDetails {
           location
           date
+          endDate
         }
         eventsCategories {
           nodes {

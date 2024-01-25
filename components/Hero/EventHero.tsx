@@ -19,6 +19,7 @@ type EventHeroProps = {
   email?: string
   location?: string
   date?: string
+  endDate?: string
   time?: string
 }
 
@@ -34,6 +35,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
   email,
   location,
   date,
+  endDate,
   time,
 }) => {
   const router = useRouter()
@@ -71,8 +73,8 @@ export const EventHero: React.FC<EventHeroProps> = ({
           <div className="mb-6 flex w-fit flex-col gap-y-5">
             {date && (
               <div className="group flex items-center gap-x-1 text-darkGrey">
-                <span className="font-bold text-darkGrey">Date:</span>
-                {formatDate(date)}
+                <span className="font-bold text-darkGrey">Date{endDate ? 's' : ''}:</span>
+                {formatDate(date)}{endDate ? ` - ${formatDate(endDate)}` : ''}
               </div>
             )}
             {time && (

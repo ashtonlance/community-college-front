@@ -43,6 +43,7 @@ export default function SingleEvent(props) {
         ctaURL={pageData.eventDetails?.heroCta?.url}
         location={pageData.eventDetails?.location}
         date={pageData.eventDetails?.date}
+        endDate={pageData.eventDetails?.endDate}
         time={pageData.eventDetails?.time}
         description={pageData?.eventsCategories?.nodes[0]?.name}
       />
@@ -98,6 +99,7 @@ SingleEvent.query = gql`
         details
         name
         date
+        endDate
         time
         location
         heroCta {

@@ -25,17 +25,17 @@ export const EventCard: React.FC<EventCardProps> = ({ card }) => {
           />
         ) : null}
         <div className="flex flex-1 flex-col justify-between bg-white p-10">
-          <div className="mb-[15px] flex items-center justify-center gap-2 ">
+          <div className="mb-[15px] flex items-center justify-center gap-2 flex-wrap">
             {card.eventsCategories?.nodes.length > 0 && (
               <div className="body-regular font-bold text-darkGrey">
                 {card.eventsCategories?.nodes[0]?.name}
               </div>
             )}
             {card.eventsCategories?.nodes.length > 0 &&
-              card.eventDetails?.date && <div> • </div>}
+              card.eventDetails?.date && !card.eventDetails?.endDate && <div> • </div>}
             {card.eventDetails?.date && (
-              <div className="body-regular font-bold text-darkGrey">
-                {formatDateLong(card.eventDetails?.date)}
+              <div className="body-regular font-bold text-darkGrey text-center {card.eventDetails?.endDate ? 'basis-full' : ''}">
+                {formatDateLong(card.eventDetails?.date)}{card.eventDetails?.endDate ? ` - ${formatDateLong(card.eventDetails?.endDate)}` : ''}
               </div>
             )}
           </div>
